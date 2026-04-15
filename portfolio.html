@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Elvis Ngwu| App Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showPage('work',this)">Work</button>
+    <button class="nav-btn" onclick="showPage('about',this)">About</button>
+    <button class="nav-btn" onclick="showPage('notes',this)">Notes</button>
+    <button class="nav-btn" onclick="showPage('contact',this)">Contact</button>
+    <div class="nav-divider"></div>
+    <button class="nav-theme" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">☀️</button>
+  </div>
+</nav>
+
+<!-- ══════ WORK PAGE ══════ -->
+<div id="work" class="page active">
+
+  <div class="hero">
+    <h1 class="hero-h1 reveal">Hi I'm Elvis<br>Android Developer</h1>
+    <p class="hero-p reveal"> App developer focused on building accessible,
+      high-performance applications with clean, reliable interfaces</p>
+    <button class="btn-primary reveal" onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
+  </div>
+
+  <div style="text-align:center;padding:0 16px 16px">
+    <h2 class="sec-title reveal">Projects.</h2>
+  </div>
+
+  <div class="projects-list">
+
+    <!-- Xtensionvrse -->
+    <div class="pcard reveal">
+      <div class="pcard-preview p-xt">
+        <div class="p-xt-box">
+          <div class="p-xt-nav">
+            <span class="in-prog">IN PROGRESS</span>
+            <div class="p-xt-navlinks">
+              <span>Braids</span><span>Twists</span><span>Locs</span><span>New In</span><span class="sale">Sale</span>
+            </div>
+          </div>
+          <div class="p-xt-body">
+            <div class="p-xt-text">
+              <div class="p-xt-badge">NEW COLLECTION DROP</div>
+              <h3>Strands That Perfectly <span class="pink">Compliment</span> You!!</h3>
+              <p>Premium braiding hair extensions for the modern woman. Tangle-free, lightweight, and vibrant colors available now.</p>
+              <button>Shop Collection</button>
+            </div>
+            <div class="p-xt-img">👩🏾</div>
+          </div>
+        </div>
+      </div>
+      <div class="pcard-info">
+        <div class="pcard-row">
+          <span class="pcard-name">Xtensionvrse</span>
+          <div class="pcard-arrow">↗</div>
+        </div>
+        <div class="pcard-tags">
+          <span class="ptag">E-Commerce</span>
+          <span class="ptag">React</span>
+          <span class="ptag">Node.js</span>
+          <span class="ptag">PostgreSQL</span>
+          <span class="ptag">Build in Public</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LinguaCore AI -->
+    <div class="pcard reveal">
+      <div class="pcard-preview p-lc">
+        <div class="p-lc-box">
+          <div class="lc-name">🌐 LinguaCore AI</div>
+          <div class="lc-sub">The complete infrastructure to power your multilingual platform at scale</div>
+          <button class="lc-btn">Get Started →</button>
+        </div>
+      </div>
+      <div class="pcard-info">
+        <div class="pcard-row">
+          <span class="pcard-name">LinguaCore AI</span>
+          <div class="pcard-arrow">↗</div>
+        </div>
+        <div class="pcard-tags">
+          <span class="ptag">AI</span>
+          <span class="ptag">React</span>
+          <span class="ptag">Node.js</span>
+          <span class="ptag">OpenAI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Yvonne Kafor Coaching -->
+    <div class="pcard reveal">
+      <div class="pcard-preview p-yv">
+        <div class="p-yv-box">
+          <div class="yv-t">Experienced & Compassionate<br>Mediator, Divorce & Custody Coach</div>
+          <div class="yv-pink">Yvonne Kafor Coaching</div>
+          <div class="yv-s">Why We Should Be Your First Choice in the Divorce & Custody Process</div>
+          <button class="yv-btn">Book a Call</button>
+        </div>
+      </div>
+      <div class="pcard-info">
+        <div class="pcard-row">
+          <span class="pcard-name">Yvonne Kafor Coaching</span>
+          <div class="pcard-arrow">↗</div>
+        </div>
+        <div class="pcard-tags">
+          <span class="ptag">JavaScript</span>
+          <span class="ptag">Express.js</span>
+          <span class="ptag">React</span>
+          <span class="ptag">Node.js</span>
+          <span class="ptag">CSS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ConfessIO -->
+    <div class="pcard reveal">
+      <div class="pcard-preview p-cf">
+        <div class="p-cf-box">
+          <div class="cf-anon">Anonymous Confessions</div>
+          <div class="cf-speak">Speak</div>
+          <div class="cf-with">without</div>
+          <div class="cf-fear">fear.</div>
+        </div>
+      </div>
+      <div class="pcard-info">
+        <div class="pcard-row">
+          <span class="pcard-name">ConfessIO</span>
+          <div class="pcard-arrow">↗</div>
+        </div>
+        <div class="pcard-tags">
+          <span class="ptag">HTML</span>
+          <span class="ptag">Tailwind</span>
+          <span class="ptag">Node.js</span>
+          <span class="ptag">PostgreSQL</span>
+          <span class="ptag">Express.js</span>
+          <span class="ptag">Socket.io</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Axelerate -->
+    <div class="pcard reveal">
+      <div class="pcard-preview p-ax">
+        <div class="p-ax-box">
+          <div class="ax-lbl">Axelerate</div>
+          <div class="ax-big">DATA-DRIVEN SCALE<br>HUMAN-DRIVEN DESIRE</div>
+          <div class="ax-sub">Scaling businesses through the Art of the offer and the Science of finding customers. You have mastered the Art. We bring in the Science.</div>
+        </div>
+      </div>
+      <div class="pcard-info">
+        <div class="pcard-row">
+          <span class="pcard-name">Axelerate</span>
+          <div class="pcard-arrow">↗</div>
+        </div>
+        <div class="pcard-tags">
+          <span class="ptag">CRM</span>
+          <span class="ptag">React</span>
+          <span class="ptag">Node.js</span>
+          <span class="ptag">SaaS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BigCut -->
+    <div class="pcard reveal">
+      <div class="pcard-preview p-bc">
+        <div class="p-bc-box">
+          <div class="p-bc-left">
+            <div class="bc-soon">Coming Soon</div>
+            <h3>Your Gateway to <span>Recurring Income.</span></h3>
+            <p>One Platform Where You Build, Automate & Cut isn't just a SaaS platform. It's the home of your ecosystem.</p>
+          </div>
+          <div class="p-bc-chart">
+            <div class="bar" style="height:28%"></div>
+            <div class="bar" style="height:48%"></div>
+            <div class="bar" style="height:64%"></div>
+            <div class="bar" style="height:82%"></div>
+            <div class="bar" style="height:100%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pcard-info">
+        <div class="pcard-row">
+          <span class="pcard-name">BigCut</span>
+          <div class="pcard-arrow">↗</div>
+        </div>
+        <div class="pcard-tags">
+          <span class="ptag">HTML</span>
+          <span class="ptag">CSS</span>
+          <span class="ptag">Tailwind</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /projects-list -->
+
+  <!-- Tech Stack -->
+  <div style="text-align:center;padding:0 16px 16px">
+    <h2 class="sec-title reveal">Tech Stack.</h2>
+  </div>
+  <div class="stack-section">
+    <div class="stack-card reveal">
+      <div class="stack-card-title">Frontend</div>
+      <div class="sicons">
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"><span>HTML5</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"><span>CSS3</span></div>
+        <div class="si"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind"><span>Tailwind</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap"><span>Bootstrap</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><span>JavaScript</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"><span>TypeScript</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" alt="jQuery"><span>jQuery</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><span>React</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"><span>Next.js</span></div>
+      </div>
+    </div>
+    <div class="stack-card reveal">
+      <div class="stack-card-title">Backend</div>
+      <div class="sicons">
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><span>Node.js</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" style="filter:invert(1)"><span>Express</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"><span>MongoDB</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"><span>PostgreSQL</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"><span>Firebase</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL"><span>GraphQL</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" alt="Prisma" style="filter:invert(1)"><span>Prisma</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" alt="Socket.io" style="filter:invert(1)"><span>Socket.io</span></div>
+      </div>
+    </div>
+    <div class="stack-card reveal">
+      <div class="stack-card-title">Tools & Others</div>
+      <div class="sicons">
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)"><span>GitHub</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><span>VS Code</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"><span>Figma</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" alt="npm"><span>npm</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman"><span>Postman</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="ms">Available for Hire <span class="dot">•</span> Full-Stack Developer <span class="dot">•</span> Rivers, Nigeria <span class="dot">•</span> Remote Ready <span class="dot">•</span></span>
+      <span class="ms">Available for Hire <span class="dot">•</span> Full-Stack Developer <span class="dot">•</span> Rivers, Nigeria <span class="dot">•</span> Remote Ready <span class="dot">•</span></span>
+      <span class="ms">Available for Hire <span class="dot">•</span> Full-Stack Developer <span class="dot">•</span> Rivers, Nigeria <span class="dot">•</span> Remote Ready <span class="dot">•</span></span>
+      <span class="ms">Available for Hire <span class="dot">•</span> Full-Stack Developer <span class="dot">•</span> Rivers, Nigeria <span class="dot">•</span> Remote Ready <span class="dot">•</span></span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <h3>Elvis</h3>
+        <p>App developer focused on high-performance applications, quality engineering, and polished user experiences.</p>
+      </div>
+      <div class="fcol">
+        <h4>Quick Links</h4>
+        <a onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">Home</a>
+        <a onclick="showPage('about',document.querySelectorAll('.nav-btn')[1])">About</a>
+        <a onclick="showPage('notes',document.querySelectorAll('.nav-btn')[2])">Notes</a>
+        <a onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Contact</a>
+      </div>
+      <div class="fcol">
+        <h4>Get in Touch</h4>
+        <div class="femail">Elvisazubike@gmail.com</div>
+        <div class="sicons-row">
+          <a class="sic" href="#" title="Instagram">📸</a>
+          <a class="sic" href="#" title="LinkedIn">💼</a>
+          <a class="sic" href="#" title="TikTok">🎵</a>
+          <a class="sic" href="#" title="Facebook">🔵</a>
+          <a class="sic" href="#" title="GitHub">🐙</a>
+        </div>
+      </div>
+    </div>
+    <div class="fcopy">© Elvis 2026. All rights reserved</div>
+  </div>
+
+</div><!-- /work -->
+
+<!-- ══════ ABOUT PAGE ══════ -->
+<div id="about" class="page">
+  <div class="about-inner">
+    <h1 class="about-h1 reveal">I'm Elvis.</h1>
+
+    <div class="about-top reveal">
+      <div class="about-pic">🧑🏾</div>
+      <div class="about-bio">
+        <h2>I'm a FullStack Developer working remotely from Rivers, Nigeria.</h2>
+        <p>Over the past few years, I've pushed into different parts of web creation, from crafting UI layouts to coding interactive features. I'm proud of how far I've evolved.</p>
+        <p>These days, I focus on personal projects, tutorials or school.</p>
+        <button class="btn-primary" style="margin-top:12px;font-size:13px;padding:10px 22px" onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="about-collab">Let's collaborate if you're committed to sustainability, education, equality, or carbon neutrality.</p>
+      <p class="about-collab-p">I'm committed to leaving the world better for those who come after us, and I aim to contribute however I can. If you value that too, I'd love to talk.</p>
+    </div>
+
+    <div class="vals reveal">
+      <div>
+        <div class="vnum">01</div>
+        <div class="vtitle">Make it</div>
+        <div class="vdesc">I sketch wireframes and make prototypes. Talking through tactile designs existing in the browser is worth its weight. Design tools only carry you so far; the rest should be realized with a link my team can rally around.</div>
+      </div>
+      <div>
+        <div class="vnum">02</div>
+        <div class="vtitle">Collaborate</div>
+        <div class="vdesc">Good design is not created in a vacuum but rather in a shared space. It must be facilitated and iterated upon as a team. I aim to include stakeholders in my design process and create a collaborative environment that welcomes and encourages feedback.</div>
+      </div>
+      <div>
+        <div class="vnum">03</div>
+        <div class="vtitle">Build Performant Code</div>
+        <div class="vdesc">Performance is not a feature; it's a requirement. I focus on optimizing asset delivery, minimizing render-blocking resources, and writing efficient JavaScript to ensure fast loading times and a smooth 60fps interaction experience.</div>
+      </div>
+      <div>
+        <div class="vnum">04</div>
+        <div class="vtitle">Maintain Quality & Scale</div>
+        <div class="vdesc">I prioritize code health through strict component architecture, proper typing (e.g., TypeScript), and comprehensive unit testing. This ensures the codebase remains maintainable, scalable, and resilient as the product grows.</div>
+      </div>
+    </div>
+
+    <div class="about-story reveal">
+      <p>Before I stepped fully into web development, I worked as a virtual assistant. A lot of my early tasks involved handling emails, content, and small technical fixes — long before I knew I'd fall in love with writing real code. Those moments were my first glimpse into how the web actually works.</p>
+      <p>As I grew more curious, I began studying web development and building projects of my own. From recreating classic games like the Simon Game to experimenting with UI layouts and Tailwind, every project has pushed me to understand not just how things look, but how they function behind the scenes. Now, my learning journey is driven by the excitement of exploring new languages, new tools, and new challenges.</p>
+      <p>I believe in <strong>building in public</strong>, documenting my process, and sharing what I learn — even the messy parts. That's how I grow, and hopefully how I can help others grow too.</p>
+    </div>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="fgrid">
+      <div class="fbrand"><h3>Elvis</h3><p>Full-Stack developer that blends quality performance with beautiful design and user experience.</p></div>
+      <div class="fcol">
+        <h4>Quick Links</h4>
+        <a onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">Home</a>
+        <a onclick="showPage('about',document.querySelectorAll('.nav-btn')[1])">About</a>
+        <a onclick="showPage('notes',document.querySelectorAll('.nav-btn')[2])">Notes</a>
+        <a onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Contact</a>
+      </div>
+      <div class="fcol">
+        <h4>Get in Touch</h4>
+        <div class="femail">Elvisazubike@gmail.com</div>
+        <div class="sicons-row">
+          <a class="sic" href="#">📸</a><a class="sic" href="#">💼</a><a class="sic" href="#">🎵</a><a class="sic" href="#">🔵</a><a class="sic" href="#">🐙</a>
+        </div>
+      </div>
+    </div>
+    <div class="fcopy">© Elvis 2026. All rights reserved</div>
+  </div>
+</div>
+
+<!-- ══════ NOTES PAGE ══════ -->
+<div id="notes" class="page">
+  <div class="notes-inner">
+    <h1 class="sec-title reveal">Notes.</h1>
+    <p class="notes-desc reveal">Musings on code, design, and navigating life as a student-developer-engineer.</p>
+
+    <div class="ntabs reveal">
+      <button class="ntab active" onclick="filterNotes('all',this)">All</button>
+      <button class="ntab" onclick="filterNotes('devlife',this)">Dev Life</button>
+      <button class="ntab" onclick="filterNotes('fullstack',this)">Full Stack</button>
+      <button class="ntab" onclick="filterNotes('thoughts',this)">Thoughts</button>
+    </div>
+
+    <div class="ngrid" id="ngrid">
+      <div class="ncard reveal" data-cat="devlife">
+        <div class="ncat devlife">Dev Life</div>
+        <div class="ndate">February 13, 2025</div>
+        <div class="ntitle">Leaving VS Code for AI (And why I don't feel guilty)</div>
+        <div class="nexcerpt">How I stopped fighting the tool and started letting AI handle the repetitive parts of my workflow.</div>
+      </div>
+      <div class="ncard reveal" data-cat="fullstack">
+        <div class="ncat fullstack">Full Stack</div>
+        <div class="ndate">February 15, 2025</div>
+        <div class="ntitle">Why I stopped fighting Tailwind CSS</div>
+        <div class="nexcerpt">Utility-first CSS felt wrong until it felt completely right. Here's what changed my mind.</div>
+      </div>
+      <div class="ncard reveal" data-cat="thoughts">
+        <div class="ncat thoughts">Thoughts</div>
+        <div class="ndate">February 1, 2025</div>
+        <div class="ntitle">Confession: 90% of my side projects are abandoned</div>
+        <div class="nexcerpt">And that's okay. Here's why starting many things and finishing few is still a W.</div>
+      </div>
+      <div class="ncard reveal" data-cat="devlife">
+        <div class="ncat devlife">Dev Life</div>
+        <div class="ndate">February 16, 2025</div>
+        <div class="ntitle">The great FUTO night class delusion</div>
+        <div class="nexcerpt">I attended midnight lectures and thought I was thriving. Here's what actually happened.</div>
+      </div>
+      <div class="ncard reveal" data-cat="fullstack">
+        <div class="ncat fullstack">Full Stack</div>
+        <div class="ndate">January 28, 2025</div>
+        <div class="ntitle">Building my first REST API with Node and Express</div>
+        <div class="nexcerpt">Step by step breakdown of how I built and deployed my first backend — mistakes included.</div>
+      </div>
+      <div class="ncard reveal" data-cat="thoughts">
+        <div class="ncat thoughts">Thoughts</div>
+        <div class="ndate">January 10, 2025</div>
+        <div class="ntitle">Why self-taught devs need to document everything</div>
+        <div class="nexcerpt">Your journey is your portfolio. Here's why writing things down changed how I learn.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="fgrid">
+      <div class="fbrand"><h3>Elvis</h3><p>Full-Stack developer that blends quality performance with beautiful design and user experience.</p></div>
+      <div class="fcol">
+        <h4>Quick Links</h4>
+        <a onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">Home</a>
+        <a onclick="showPage('about',document.querySelectorAll('.nav-btn')[1])">About</a>
+        <a onclick="showPage('notes',document.querySelectorAll('.nav-btn')[2])">Notes</a>
+        <a onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Contact</a>
+      </div>
+      <div class="fcol">
+        <h4>Get in Touch</h4>
+        <div class="femail">Elvisazubike@gmail.com</div>
+        <div class="sicons-row">
+          <a class="sic" href="#">📸</a><a class="sic" href="#">💼</a><a class="sic" href="#">🎵</a><a class="sic" href="#">🔵</a><a class="sic" href="#">🐙</a>
+        </div>
+      </div>
+    </div>
+    <div class="fcopy">© Elvis 2026. All rights reserved</div>
+  </div>
+</div>
+
+<!-- ══════ CONTACT PAGE ══════ -->
+<div id="contact" class="page">
+  <div class="contact-inner">
+    <h1 class="sec-title reveal">Contact.</h1>
+    <div class="cbox reveal">
+      <h2>Let's Work Together</h2>
+      <p>I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+      <a class="btn-primary" href="mailto:Elvisazubike@gmail.com">Say Hello</a>
+      <div class="srow">
+        <a class="soc" href="#">🐙 GitHub</a>
+        <a class="soc" href="#">💼 LinkedIn</a>
+        <a class="soc" href="#">𝕏 X (Twitter)</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="fgrid">
+      <div class="fbrand"><h3>Elvis</h3><p>Full-Stack developer that blends quality performance with beautiful design and user experience.</p></div>
+      <div class="fcol">
+        <h4>Quick Links</h4>
+        <a onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">Home</a>
+        <a onclick="showPage('about',document.querySelectorAll('.nav-btn')[1])">About</a>
+        <a onclick="showPage('notes',document.querySelectorAll('.nav-btn')[2])">Notes</a>
+        <a onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Contact</a>
+      </div>
+      <div class="fcol">
+        <h4>Get in Touch</h4>
+        <div class="femail">Elvisazubike@gmail.com</div>
+        <div class="sicons-row">
+          <a class="sic" href="#">📸</a><a class="sic" href="#">💼</a><a class="sic" href="#">🎵</a><a class="sic" href="#">🔵</a><a class="sic" href="#">🐙</a>
+        </div>
+      </div>
+    </div>
+    <div class="fcopy">© Elvis 2026. All rights reserved</div>
+  </div>
+</div>
+
+<script src="Script.js"></script>
+</body>
+</html>
