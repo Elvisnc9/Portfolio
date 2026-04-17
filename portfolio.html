@@ -17,7 +17,7 @@
     <button class="nav-btn active" onclick="showPage('work',this)">Work</button>
     <button class="nav-btn" onclick="showPage('about',this)">About</button>
     <button class="nav-btn" onclick="showPage('notes',this)">Notes</button>
-    <button class="nav-btn" onclick="showPage('contact',this)">Contact</button>
+    <button class="nav-btn" onclick="goToContact(this)">Contact</button>
     <div class="nav-divider"></div>
     <button class="nav-theme" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">☀️</button>
   </div>
@@ -31,7 +31,7 @@
     <h1 class="hero-h1 reveal-up delay-1">Hi I'm Elvis<br>Software&nbsp;Developer</h1>
     <p class="hero-p reveal-up delay-2">App developer focused on building accessible,
       high-performance applications with clean, reliable interfaces</p>
-    <button class="btn-primary reveal-up delay-3" onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
+   <button class="btn-primary reveal-up delay-3" onclick="goToContact(document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
   </div>
 
   <div class="section-header">
@@ -324,12 +324,12 @@
   </div>
 <!-- ══════ CONTACT PAGE ══════ -->
 
-  <div class="contact-inner">
+ <section id="contact" class="contact-inner">
     <h1 class="sec-title reveal-up">Contact.</h1>
     <div class="cbox reveal-card">
       <h2>Let's Work Together</h2>
       <p>I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-      <a class="btn-primary" href="mailto:Elvisazubike@gmail.com">Say Hello</a>
+      <a class="btn-primary" href="mailto:elvisngwu18@gmail.com">Say Hello</a>
      <div class="sicons-row"  style="margin-top:20px;justify-content:center">
          <a class="sic" href="https://linkedin.com/in/yourusername" target="_blank" title="X">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/330px-X_logo_2023.svg.png?_=20250120013756" alt="X">
@@ -345,7 +345,7 @@
         </a>
       </div>
     </div>
-  </div>
+  </section>
 
 
 </div>

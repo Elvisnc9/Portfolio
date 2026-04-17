@@ -1,26 +1,86 @@
-/* ─── PAGE SWITCHER ─── */
-function showPage(id, btn) {
-  console.log('Switching to page:', id);
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const page = document.getElementById(id);
-  if (page) {
-    page.classList.add('active');
-    console.log('Page found and active class added');
-  } else {
-    console.error('Page not found:', id);
-  }
+/* ─── HELPERS ─── */
+function setActiveNav(btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'instant' });
-  // Kick reveal after paint
-  requestAnimationFrame(() => requestAnimationFrame(kickReveal));
+}
+
+function resetReveal(scope = document) {
+  scope.querySelectorAll('.reveal-up, .reveal-card').forEach(el => {
+    el.classList.remove('visible');
+  });
+}
+
+function playHeroIntro() {
+  const heroEls = document.querySelectorAll(
+    '#work .hero .reveal-up, #work .hero .reveal-card'
+  );
+
+  heroEls.forEach(el => el.classList.remove('visible'));
+
+  heroEls.forEach((el, i) => {
+    setTimeout(() => {
+      el.classList.add('visible');
+    }, 120 + i * 100);
+  });
+}
+
+/* ─── PAGE SWITCHER ─── */
+function showPage(id, btn, options = {}) {
+  const { scrollToTop = true, targetSelector = null } = options;
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+  const page = document.getElementById(id);
+  if (!page) {
+    console.error('Page not found:', id);
+    return;
+  }
+
+  page.classList.add('active');
+  setActiveNav(btn);
+
+  // reset animations on this page so they can replay
+  resetReveal(page);
+
+  if (id === 'work') {
+    playHeroIntro();
+  }
+
+  if (scrollToTop) {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      kickReveal();
+
+      if (targetSelector) {
+        const target = document.querySelector(targetSelector);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }, 120);
+        }
+      }
+    });
+  });
+}
+
+/* ─── GO TO CONTACT ON HOME PAGE ─── */
+function goToContact(btn) {
+  showPage('work', btn, {
+    scrollToTop: true,
+    targetSelector: '#contact'
+  });
 }
 
 /* ─── INTERSECTION OBSERVER – SCROLL REVEAL ─── */
 let revealObserver;
 
 function kickReveal() {
-  // Kill old observer so we don't double-observe
   if (revealObserver) revealObserver.disconnect();
 
   const els = document.querySelectorAll(
@@ -35,40 +95,35 @@ function kickReveal() {
       }
     });
   }, {
-    threshold: 0.07,
-    rootMargin: '0px 0px -24px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
   });
 
   els.forEach(el => revealObserver.observe(el));
 }
 
-/* ─── INITIAL REVEAL (elements already in viewport on load) ─── */
-window.addEventListener('DOMContentLoaded', () => {
-  // Immediately reveal hero elements with stagger
-  const heroEls = document.querySelectorAll('.page.active .reveal-up, .page.active .reveal-card');
-  heroEls.forEach((el, i) => {
-    setTimeout(() => el.classList.add('visible'), 120 + i * 90);
-  });
-
-  // Then set up observer for the rest
-  setTimeout(kickReveal, 600);
-});
-
 /* ─── NOTES FILTER ─── */
 function filterNotes(cat, btn) {
   document.querySelectorAll('.ntab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
 
   const cards = document.querySelectorAll('.ncard');
-  cards.forEach((c, i) => {
+
+  cards.forEach((c) => {
+    c.classList.remove('visible');
+    c.style.display = 'none';
+  });
+
+  let visibleIndex = 0;
+
+  cards.forEach((c) => {
     const show = cat === 'all' || c.dataset.cat === cat;
     if (show) {
       c.style.display = '';
-      // Re-animate visible cards
-      c.classList.remove('visible');
-      setTimeout(() => c.classList.add('visible'), 30 + i * 45);
-    } else {
-      c.style.display = 'none';
+      setTimeout(() => {
+        c.classList.add('visible');
+      }, 60 + visibleIndex * 70);
+      visibleIndex++;
     }
   });
 }
@@ -84,6 +139,7 @@ function toggleTheme() {
 /* ─── SMOOTH IMAGE PARALLAX ON PROJECT CARDS ─── */
 function initCardParallax() {
   const cards = document.querySelectorAll('.pcard');
+
   cards.forEach(card => {
     const img = card.querySelector('.pcard-img');
     if (!img) return;
@@ -104,6 +160,8 @@ function initCardParallax() {
 /* ─── NAV SCROLL SHADOW ─── */
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
+  if (!nav) return;
+
   if (window.scrollY > 10) {
     nav.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
   } else {
@@ -114,4 +172,9 @@ window.addEventListener('scroll', () => {
 /* ─── INIT ─── */
 window.addEventListener('DOMContentLoaded', () => {
   initCardParallax();
+  playHeroIntro();
+
+  setTimeout(() => {
+    kickReveal();
+  }, 400);
 });

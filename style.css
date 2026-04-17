@@ -375,13 +375,13 @@ nav{
 .nexcerpt{font-size:12px;color:var(--gray);line-height:1.65}
 
 /* ─── CONTACT ─── */
-.contact-inner{max-width:600px;margin:0 auto;padding:24px 24px 72px;text-align:center}
+.contact-inner{max-width:800px;margin:0 auto;padding:24px 24px 72px;text-align:center}
 .cbox{
   background:var(--bg2);border:1px solid var(--border);
   border-radius:22px;padding:44px 32px;margin-top:28px;
 }
-.cbox h2{font-size:22px;font-weight:800;margin-bottom:12px}
-.cbox p{font-size:14px;color:var(--gray);line-height:1.75;margin-bottom:28px;max-width:360px;margin-left:auto;margin-right:auto}
+.cbox h2{font-size:28px;font-weight:800;margin-bottom:12px}
+.cbox p{font-size:16px;color:var(--gray);line-height:1.75;margin-bottom:28px;max-width:360px;margin-left:auto;margin-right:auto}
 .srow{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
 .soc{
   display:flex;align-items:center;gap:7px;
