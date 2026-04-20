@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -356,15 +357,36 @@
   <div class="about-inner">
     <h1 class="about-h1 reveal-up">I'm Elvis.</h1>
 
-    <div class="about-top reveal-up">
-      <div class="about-pic"><img src="assets/profile.jpeg" alt="Elvis Ngwu"></div>
-      <div class="about-bio">
-        <p>Coming from West Africa, I carry resilience, ambition, and a quiet determination to build beyond limits. My focus is on contributing to the future of technology in Africa through meaningful innovation, thoughtful products, and ideas built to endure.
-           I believe the future of tech on the continent will be shaped by those willing to build it. Coming from West Africa, I carry resilience, ambition, and a quiet determination to build beyond limits. My focus is on contributing to the future of technology in Africa through meaningful innovation, thoughtful products, and ideas built to endure.
-           I believe the future of tech on the continent will be shaped by those willing to build it.Coming from West Africa, I carry resilience, ambition, and a quiet determination to build beyond limits. My focus is on contributing to the future of technology in Africa through meaningful innovation, thoughtful products, and ideas built to endure.
-           I believe the future of tech on the continent will be shaped by those willing to build it.</p>
-        <button class="btn-primary" style="margin-top:12px;font-size:13px;padding:10px 22px" onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
+    <div class="about-slider-wrap reveal-up">
+      <div class="about-slider">
+        <div class="about-slide">
+          <img src="assets/profile.jpeg" alt="Elvis Ngwu 1">
+        </div>
+        <div class="about-slide">
+          <img src="assets/profile.jpeg" alt="Elvis Ngwu 2">
+        </div>
+        <div class="about-slide active">
+          <img src="assets/profile.jpeg" alt="Elvis Ngwu 3">
+        </div>
+        <div class="about-slide">
+          <img src="assets/profile.jpeg" alt="Elvis Ngwu 4">
+        </div>
+        <div class="about-slide">
+          <img src="assets/profile.jpeg" alt="Elvis Ngwu 5">
+        </div>
       </div>
+    </div>
+
+    <div class="about-bio about-bio-full reveal-up">
+      <p>
+        <strong>Coming from West Africa, I carry resilience, ambition, and a quiet determination to build beyond limits.</strong>
+        My focus is on contributing to the future of technology in Africa through meaningful innovation, thoughtful products, and ideas built to endure.
+        I believe the future of tech on the continent will be shaped by those willing to build it.
+      </p>
+
+      <button class="btn-primary" style="margin-top:12px;font-size:13px;padding:10px 22px">
+        Get In Touch
+      </button>
     </div>
 
     <div class="reveal-up">
@@ -391,7 +413,7 @@
       <div>
         <div class="vnum">04</div>
         <div class="vtitle">Maintain Quality & Scale</div>
-        <div class="vdesc">I prioritize code health through strict component architecture, proper typing (e.g., TypeScript), and comprehensive unit testing. This ensures the codebase remains maintainable, scalable, and resilient as the product grows.</div>
+        <div class="vdesc">I prioritize code health through strict component architecture, proper typing, and comprehensive unit testing. This ensures the codebase remains maintainable, scalable, and resilient as the product grows.</div>
       </div>
     </div>
 
@@ -401,7 +423,6 @@
       <p>I believe in building in public, documenting my process, and sharing what I learn — even the messy parts. That's how I grow, and hopefully how I can help others grow too.</p>
     </div>
   </div>
-
 </div>
 
 <!-- ══════ NOTES PAGE ══════ -->

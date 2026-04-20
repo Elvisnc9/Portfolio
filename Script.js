@@ -178,3 +178,21 @@ window.addEventListener('DOMContentLoaded', () => {
     kickReveal();
   }, 400);
 });
+
+const stackCards = document.querySelectorAll('#stackCarousel .stack-card');
+  const classOrder = ['prev', 'active', 'next', 'next-2'];
+
+  function rotateStackCards() {
+    const current = [...stackCards].map(card =>
+      classOrder.find(cls => card.classList.contains(cls))
+    );
+
+    stackCards.forEach((card, index) => {
+      card.classList.remove('prev', 'active', 'next', 'next-2');
+      const currentClass = current[index];
+      const nextIndex = (classOrder.indexOf(currentClass) - 1 + classOrder.length) % classOrder.length;
+      card.classList.add(classOrder[nextIndex]);
+    });
+  }
+
+  setInterval(rotateStackCards, 2500);
