@@ -12,6 +12,8 @@
 </head>
 <body>
 
+  <div id="intro-veil"></div>   
+
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
@@ -353,47 +355,42 @@
 
 
 <!-- ══════ ABOUT PAGE ══════ -->
-<div id="about" class="page">
+<div id="about" class="page" >
   <div class="about-inner">
+ 
     <h1 class="about-h1 reveal-up">I'm Elvis.</h1>
-
-    <div class="about-slider-wrap reveal-up">
-      <div class="about-slider">
-        <div class="about-slide">
-          <img src="assets/profile.jpeg" alt="Elvis Ngwu 1">
-        </div>
-        <div class="about-slide">
-          <img src="assets/profile.jpeg" alt="Elvis Ngwu 2">
-        </div>
-        <div class="about-slide active">
-          <img src="assets/profile.jpeg" alt="Elvis Ngwu 3">
-        </div>
-        <div class="about-slide">
-          <img src="assets/profile.jpeg" alt="Elvis Ngwu 4">
-        </div>
-        <div class="about-slide">
-          <img src="assets/profile.jpeg" alt="Elvis Ngwu 5">
+ 
+    <!-- ── CENTER CARD CAROUSEL ( no buttons, drag/swipe only) ── -->
+    <div class="cs-root reveal-up" >
+      <div class="cs-viewport">
+        <div class="cs-track" id="csTrack">
+          <div class="cs-slide"><img src="assets/profile.jpeg" alt="Elvis 1" draggable="false"></div>
+          <div class="cs-slide"><img src="assets/profile.jpeg" alt="Elvis 2" draggable="false"></div>
+          <div class="cs-slide"><img src="assets/profile.jpeg" alt="Elvis 3" draggable="false"></div>
+          <div class="cs-slide"><img src="assets/profile.jpeg" alt="Elvis 4" draggable="false"></div>
+          <div class="cs-slide"><img src="assets/profile.jpeg" alt="Elvis 5" draggable="false"></div>
         </div>
       </div>
     </div>
-
+ 
+    <!-- Bio -->
     <div class="about-bio about-bio-full reveal-up">
       <p>
-        <strong>Coming from West Africa, I carry resilience, ambition, and a quiet determination to build beyond limits.</strong>
+        Coming from West Africa, I carry resilience, ambition, and a quiet determination to build beyond limits.
         My focus is on contributing to the future of technology in Africa through meaningful innovation, thoughtful products, and ideas built to endure.
         I believe the future of tech on the continent will be shaped by those willing to build it.
       </p>
-
-      <button class="btn-primary" style="margin-top:12px;font-size:13px;padding:10px 22px">
+      <button class="btn-primary" style="margin-top:20px;font-size:13px;padding:10px 26px"
+        onclick="goToContact(document.querySelectorAll('.nav-btn')[3])">
         Get In Touch
       </button>
     </div>
-
+ 
     <div class="reveal-up">
       <p class="about-collab">Let's collaborate if you're committed to sustainability, education, equality, or carbon neutrality.</p>
       <p class="about-collab-p">I'm committed to leaving the world better for those who come after us, and I aim to contribute however I can. If you value that too, I'd love to talk.</p>
     </div>
-
+ 
     <div class="vals reveal-up">
       <div>
         <div class="vnum">01</div>
@@ -403,12 +400,12 @@
       <div>
         <div class="vnum">02</div>
         <div class="vtitle">Collaborate</div>
-        <div class="vdesc">Good design is not created in a vacuum but rather in a shared space. It must be facilitated and iterated upon as a team. I aim to include stakeholders in my design process and create a collaborative environment that welcomes feedback.</div>
+        <div class="vdesc">Good design is not created in a vacuum but rather in a shared space. It must be facilitated and iterated upon as a team. I aim to include stakeholders and create a collaborative environment that welcomes feedback.</div>
       </div>
       <div>
         <div class="vnum">03</div>
         <div class="vtitle">Build Performant Code</div>
-        <div class="vdesc">Performance is not a feature; it's a requirement. I focus on optimizing asset delivery, minimizing render-blocking resources, and writing efficient JavaScript to ensure fast loading times and a smooth 60fps interaction experience.</div>
+        <div class="vdesc">Performance is not a feature; it's a requirement. I focus on optimizing asset delivery, minimizing render-blocking resources, and writing efficient code to ensure fast loading and smooth interactions.</div>
       </div>
       <div>
         <div class="vnum">04</div>
@@ -416,14 +413,18 @@
         <div class="vdesc">I prioritize code health through strict component architecture, proper typing, and comprehensive unit testing. This ensures the codebase remains maintainable, scalable, and resilient as the product grows.</div>
       </div>
     </div>
-
+ 
     <div class="about-story reveal-up">
-      <p>Before I stepped fully into web development, I worked as a virtual assistant. A lot of my early tasks involved handling emails, content, and small technical fixes — long before I knew I'd fall in love with writing real code. Those moments were my first glimpse into how the web actually works.</p>
-      <p>As I grew more curious, I began studying web development and building projects of my own. From recreating classic games like the Simon Game to experimenting with UI layouts and Tailwind, every project has pushed me to understand not just how things look, but how they function behind the scenes. Now, my learning journey is driven by the excitement of exploring new languages, new tools, and new challenges.</p>
-      <p>I believe in building in public, documenting my process, and sharing what I learn — even the messy parts. That's how I grow, and hopefully how I can help others grow too.</p>
+      <p>Before I stepped fully into web development, I worked as a virtual assistant. A lot of my early tasks involved handling emails, content, and small technical fixes — long before I knew I'd fall in love with writing real code.</p>
+      <p>As I grew more curious, I began studying web development and building projects of my own. Every project pushed me to understand not just how things look, but how they function behind the scenes.</p>
+      <p>I believe in <strong>building in public</strong>, documenting my process, and sharing what I learn — even the messy parts. That's how I grow, and hopefully how I can help others grow too.</p>
     </div>
+ 
   </div>
 </div>
+ 
+ 
+ 
 
 <!-- ══════ NOTES PAGE ══════ -->
 <div id="notes" class="page">
@@ -527,5 +528,92 @@
 </footer>
 
 <script src="Script.js"></script>
+<script>
+(function () {
+  const track  = document.getElementById('csTrack');
+  if (!track) return;
+ 
+  const slides = Array.from(track.querySelectorAll('.cs-slide'));
+  const total  = slides.length;
+ 
+  /* Card dimensions — must match CSS */
+  const CARD_W  = 240;   /* px, card width  */
+  const STEP    = 168;   /* px between card centers (tight overlap) */
+ 
+  /* Start at the middle card */
+  let current = Math.floor(total / 2);
+ 
+  /* ── Wrap offset to shortest circular path ── */
+  function circularOffset(i) {
+    let off = i - current;
+    /* wrap into range -(total/2) … +(total/2) so loop is seamless */
+    if (off >  total / 2) off -= total;
+    if (off < -total / 2) off += total;
+    return off;
+  }
+ 
+  function render() {
+    slides.forEach((slide, i) => {
+      const off    = circularOffset(i);
+      const abs    = Math.abs(off);
+ 
+      const tx     = off * STEP;
+      const scale  = abs === 0 ? 1 : abs === 1 ? 0.82 : 0.68;
+      const bright = abs === 0 ? 1 : abs === 1 ? 0.48 : 0.28;
+      const sat    = abs === 0 ? 1 : 0;
+      const z      = total - abs;
+ 
+      slide.style.transform = `translateX(${tx}px) scale(${scale})`;
+      slide.style.zIndex    = z;
+      slide.style.filter    = `brightness(${bright}) saturate(${sat})`;
+      slide.style.opacity   = abs > 2 ? 0 : 1;
+      slide.style.cursor    = abs === 0 ? 'default' : 'pointer';
+      slide.classList.toggle('cs-active', abs === 0);
+    });
+  }
+ 
+  function go(idx) {
+    /* wrap infinitely */
+    current = ((idx % total) + total) % total;
+    render();
+  }
+ 
+  /* Click a side card to centre it */
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', () => {
+      const off = circularOffset(i);
+      if (off !== 0) go(current + off);
+    });
+  });
+ 
+  /* Drag / swipe */
+  let dragStart = null;
+  track.addEventListener('mousedown',  e => { dragStart = e.clientX; e.preventDefault(); });
+  track.addEventListener('touchstart', e => { dragStart = e.touches[0].clientX; }, { passive: true });
+ 
+  const onEnd = endX => {
+    if (dragStart === null) return;
+    const diff = dragStart - endX;
+    if (Math.abs(diff) > 36) go(current + (diff > 0 ? 1 : -1));
+    dragStart = null;
+  };
+ 
+  track.addEventListener('mouseup',    e => onEnd(e.clientX));
+  track.addEventListener('mouseleave', ()  => { dragStart = null; });
+  track.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientX));
+ 
+  /* Keyboard */
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('about')?.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft')  go(current - 1);
+    if (e.key === 'ArrowRight') go(current + 1);
+  });
+
+  window.csNext = () => go(current + 1);
+ 
+  render();
+})();
+</script>
+
 </body>
 </html>

@@ -320,137 +320,186 @@ nav{
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ─── ABOUT ─── */
-.about-inner{max-width:900px;margin:0 auto;padding:24px 24px 72px}
-.about-h1{font-size:clamp(2.6rem,8vw,5rem);font-weight:900;letter-spacing:-.03em;text-align:center;margin-bottom:36px}
-.about-bio p strong{
-  display:inline;
-  color: var(--white);
-  font-size:clamp(1.55rem, 3.5vw, 2.0rem);
-  font-weight:800;
-  font-family:"Cormorant Garamond", "Playfair Display", serif;
-  line-height:1.15;
-  letter-spacing:0.2px;
+/* ══════════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════════ */
+ 
+/* ══════════════════════════════════════════
+   ABOUT PAGE
+   Remove all old .about-slider / .about-slide
+   / .about-top / .about-pic rules and replace
+   with everything below.
+══════════════════════════════════════════ */
+
+.about-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 24px 72px;
 }
+ 
+.about-h1 {
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+ 
+/* ─────────────────────────────────────────
+   CENTER-CARD CAROUSEL
+───────────────────────────────────────── */
+ 
+#intro-veil {
+  position: fixed;
+  inset: 0;
+  background: #0d0d0d;
+  z-index: 9998;
+  pointer-events: none;
+  transition: opacity 1s cubic-bezier(0.65,0,0.35,1);
+}
+body.light #intro-veil { background: #f4f4f4; }
 
-
-/* ─── ABOUT FULL-WIDTH CAROUSEL ─── */
-.about-slider-wrap{
+.cs-root {
+  position: relative;
   width: 100%;
-  margin: 0 0 30px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 8px 0 14px;
+  /* height = card height + vertical bleed from scale transform */
+  height: 360px;
+  margin-bottom: 52px;
 }
-
-.about-slider-wrap::-webkit-scrollbar{
-  display: none;
+ 
+/* Clips left/right overflow so only ~3 cards peek out */
+.cs-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
 }
-
-.about-slider{
-  display: flex;
-  align-items: center;
-  gap: 0;
-  min-width: max-content;
-  padding: 8px 72px;
+ 
+/* Zero-size anchor point dead-centre of the viewport */
+.cs-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  cursor: grab;
 }
-
-.about-slide{
-  flex: 0 0 auto;
-  width: 220px;
-  height: 300px;
-  margin-left: -54px;
+.cs-track:active { cursor: grabbing; }
+ 
+/* Each card — positioned relative to the track centre */
+.cs-slide {
+  position: absolute;
+ 
+  /* ← card size */
+  width: 240px;
+  height: 310px;
+ 
+  /* offset so the card itself is centred on the anchor */
+  margin-top:  -155px;   /* half of height */
+  margin-left: -120px;   /* half of width  */
+ 
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--bg3);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.22);
-  transform: scale(0.92) rotate(-6deg);
-  transition: transform .35s ease, box-shadow .35s ease, filter .35s ease;
-  filter: brightness(0.82);
-  position: relative;
+ 
+  transition:
+    transform  0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter     0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity    0.35s ease,
+    box-shadow 0.45s ease;
+ 
+  will-change: transform, filter;
+  box-shadow: 0 10px 32px rgba(0,0,0,0.45);
 }
-
-.about-slide:first-child{
-  margin-left: 0;
+ 
+.cs-slide.cs-active {
+  box-shadow: 0 22px 60px rgba(0,0,0,0.65);
 }
-
-.about-slide:nth-child(even){
-  transform: scale(0.92) rotate(6deg);
-}
-
-.about-slide.active{
-  width: 250px;
-  height: 330px;
-  z-index: 3;
-  transform: scale(1) rotate(0deg);
-  filter: brightness(1);
-  box-shadow: 0 24px 56px rgba(0,0,0,0.3);
-}
-
-.about-slide:hover{
-  transform: scale(1.02) rotate(0deg);
-  filter: brightness(1);
-  z-index: 5;
-}
-
-.about-slide img{
+ 
+.cs-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
+  user-select: none;
 }
-
-.about-bio-full{
+ 
+/* ─────────────────────────────────────────
+   BIO / COLLAB / VALS / STORY
+───────────────────────────────────────── */
+ 
+.about-bio-full {
   max-width: 100%;
   margin-bottom: 34px;
+  text-align: center;
 }
-
-.about-bio-full p{
+ 
+.about-bio-full p {
   font-size: 13.5px;
   color: var(--gray);
   line-height: 1.8;
-  text-align: justify;
 }
-
-/* mobile */
-@media (max-width: 600px){
-  .about-slider{
-    padding: 8px 24px 10px;
-  }
-
-  .about-slide{
-    width: 160px;
-    height: 220px;
-    margin-left: -34px;
-    border-radius: 16px;
-  }
-
-  .about-slide.active{
-    width: 185px;
-    height: 250px;
-  }
-
-  .about-bio-full p{
-    text-align: center;
-  }
+ 
+.about-bio-full p strong {
+  display: inline;
+  color: var(--white);
+  font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+  font-weight: 800;
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
+  line-height: 1.15;
 }
-.about-bio h2{font-size:clamp(14px,3.5vw,17px);font-weight:700;line-height:1.35;margin-bottom:12px}
-.about-bio p{font-size:13.5px;color:var(--gray);line-height:1.75;margin-bottom:9px; text-align: justify;}
-.about-collab{font-size:clamp(14px,3.5vw,18px);font-weight:700;line-height:1.4;margin-bottom:10px}
-.about-collab-p{font-size:13.5px;color:var(--gray);line-height:1.75;margin-bottom:36px}
-.vals{
-  display:grid;grid-template-columns:1fr 1fr;gap: 30px;
-  background:var(--bg2);border:1px solid var(--border);border-radius:18px;
-  padding:30px;margin-bottom:32px;
+ 
+.about-collab {
+  font-size: clamp(14px, 3.5vw, 18px);
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 10px;
 }
-.vnum{font-size:36px;font-weight:900;color:var(--border);margin-bottom:6px}
-.vtitle{font-size:14px;font-weight:700;margin-bottom:6px}
-.vdesc{font-size:12.5px;color:var(--gray);line-height:1.7}
-.about-story{font-size:13.5px;color:var(--gray);line-height:1.85}
-.about-story p{margin-bottom:16px}
-.about-story strong{color:var(--white)}
+.about-collab-p {
+  font-size: 13.5px;
+  color: var(--gray);
+  line-height: 1.75;
+  margin-bottom: 36px;
+}
+ 
+.vals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  margin-bottom: 32px;
+}
+.vnum   { font-size: 36px; font-weight: 900; color: var(--border); margin-bottom: 6px; }
+.vtitle { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.vdesc  { font-size: 12.5px; color: var(--gray); line-height: 1.7; }
+ 
+.about-story { font-size: 13.5px; color: var(--gray); line-height: 1.85; }
+.about-story p { margin-bottom: 16px; }
+.about-story strong { color: var(--white); }
+ 
+/* ─────────────────────────────────────────
+   MOBILE
+───────────────────────────────────────── */
+@media (max-width: 600px) {
+  .about-inner { padding-left: 16px; padding-right: 16px; }
+ 
+  .cs-root   { height: 350px; margin-bottom: 40px; }
+  .cs-slide  {
+    width: 180px;
+    height: 280px;
+    margin-top:  -120px;
+    margin-left: -90px;
+    border-radius: 14px;
+  }
+ 
+  .about-bio-full p { text-align: center; }
+  .vals { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+}
+ 
 
 /* ─── NOTES ─── */
 .notes-inner{max-width:900px;margin:0 auto;padding:24px 24px 72px}
@@ -752,23 +801,7 @@ body.light .browser-chrome{background:#ddd;border-color:#ccc}
   .vals{grid-template-columns:1fr;gap:18px;padding:20px}
   .about-top{flex-direction:column;align-items:center;text-align:center}
   .about-bio p{font-size:13.5px;color:var(--gray);line-height:1.75;margin-bottom:9px; text-align: center;}
-   .about-pic{
-    width: 280px;
-    height: 260px;
-    margin: 0 auto 10px;
-  }
 
-  .stack-card.next{
-    transform: translateX(34px) scale(0.92) rotate(6deg);
-  }
-
-  .stack-card.next-2{
-    transform: translateX(64px) scale(0.84) rotate(10deg);
-  }
-
-  .stack-card.prev{
-    transform: translateX(-30px) scale(0.9) rotate(-6deg);
-  }
 }
   .about-inner,.notes-inner,.contact-inner{padding-left:16px;padding-right:16px}
   .fgrid{grid-template-columns:1fr;gap:24px}
@@ -780,4 +813,19 @@ body.light .browser-chrome{background:#ddd;border-color:#ccc}
 @media(max-width:380px){
   .nav-btn{font-size:11.5px;padding:6px 10px}
   .hero-h1{font-size:2.2rem}
+}
+
+@media (max-width: 600px) {
+  .fan-stage   { height: 340px; margin-bottom: 44px; }
+  .fan-track   { width: 170px; height: 240px; }
+  .fan-card    { border-radius: 14px; }
+ 
+  /* Tighten the spread on mobile */
+  /* The JS uses 130px per step – override via CSS custom property trick isn't
+     possible without JS change, so just reduce stage overflow clip */
+  .fan-stage   { overflow: visible; }
+ 
+  .about-bio-full p { text-align: center; }
+  .vals        { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+  .about-inner { padding-left: 16px; padding-right: 16px; }
 }
