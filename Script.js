@@ -189,7 +189,7 @@ function stopCarousel() {
 }
 
 let resumeTimer = null;
-function pauseCarousel(ms = 5000) {
+function pauseCarousel(ms = 3000) {
   carouselPaused = true;
   clearTimeout(resumeTimer);
   resumeTimer = setTimeout(() => { carouselPaused = false; }, ms);
@@ -240,7 +240,7 @@ function runIntro() {
   });
 
   /* 3 ── after hero lands, kick scroll-reveal for rest of page */
-  setTimeout(kickReveal, 1100);
+  setTimeout(kickReveal, 800);
 
   /* 4 ── init carousel hooks + auto-scroll */
   setTimeout(() => {

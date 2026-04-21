@@ -135,7 +135,7 @@ nav{
   padding:0 24px 72px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:20px;
+  gap:60px;
 }
 
 /* ─── PROJECT CARD ─── */
@@ -363,9 +363,10 @@ body.light #intro-veil { background: #f4f4f4; }
   position: relative;
   width: 100%;
   /* height = card height + vertical bleed from scale transform */
-  height: 360px;
+  height: 450px;
   margin-bottom: 52px;
 }
+
  
 /* Clips left/right overflow so only ~3 cards peek out */
 .cs-viewport {
@@ -390,12 +391,12 @@ body.light #intro-veil { background: #f4f4f4; }
   position: absolute;
  
   /* ← card size */
-  width: 240px;
-  height: 310px;
+  width: 280px;
+  height: 360px;
  
   /* offset so the card itself is centred on the anchor */
   margin-top:  -155px;   /* half of height */
-  margin-left: -120px;   /* half of width  */
+  margin-left: -140px;   /* half of width  */
  
   border-radius: 18px;
   overflow: hidden;
@@ -441,15 +442,6 @@ body.light #intro-veil { background: #f4f4f4; }
   line-height: 1.8;
 }
  
-.about-bio-full p strong {
-  display: inline;
-  color: var(--white);
-  font-size: clamp(1.4rem, 3.2vw, 1.9rem);
-  font-weight: 800;
-  font-family: "Cormorant Garamond", "Playfair Display", serif;
-  line-height: 1.15;
-}
- 
 .about-collab {
   font-size: clamp(14px, 3.5vw, 18px);
   font-weight: 700;
@@ -461,6 +453,7 @@ body.light #intro-veil { background: #f4f4f4; }
   color: var(--gray);
   line-height: 1.75;
   margin-bottom: 36px;
+  text-align: center;
 }
  
 .vals {
