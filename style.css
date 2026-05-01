@@ -482,10 +482,10 @@ body.light #intro-veil { background: #f4f4f4; }
  
   .cs-root   { height: 350px; margin-bottom: 40px; }
   .cs-slide  {
-    width: 180px;
+    width: 220px;
     height: 280px;
     margin-top:  -120px;
-    margin-left: -90px;
+    margin-left: -95px;
     border-radius: 14px;
   }
  
