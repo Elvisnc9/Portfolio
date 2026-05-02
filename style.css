@@ -332,9 +332,9 @@ nav{
 ══════════════════════════════════════════ */
 
 .about-inner {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 24px 24px 72px;
+  padding: 24px 24px 2px;
 }
  
 .about-h1 {
@@ -482,11 +482,12 @@ body.light #intro-veil { background: #f4f4f4; }
  
   .cs-root   { height: 350px; margin-bottom: 40px; }
   .cs-slide  {
-    width: 220px;
-    height: 280px;
+    width: 190px;
+    height: 250px;
     margin-top:  -120px;
     margin-left: -95px;
     border-radius: 14px;
+    overflow: hidden;
   }
  
   .about-bio-full p { text-align: center; }
