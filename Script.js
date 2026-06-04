@@ -69,6 +69,12 @@ function goToContact(btn) {
 }
 
 
+/* ─── GO BACK (from project page) ─── */
+function goBack() {
+  showPage('work', document.querySelectorAll('.nav-btn')[0], { scrollToTop: true });
+}
+
+
 /* ─── SCROLL REVEAL ─── */
 let revealObserver;
 

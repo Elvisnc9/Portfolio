@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Elvis Ngwu | App Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"/>
+
+<style>
+/* ══════════════════════════════════════════
+   NEW PROJECT CARD — matches reference image
+══════════════════════════════════════════ */
+
+/* Override old 2-col grid to single col */
+.projects-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  max-width: 1100px !important;
+}
+
+/* The new card */
+.pcard-new {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 20px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  min-height: 460px;
+  cursor: pointer;
+  transition: border-color .3s, transform .35s cubic-bezier(0.34,1.56,0.64,1), box-shadow .3s;
+}
+.pcard-new:hover {
+  border-color: #333;
+  transform: translateY(-4px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+
+/* ── LEFT: phone stage ── */
+.pcard-left {
+  position: relative;
+  background: #0e0e0e;
+  border-right: 1px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px 0 20px;
+  min-height: 460px;
+}
+
+/* Three phones fanned */
+.phones-fan {
+  position: relative;
+  width: 340px;
+  height: 380px;
+  flex-shrink: 0;
+}
+.pf-phone {
+  position: absolute;
+  background: #fff;
+  border-radius: 28px;
+  border: 5px solid #1c1c1c;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+  overflow: hidden;
+  width: 180px;
+}
+.pf-phone img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 9/19.5;
+  object-fit: cover;
+}
+
+/* left phone */
+.pf-left  { left: 0;   bottom: 0; transform: rotate(-6deg); z-index: 1; }
+/* center phone — tallest, upright */
+.pf-center{ left: 50%; bottom: 0; transform: translateX(-50%); z-index: 3; width: 190px; }
+/* right phone */
+.pf-right { right: 0;  bottom: 0; transform: rotate(6deg);  z-index: 2; }
+
+/* "+N more screens" badge */
+.more-badge {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 100px;
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  z-index: 10;
+}
+.more-badge-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4ade80; flex-shrink: 0;
+}
+
+/* placeholder phone screen when no image */
+.phone-screen-placeholder {
+  width: 100%;
+  aspect-ratio: 9/19.5;
+  background: linear-gradient(160deg, #1e1e1e 0%, #2a2a2a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+/* ── RIGHT: info ── */
+.pcard-right {
+  padding: 44px 44px 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+/* category eyebrow */
+.pcard-cat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #555;
+  margin-bottom: 16px;
+}
+.pcard-cat-icon {
+  width: 16px; height: 16px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+}
+
+/* project title */
+.pcard-title-new {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* description */
+.pcard-desc {
+  font-size: 14.5px;
+  color: #666;
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 400px;
+}
+
+/* pill tags */
+.pcard-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pcard-pill {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #aaa;
+  border: 1px solid #2e2e2e;
+  border-radius: 100px;
+  padding: 6px 16px;
+  background: transparent;
+  transition: border-color .2s, color .2s;
+}
+.pcard-new:hover .pcard-pill {
+  border-color: #404040;
+  color: #ccc;
+}
+
+/* arrow button top-right */
+.pcard-arrow-new {
+  position: absolute;
+  top: 24px; right: 24px;
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid #2a2a2a;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #888;
+  transition: background .2s, color .2s, transform .3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.pcard-new:hover .pcard-arrow-new {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transform: rotate(-45deg);
+}
+/* wrapper needs relative for arrow */
+.pcard-new { position: relative; }
+
+/* ── LIGHT MODE overrides ── */
+body.light .pcard-new       { background: #f4f4f4; border-color: #e0e0e0; }
+body.light .pcard-left      { background: #e8e8e8; border-color: #ddd; }
+body.light .pf-phone        { border-color: #bbb; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+body.light .pcard-title-new { color: #111; }
+body.light .pcard-desc      { color: #777; }
+body.light .pcard-pill      { color: #555; border-color: #ccc; }
+body.light .pcard-cat       { color: #999; }
+body.light .pcard-arrow-new { background: rgba(0,0,0,0.05); border-color: #ccc; color: #888; }
+body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: #666; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .pcard-new { grid-template-columns: 1fr; }
+  .pcard-left { border-right: none; border-bottom: 1px solid #222; min-height: 340px; }
+  .phones-fan { width: 280px; height: 300px; }
+  .pf-phone   { width: 140px; }
+  .pcard-right { padding: 28px 24px 32px; }
+  .pcard-title-new { font-size: 2rem; }
+}
+@media (max-width: 520px) {
+  .phones-fan { width: 240px; height: 260px; }
+  .pf-phone   { width: 120px; border-radius: 20px; border-width: 4px; }
+  .pcard-right { padding: 22px 18px 26px; }
+}
+</style>
+</head>
+<body>
+
+<div id="intro-veil"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showPage('work',this)">Work</button>
+    <button class="nav-btn" onclick="showPage('about',this)">About</button>
+    <button class="nav-btn" onclick="showPage('notes',this)">Notes</button>
+    <button class="nav-btn" onclick="goToContact(this)">Contact</button>
+    <div class="nav-divider"></div>
+    <button class="nav-theme" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">☀️</button>
+  </div>
+</nav>
+
+<!-- ══════ WORK PAGE ══════ -->
+<div id="work" class="page active">
+
+  <div class="hero">
+    <div class="hero-eyebrow reveal-up">Available for hire · Remote</div>
+    <h1 class="hero-h1 reveal-up delay-1">Hi I'm Elvis<br>Software&nbsp;Developer</h1>
+    <p class="hero-p reveal-up delay-2">App developer focused on building accessible,
+      high-performance applications with clean, reliable interfaces</p>
+    <button class="btn-primary reveal-up delay-3" onclick="goToContact(document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
+  </div>
+
+  <div class="section-header">
+    <h2 class="sec-title reveal-up">Projects.</h2>
+  </div>
+
+  <!-- ════ NEW PROJECT CARDS ════ -->
+  <div class="projects-grid">
+
+    <!-- 1 · Elves Plus App -->
+    <div class="pcard-new reveal-card" onclick="window.location.href='project.html'">
+      <div class="pcard-arrow-new">↗</div>
+      <div class="pcard-left">
+        <div class="phones-fan">
+          <!-- Replace src values with your real screenshots -->
+          <div class="pf-phone pf-left">
+            <img src="assets/screen-1.png" alt="Create Account" onerror="this.parentNode.innerHTML='<div class=\'phone-screen-placeholder\'>📱</div>'"/>
+          </div>
+          <div class="pf-phone pf-center">
+            <img src="assets/screen-2.png" alt="Home Dashboard" onerror="this.parentNode.innerHTML='<div class=\'phone-screen-placeholder\'>🏠</div>'"/>
+          </div>
+          <div class="pf-phone pf-right">
+            <img src="assets/screen-3.png" alt="Checkout" onerror="this.parentNode.innerHTML='<div class=\'phone-screen-placeholder\'>🛒</div>'"/>
+          </div>
+        </div>
+        <div class="more-badge">
+          <span class="more-badge-dot"></span>
+          +5 more screens
+        </div>
+      </div>
+      <div class="pcard-right">
+        <div class="pcard-cat">
+          <span class="pcard-cat-icon">📱</span>
+          Mobile App
+        </div>
+        <div class="pcard-title-new">Elves Plus<br>App</div>
+        <div class="pcard-desc">A production-ready e-commerce mobile platform engineered with real-time inventory sync, African-first payment integration, and offline-first cart management.</div>
+        <div class="pcard-pills">
+          <span class="pcard-pill">Flutter</span>
+          <span class="pcard-pill">PostgreSQL</span>
+          <span class="pcard-pill">Node.js</span>
+          <span class="pcard-pill">Serverpod</span>
+          <span class="pcard-pill">E-Commerce</span>
+          <span class="pcard-pill">Mobile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · Elves ChatBot App -->
+    <div class="pcard-new reveal-card delay-1" onclick="window.location.href='project-2.html'">
+      <div class="pcard-arrow-new">↗</div>
+      <div class="pcard-left">
+        <div class="phones-fan">
+          <div class="pf-phone pf-left">
+            <div class="phone-screen-placeholder">🤖</div>
+          </div>
+          <div class="pf-phone pf-center">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#1a1f2e,#0d1117)">💬</div>
+          </div>
+          <div class="pf-phone pf-right">
+            <div class="phone-screen-placeholder">✨</div>
+          </div>
+        </div>
+        <div class="more-badge">
+          <span class="more-badge-dot"></span>
+          AI-Powered
+        </div>
+      </div>
+      <div class="pcard-right">
+        <div class="pcard-cat">
+          <span class="pcard-cat-icon">🤖</span>
+          AI · Mobile App
+        </div>
+        <div class="pcard-title-new">Elves<br>ChatBot App</div>
+        <div class="pcard-desc">A multilingual AI chatbot mobile application with context-aware conversations, voice input, and real-time streaming responses powered by OpenAI.</div>
+        <div class="pcard-pills">
+          <span class="pcard-pill">Flutter</span>
+          <span class="pcard-pill">Serverpod</span>
+          <span class="pcard-pill">OpenAI</span>
+          <span class="pcard-pill">AI</span>
+          <span class="pcard-pill">Mobile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · Elves Ecommerce App -->
+    <div class="pcard-new reveal-card" onclick="window.location.href='project-3.html'">
+      <div class="pcard-arrow-new">↗</div>
+      <div class="pcard-left">
+        <div class="phones-fan">
+          <div class="pf-phone pf-left">
+            <div class="phone-screen-placeholder">🛍️</div>
+          </div>
+          <div class="pf-phone pf-center">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#1a1226,#0d0d1a)">💜</div>
+          </div>
+          <div class="pf-phone pf-right">
+            <div class="phone-screen-placeholder">📦</div>
+          </div>
+        </div>
+        <div class="more-badge">
+          <span class="more-badge-dot" style="background:#a78bfa"></span>
+          Full Stack
+        </div>
+      </div>
+      <div class="pcard-right">
+        <div class="pcard-cat">
+          <span class="pcard-cat-icon">🌐</span>
+          Web · Mobile
+        </div>
+        <div class="pcard-title-new">Elves<br>Ecommerce App</div>
+        <div class="pcard-desc">A full-stack e-commerce platform with a Flutter mobile app, React web dashboard, and Serverpod backend — built for scalability and performance.</div>
+        <div class="pcard-pills">
+          <span class="pcard-pill">Flutter</span>
+          <span class="pcard-pill">Serverpod</span>
+          <span class="pcard-pill">React</span>
+          <span class="pcard-pill">Node.js</span>
+          <span class="pcard-pill">CSS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · Jaspr -->
+    <div class="pcard-new reveal-card delay-1" onclick="window.location.href='project-4.html'">
+      <div class="pcard-arrow-new">↗</div>
+      <div class="pcard-left">
+        <div class="phones-fan">
+          <div class="pf-phone pf-left">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#0d0d0d,#1a0a0a)">🎭</div>
+          </div>
+          <div class="pf-phone pf-center">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#111,#1c0808)">😶</div>
+          </div>
+          <div class="pf-phone pf-right">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#0d0d0d,#1a0a0a)">🔴</div>
+          </div>
+        </div>
+        <div class="more-badge">
+          <span class="more-badge-dot" style="background:#ef4444"></span>
+          Real-Time
+        </div>
+      </div>
+      <div class="pcard-right">
+        <div class="pcard-cat">
+          <span class="pcard-cat-icon">💬</span>
+          Web App
+        </div>
+        <div class="pcard-title-new">Jaspr</div>
+        <div class="pcard-desc">An anonymous confessions platform with real-time interactions via Socket.io, persistent storage in PostgreSQL, and a clean Tailwind-powered UI.</div>
+        <div class="pcard-pills">
+          <span class="pcard-pill">HTML</span>
+          <span class="pcard-pill">Tailwind</span>
+          <span class="pcard-pill">Node.js</span>
+          <span class="pcard-pill">PostgreSQL</span>
+          <span class="pcard-pill">Socket.io</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 · Axelerate -->
+    <div class="pcard-new reveal-card" onclick="window.location.href='project-5.html'">
+      <div class="pcard-arrow-new">↗</div>
+      <div class="pcard-left">
+        <div class="phones-fan">
+          <div class="pf-phone pf-left">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#0a0a1a,#111128)">📊</div>
+          </div>
+          <div class="pf-phone pf-center">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#0d0d22,#14143a)">📈</div>
+          </div>
+          <div class="pf-phone pf-right">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#0a0a1a,#111128)">🚀</div>
+          </div>
+        </div>
+        <div class="more-badge">
+          <span class="more-badge-dot" style="background:#6366f1"></span>
+          SaaS · CRM
+        </div>
+      </div>
+      <div class="pcard-right">
+        <div class="pcard-cat">
+          <span class="pcard-cat-icon">⚡</span>
+          SaaS Platform
+        </div>
+        <div class="pcard-title-new">Axelerate</div>
+        <div class="pcard-desc">A data-driven business scaling platform with CRM capabilities, analytics dashboards, and automated workflows — built with React and Node.js.</div>
+        <div class="pcard-pills">
+          <span class="pcard-pill">CRM</span>
+          <span class="pcard-pill">React</span>
+          <span class="pcard-pill">Node.js</span>
+          <span class="pcard-pill">SaaS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 · Genie -->
+    <div class="pcard-new reveal-card delay-1" onclick="window.location.href='project-6.html'">
+      <div class="pcard-arrow-new">↗</div>
+      <div class="pcard-left" style="background:linear-gradient(135deg,#0d0d0d,#111108)">
+        <div class="phones-fan">
+          <div class="pf-phone pf-left">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#1a1200,#221800)">✨</div>
+          </div>
+          <div class="pf-phone pf-center">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#221800,#2a1e00)">💰</div>
+          </div>
+          <div class="pf-phone pf-right">
+            <div class="phone-screen-placeholder" style="background:linear-gradient(160deg,#1a1200,#221800)">🔮</div>
+          </div>
+        </div>
+        <div class="more-badge">
+          <span class="more-badge-dot" style="background:#f97316"></span>
+          Coming Soon
+        </div>
+      </div>
+      <div class="pcard-right">
+        <div class="pcard-cat">
+          <span class="pcard-cat-icon">🔮</span>
+          Mobile App · Coming Soon
+        </div>
+        <div class="pcard-title-new">Genie</div>
+        <div class="pcard-desc">Your gateway to recurring income — a Flutter-powered SaaS mobile application with subscription management, analytics, and automated billing built on Serverpod.</div>
+        <div class="pcard-pills">
+          <span class="pcard-pill">Flutter</span>
+          <span class="pcard-pill">Dart</span>
+          <span class="pcard-pill">Serverpod</span>
+          <span class="pcard-pill">SaaS</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /projects-grid -->
+
+  <!-- Tech Stack -->
+  <div class="section-header">
+    <h2 class="sec-title reveal-up">Tech Stack.</h2>
+  </div>
+  <div class="stack-section">
+    <div class="stack-card reveal-card">
+      <div class="stack-card-title">Frontend</div>
+      <div class="sicons">
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter"><span>Flutter</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android"><span>Android</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart"><span>Dart</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin"><span>Kotlin</span></div>
+        <div class="si"><img src="https://jaspr.site/images/logo.svg" alt="jaspr"><span>jaspr</span></div>
+        <div class="si"><img src="https://riverpod.dev/img/logo.png" alt="Riverpod"><span>Riverpod</span></div>
+      </div>
+    </div>
+    <div class="stack-card reveal-card delay-1">
+      <div class="stack-card-title">Backend</div>
+      <div class="sicons">
+        <div class="si"><img src="assets/serverpod.png" alt="Serverpod"><span>Serverpod</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"><span>Firebase</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><span>Node.js</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" style="filter:invert(1)"><span>Express</span></div>
+        <div class="si"><img src="https://www.svgrepo.com/show/354553/websocket.svg" alt="WebSocket" style="filter:invert(1)"><span>WebSocket</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"><span>MongoDB</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"><span>PostgreSQL</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL"><span>GraphQL</span></div>
+        <div class="si"><img src="https://www.gstatic.com/cgc/google-cloud-logo.svg" alt="Google Cloud"><span>Google Cloud</span></div>
+      </div>
+    </div>
+    <div class="stack-card reveal-card delay-2">
+      <div class="stack-card-title">Tools</div>
+      <div class="sicons">
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio"><span>Android Studio</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><span>VS Code</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)"><span>GitHub</span></div>
+        <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman"><span>Postman</span></div>
+        <div class="si"><img src="assets/Google_Antigravity_Logo_2025_icon.svg" alt="Antigravity"><span>Antigravity</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="ms">Available for Hire <span class="dot">•</span> Mobile App Developer <span class="dot">•</span> Worldwide Remote <span class="dot">•</span> Global Availability <span class="dot">•</span></span>
+      <span class="ms">Available for Hire <span class="dot">•</span> Mobile App Developer <span class="dot">•</span> Worldwide Remote <span class="dot">•</span> Global Availability <span class="dot">•</span></span>
+      <span class="ms">Available for Hire <span class="dot">•</span> Mobile App Developer <span class="dot">•</span> Worldwide Remote <span class="dot">•</span> Global Availability <span class="dot">•</span></span>
+      <span class="ms">Available for Hire <span class="dot">•</span> Mobile App Developer <span class="dot">•</span> Worldwide Remote <span class="dot">•</span> Global Availability <span class="dot">•</span></span>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-inner">
+    <h1 class="sec-title reveal-up">Contact.</h1>
+    <div class="cbox reveal-card">
+      <h2>Let's Work Together</h2>
+      <p>I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+      <a class="btn-primary" href="mailto:elvisngwu18@gmail.com">Say Hello</a>
+      <div class="sicons-row" style="margin-top:20px;justify-content:center">
+        <a class="sic" href="https://linkedin.com/in/yourusername" target="_blank" title="X">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/330px-X_logo_2023.svg.png" alt="X">
+        </a>
+        <a class="sic" href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn">
+        </a>
+        <a class="sic" href="https://github.com/yourusername" target="_blank" title="GitHub">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)">
+        </a>
+        <a class="sic" href="https://instagram.com/yourusername" target="_blank" title="Instagram">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png" alt="Instagram">
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /work page -->
+
+
+<!-- ══════ ABOUT PAGE ══════ -->
+<div id="about" class="page">
+  <div class="about-inner">
+    <h1 class="about-h1 reveal-up">I'm Elvis.</h1>
+    <div class="cs-root reveal-up">
+      <div class="cs-viewport">
+        <div class="cs-track" id="csTrack">
+          <div class="cs-slide"><img src="assets/profile.jpeg" alt="Elvis 1" draggable="false"></div>
+          <div class="cs-slide"><img src="assets/profile(1).jpeg" alt="Elvis 2" draggable="false"></div>
+          <div class="cs-slide"><img src="assets/profile(2).jpeg" alt="Elvis 3" draggable="false"></div>
+          <div class="cs-slide"><img src="assets/profile(3).jpeg" alt="Elvis 4" draggable="false"></div>
+          <div class="cs-slide"><img src="assets/profile(4).jpeg" alt="Elvis 5" draggable="false"></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-bio about-bio-full reveal-up">
+      <p>Coming from West Africa, I carry resilience, ambition, and a quiet determination to build beyond limits.
+        My focus is on contributing to the future of technology in Africa through meaningful innovation, thoughtful products, and ideas built to endure.
+        I believe the future of tech on the continent will be shaped by those willing to build it.</p>
+      <button class="btn-primary" style="margin-top:15px;font-size:13px;padding:12px 30px"
+        onclick="goToContact(document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
+    </div>
+    <div class="reveal-up">
+      <p class="about-collab-p">Let's collaborate if you're committed to sustainability, education, equality, or carbon neutrality.
+        I'm committed to leaving the world better for those who come after us, and I aim to contribute however I can. If you value that too, I'd love to talk.</p>
+    </div>
+    <div class="about-bio about-bio-full reveal-up">
+      <button class="btn-primary" style="margin-bottom:15px;font-size:13px;padding:12px 30px"
+        onclick="goToContact(document.querySelectorAll('.nav-btn')[4])">Download Resume</button>
+    </div>
+    <div class="vals reveal-up">
+      <div>
+        <div class="vnum">01</div>
+        <div class="vtitle">Make it</div>
+        <div class="vdesc">I sketch wireframes and make prototypes. Talking through tactile designs existing in the browser is worth its weight. Design tools only carry you so far; the rest should be realized with a link my team can rally around.</div>
+      </div>
+      <div>
+        <div class="vnum">02</div>
+        <div class="vtitle">Collaborate</div>
+        <div class="vdesc">Good design is not created in a vacuum but rather in a shared space. It must be facilitated and iterated upon as a team. I aim to include stakeholders and create a collaborative environment that welcomes feedback.</div>
+      </div>
+      <div>
+        <div class="vnum">03</div>
+        <div class="vtitle">Build Performant Code</div>
+        <div class="vdesc">Performance is not a feature; it's a requirement. I focus on optimizing asset delivery, minimizing render-blocking resources, and writing efficient code to ensure fast loading and smooth interactions.</div>
+      </div>
+      <div>
+        <div class="vnum">04</div>
+        <div class="vtitle">Maintain Quality & Scale</div>
+        <div class="vdesc">I prioritize code health through strict component architecture, proper typing, and comprehensive unit testing. This ensures the codebase remains maintainable, scalable, and resilient as the product grows.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ NOTES PAGE ══════ -->
+<div id="notes" class="page">
+  <div class="notes-inner">
+    <h1 class="sec-title reveal-up">Notes.</h1>
+    <p class="notes-desc reveal-up">Musings on code, design, and navigating life as a student-developer-engineer.</p>
+    <div class="ntabs reveal-up">
+      <button class="ntab active" onclick="filterNotes('all',this)">All</button>
+      <button class="ntab" onclick="filterNotes('devlife',this)">Dev Life</button>
+      <button class="ntab" onclick="filterNotes('fullstack',this)">Full Stack</button>
+      <button class="ntab" onclick="filterNotes('thoughts',this)">Thoughts</button>
+    </div>
+    <div class="ngrid" id="ngrid">
+      <div class="ncard reveal-card" data-cat="devlife">
+        <div class="ncat devlife">Dev Life</div>
+        <div class="ndate">February 13, 2025</div>
+        <div class="ntitle">Leaving VS Code for AI (And why I don't feel guilty)</div>
+        <div class="nexcerpt">How I stopped fighting the tool and started letting AI handle the repetitive parts of my workflow.</div>
+      </div>
+      <div class="ncard reveal-card delay-1" data-cat="fullstack">
+        <div class="ncat fullstack">Stacks</div>
+        <div class="ndate">February 15, 2025</div>
+        <div class="ntitle">Why I stopped fighting Tailwind CSS</div>
+        <div class="nexcerpt">Utility-first CSS felt wrong until it felt completely right. Here's what changed my mind.</div>
+      </div>
+      <div class="ncard reveal-card delay-2" data-cat="thoughts">
+        <div class="ncat thoughts">Thoughts</div>
+        <div class="ndate">February 1, 2025</div>
+        <div class="ntitle">Confession: 90% of my side projects are abandoned</div>
+        <div class="nexcerpt">And that's okay. Here's why starting many things and finishing few is still a W.</div>
+      </div>
+      <div class="ncard reveal-card" data-cat="devlife">
+        <div class="ncat devlife">Dev Life</div>
+        <div class="ndate">February 16, 2025</div>
+        <div class="ntitle">The great FUTO night class delusion</div>
+        <div class="nexcerpt">I attended midnight lectures and thought I was thriving. Here's what actually happened.</div>
+      </div>
+      <div class="ncard reveal-card delay-1" data-cat="fullstack">
+        <div class="ncat fullstack">Full Stack</div>
+        <div class="ndate">January 28, 2025</div>
+        <div class="ntitle">Building my first REST API with Node and Express</div>
+        <div class="nexcerpt">Step by step breakdown of how I built and deployed my first backend — mistakes included.</div>
+      </div>
+      <div class="ncard reveal-card delay-2" data-cat="thoughts">
+        <div class="ncat thoughts">Thoughts</div>
+        <div class="ndate">January 10, 2025</div>
+        <div class="ntitle">Why self-taught devs need to document everything</div>
+        <div class="nexcerpt">Your journey is your portfolio. Here's why writing things down changed how I learn.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer-wrap">
+  <div class="footer-top">
+    <div class="fbrand"><h3>Elves Corp</h3></div>
+    <div class="fcol">
+      <h4>Navigation</h4>
+      <a onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">Home</a>
+      <a onclick="showPage('about',document.querySelectorAll('.nav-btn')[1])">About</a>
+      <a onclick="showPage('notes',document.querySelectorAll('.nav-btn')[2])">Notes</a>
+      <a onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Contact</a>
+    </div>
+    <div class="fcol">
+      <h4>Contact</h4>
+      <a href="mailto:elvisngwu18@gmail.com" class="femail">elvisngwu18@gmail.com</a>
+      <div class="sicons-row">
+        <a class="sic" href="#" target="_blank" title="X"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/330px-X_logo_2023.svg.png" alt="X"></a>
+        <a class="sic" href="#" target="_blank" title="LinkedIn"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn"></a>
+        <a class="sic" href="#" target="_blank" title="GitHub"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)"></a>
+        <a class="sic" href="#" target="_blank" title="Instagram"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png" alt="Instagram"></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Elves Corp</span>
+    <span>All rights reserved</span>
+  </div>
+</footer>
+
+<script src="Script.js"></script>
+<script>
+(function () {
+  const track = document.getElementById('csTrack');
+  if (!track) return;
+  const slides = Array.from(track.querySelectorAll('.cs-slide'));
+  const total  = slides.length;
+  const STEP   = 168;
+  let current  = Math.floor(total / 2);
+
+  function circularOffset(i) {
+    let off = i - current;
+    if (off >  total / 2) off -= total;
+    if (off < -total / 2) off += total;
+    return off;
+  }
+  function render() {
+    slides.forEach((slide, i) => {
+      const off    = circularOffset(i);
+      const abs    = Math.abs(off);
+      const tx     = off * STEP;
+      const scale  = abs === 0 ? 1 : abs === 1 ? 0.82 : 0.68;
+      const bright = abs === 0 ? 1 : abs === 1 ? 0.48 : 0.28;
+      const sat    = abs === 0 ? 1 : 0;
+      const z      = total - abs;
+      slide.style.transform = `translateX(${tx}px) scale(${scale})`;
+      slide.style.zIndex    = z;
+      slide.style.filter    = `brightness(${bright}) saturate(${sat})`;
+      slide.style.opacity   = abs > 2 ? 0 : 1;
+      slide.style.cursor    = abs === 0 ? 'default' : 'pointer';
+      slide.classList.toggle('cs-active', abs === 0);
+    });
+  }
+  function go(idx) { current = ((idx % total) + total) % total; render(); }
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', () => { const off = circularOffset(i); if (off !== 0) go(current + off); });
+  });
+  let dragStart = null;
+  track.addEventListener('mousedown',  e => { dragStart = e.clientX; e.preventDefault(); });
+  track.addEventListener('touchstart', e => { dragStart = e.touches[0].clientX; }, { passive: true });
+  const onEnd = endX => {
+    if (dragStart === null) return;
+    const diff = dragStart - endX;
+    if (Math.abs(diff) > 36) go(current + (diff > 0 ? 1 : -1));
+    dragStart = null;
+  };
+  track.addEventListener('mouseup',    e => onEnd(e.clientX));
+  track.addEventListener('mouseleave', ()  => { dragStart = null; });
+  track.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientX));
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('about')?.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft')  go(current - 1);
+    if (e.key === 'ArrowRight') go(current + 1);
+  });
+  window.csNext = () => go(current + 1);
+  render();
+})();
+</script>
+</body>
+</html>

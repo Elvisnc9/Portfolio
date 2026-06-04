@@ -6,8 +6,7 @@
 <title>Elvis Ngwu | App Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -31,7 +30,7 @@
 
   <div class="hero">
     <div class="hero-eyebrow reveal-up">Available for hire · Remote</div>
-    <h1 class="hero-h1 reveal-up delay-1">Hi I'm Elvis<br>Software&nbsp;Developer</h1>
+    <h1 class="hero-h1 reveal-up delay-1">I'm Elvis<br> App&nbsp;Developer</h1>
     <p class="hero-p reveal-up delay-2">App developer focused on building accessible,
       high-performance applications with clean, reliable interfaces</p>
    <button class="btn-primary reveal-up delay-3" onclick="goToContact(document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
@@ -44,13 +43,9 @@
   <div class="projects-grid">
 
     <!-- Xtensionvrse -->
-    <div class="pcard reveal-card">
+    <div class="pcard reveal-card" onclick="showPage('project',null)">
       <div class="pcard-preview">
-        <div class="browser-chrome">
-          <div class="b-dots"><span></span><span></span><span></span></div>
-          <div class="b-url">xtensionvrse.com</div>
-          <div class="b-tag">IN PROGRESS</div>
-        </div>
+        
         <div class="pcard-img-wrap">
           <img
             src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=80&fit=crop"
@@ -83,7 +78,7 @@
     </div>
 
     <!-- LinguaCore AI -->
-    <div class="pcard reveal-card delay-1">
+    <div class="pcard reveal-card delay-1" onclick="window.location.href='project.html'">
       <div class="pcard-preview">
         <div class="browser-chrome dark-chrome">
           <div class="b-dots"><span></span><span></span><span></span></div>
@@ -123,7 +118,7 @@
     </div>
 
     <!-- Yvonne Kafor Coaching -->
-    <div class="pcard reveal-card">
+    <div class="pcard reveal-card" onclick="window.location.href='project.html'">
       <div class="pcard-preview">
         <div class="browser-chrome">
           <div class="b-dots"><span></span><span></span><span></span></div>
@@ -160,7 +155,7 @@
     </div>
 
     <!-- ConfessIO -->
-    <div class="pcard reveal-card delay-1">
+    <div class="pcard reveal-card delay-1" onclick="window.location.href='project.html'">
       <div class="pcard-preview">
         <div class="browser-chrome dark-chrome">
           <div class="b-dots"><span></span><span></span><span></span></div>
@@ -199,7 +194,7 @@
     </div>
 
     <!-- Axelerate -->
-    <div class="pcard reveal-card">
+    <div class="pcard reveal-card" onclick="window.location.href='project.html'">
       <div class="pcard-preview">
         <div class="browser-chrome dark-chrome">
           <div class="b-dots"><span></span><span></span><span></span></div>
@@ -235,7 +230,7 @@
     </div>
 
     <!-- BigCut -->
-    <div class="pcard reveal-card delay-1">
+    <div class="pcard reveal-card delay-1" onclick="window.location.href='project.html'">
       <div class="pcard-preview">
         <div class="browser-chrome">
           <div class="b-dots"><span></span><span></span><span></span></div>
@@ -488,8 +483,123 @@
  
 </div>
 
+<!-- ══════ PROJECT PAGE ══════ -->
+<div id="project" class="page">
+  <div class="pj-wrap">
+    <button class="back-btn reveal-up" onclick="goBack()">
+      <span class="back-arrow-circle">←</span>
+      Back to Projects
+    </button>
+    <h1 class="pj-title reveal-up">Elves Plus-App</h1>
+    <p class="pj-desc reveal-up delay-1">
+      A production-ready e-commerce mobile platform engineered with real-time inventory sync,
+      African-first payment integration, and offline-first cart management for zero-loss transactions.
+    </p>
+    <div class="phone-stage reveal-up delay-2">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="assets/screen-1.jpeg" alt="Elves Plus App – Home Screen" class="phone-screen" />
+      </div>
+    </div>
+  </div>
 
+  <div style="max-width:1160px;margin:0 auto;padding:0 40px">
+    <div class="pj-divider" style="margin-top:60px"></div>
+  </div>
 
+  <div style="max-width:1160px;margin:0 auto;padding:0 40px">
+    <div class="two-col reveal-up">
+      <div>
+        <div class="left-col-label">Role</div>
+        <div class="left-col-value">Lead Full-Stack Engineer</div>
+        <div class="left-col-label">Timeline</div>
+        <div class="left-col-value">In Progress</div>
+        <div class="left-col-label">Tech Stack</div>
+        <div style="margin-top:4px">
+          <span class="tag-pill">Flutter</span>
+          <span class="tag-pill">PostgreSQL</span>
+          <span class="tag-pill">Node.js</span>
+          <span class="tag-pill">Serverpod</span>
+          <span class="tag-pill">Riverpod</span>
+          <span class="tag-pill">E-Commerce</span>
+          <span class="tag-pill">Mobile</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-heading">
+          <span class="section-icon">🗂</span> Overview
+        </div>
+        <div class="section-body">
+          <p>Elves Plus is a high-performance e-commerce mobile application built to power Xtensionvrse, a premium braiding hair extensions brand targeting customers across West Africa and the diaspora.</p>
+          <p>Architected with a Flutter frontend and a heavily optimised Node.js/PostgreSQL backend, this platform handles the complete lifecycle of product discovery, cart management, and checkout transactions. The backend is powered by real-time inventory sync and offline-first cart persistence, ensuring absolute data integrity across distributed third-party payment APIs.</p>
+          <p>The mobile client leverages Riverpod for granular, optimistic UI updates, guaranteeing the application feels exceptionally fast and responsive even during heavy network latency. This project represents end-to-end product ownership — mastery in distributed systems, secure payment integration, and real-world mobile engineering.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col reveal-up">
+      <div></div>
+      <div>
+        <div class="section-heading">
+          <span class="section-icon">⚡</span> Challenges &amp; Solutions
+        </div>
+        <div class="section-body">
+          <p>The core engineering challenge was handling unreliable network conditions prevalent across Nigerian mobile networks while maintaining cart integrity and payment reliability. I designed an offline-first SQLite cart layer alongside a strict idempotent checkout engine that guarantees no double-charges even if a payment webhook arrives late or out of order.</p>
+          <p>Securing the application required implementing JWT-based authentication with refresh token rotation, paired with custom bcrypt-hashing for in-app transaction PINs — effectively creating a tamper-proof checkout sandbox. Integrating multiple African payment providers (Paystack, Flutterwave) with differing webhook schemas required building a unified reconciliation layer that normalises all incoming events into a single internal transaction model.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col reveal-up" style="border-bottom:1px solid var(--border)">
+      <div></div>
+      <div>
+        <div class="features-heading">
+          <span class="section-icon">‹›</span> Key Features
+        </div>
+        <div class="features-grid">
+          <div class="feature-item"><span class="feature-dot"></span>Offline-First Cart Engine</div>
+          <div class="feature-item"><span class="feature-dot"></span>ACID-Compliant Checkout Flow</div>
+          <div class="feature-item"><span class="feature-dot"></span>Multi-Provider Payment Orchestration</div>
+          <div class="feature-item"><span class="feature-dot"></span>Optimistic UI via Riverpod</div>
+          <div class="feature-item"><span class="feature-dot"></span>Real-Time Inventory Sync</div>
+          <div class="feature-item"><span class="feature-dot"></span>Automated Webhook Reconciliation</div>
+          <div class="feature-item"><span class="feature-dot"></span>Bank-Grade PIN Security</div>
+          <div class="feature-item"><span class="feature-dot"></span>Admin Analytics Dashboard</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1160px;margin:0 auto;padding:0 40px">
+    <div class="screenshots-section reveal-up">
+      <div class="screenshots-heading">
+        <span class="section-icon">🗂</span> App Screenshots
+      </div>
+      <div class="screenshots-row">
+        <div class="screen-card">
+          <img src="assets/screen-1.jpeg" alt="Create Account screen" />
+        </div>
+        <div class="screen-card">
+          <img src="assets/screen-2.jpeg" alt="Home Dashboard screen" />
+        </div>
+        <div class="screen-card">
+          <img src="assets/screen-3.jpeg" alt="Checkout screen" />
+        </div>
+        <div class="screen-card">
+          <img src="assets/screen-4.jpeg" alt="Messages screen" />
+        </div>
+        <div class="screen-card">
+          <img src="assets/screen-1.jpeg" alt="Notifications screen" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="view-all-section">
+    <p class="view-all-sub">Want to see more?</p>
+    <button class="view-all-link" onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">View All Projects</button>
+  </div>
+</div>
 
   <!-- Footer -->
  <footer class="footer-wrap">
