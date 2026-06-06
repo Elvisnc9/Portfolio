@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -30,7 +31,15 @@
 
   <div class="hero">
     <div class="hero-eyebrow reveal-up">Available for hire · Remote</div>
-    <h1 class="hero-h1 reveal-up delay-1">I'm Elvis<br> App&nbsp;Developer</h1>
+
+    <h1 class="hero-h1 reveal-up delay-1">
+  <span class="word-reveal">
+    <span class="word-inner">I'm  Elvis</span>
+  </span><br>
+  <span class="word-reveal">
+    <span class="word-inner">App&nbsp;Developer</span>
+
+</h1>
     <p class="hero-p reveal-up delay-2">App developer focused on building accessible,
       high-performance applications with clean, reliable interfaces</p>
    <button class="btn-primary reveal-up delay-3" onclick="goToContact(document.querySelectorAll('.nav-btn')[3])">Get In Touch</button>
@@ -237,27 +246,19 @@
 <!-- ══════ CONTACT PAGE ══════ -->
 
  <section id="contact" class="contact-inner">
-    <h1 class="sec-title reveal-up">Contact.</h1>
-    <div class="cbox reveal-card">
-      <h2>Let's Work Together</h2>
-      <p>I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-      <a class="btn-primary" href="mailto:elvisngwu18@gmail.com">Say Hello</a>
-     <div class="sicons-row"  style="margin-top:20px;justify-content:center">
-         <a class="sic" href="https://linkedin.com/in/yourusername" target="_blank" title="X">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/330px-X_logo_2023.svg.png?_=20250120013756" alt="X">
-        </a>
-        <a class="sic" href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn">
-        </a>
-        <a class="sic" href="https://github.com/yourusername" target="_blank" title="GitHub">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)">
-        </a>
-        <a class="sic" href="https://instagram.com/yourusername" target="_blank" title="Instagram">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png?_=20220518162235" alt="Instagram">
-        </a>
-      </div>
+  <h1 class="sec-title reveal-up">Contact.</h1>
+  <div class="cbox reveal-card">
+    <div class="cbox-status">
+      <span class="cbox-dot"></span>
+      Available for new projects
     </div>
-  </section>
+    <h2>Let's Work Together</h2>
+    <p>I'm currently open to freelance contracts, full-time roles, and interesting collaborations. If you have a project in mind or just want to talk, I'd love to hear from you.</p>
+    <a class="btn-primary cbox-btn" href="mailto:elvisngwu18@gmail.com">
+      Get in Touch 
+    </a>
+  </div>
+</section>
 
 
 </div>

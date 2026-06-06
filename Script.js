@@ -17,11 +17,19 @@ function resetReveal(scope = document) {
 
 function playHeroIntro() {
   const heroEls = document.querySelectorAll(
-    '#work .hero .reveal-up, #work .hero .reveal-card'
+    '#work .hero .reveal-up:not(.hero-h1), #work .hero .reveal-card'
   );
   heroEls.forEach(el => el.classList.remove('visible'));
   heroEls.forEach((el, i) => {
     setTimeout(() => el.classList.add('visible'), 120 + i * 100);
+  });
+
+  // re-trigger word animations on the h1
+  const words = document.querySelectorAll('.hero-h1 .word-inner');
+  words.forEach(w => {
+    w.style.animation = 'none';
+    w.offsetHeight; // force reflow
+    w.style.animation = '';
   });
 }
 
@@ -144,13 +152,26 @@ function initCardParallax() {
 
 
 /* ─── NAV SCROLL SHADOW ─── */
+/* ─── NAV SCROLL SHADOW + AUTO-HIDE ─── */
+let lastScrollY = 0;
+let navHideTimer = null;
+
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
   if (!nav) return;
-  nav.style.borderBottom = window.scrollY > 10 ? '1px solid rgba(255,255,255,0.06)' : '';
+
+  const currentY = window.scrollY;
+  const scrollingDown = currentY > lastScrollY;
+
+  // Hide when scrolling down and not at top
+  if (scrollingDown && currentY > 80) {
+    nav.classList.add('nav-hidden');
+  } else {
+    nav.classList.remove('nav-hidden');
+  }
+
+  lastScrollY = currentY;
 }, { passive: true });
-
-
 /* ═══════════════════════════════════════════════
    ABOUT CAROUSEL  — works with .about-slide
    (your existing HTML markup)
@@ -227,7 +248,7 @@ function runIntro() {
   }
 
   /* 2 ── staggered hero cascade */
-  const heroSelectors = ['.hero-eyebrow', '.hero-h1', '.hero-p', '.hero .btn-primary'];
+ const heroSelectors = ['.hero-eyebrow', '.hero-p', '.hero .btn-primary'];
   heroSelectors.forEach((sel, i) => {
     const el = document.querySelector(sel);
     if (!el) return;
