@@ -30,7 +30,7 @@ body.light nav{background:transparent}
 html{scroll-behavior:smooth}
 body{
   background:var(--bg);color:var(--white);
-  font-family:'Plus Jakarta Sans',sans-serif;
+  font-family: 'Inter', sans-serif;
   overflow-x:hidden;line-height:1.6;
   padding:0;
 }
@@ -58,7 +58,7 @@ nav{
 .nav-btn{
   background:none;border:none;cursor:poro;
   color:var(--white);
-  font-family:'roboto',sans-serif;
+  font-family:'Inter',sans-serif;
   font-size:16px;font-weight:500;
   padding:14px 24px;border-radius:100px;
   transition:color 0.2s var(--ease-out),background 0.2s var(--ease-out);
@@ -137,8 +137,10 @@ nav{
 ═══════════════════════════ */
 .projects-grid {
   grid-template-columns: 1fr !important;
-  gap: 20px !important;
-  max-width: 1100px !important;
+  gap: 40px !important;
+  max-width: 1300px !important;  /* was 1100px */
+  margin: 0 auto;
+  padding: 0 24px 80px;
 }
 
 .pcard-new {
@@ -149,7 +151,7 @@ nav{
   overflow: hidden;
   display: grid;
   grid-template-columns: 55% 45%;
-  min-height: 460px;
+  min-height: 320px; 
   cursor: pointer;
   transition: border-color .3s, transform .35s var(--ease-spring), box-shadow .3s;
 }
@@ -1055,4 +1057,172 @@ body.light .view-all-section { background: #f0f0f0; }
   .back-btn { margin-bottom: 36px; }
   .screenshots-row { gap: 14px; }
   .screen-card { width: 160px; border-radius: 22px; border-width: 5px; }
+}
+
+
+
+
+
+
+/* ── FIX: grid needs margin auto to center ── */
+.projects-grid {
+  grid-template-columns: 1fr !important;
+  gap: 40px !important;
+  max-width: 1300px !important;  /* was 1100px */
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+/* ── FIX: phones-fan — match reference exactly ── */
+.phones-fan {
+  position: relative;
+  width: 360px;
+  height: 400px;
+  flex-shrink: 0;
+}
+
+.pf-phone {
+  position: absolute;
+  background: #fff;
+  border-radius: 30px;
+  border: 5px solid #222;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.75);
+  overflow: hidden;
+  width: 170px;
+  bottom: 0;
+}
+
+/* Left phone: rotated left, partially behind center */
+.pf-left {
+  left: 10px;
+  transform: rotate(-8deg);
+  z-index: 1;
+  bottom: 10px;
+}
+
+/* Center phone: tallest, perfectly upright */
+.pf-center {
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 182px;
+  bottom: 20px;
+}
+
+/* Right phone: rotated right, partially behind center */
+.pf-right {
+  right: 10px;
+  transform: rotate(8deg);
+  z-index: 2;
+  bottom: 10px;
+}
+
+/* ── FIX: left panel min-height to show phones fully ── */
+.pcard-left {
+  min-height: 480px;
+  padding: 48px 0 64px;
+  align-items: flex-end;  /* anchor phones to bottom */
+  justify-content: center;
+}
+
+/* ── FIX: right panel vertical alignment ── */
+.pcard-right {
+  padding: 52px 48px 52px 44px;
+}
+
+/* ── FIX: card min-height ── */
+.pcard-new {
+  min-height: 480px;
+  align-items: stretch;
+}
+
+/* ── FIX: font — match reference (Inter 900) ── */
+.pcard-title-new {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: #fff;
+  margin-bottom: 18px;
+}
+
+.pcard-cat {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #444;
+  margin-bottom: 14px;
+}
+
+.pcard-desc {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.pcard-pill {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 7px 18px;
+  border-radius: 100px;
+  border: 1.5px solid #2e2e2e;
+  color: #888;
+}
+
+/* ── FIX: badge positioning ── */
+.more-badge {
+  bottom: 20px;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+/* ── RESPONSIVE: tablet ── */
+@media (max-width: 1024px) {
+  .pcard-new {
+    grid-template-columns: 50% 50%;
+  }
+  .phones-fan {
+    width: 300px;
+    height: 340px;
+  }
+  .pf-phone  { width: 145px; }
+  .pf-center { width: 158px; }
+  .pcard-right { padding: 40px 32px 40px 32px; }
+}
+
+/* ── RESPONSIVE: mobile — stack vertically ── */
+@media (max-width: 768px) {
+  .pcard-new {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  .pcard-left {
+    min-height: 360px;
+    border-right: none;
+    border-bottom: 1px solid #2a2a2a;
+    padding: 40px 0 56px;
+  }
+  .phones-fan {
+    width: 280px;
+    height: 310px;
+  }
+  .pf-phone  { width: 130px; border-radius: 24px; }
+  .pf-center { width: 142px; }
+  .pcard-right {
+    padding: 32px 24px 36px;
+  }
+  .pcard-title-new { font-size: 1.9rem; }
+  .pcard-desc { font-size: 13.5px; }
+}
+
+@media (max-width: 480px) {
+  .phones-fan { width: 240px; height: 270px; }
+  .pf-phone   { width: 112px; border-radius: 20px; border-width: 4px; }
+  .pf-center  { width: 124px; }
+  .pcard-right { padding: 24px 18px 28px; }
+  .projects-grid { padding: 0 12px 48px; }
 }
