@@ -28,16 +28,20 @@ body.light .nav-inner{  backdrop-filter:blur(5px);
   -webkit-backdrop-filter:blur(10px); background:transparent}
 body.light .nav-btn.active{background:#000;color:#fff}
 body.light nav{background:transparent}
-html{scroll-behavior:smooth}
-body{
+
+html body{
   background:var(--bg);color:var(--white);
     font-family: 'Clash Display', sans-serif;
-  overflow-x:hidden;line-height:1.6;
+  overflow-x:hidden;
+  line-height:1.6;
   padding:0;
+  scroll-behavior:smooth;
+  max-width: 100%;
+
 }
 
 /* ─── PAGES ─── */
-.page{display:none;min-height:calc(100vh - 70px);padding-top:80px}
+.page{display:none;min-height:calc(100vh - 70px);padding-top:80px; overflow-x: hidden;}
 .page.active{display:block}
 
 /* ─── NAV ─── */
@@ -112,15 +116,15 @@ nav{
   border-radius:100px;padding:5px 16px;margin-bottom:22px;
 }
 .hero-h1{
-  font-size:clamp(4.5rem,16vw,8.0rem);
-  font-weight:600;line-height:1.05;letter-spacing:0.002em;
+  font-size:clamp(5rem,19vw,8.5rem);
+  font-weight:620;line-height:1.05;letter-spacing:0.002em;
   font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
   margin-bottom:20px;
 }
 .hero-p{
-  color:var(--gray);font-size:clamp(18px,3.5vw,18px);
+  color:var(--gray);font-size:clamp(20px,4vw,20px);
   max-width:480px;line-height:1.7;margin-bottom:32px;
-   font-weight:500;
+   font-weight:550;
    font-family:'Dancing Script',cursive;
   
 }
@@ -175,13 +179,14 @@ nav{
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px 100px;
+  padding: 0 40px 100px;
 }
 
 .pcard-new {
   position: relative;
+  width: 100%;
   background: #141414;
   border: 1px solid #222;
   border-radius: 20px;
@@ -191,6 +196,7 @@ nav{
   min-height: 400px;
   align-items: stretch;
   cursor: pointer;
+
   margin-bottom: 16px;
   transition: border-color .3s, transform .35s var(--ease-spring), box-shadow .3s;
 }
@@ -1240,7 +1246,7 @@ body.light .view-all-section { background: #f0f0f0; }
 /* ─── HERO RESPONSIVE ─── */
 @media (max-width: 600px) {
   .hero-h1 {
-    font-size: clamp(3rem, 14vw, 4.5rem);
+    font-size: clamp(2.8rem, 12vw, 3.8rem);
   }
   .hero-eyebrow {
     font-size: 10px;
@@ -1253,7 +1259,8 @@ body.light .view-all-section { background: #f0f0f0; }
 
 @media (max-width: 380px) {
   .hero-h1 {
-    font-size: clamp(2.4rem, 13vw, 3.2rem);
+    font-size: clamp(2.2rem, 11vw, 3.0rem);
+  
   }
 }
 
