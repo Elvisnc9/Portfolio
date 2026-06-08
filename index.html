@@ -202,7 +202,7 @@
         <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android"><span>Android</span></div>
         <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart"><span>Dart</span></div>
         <div class="si"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin"><span>Kotlin</span></div>
-        <div class="si"><img src="https://jaspr.site/images/logo.svg" alt="jaspr"><span>jaspr</span></div>
+        <div class="si"><img src="assets/jaspr.png" alt="jaspr"><span>jaspr</span></div>
         <div class="si"><img src="https://riverpod.dev/img/logo.png" alt="Riverpod"><span>Riverpod</span></div>
       </div>
     </div>
@@ -515,49 +515,44 @@
     <button class="view-all-link" onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">View All Projects</button>
   </div>
 </div>
+   </div>
 
   <!-- Footer -->
- <footer class="footer-wrap">
-  <div class="footer-top">
-    <div class="fbrand">
-      <h3>Elves Corp</h3>
+<footer class="footer-wrap">
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <span>Elves Corp</span>
     </div>
 
-    <div class="fcol">
-      <h4>Navigation</h4>
-      <a onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">Home</a>
-      <a onclick="showPage('about',document.querySelectorAll('.nav-btn')[1])">About</a>
-      <a onclick="showPage('notes',document.querySelectorAll('.nav-btn')[2])">Notes</a>
-      <a onclick="showPage('contact',document.querySelectorAll('.nav-btn')[3])">Contact</a>
+    <div class="footer-nav">
+      <a onclick="showPage('work', document.querySelectorAll('.nav-btn')[0])">Work</a>
+      <a onclick="showPage('about', document.querySelectorAll('.nav-btn')[1])">About</a>
+      <a onclick="showPage('notes', document.querySelectorAll('.nav-btn')[2])">Notes</a>
+      <a onclick="goToContact(document.querySelectorAll('.nav-btn')[3])">Contact</a>
     </div>
 
-    <div class="fcol">
-      <h4>Contact</h4>
-      <a href="mailto:elvisngwu18@gmail.com" class="femail">elvisngwu18@gmail.com</a>
-
-      <div class="sicons-row">
-         <a class="sic" href="https://linkedin.com/in/yourusername" target="_blank" title="X">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/330px-X_logo_2023.svg.png?_=20250120013756" alt="X">
-        </a>
-        <a class="sic" href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn">
-        </a>
-        <a class="sic" href="https://github.com/yourusername" target="_blank" title="GitHub">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)">
-        </a>
-        <a class="sic" href="https://instagram.com/yourusername" target="_blank" title="Instagram">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png?_=20220518162235" alt="Instagram">
-        </a>
-      </div>
+    <div class="footer-socials">
+      <a class="sic" href="https://x.com/yourusername" target="_blank" title="X">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/330px-X_logo_2023.svg.png" alt="X">
+      </a>
+      <a class="sic" href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn">
+      </a>
+      <a class="sic" href="https://github.com/yourusername" target="_blank" title="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)">
+      </a>
+      <a class="sic" href="https://instagram.com/yourusername" target="_blank" title="Instagram">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png" alt="Instagram">
+      </a>
     </div>
+
   </div>
 
   <div class="footer-bottom">
-    <span>© 2026 Elves Corp</span>
-    <span>All rights reserved</span>
+    <span>© 2026 Elves Corp · All rights reserved</span>
   </div>
 </footer>
-
 <script src="Script.js"></script>
 <script>
 (function () {
