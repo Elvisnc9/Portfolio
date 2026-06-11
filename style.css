@@ -446,7 +446,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
 .about-h1 {
   font-size: clamp(2.6rem, 8vw, 5rem);
   font-weight: 900;
-  letter-spacing: -.03em;
+  letter-spacing: -.0008em;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -548,19 +548,18 @@ body.light #intro-veil { background: #f4f4f4; }
   line-height: 1.8;
 }
  
-.about-collab {
-  font-size: clamp(14px, 3.5vw, 18px);
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 10px;
-}
 .about-collab-p {
-  font-size: 13.5px;
+  font-size: 15px;
   color: var(--gray);
-  line-height: 1.75;
-  margin-bottom: 36px;
+  line-height: 1.8;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: var(--gray);
+  word-spacing: 0.04em;
   text-align: center;
+  
 }
+
  
 .vals {
   display: grid;
@@ -572,9 +571,9 @@ body.light #intro-veil { background: #f4f4f4; }
   padding: 30px;
   margin-bottom: 32px;
 }
-.vnum   { font-size: 36px; font-weight: 900; color: var(--border); margin-bottom: 6px; }
-.vtitle { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-.vdesc  { font-size: 12.5px; color: var(--gray); line-height: 1.7; }
+.vnum   { font-size: 50px; font-weight: 900; color: var(--border); margin-bottom: 6px; }
+.vtitle { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.vdesc  { font-size: 16.5px;font-weight: 500; color: var(--gray); line-height: 1.7; }
  
 .about-story { font-size: 13.5px; color: var(--gray); line-height: 1.85; }
 .about-story p { margin-bottom: 16px; }
@@ -586,6 +585,7 @@ body.light #intro-veil { background: #f4f4f4; }
 @media (max-width: 600px) {
   nav { padding-left: 26px; padding-right: 26px; }
   .about-inner { padding-left: 16px; padding-right: 16px; }
+
  
   .cs-root   { height: 350px; margin-bottom: 40px; }
   .cs-slide  {
@@ -916,6 +916,7 @@ body.light .browser-chrome{background:#ddd;border-color:#ccc}
   .stack-section{padding:0 16px 56px}
   .footer-wrap{padding:32px 16px 24px}
   .section-header{padding:0 16px 22px}
+ 
   .ngrid{grid-template-columns:1fr}
   .vals{grid-template-columns:1fr;gap:18px;padding:20px}
   .about-top{flex-direction:column;align-items:center;text-align:center}
@@ -956,35 +957,46 @@ body.light .browser-chrome{background:#ddd;border-color:#ccc}
 
 .back-btn {
   display: inline-flex; align-items: center; gap: 10px;
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 100px; padding: 8px 16px 8px 10px;
-  color: var(--gray); font-family: 'Roboto', sans-serif;
-  font-size: 13px; font-weight: 500; cursor: poro;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 100px; padding: 15px 20px 15px 15px;
+  color: var(--white);
+  font-size: 13px; font-weight:600; cursor: pointer;
   text-decoration: none;
   transition: color .2s, border-color .2s, background .2s;
   margin-bottom: 56px;
 }
 .back-btn:hover { color: var(--white); border-color: #444; background: var(--bg2); }
-.back-arrow-circle {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: var(--bg2); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; transition: background .2s;
-}
-.back-btn:hover .back-arrow-circle { background: var(--bg3); }
+
+.back-btn:hover .back-arrow { background: var(--bg3); }
 
 .pj-title {
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  text-align: center;
   font-weight: 900; letter-spacing: -.04em;
   line-height: 1.0; margin-bottom: 32px;
   font-family: 'Dancing Script', sans-serif;
 }
+
+
 .pj-desc {
-  font-size: clamp(10px, 2.0vw, 12px);
-  font-weight: 400; line-height: 1.75;
-  max-width: 680px; margin-bottom: 80px;
+  font-size: clamp(18px, 4.0vw, 18px);
+  font-weight: 500; line-height: 1.75;
+  text-align: center;
+  margin-bottom: 80px;
   color: var(--gray);
+  letter-spacing: .04em;
 }
+
+/* Center project video */
+.pj-wrap video {
+  display: block;
+  margin: 24px auto;
+  max-width: 880px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
 
 .phone-stage {
   display: flex; justify-content: center;
@@ -1020,10 +1032,11 @@ body.light .phone-notch { background: #bbb; }
 
 .left-col-label {
   font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .14em; color: var(--gray2); margin-bottom: 8px;
+  letter-spacing: .24em; color: var(--gray2); margin-bottom: 8px;
 }
 .left-col-value {
   font-size: 15px; font-weight: 700; margin-bottom: 28px; color: var(--white);
+  letter-spacing: .14em;
 }
 .tag-pill {
   display: inline-block;
@@ -1037,12 +1050,13 @@ body.light .phone-notch { background: #bbb; }
 
 .section-heading {
   display: flex; align-items: center; gap: 10px;
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  font-weight: 900; letter-spacing: -.025em;
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  font-weight: 800; letter-spacing: -.025em;
   margin-bottom: 20px;
+  font-family: 'Dancing Script', sans-serif;
 }
 .section-icon { font-size: 20px; flex-shrink: 0; }
-.section-body { font-size: 15px; color: var(--gray); line-height: 1.85; }
+.section-body { font-size: 15px; color: var(--gray); line-height: 1.85; letter-spacing: .04em; font-weight: 500; }
 .section-body p { margin-bottom: 14px; }
 .section-body p:last-child { margin-bottom: 0; }
 
@@ -1051,6 +1065,7 @@ body.light .phone-notch { background: #bbb; }
   font-size: clamp(1.6rem, 3.5vw, 2.4rem);
   font-weight: 900; letter-spacing: -.025em;
   margin-bottom: 28px;
+  font-family: 'Dancing Script', sans-serif;
 }
 .features-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
@@ -1072,8 +1087,9 @@ body.light .phone-notch { background: #bbb; }
 .screenshots-heading {
   display: flex; align-items: center; gap: 10px;
   font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  font-weight: 900; letter-spacing: -.025em;
+  font-weight: 900; letter-spacing: .025em;
   margin-bottom: 36px;
+   font-family: 'Dancing Script', sans-serif;
 }
 .screenshots-row {
   display: flex; gap: 20px;
@@ -1281,5 +1297,85 @@ body.light .view-all-section { background: #f0f0f0; }
   .pcard-pills {
     padding-top: 20px;  /* override the 200px desktop spacer */
     gap: 6px;
+  }
+
+}
+
+/* ─── ABOUT SPLIT LAYOUT ─── */
+.about-split {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 60px;
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 0 0 20px;
+}
+
+.about-photo-wrap {
+  width: 100%;
+}
+
+.about-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 20px 20px 24px 24px; /* arched top */
+  display: block;
+  filter: grayscale(20%);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 12px;
+}
+
+.about-tagline {
+  font-size: clamp(1.2rem, 3.2vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.008em;
+  color: var(--white);
+}
+
+.about-para {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 480px;
+  font-weight: 500;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+  .about-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .about-photo-wrap {
+ width: 90%;
+    margin: 0 auto;
+  }
+  .about-text {
+    text-align: center;
+    align-items: center;
+    padding-top: 0;
+  }
+  .about-para {
+    text-align: center;
+  }
+  .about-tagline {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-photo-wrap {
+    width: 90%;
+  }
+  .about-tagline {
+    font-size: 1.5rem;
   }
 }
