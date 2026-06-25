@@ -266,140 +266,158 @@
 
 <!-- ══════ ABOUT PAGE ══════ -->
 <!-- ══════ ABOUT PAGE (LUXURY REDESIGN) ══════ -->
- <div id="about" class="page">
-        <section class="hero">
-            <h1 class="hero-title">Enterprise-Grade <br> Mobile Development </h1>
-            <p class="subtitle">Book and meet with certified lawyers online for fast,<br>confidential advice.</p>
-            <button class="cta-button">
-                Schedule a Session
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            </button>
+<div id="about" class="page">
  
-            <div class="visual-center">
-                <img src="assets/dalu.png" alt="Legal Professional" class="main-portrait">
+  <!-- ── HERO VISUAL ── -->
+  <section class="ab-hero">
  
-                <!-- Audio widget -->
-                <div class="widget w-audio float-1">
-                    <div class="w-audio-avatar">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100" alt="">
-                    </div>
-                    <div class="audio-waves">
-                        <span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                </div>
+    <h1 class="ab-hero-title">Enterprise Grade<br>Mobile Development</h1>
+    <p class="ab-subtitle">Crafting high-performance apps with clean,<br>reliable interfaces that scale.</p>
+    <button class="ab-cta-btn" onclick="goToContact(document.querySelectorAll('.nav-btn')[3])">
+      Schedule a Meeting
+    </button>
  
-                <!-- Document widget -->
-                <div class="widget w-doc float-2">
-                    <div class="doc-lines">
-                        <span></span><span></span><span></span>
-                    </div>
-                    <div style="font-size:0.7rem; color: var(--text-dim);">NDA Draft</div>
-                </div>
+    <!-- Portrait + widgets layout -->
+    <div class="ab-visual">
  
-                <!-- Stats widget -->
-                <div class="widget w-stats float-3">
-                    <div class="stat-icon">🌐</div>
-                    <div>
-                        <strong>350M+</strong>
-                        <span>Users worldwide</span>
-                    </div>
-                </div>
+      <!-- LEFT WIDGETS -->
+<div class="ab-widgets-left">
+
+  <div class="ab-widget abw-pos-audio float-1">
+    <div class="abw-audio-avatar">
+      <img src="assets/dalu.png" alt="">
+    </div>
+  <div class="abw-waves">
+  <span></span><span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+  </div>
+
+  <div class="ab-widget ab-widget-doc abw-pos-doc float-2">
+    <div class="abw-doc-lines">
+      <span></span><span></span><span></span>
+    </div>
+      <div class="abw-doc-icon">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <line x1="16" y1="13" x2="8" y2="13"/>
+      <line x1="16" y1="17" x2="8" y2="17"/>
+    </svg>
+  </div>
+    <div class="abw-doc-label">Contracts</div>
+
+  </div>
+
+
+
+
+  <div class="ab-widget ab-widget-stat abw-pos-stat float-3">
+    <div>
+      <strong>305+</strong>
+      <span>Collaborations</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- PORTRAIT -->
+<div class="ab-portrait-wrap">
+  <img src="assets/dalu.png" alt="Elvis Ngwu" class="ab-portrait">
+</div>
+
+<!-- RIGHT WIDGETS -->
+<div class="ab-widgets-right">
+
+  <div class="ab-widget ab-widget-msg abw-pos-msg float-4">
+    <div class="abw-msg-header">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Encrypted delivery</span>
+    </div>
+    <p>Every build stays between you and who you ship it to.</p>
+    <div class="abw-bubble">App is ready to deploy ···</div>
+  </div>
+
+  <div class="ab-widget ab-widget-chart abw-pos-chart float-5">
+    <div class="abw-chart-bars">
+      <div class="abw-bar" style="height:20%"></div>
+      <div class="abw-bar" style="height:40%"></div>
+      <div class="abw-bar" style="height:65%"></div>
+      <div class="abw-bar" style="height:100%"></div>
+    </div>
+    <div class="abw-chart-text">
+      <span>Performance</span>
+      <strong>40%↑</strong>
+    </div>
+  </div>
+
+  <div class="ab-widget ab-widget-share abw-pos-share float-2">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    Share
+  </div>
+
+</div>
+    </div>
+  </section>
  
-                <!-- Message widget -->
-                <div class="widget w-message float-4">
-                    <div class="msg-header">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <span style="color:var(--text-main); font-size:0.78rem;">End-to-end encrypted</span>
-                    </div>
-                    <p>Every message stays between you and who you send it to.</p>
-                    <div class="msg-bubble">NDA is ready to send now ···</div>
-                </div>
+
  
-                <!-- Chart widget -->
-                <div class="widget w-chart float-5">
-                    <div class="chart-bars">
-                        <div class="bar" style="height:40%"></div>
-                        <div class="bar" style="height:65%"></div>
-                        <div class="bar" style="height:100%"></div>
-                    </div>
-                    <div class="chart-text">
-                        <span>Engagement</span>
-                        <strong>40%</strong>
-                    </div>
-                </div>
+  <!-- ── ABOUT INFO SECTION ── -->
+  <section class="ab-info">
  
-                <!-- Share pill -->
-                <div class="widget w-share float-2">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                    Share
-                </div>
-            </div>
-        </section>
+    <div class="ab-eyebrow reveal-up">
+      <span>About Me</span>
+    </div>
  
-        <!-- ── LOGO STRIP ── -->
-        <section class="logo-strip">
-            <span>↗ 45 Degrees°</span>
-            <span>✦ Acme Corp</span>
-            <span>▤ Codecraft_</span>
-            <span>☼ C-nvergence</span>
-            <span>◍◍ Lightspeed</span>
-            <span>◎ Luminary</span>
-        </section>
+    <h2 class="ab-headline reveal-up">
+      SKILLED. FOCUSED.<br><em>STRATEGIC.</em>
+    </h2>
  
-        <!-- ── ABOUT SECTION ── -->
-        <section class="about-section">
+    <div class="ab-stats reveal-up">
+      <div class="ab-stat-item">
+        <span class="ab-stat-num">3+</span>
+        <span class="ab-stat-lbl">Years Building</span>
+      </div>
+      <div class="ab-stat-item">
+        <span class="ab-stat-num">6+</span>
+        <span class="ab-stat-lbl">Apps Shipped</span>
+      </div>
+      <div class="ab-stat-item">
+        <span class="ab-stat-num">100%</span>
+        <span class="ab-stat-lbl">Client Focused</span>
+      </div>
+    </div>
  
-            <div class="about-eyebrow reveal">
-                <span>About the firm</span>
-            </div>
+    <div class="ab-body reveal-up">
+    
+        <p>
+          With 3+ years building production apps in Flutter, Dart, and Serverpod, I help founders and teams ship fast, reliable mobile experiences. Known for clean architecture and a no-nonsense, delivery-first approach.
+          Every project starts with understanding your users — then building systems that scale with them.
+            With 3+ years building production apps in Flutter, Dart, and Serverpod, I help founders and teams ship fast, reliable mobile experiences. Known for clean architecture and a no-nonsense, delivery-first approach.
+          Every project starts with understanding your users — then building systems that scale with them.
+          With 3+ years building production apps in Flutter, Dart, and Serverpod, I help founders and teams ship fast, reliable mobile experiences. Known for clean architecture and a no-nonsense, delivery-first approach.
+          Every project starts with understanding your users — then building systems that scale with them.          With 3+ years building production apps in Flutter, Dart, and Serverpod, I help founders and teams ship fast, reliable mobile experiences. Known for clean architecture and a no-nonsense, delivery-first approach.
+          Every project starts with understanding your users — then building systems that scale with them.
+            With 3+ years building production apps in Flutter, Dart, and Serverpod, I help founders and teams ship fast, reliable mobile experiences. Known for clean architecture and a no-nonsense, delivery-first approach.
+          Every project starts with understanding your users — then building systems that scale with them.
+          With 3+ years building production apps in Flutter, Dart, and Serverpod, I help founders and teams ship fast, reliable mobile experiences. Known for clean architecture and a no-nonsense, delivery-first approach.
+          Every project starts with understanding your users — then building systems that scale with them.
+        
+        
+        
+        </p>
+
+     
+    </div>
+    
  
-            <h2 class="about-headline reveal">
-                TRUSTED. EXPERIENCED.<br><em>STRATEGIC.</em>
-            </h2>
+
  
-            <div class="about-stats reveal">
-                <div class="stat-item">
-                    <span class="stat-number">12+</span>
-                    <span class="stat-label">Years in practice</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">350M+</span>
-                    <span class="stat-label">Cases resolved</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">98%</span>
-                    <span class="stat-label">Client satisfaction</span>
-                </div>
-            </div>
+  </section>
  
-            <div class="about-body reveal">
-                <div class="about-body-left">
-                    <p>
-                        With over <strong>12 years of experience</strong> in corporate and commercial law, I help business leaders make confident decisions. Known for a no-nonsense, solution-first approach, I support clients across tech, finance, healthcare, and professional services.<br><br>
-                        Every engagement begins with listening — then a clear strategy with no ambiguity.
-                    </p>
-                </div>
-                <div class="about-body-right">
-                    <div>
-                        <div class="practice-tag">Corporate Law</div>
-                        <div class="practice-tag">M&amp;A Advisory</div>
-                        <div class="practice-tag">Commercial Disputes</div>
-                        <div class="practice-tag">IP &amp; Technology</div>
-                        <div class="practice-tag">Healthcare Compliance</div>
-                        <div class="practice-tag">Finance</div>
-                    </div>
-                    <button class="about-cta">
-                        Book a Consultation
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </button>
-                </div>
-            </div>
- 
-            <div class="about-mega">
-                <span class="about-mega-text">COMPREHENSIVE CORPORATE</span>
-            </div>
-        </section>
-        </div >
+</div>
  
  
  
