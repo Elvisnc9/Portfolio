@@ -52,7 +52,7 @@
 <div class="projects-grid">
 
   <!-- Card 1 -->
-  <div class="pcard-new reveal-card" onclick="showPage('project', document.querySelectorAll('.nav-btn')[0])">
+  <div class="pcard-new reveal-card" onclick="showProject(0)">
   <div class="pcard-left">
   <img src="assets/fashion.webp" alt="Project preview" class="pcard-cover">
       <div class="more-badge">
@@ -78,7 +78,7 @@
   </div>
 
   <!-- Card 2 -->
-  <div class="pcard-new reveal-card delay-1" onclick="showPage('project', document.querySelectorAll('.nav-btn')[1])">
+  <div class="pcard-new reveal-card delay-1" onclick="showProject(1)">
    <div class="pcard-left">
   <img src="assets/fitnessapp.png" alt="Project preview" class="pcard-cover">
       <div class="more-badge">
@@ -102,7 +102,7 @@
   </div>
 
   <!-- Card 3 -->
-  <div class="pcard-new reveal-card" onclick="showPage('project', document.querySelectorAll('.nav-btn')[2])">
+  <div class="pcard-new reveal-card" onclick="showProject(2)">
      <div class="pcard-left">
   <img src="assets/MoneyappScreen.png" alt="Project preview" class="pcard-cover">
       <div class="more-badge">
@@ -124,7 +124,7 @@
   </div>
 
   <!-- Card 4 -->
-  <div class="pcard-new reveal-card delay-1" onclick="showPage('project', document.querySelectorAll('.nav-btn')[3])">
+  <div class="pcard-new reveal-card delay-1" onclick="showProject(3)">
     <div class="pcard-left">
   <img src="assets/screenn2.png" alt="Project preview" class="pcard-cover">
       <div class="more-badge">
@@ -146,7 +146,7 @@
   </div>
 
   <!-- Card 5 -->
-  <div class="pcard-new reveal-card" onclick="showPage('project', document.querySelectorAll('.nav-btn')[4])">
+  <div class="pcard-new reveal-card" onclick="showProject(4)">
     <div class="pcard-left">
   <img src="assets/yabas.png" alt="Project preview" class="pcard-cover">
       <div class="more-badge">
@@ -168,7 +168,7 @@
   </div>
 
   <!-- Card 6 -->
-  <div class="pcard-new reveal-card delay-1" onclick="showPage('project', document.querySelectorAll('.nav-btn')[5])">
+  <div class="pcard-new reveal-card delay-1" onclick="showProject(5)">
   <div class="pcard-left">
   <img src="assets/Chair.png" alt="Project preview" class="pcard-cover">
       <div class="more-badge">
@@ -390,22 +390,7 @@
 
 <!-- ══════ PROJECT PAGE ══════ -->
 <div id="project" class="page">
-  <div class="pj-wrap">
-    <button class="back-btn reveal-up" onclick="goBack()">     
-      Back to Projects
-    </button>
-    <h1 class="pj-title reveal-up">Elves Meet-App</h1>
-    <p class="pj-desc reveal-up delay-1">
-      A production-ready e-commerce mobile platform engineered with real-time inventory sync,
-      African-first payment integration, and offline-first cart management for zero-loss transactions.
-    </p>
 
-        <video autoplay muted playsinline>
-        <source src="assets/NextArt.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-  
-</div>
   <div style="max-width:1160px;margin:0 auto;padding:0 40px">
     <div class="pj-divider" style="margin-top:60px"></div>
   </div>
