@@ -295,7 +295,27 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
+const reveals = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('visible'), i * 120);
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => io.observe(el));
+ 
+        // Parallax on widgets
+        document.addEventListener('mousemove', (e) => {
+            const widgets = document.querySelectorAll('.widget');
+            const mx = e.clientX / window.innerWidth - 0.5;
+            const my = e.clientY / window.innerHeight - 0.5;
+            widgets.forEach((w, i) => {
+                const d = (i + 1) * 8;
+                w.style.transform = `translate(${mx * d}px, ${my * d}px)`;
+            });
+        });
 
 
 
