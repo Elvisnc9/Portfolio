@@ -324,48 +324,55 @@ const reveals = document.querySelectorAll('.reveal');
 ═══════════════════════════════════════════════ */
 const projects = [
   {
-    id: 'elves-plus',
-    title: 'Elves Plus App',
-    tagline: 'A production-ready e-commerce mobile platform with real-time inventory sync, African-first payment integration, and offline-first cart management.',
+    id: 'elves-ai',
+    title: 'Elves AI chatBot',
+    tagline: 'A fast, intelligent AI chatbot that helps you write, learn, code, research, and solve everyday tasks through natural conversations.',
     video: 'assets/NextArt.mp4',
-    role: 'Lead Full-Stack Engineer',
+    role: 'Main Developer',
     timeline: 'In Progress',
-    stack: ['Flutter', 'PostgreSQL', 'Node.js', 'Serverpod', 'Riverpod', 'E-Commerce'],
+    stack: ['Flutter', 'PostgreSQL', 'Serverpod', 'Riverpod', 'Gemini-AI', 'Drift'],
     overview: [
-      'Elves Plus is a high-performance e-commerce mobile application built to power Xtensionvrse, a premium braiding hair extensions brand targeting customers across West Africa and the diaspora.',
-      'Architected with a Flutter frontend and a heavily optimised Node.js/PostgreSQL backend, this platform handles the complete lifecycle of product discovery, cart management, and checkout transactions. The backend is powered by real-time inventory sync and offline-first cart persistence, ensuring absolute data integrity across distributed third-party payment APIs.',
-      'The mobile client leverages Riverpod for granular, optimistic UI updates, guaranteeing the application feels exceptionally fast and responsive even during heavy network latency.'
+      'Elves AI is a multilingual conversational AI mobile app that provides context-aware interactions powered by Gemini-AI. Built for users across Africa, the app supports voice input and real-time token streaming to deliver near-instant responses.',
+      'The backend is built on Serverpod, handling session management, conversation history persistence via PostgreSQL, and local caching with Drift for offline access to past conversations.',
+      'The app is engineered for minimal latency — streaming tokens are pushed directly to the Flutter UI as they arrive, giving users a "typing" effect that dramatically improves perceived performance.'
     ],
     challenges: [
-      'The core engineering challenge was handling unreliable network conditions prevalent across Nigerian mobile networks while maintaining cart integrity and payment reliability. I designed an offline-first SQLite cart layer alongside a strict idempotent checkout engine that guarantees no double-charges even if a payment webhook arrives late or out of order.',
-      'Securing the application required implementing JWT-based authentication with refresh token rotation, paired with custom bcrypt-hashing for in-app transaction PINs. Integrating multiple African payment providers (Paystack, Flutterwave) with differing webhook schemas required building a unified reconciliation layer that normalises all incoming events into a single internal transaction model.'
+      'The main challenge was maintaining conversation context across sessions without inflating API costs. I designed a sliding context window that summarises older messages and injects only the most relevant history into each prompt.',
+      'Voice input required integrating a speech-to-text pipeline with noise handling for environments with background sound — a common challenge in busy Nigerian households and offices. Real-time streaming from Gemini-AI required custom SSE (Server-Sent Events) handling on the Serverpod backend.'
     ],
     features: [
-      'Offline-First Cart Engine',
-      'ACID-Compliant Checkout Flow',
-      'Multi-Provider Payment Orchestration',
-      'Optimistic UI via Riverpod',
-      'Real-Time Inventory Sync',
-      'Automated Webhook Reconciliation',
-      'Bank-Grade PIN Security',
-      'Admin Analytics Dashboard'
+      'Real-Time Token Streaming',
+      'Multilingual Support',
+      'Voice-to-Text Input',
+      'Context-Aware Conversation History',
+      'Offline Chat Access via Drift',
+      'Session Management & Auth',
+      'Conversation Summarisation Engine',
+      'Dark/Light Mode UI'
     ],
     screenshots: [
-      { src: 'assets/screen-1.jpeg', alt: 'Home screen' },
-      { src: 'assets/screen-2.jpeg', alt: 'Product listing' },
-      { src: 'assets/screen-3.jpeg', alt: 'Cart screen' },
-      { src: 'assets/screen-4.jpeg', alt: 'Checkout screen' },
-      { src: 'assets/screen-1.jpeg', alt: 'Orders screen' },
+      { src: 'assets/ELF_AI/chatbot10.jpeg', alt: 'Onboarding screen' },
+      { src: 'assets/ELF_AI/chatbot3.jpeg', alt: 'Welcome listing' },
+      { src: 'assets/ELF_AI/chatbot5.jpeg', alt: 'chat screen' },
+      { src: 'assets/ELF_AI/chatbot4.jpeg', alt: 'Drawer screen' },
+      { src: 'assets/ELF_AI/chatbot2.jpeg', alt: 'Onboarding screen' },
+      { src: 'assets/ELF_AI/chatbot8.jpeg', alt: 'Welcome screen' },
+      { src: 'assets/ELF_AI/chatbot1.jpeg', alt: 'chat screen' },
+      { src: 'assets/ELF_AI/chatbot7.jpeg', alt: 'Drawer screen' },
+      { src: 'assets/ELF_AI/chatbot6.jpeg', alt: 'Setting screen' },
     ]
   },
+
+
+
   {
-    id: 'elves-chatbot',
-    title: 'Elves ChatBot App',
+    id: 'elves-meet',
+    title: 'Elves Meet',
     tagline: 'A multilingual AI chatbot with context-aware conversations, voice input, and real-time streaming responses powered by OpenAI.',
     video: 'assets/NextArt.mp4', // swap for your chatbot video
     role: 'Full-Stack Engineer',
     timeline: 'Completed',
-    stack: ['Flutter', 'Serverpod', 'OpenAI', 'Drift', 'PostgreSQL', 'AI'],
+    stack: ['Flutter', 'Agora', 'Serverpod', 'Riverpod', 'Drift', 'PostgreSQL', ''],
     overview: [
       'Elves ChatBot is a multilingual conversational AI mobile app that provides context-aware interactions powered by the OpenAI API. Built for users across Africa, the app supports voice input and real-time token streaming to deliver near-instant responses.',
       'The backend is built on Serverpod, handling session management, conversation history persistence via PostgreSQL, and local caching with Drift for offline access to past conversations.',
