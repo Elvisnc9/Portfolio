@@ -401,73 +401,75 @@ const projects = [
     ]
   },
   {
-    id: 'elves-ecommerce',
-    title: 'Elves Ecommerce App',
-    tagline: 'Full-stack platform with Flutter mobile app, React web dashboard, and Serverpod backend — built for scalability.',
+    id: 'aurelle',
+    title: 'Aurelle App',
+    tagline: 'Aurelle is a luxury fashion e-commerce application that transforms product discovery through a reels-inspired shopping experience. Users can seamlessly browse curated fashion content, explore products in full-screen, and transition directly from inspiration to purchase.',
     video: 'assets/NextArt.mp4',
     role: 'Full-Stack Engineer',
     timeline: 'In Progress',
-    stack: ['Flutter', 'Serverpod', 'React', 'Node.js'],
+    stack: ['Flutter', 'Node.JS', 'Cloudinary', 'MongoDB'],
     overview: [
-      'A comprehensive full-stack e-commerce solution built from the ground up — a Flutter mobile app for customers, a React admin dashboard for business owners, and a Serverpod backend that powers both.',
-      'The platform was designed for scalability from day one, with a modular backend architecture that separates concerns across auth, inventory, orders, and analytics services.',
-      'The React dashboard gives shop owners real-time visibility into sales metrics, inventory levels, and customer activity — all synced live with the mobile app.'
+   'Aurelle is a luxury fashion e-commerce application built to deliver a modern, premium shopping experience with an emphasis on visual product discovery. Instead of relying on traditional product grids alone, Aurelle introduces a reels-inspired browsing experience where users can discover curated fashion pieces through immersive full-screen images and videos before seamlessly transitioning to detailed product pages The application features a clean, minimalist interface that keeps the focus on the products while providing intuitive navigation between shopping, product exploration, and user profiles. Each product page includes multiple product views, pricing, sale information, wishlisting, and a smooth purchasing flow designed to feel elegant and effortless. The overall experience combines luxury aesthetics with social-media-inspired interactions to create a more engaging way of shopping for fashion.'
     ],
     challenges: [
-      'Keeping the Flutter app and React dashboard in perfect data sync required careful WebSocket design and conflict resolution on the backend. Any inventory change on the dashboard needed to reflect on the mobile app within milliseconds.',
-      'Supporting both platforms from a single Serverpod backend without duplicating business logic meant designing a clean API layer that could serve both REST (for React) and Serverpod\'s own typed RPC (for Flutter) simultaneously.'
+      'One of the biggest challenges during development was designing a reels-based shopping experience that felt natural while maintaining fast navigation between the reels feed and detailed product pages. Achieving smooth animations and preserving application state without sacrificing performance required careful UI architecture and state management.',
+       'Another challenge was creating a luxury-inspired interface that remained clean and uncluttered despite displaying a large amount of product information. Balancing typography, spacing, imagery, and user interactions was essential to delivering a premium shopping experience while ensuring responsiveness across different screen sizes and devices.'
     ],
     features: [
-      'Cross-Platform Sync (Mobile + Web)',
-      'React Admin Dashboard',
-      'Live Inventory Management',
-      'Order Pipeline & Tracking',
-      'Typed RPC via Serverpod',
-      'Real-Time WebSocket Updates',
-      'Multi-Tenant Architecture',
-      'Role-Based Access Control'
+'Reels Product Feed',
+'Luxury Product Discovery',
+'Interactive Product Gallery',
+'Product Detail View',
+'Smart Product Search',
+'Category Based Shopping',
+'Secure User Authentication',
+'Wishlist Management System',
+'Shopping Cart Experience',
+'Responsive User Interface',
+'Smooth Page Transitions',
+'Premium Fashion Experience',
     ],
     screenshots: [
-      { src: 'assets/MoneyappScreen.png', alt: 'Mobile home' },
-      { src: 'assets/screen-2.jpeg', alt: 'Product page' },
-      { src: 'assets/screen-3.jpeg', alt: 'Orders' },
-      { src: 'assets/screen-4.jpeg', alt: 'Dashboard' },
-      { src: 'assets/screen-1.jpeg', alt: 'Analytics' },
+      { src: 'assets/AURELLE/1000053676.jpg', alt: 'HomePage' },
+      { src: 'assets/AURELLE/1000053676.jpg', alt: 'HomePage' },
+      { src: 'assets/AURELLE/1000053679.jpg', alt: 'Product page' },
+      { src: 'assets/AURELLE/1000053680.jpg', alt: 'Product' },
+      { src: 'assets/AURELLE/1000053681.jpg', alt: 'Login' },
+      { src: 'assets/AURELLE/1000053693.jpg', alt: 'checkOut' },
+      { src: 'assets/AURELLE/1000053683.jpg', alt: 'Dashboard' },
+      
     ]
   },
   {
-    id: 'jaspr',
-    title: 'Jaspr',
-    tagline: 'Anonymous confessions platform with real-time interactions via Socket.io and persistent PostgreSQL storage.',
+    id: 'MM',
+    title: 'Muslim Matrimony',
+    tagline: 'Muslims Shadi that connects millions of people searching for their forever one across the globe.',
     video: 'assets/NextArt.mp4',
-    role: 'Solo Developer',
+    role: 'Team',
     timeline: 'Completed',
-    stack: ['HTML', 'Tailwind', 'Node.js', 'Socket.io', 'PostgreSQL'],
+    stack: ['Flutter', 'Laravel', 'Kotlin', 'Socket.io', 'PostgreSQL'],
     overview: [
-      'Jaspr is a web-based anonymous confessions platform where users can post thoughts, secrets, and confessions without revealing their identity. Real-time reactions and comments are powered by Socket.io.',
-      'Built with a lightweight HTML/Tailwind frontend and a Node.js/Express backend, Jaspr was designed to be fast and frictionless — no account required to post.',
-      'All confessions and interactions are persisted in PostgreSQL, with a feed algorithm that surfaces trending posts based on reaction velocity.'
+      'Nikah Forever is a cross-platform Muslim matrimony application developed to simplify and modernize the journey of finding a life partner. The app enables users to create detailed profiles, discover compatible matches through personalized search filters, connect securely with potential partners, and manage their matchmaking experience through an intuitive and responsive interface.'
+
     ],
     challenges: [
-      'Anonymity without abuse was the core design challenge. I implemented rate limiting, IP-based fingerprinting, and a community reporting system to keep the platform safe without requiring sign-up.',
-      'Real-time reactions at scale required careful Socket.io room management to avoid broadcasting updates to users who weren\'t viewing the relevant post.'
+     'Developing Nikah Forever required building a user experience that balanced simplicity, privacy, and performance while handling large volumes of user profiles. Creating responsive search, seamless navigation, real-time interactions, and maintaining a consistent experience across Android and iOS demanded careful architecture, efficient state management, and continuous performance optimization.'
     ],
     features: [
-      'Anonymous Posting (No Sign-Up)',
-      'Real-Time Reactions via Socket.io',
-      'Threaded Comments',
-      'Trending Feed Algorithm',
-      'IP-Based Rate Limiting',
-      'Community Reporting System',
-      'PostgreSQL Persistence',
-      'Mobile-Responsive UI'
+     'User Registration',
+      'Secure Authentication',
+       'Profile Creation',
+       'Profile Verification',
+      'Advanced Search',
+      'Match Discovery',
+      'Personalized Recommendations',
+      'Interest Requests',
+      'Real-Time Chat',
+      'Instant Notifications',
+      'Privacy Controls'
     ],
     screenshots: [
-      { src: 'assets/screenn2.png', alt: 'Feed' },
-      { src: 'assets/screen-2.jpeg', alt: 'Confession detail' },
-      { src: 'assets/screen-3.jpeg', alt: 'Comments' },
-      { src: 'assets/screen-4.jpeg', alt: 'Trending' },
-      { src: 'assets/screen-1.jpeg', alt: 'Post screen' },
+     
     ]
   },
   {
@@ -498,11 +500,7 @@ const projects = [
       'Export to CSV / PDF'
     ],
     screenshots: [
-      { src: 'assets/yabas.png', alt: 'Dashboard' },
-      { src: 'assets/screen-2.jpeg', alt: 'CRM view' },
-      { src: 'assets/screen-3.jpeg', alt: 'Workflow builder' },
-      { src: 'assets/screen-4.jpeg', alt: 'Analytics' },
-      { src: 'assets/screen-1.jpeg', alt: 'Reports' },
+     
     ]
   },
   {
