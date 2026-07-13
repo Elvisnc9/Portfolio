@@ -280,11 +280,25 @@ function runIntro() {
 }
 
 /* ─── SHOW PROJECT (render then navigate) ─── */
+let pjCarIndex = 0;
+
+function pjCarouselNav(dir) {
+  const track = document.getElementById('pjCarTrack');
+  if (!track) return;
+  const slides = track.children;
+  const total = slides.length;
+  pjCarIndex = (pjCarIndex + dir + total) % total;
+  track.style.transform = `translateX(-${pjCarIndex * 100}%)`;
+  document.querySelectorAll('#pjCarDots .pj-car-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === pjCarIndex);
+  });
+}
+
 function showProject(index) {
+  pjCarIndex = 0;
   renderProject(index);
   showPage('project', null, { scrollToTop: true });
 }
-
 
 /* ═══════════════════════════════════════════════
    INIT
@@ -327,7 +341,8 @@ const projects = [
     id: 'elves-ai',
     title: 'Elves AI chatBot',
     tagline: 'A fast, intelligent AI chatbot that helps you write, learn, code, research, and solve everyday tasks through natural conversations.',
-    video: 'assets/NextArt.mp4',
+    // video: 'assets/NextArt.mp4',
+    coverImage: 'assets/ELF_AI/screens_mockup.png',
     role: 'Main Developer',
     timeline: 'In Progress',
     stack: ['Flutter', 'PostgreSQL', 'Serverpod', 'Riverpod', 'Gemini-AI', 'Drift'],
@@ -369,7 +384,7 @@ const projects = [
     id: 'elves-meet',
     title: 'Elves Meet',
     tagline: 'A multilingual AI chatbot with context-aware conversations, voice input, and real-time streaming responses powered by OpenAI.',
-    video: 'assets/NextArt.mp4', // swap for your chatbot video
+    coverImage: 'assets/ELF_AI/screens_mockup.png', // swap for your chatbot video
     role: 'Full-Stack Engineer',
     timeline: 'Completed',
     stack: ['Flutter', 'Agora', 'Serverpod', 'Riverpod', 'Drift', 'PostgreSQL', ''],
@@ -404,7 +419,8 @@ const projects = [
     id: 'aurelle',
     title: 'Aurelle App',
     tagline: 'Aurelle is a luxury fashion e-commerce application that transforms product discovery through a reels-inspired shopping experience. Users can seamlessly browse curated fashion content, explore products in full-screen, and transition directly from inspiration to purchase.',
-    video: 'assets/NextArt.mp4',
+    // video: 'assets/NextArt.mp4',
+    coverImage: 'assets/AURELLE/mockup.png',
     role: 'Full-Stack Engineer',
     timeline: 'In Progress',
     stack: ['Flutter', 'Node.JS', 'Cloudinary', 'MongoDB'],
@@ -430,7 +446,7 @@ const projects = [
 'Premium Fashion Experience',
     ],
     screenshots: [
-      { src: 'assets/AURELLE/1000053676.jpg', alt: 'HomePage' },
+     
       { src: 'assets/AURELLE/1000053676.jpg', alt: 'HomePage' },
       { src: 'assets/AURELLE/1000053679.jpg', alt: 'Product page' },
       { src: 'assets/AURELLE/1000053680.jpg', alt: 'Product' },
@@ -444,7 +460,9 @@ const projects = [
     id: 'MM',
     title: 'Muslim Matrimony',
     tagline: 'Muslims Shadi that connects millions of people searching for their forever one across the globe.',
-    video: 'assets/NextArt.mp4',
+    // video: 'assets/NextArt.mp4',
+    coverImage: 'assets/MM/muslim.png',
+    liveUrl: 'https://play.google.com/store/apps/details?id=com.nikahforever',
     role: 'Team',
     timeline: 'Completed',
     stack: ['Flutter', 'Laravel', 'Kotlin', 'Socket.io', 'PostgreSQL'],
@@ -558,10 +576,19 @@ function renderProject(index) {
       <h1 class="pj-title reveal-up">${p.title}</h1>
       <p class="pj-desc reveal-up delay-1">${p.tagline}</p>
 
-      <video autoplay muted playsinline>
-        <source src="${p.video}" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+ ${p.video ? `
+  <video autoplay muted playsinline loop>
+    <source src="${p.video}" type="video/mp4">
+  </video>
+` : `
+  <img src="${p.coverImage}" alt="${p.title} cover" class="pj-cover-img" />
+`}
+
+${p.liveUrl ? `
+  <div class="pj-live-cta reveal-up">
+    <a class="btn-primary" href="${p.liveUrl}" target="_blank" rel="noopener">See Project Live</a>
+  </div>
+` : ''}
     </div>
 
     <div style="max-width:1160px;margin:0 auto;padding:0 40px">
@@ -618,17 +645,19 @@ function renderProject(index) {
     </div>
 
     <!-- Screenshots -->
-    <div style="max-width:1160px;margin:0 auto;padding:0 40px">
-      <div class="screenshots-section reveal-up">
-        <div class="screenshots-heading"><span class="section-icon">🗂</span> App Screenshots</div>
-        <div class="screenshots-row">
-          ${p.screenshots.map(sc => `
-            <div class="screen-card">
-              <img src="${sc.src}" alt="${sc.alt}" />
-            </div>`).join('')}
-        </div>
+ ${p.screenshots.length > 0 ? `
+  <div style="max-width:1160px;margin:0 auto;padding:0 40px">
+    <div class="screenshots-section reveal-up">
+      <div class="screenshots-heading"><span class="section-icon">🗂</span> App Screenshots</div>
+      <div class="screenshots-row">
+        ${p.screenshots.map(sc => `
+          <div class="screen-card"><img src="${sc.src}" alt="${sc.alt}" /></div>
+        `).join('')}
       </div>
     </div>
+  </div>
+` : ''}
+
 
     <!-- View all -->
     <div class="view-all-section">
