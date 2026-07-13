@@ -127,7 +127,7 @@ function filterNotes(cat, btn) {
 
 
 /* ─── THEME TOGGLE ─── */
-let dark = true;
+let dark = false;
 function toggleTheme() {
   dark = !dark;
   document.body.classList.toggle('light', !dark);
@@ -464,7 +464,7 @@ const projects = [
     coverImage: 'assets/MM/muslim.png',
     liveUrl: 'https://play.google.com/store/apps/details?id=com.nikahforever',
     role: 'Team',
-    timeline: 'Completed',
+    timeline: 'Live On PlayStore',
     stack: ['Flutter', 'Laravel', 'Kotlin', 'Socket.io', 'PostgreSQL'],
     overview: [
       'Nikah Forever is a cross-platform Muslim matrimony application developed to simplify and modernize the journey of finding a life partner. The app enables users to create detailed profiles, discover compatible matches through personalized search filters, connect securely with potential partners, and manage their matchmaking experience through an intuitive and responsive interface.'
@@ -662,9 +662,9 @@ ${p.liveUrl ? `
     <!-- View all -->
     <div class="view-all-section">
       <p class="view-all-sub">Want to see more?</p>
-      <button class="view-all-link" onclick="showPage('work',document.querySelectorAll('.nav-btn')[0])">
-        View All Projects
-      </button>
+     <button class="view-all-link" onclick="window.location.href='https://github.com/Elvisnc9'">
+  View All Projects
+</button>
     </div>
   `;
 }
