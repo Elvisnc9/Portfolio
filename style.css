@@ -403,8 +403,8 @@ body.light .pcard-arrow-new { border-color: #ccc; color: #999; background: rgba(
 body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: #777; }
 
 /* ── Responsive: tablet ── */
-@media (max-width: 1024px) {
-  .pcard-new         { grid-template-columns: 50% 50%; min-height: 260px; }
+@media (max-width: 860px) {
+  .pcard-new         { grid-template-columns: 60% 40%; min-height: 260px; }
   .phones-fan        { width: 300px; height: 230px; }
   .pf-phone          { width: 128px; }
   .pf-center         { width: 140px; }
