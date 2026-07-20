@@ -491,31 +491,26 @@ const projects = [
     ]
   },
   {
-    id: 'axelerate',
-    title: 'Axelerate',
-    tagline: 'Data-driven business scaling platform with CRM, analytics dashboards, and automated workflows.',
-    video: 'assets/NextArt.mp4',
-    role: 'Full-Stack Engineer',
+    id: 'Genie',
+    title: 'Genie',
+    tagline: 'Genie is an AI-powered augmented reality assistant that helps homeowners visualize and design living spaces by placing realistic 3D furniture in their homes before purchasing or rearranging them. It combines artificial intelligence and augmented reality to make interior planning more immersive, accurate, and confident.',
+    coverImage: 'assets/GENIE/Appmockup.png',
+    role: 'Full-Stack Developer',
     timeline: 'In Progress',
-    stack: ['React', 'Node.js', 'CRM', 'SaaS'],
+    stack: ['Flutter', 'fastApi', 'api', 'SaaS'],
     overview: [
-      'Axelerate is a SaaS platform built to help small and medium businesses in Africa scale operations through data. It combines CRM, sales pipeline management, and automated workflows in a single dashboard.',
-      'The React frontend is built around a modular widget system, letting businesses customise their dashboard layout to surface the metrics that matter most to them.',
-      'Node.js powers the backend automation engine — handling scheduled reports, trigger-based notifications, and third-party integrations via a webhook system.'
+      'Genie is an AI-powered home augmented reality application that transforms the way people furnish and design their living spaces. By combining Augmented Reality (AR) and Artificial Intelligence (AI), users can place life-sized 3D furniture in their real environment, experiment with different layouts and styles, and make confident design decisions before purchasing. Genie bridges the gap between imagination and reality by providing an immersive, interactive, and intelligent home visualization experience.',
     ],
     challenges: [
-      'Designing a workflow automation engine that non-technical business owners could actually configure was the hardest UX challenge. I built a visual drag-and-drop trigger builder that abstracts the underlying logic into plain-English conditions.',
-      'Multi-tenant data isolation required a careful PostgreSQL schema design to ensure one customer could never accidentally see another\'s data, even under misconfigured queries.'
+      'Developing Genie presented several challenges, including creating realistic and properly scaled 3D furniture models that could accurately fit into real-world environments. Implementing stable augmented reality tracking and ensuring accurate object placement, rotation, and scaling across different devices was also challenging. Additionally, integrating AI-based features, optimizing AR performance, managing large 3D assets, and ensuring a smooth user experience while maintaining application efficiency required significant technical effort.',
     ],
     features: [
-      'Visual Workflow Automation Builder',
-      'CRM with Pipeline View',
-      'Customisable Analytics Dashboard',
-      'Scheduled & Trigger-Based Reports',
-      'Multi-Tenant Architecture',
-      'Third-Party Webhook Integration',
-      'Role-Based Team Access',
-      'Export to CSV / PDF'
+      'Augmented Reality Furniture Placement – Place life-sized 3D furniture in your home using your device camera.',
+      'AI-Powered Furniture Recommendations – Receive intelligent furniture suggestions based on your room and preferences.',
+      'Realistic 3D Models – Explore high-quality, true-to-scale furniture models.',
+      'Furniture Catalog – Browse a collection of furniture categorized by style, room, and type.',
+      'Save & Share Designs – Save room layouts and share them with friends, family, or interior designers.',
+     
     ],
     screenshots: [
      
