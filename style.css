@@ -197,7 +197,7 @@ nav{
   min-height: 400px;
   align-items: normal;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 15px;
   margin-bottom: 16px;
   transition: border-color .3s, transform .35s var(--ease-spring), box-shadow .3s;
 }
