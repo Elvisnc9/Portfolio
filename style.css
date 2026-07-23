@@ -117,7 +117,7 @@ nav{
   border-radius:100px;padding:5px 16px;margin-bottom:22px;
 }
 .hero-h1{
-  font-size:clamp(5rem,19vw,8.5rem);
+  font-size:clamp(5rem,12vw,8.5rem);
   font-weight:800;line-height:1.05;letter-spacing:0.002em;
   font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
   margin-bottom:20px;
@@ -411,7 +411,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
   .pf-center         { width: 140px; }
   .pcard-right       { padding: 32px 32px 32px 28px; }
   .pcard-title-new   { font-size: 2rem; }
-  .hero-h1         { font-size: clamp(3.0rem, 9vw, 8.8rem); }
+  
 }
 
 /* ── Responsive: mobile stack ── */
