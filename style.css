@@ -187,7 +187,7 @@ nav{
 
 .pcard-new {
   position: relative;
-  width: 98%;
+  width: 97%;
   background: #141414;
   border: 1px solid #222;
   border-radius: 20px;
@@ -195,7 +195,7 @@ nav{
   display: grid;
   grid-template-columns: 58% 42%;
   min-height: 400px;
-  align-items: stretch;
+  align-items: normal;
   cursor: pointer;
   margin-bottom: 16px;
   transition: border-color .3s, transform .35s var(--ease-spring), box-shadow .3s;
@@ -203,7 +203,7 @@ nav{
 .pcard-cover {
   width: 100%;
   height: 100%;
-  object-fit:cover;
+  object-fit:contain;
   scale: 1 ;
   display: block;
   transition: transform .5s var(--ease-out);
