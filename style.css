@@ -411,7 +411,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
   .pf-center         { width: 140px; }
   .pcard-right       { padding: 32px 32px 32px 28px; }
   .pcard-title-new   { font-size: 2rem; }
-  .hero-h1         { font-size: clamp(2rem, 8vw, 8.5rem); }
+  .hero-h1         { font-size: clamp(3.0rem, 9vw, 8.8rem); }
 }
 
 /* ── Responsive: mobile stack ── */
