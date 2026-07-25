@@ -487,7 +487,11 @@ const projects = [
       'Privacy Controls'
     ],
     screenshots: [
-     
+      { src: 'assets/MM/mockup.png', alt: 'Splash' },
+      { src: 'assets/MM/mockupp.png', alt: 'Creator profile' },
+      { src: 'assets/MM/mockupp2.png', alt: 'Subscription tiers' },
+      { src: 'assets/MM/mockupp3.png', alt: 'Earnings dashboard' },
+      { src: 'assets/MM/mockupp4.png', alt: 'Billing' },
     ]
   },
   {

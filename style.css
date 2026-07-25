@@ -834,6 +834,12 @@ body.light .cbox {
   .cbox h2 {
     font-size: 1.6rem;
   }
+  .hero-h1{
+     font-size:clamp(3.1rem,8vw,8.5rem);
+  }
+  /* .hero-p{
+
+  } */
   .cbox p {
     font-size: 14px;
   }
