@@ -380,41 +380,8 @@ const projects = [
 
 
 
-  {
-    id: 'elves-meet',
-    title: 'Elves Meet',
-    tagline: 'A multilingual AI chatbot with context-aware conversations, voice input, and real-time streaming responses powered by OpenAI.',
-    coverImage: 'assets/ELF_AI/screens_mockup.png', // swap for your chatbot video
-    role: 'Full-Stack Engineer',
-    timeline: 'Completed',
-    stack: ['Flutter', 'Agora', 'Serverpod', 'Riverpod', 'Drift', 'PostgreSQL', ''],
-    overview: [
-      'Elves ChatBot is a multilingual conversational AI mobile app that provides context-aware interactions powered by the OpenAI API. Built for users across Africa, the app supports voice input and real-time token streaming to deliver near-instant responses.',
-      'The backend is built on Serverpod, handling session management, conversation history persistence via PostgreSQL, and local caching with Drift for offline access to past conversations.',
-      'The app is engineered for minimal latency — streaming tokens are pushed directly to the Flutter UI as they arrive, giving users a "typing" effect that dramatically improves perceived performance.'
-    ],
-    challenges: [
-      'The main challenge was maintaining conversation context across sessions without inflating API costs. I designed a sliding context window that summarises older messages and injects only the most relevant history into each prompt.',
-      'Voice input required integrating a speech-to-text pipeline with noise handling for environments with background sound — a common challenge in busy Nigerian households and offices. Real-time streaming from OpenAI required custom SSE (Server-Sent Events) handling on the Serverpod backend.'
-    ],
-    features: [
-      'Real-Time Token Streaming',
-      'Multilingual Support',
-      'Voice-to-Text Input',
-      'Context-Aware Conversation History',
-      'Offline Chat Access via Drift',
-      'Session Management & Auth',
-      'Conversation Summarisation Engine',
-      'Dark/Light Mode UI'
-    ],
-    screenshots: [
-      { src: 'assets/fitnessapp.png', alt: 'Chat home' },
-      { src: 'assets/screen-2.jpeg', alt: 'Active conversation' },
-      { src: 'assets/screen-3.jpeg', alt: 'Voice input' },
-      { src: 'assets/screen-4.jpeg', alt: 'Settings' },
-      { src: 'assets/screen-1.jpeg', alt: 'History' },
-    ]
-  },
+
+  
   {
     id: 'aurelle',
     title: 'Aurelle App',
@@ -521,40 +488,36 @@ const projects = [
     ]
   },
   {
-    id: 'genie',
-    title: 'Genie',
-    tagline: 'Your gateway to recurring income — SaaS mobile app with subscription management and automated billing on Serverpod.',
-    video: 'assets/NextArt.mp4',
-    role: 'Lead Mobile Engineer',
-    timeline: 'Coming Soon',
-    stack: ['Flutter', 'Dart', 'Serverpod'],
+    id: 'Elves-meet',
+    title: 'Elves Meet',
+    tagline: 'A multilingual AI chatbot with context-aware conversations, voice input, and real-time streaming responses powered by OpenAI.',
+    coverImage: 'assets/ELF_AI/screens_mockup.png', // swap for your chatbot video
+    role: 'Full-Stack Engineer',
+    timeline: 'Completed',
+    stack: ['Flutter', 'Agora', 'Serverpod', 'Riverpod', 'Drift', 'PostgreSQL', ''],
     overview: [
-      'Genie is a Flutter mobile app that lets creators and entrepreneurs monetise their content and services through subscription tiers — think Patreon meets Substack, built for the African market.',
-      'Powered by Serverpod on the backend, Genie handles subscription lifecycle management, automated billing cycles, and creator payout processing — all with African payment methods as first-class citizens.',
-      'The app is currently in private beta with a small group of Nigerian creators.'
+      'Elves Meet is a real-time video conferencing application inspired by Google Meet, It allows users to create secure meeting rooms or join existing meetings using a unique room code.',
+      'The application supports high-quality one-to-one and group video calls with real-time audio and video communication.Users can authenticate, manage meetings, and view their recent call history from a clean and intuitive interface.',
+      'The project was built to understand the complete architecture, workflow, and user experience behind modern video conferencing platforms while replicating production-level functionality.'
     ],
     challenges: [
-      'Subscription billing in markets with unreliable card infrastructure required building a retry and dunning engine that gracefully handles failed payments without immediately churning subscribers.',
-      'Creator payout scheduling across different African banks and mobile money providers required a unified disbursement abstraction layer on the backend.'
+      'One of the main challenges was synchronizing real-time audio, video, and participant states while maintaining a smooth user experience. Additional challenges included handling meeting lifecycle events, network interruptions, permission management, and ensuring reliable room creation and joining across different devices.',
     ],
     features: [
-      'Multi-Tier Subscription System',
-      'Automated Billing & Retry Engine',
-      'Creator Payout Scheduling',
-      'Content Gating by Tier',
-      'African Payment Method Support',
-      'Subscriber Analytics for Creators',
-      'In-App Notifications',
-      'Referral & Growth Mechanics'
+      'Secure meeting room generation with unique join codes',
+      'Instant one-to-one and group video conferencing',
+      'Live participant synchronization and presence tracking',
+     'Low-latency, high-quality audio and video streaming',
+      'Responsive meeting experience across devices',
+       'Clean Google Meet-inspired user experience'
     ],
     screenshots: [
-      { src: 'assets/Chair.png', alt: 'Splash' },
-      { src: 'assets/screen-2.jpeg', alt: 'Creator profile' },
-      { src: 'assets/screen-3.jpeg', alt: 'Subscription tiers' },
-      { src: 'assets/screen-4.jpeg', alt: 'Earnings dashboard' },
-      { src: 'assets/screen-1.jpeg', alt: 'Billing' },
-    ]
-  }
+      { src: 'assets/ELVES_MEET/Screenshotva2.jpg', alt: 'Chat home' },
+      { src: 'assets/ELVES_MEET/Screenshotva3.jpg', alt: 'Active conversation' },
+      { src: 'assets/ELVES_MEET/Screenshotva5.jpg', alt: 'Voice input' },
+      { src: 'assets/ELVES_MEET/Screenshotva4.jpg', alt: 'Settings' },
+      { src: 'assets/ELVES_MEET/Screenshotva1.jpg', alt: 'History' },
+    ]}
 ];
 
 
