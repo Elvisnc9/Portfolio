@@ -900,7 +900,7 @@ body.light .cbox {
 
 @media (max-width: 1200Px){
   .hero-h1{
-     font-size:clamp(4.1rem,10vw,8.5rem);
+     font-size:clamp(5.1rem,11.5vw,8.5rem);
   }
 }
 
