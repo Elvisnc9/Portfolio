@@ -491,7 +491,7 @@ const projects = [
     id: 'Elves-meet',
     title: 'Elves Meet',
     tagline: 'A multilingual AI chatbot with context-aware conversations, voice input, and real-time streaming responses powered by OpenAI.',
-    coverImage: 'assets/ELF_AI/screens_mockup.png', // swap for your chatbot video
+    coverImage: 'assets/ELVES_MEET/mockup.png', // swap for your chatbot video
     role: 'Full-Stack Engineer',
     timeline: 'Completed',
     stack: ['Flutter', 'Agora', 'Serverpod', 'Riverpod', 'Drift', 'PostgreSQL', ''],
