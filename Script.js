@@ -48,10 +48,14 @@ function showPage(id, btn, options = {}) {
   const currentPage = document.querySelector('.page.active');
 
   // If it's the same page, just do nav highlight + skip animation
-  if (currentPage === nextPage) {
-    setActiveNav(btn);
-    return;
+if (currentPage === nextPage) {
+  setActiveNav(btn);
+  if (targetSelector) {
+    const target = document.querySelector(targetSelector);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  return;
+}
 
   isTransitioning = true;
   setActiveNav(btn);
@@ -79,12 +83,13 @@ function showPage(id, btn, options = {}) {
     isTransitioning = false;
   };
 
-  const startEnter = () => {
-    if (currentPage) {
-      currentPage.classList.remove('page-exiting', 'active');
-      currentPage.style.display = 'none';
-    }
+const startEnter = () => {
+  if (currentPage) {
+    currentPage.classList.remove('page-exiting', 'active');
+    currentPage.style.display = '';   // ← was 'none', now just clear the inline override
+  }
 
+  nextPage.style.display = '';        // ← ADD THIS: clear any leftover inline style from a previous exit
     nextPage.classList.add('active', 'page-entering');
     resetReveal(nextPage);
 
