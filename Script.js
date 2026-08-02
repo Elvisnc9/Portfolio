@@ -35,39 +35,79 @@ function playHeroIntro() {
 
 
 /* ─── PAGE SWITCHER ─── */
+let isTransitioning = false;
+
 function showPage(id, btn, options = {}) {
   const { scrollToTop = true, targetSelector = null } = options;
 
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  if (isTransitioning) return; // guard against double-clicks
 
-  const page = document.getElementById(id);
-  if (!page) return;
+  const nextPage = document.getElementById(id);
+  if (!nextPage) return;
 
-  page.classList.add('active');
-  setActiveNav(btn);
-  resetReveal(page);
+  const currentPage = document.querySelector('.page.active');
 
-  if (id === 'work') playHeroIntro();
-
-  /* start / stop carousel when switching to/from about */
-  if (id === 'about') {
-    carouselPaused = false;
-    startCarousel();
-  } else {
-    stopCarousel();
+  // If it's the same page, just do nav highlight + skip animation
+  if (currentPage === nextPage) {
+    setActiveNav(btn);
+    return;
   }
 
-  if (scrollToTop) window.scrollTo({ top: 0, behavior: 'auto' });
+  isTransitioning = true;
+  setActiveNav(btn);
 
-  requestAnimationFrame(() => {
+  const finishEnter = () => {
+    if (id === 'work') playHeroIntro();
+
+    if (id === 'about') {
+      carouselPaused = false;
+      startCarousel();
+    } else {
+      stopCarousel();
+    }
+
     requestAnimationFrame(() => {
-      kickReveal();
-      if (targetSelector) {
-        const target = document.querySelector(targetSelector);
-        if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
-      }
+      requestAnimationFrame(() => {
+        kickReveal();
+        if (targetSelector) {
+          const target = document.querySelector(targetSelector);
+          if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+        }
+      });
     });
-  });
+
+    isTransitioning = false;
+  };
+
+  const startEnter = () => {
+    if (currentPage) {
+      currentPage.classList.remove('page-exiting', 'active');
+      currentPage.style.display = 'none';
+    }
+
+    nextPage.classList.add('active', 'page-entering');
+    resetReveal(nextPage);
+
+    if (scrollToTop) window.scrollTo({ top: 0, behavior: 'auto' });
+
+    nextPage.addEventListener('animationend', function handler(e) {
+      if (e.animationName !== 'page-in') return;
+      nextPage.removeEventListener('animationend', handler);
+      nextPage.classList.remove('page-entering');
+      finishEnter();
+    });
+  };
+
+  if (currentPage) {
+    currentPage.classList.add('page-exiting');
+    currentPage.addEventListener('animationend', function handler(e) {
+      if (e.animationName !== 'page-out') return;
+      currentPage.removeEventListener('animationend', handler);
+      startEnter();
+    });
+  } else {
+    startEnter(); // first load, no current page to exit
+  }
 }
 
 

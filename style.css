@@ -42,9 +42,33 @@ html body{
 }
 
 /* ─── PAGES ─── */
-.page{display:none;min-height:calc(100vh - 70px);padding-top:80px; overflow-x: hidden;}
+.page{display:none;
+  min-height:calc(100vh - 70px);
+  padding-top:80px; 
+  overflow-x: hidden;}
+
 .page.active{display:block}
 
+
+.page-exiting{
+  display:block !important;
+  animation: page-out 0.4s var(--ease-out) forwards;
+}
+
+.page-entering{
+  display:block !important;
+  animation: page-in 0.5s var(--ease-out) forwards;
+}
+
+@keyframes page-out{
+  from{ opacity:1; transform:translateY(0); }
+  to{   opacity:0; transform:translateY(-18px); }
+}
+
+@keyframes page-in{
+  from{ opacity:0; transform:translateY(18px); }
+  to{   opacity:1; transform:translateY(0); }
+}
 /* ─── NAV ─── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:999;
