@@ -1,5 +1,6 @@
 /* ─── RESET & BASE ─── */
 @import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   
@@ -50,8 +51,9 @@ html body{
 /* ─── PAGES ─── */
 .page{display:none;
   min-height:calc(100vh - 70px);
-  padding-top:80px; 
   overflow-x: hidden;
+  width:100%;
+  padding-top:80px;
 }
 
 .page.active{display:block}
@@ -80,8 +82,8 @@ html body{
 nav{
   position:fixed;top:0;left:0;right:0;z-index:999;
   display:flex;align-items:center;justify-content:center;
-  padding:20px;
- 
+  padding:10px;
+  
   background:transparent;
   transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), 
               border-bottom 0.2s ease;
@@ -142,9 +144,8 @@ nav{
 .hero{
   display:flex;flex-direction:column;align-items:center;
   text-align:center;
-  padding:80px 20px 48px;
+  padding:80px 50px 48px;
   max-width:760px;margin:0 auto;
-  margin-top: 20px;
 }
 /* ─── HERO FLOATERS ─── */
 .hero{ position:relative; } /* needed so floaters position against it */
@@ -220,10 +221,15 @@ nav{
   border-radius:100px;padding:8px 16px;margin-bottom:22px;
 }
 .hero-h1{
-  font-size:clamp(8.1rem,15vw,9.5rem);
-  font-weight:900;line-height:1.00;letter-spacing:0.000em;
-  font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
-  margin-bottom:20px;
+  text-align:center;
+  font-size:clamp(3.5rem,10vw,9rem);
+  font-weight:900;
+  letter-spacing:-0.03em;
+  line-height:1.09;
+  font-family:'Clash Display',sans-serif;
+  background-clip:text;
+    text-transform: uppercase;
+    user-select: none;
 }
 .hero-p{
   color:var(--gray);font-size:clamp(20px,4vw,20px);
@@ -296,7 +302,7 @@ nav{
   border-radius: 20px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 58% 42%;
+  grid-template-columns: 55% 45%;
   min-height: 400px;
   align-items: normal;
   cursor: pointer;
@@ -524,6 +530,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
 /* ── Responsive: tablet ── */
 @media (max-width: 860px) {
   .pcard-new         { grid-template-columns: 60% 40%; min-height: 260px; }
+  
   .phones-fan        { width: 300px; height: 230px; }
   .pf-phone          { width: 128px; }
   .pf-center         { width: 140px; }
@@ -532,18 +539,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
   
 }
 
-/* ── Responsive: mobile stack ── */
-@media (max-width: 768px) {
-  .projects-grid     { padding: 0 16px 72px; gap: 20px; }
-  .pcard-new         { grid-template-columns: 1fr; min-height: unset; margin-bottom: 0; }
-  .pcard-left        { min-height: 300px; border-right: none; border-bottom: 1px solid #222; padding: 32px 0 52px; align-items: flex-end; }
-  .phones-fan        { width: 270px; height: 240px; }
-  .pf-phone          { width: 118px; border-radius: 20px; }
-  .pf-center         { width: 130px; }
-  .pcard-right       { padding: 28px 22px 32px; }
-  .pcard-title-new   { font-size: 1.8rem; }
-  .pcard-desc        { font-size: 13px; }
-}
+
 
 @media (max-width: 480px) {
   .phones-fan  { width: 230px; height: 210px; }
@@ -590,7 +586,162 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
 /* ══════════════════════════════════════════
    ABOUT PAGE
 ══════════════════════════════════════════ */
- 
+.about-hero{
+    width:100%;
+}
+
+.hero {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    position: relative;
+ padding:20px 20px 48px;}
+
+ .about-hero .hero{
+    height:900px;
+}
+.hero-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+       position:relative;
+    z-index:1;
+
+    font-family:'Clash Display',sans-serif;
+
+    font-weight: 800;
+
+    font-size: clamp(6.5rem, 10vw, 10.2rem);
+
+    line-height: 1.09;
+    letter-spacing: .009em;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    user-select: none;
+}
+.hero-content{
+
+    position:absolute;
+
+    top:600px;
+
+    left:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    z-index:20;
+
+}
+.hero-left{
+
+    margin-left:10px;
+
+}
+
+
+.hero-left p{
+
+    font-size:25px;
+
+    font-weight:600;
+
+    margin:0;
+
+    letter-spacing:-0.03em;
+
+}
+.scroll-btn{
+
+    margin-top:80px;
+
+    width:100px;
+
+    height:100px;
+
+    border-radius:50%;
+
+    background:none;
+
+    border:1px solid #999;
+
+    font-size:6cqb;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+.hero-right{
+
+    margin-left:10px;
+
+}
+
+
+.hero-right p{
+
+    width:260px;
+
+    font-size:25px;
+
+    line-height:1.3;
+
+    text-transform:uppercase;
+
+    letter-spacing:-0.04em;
+
+}
+.hero-title span{
+
+    display:block;
+
+    background: linear-gradient(
+        90deg,
+        #b9b9b9 0%,
+        #202020 22%,
+        #000000 50%,
+        #202020 78%,
+        #b9b9b9 100%
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    filter: contrast(115%);
+}
+
+#about{
+    overflow:hidden;
+}
+
+.hero-image{
+    position:absolute;
+
+    left:50%;
+    top: 30%;
+    transform:translateX(-50%);
+
+    width:1300px;
+
+    z-index:10;
+}
+.hero-image img{
+
+    width:100%;
+    display:block;
+
+    filter: grayscale(120%);
+}
 /* ══════════════════════════════════════════
    ABOUT PAGE
 
@@ -1245,40 +1396,44 @@ body.light .view-all-section { background: #f0f0f0; }
 
 
 
-
 @media (max-width: 768px) {
-  .pcard-new {
+  .projects-grid{ padding:0 16px 72px; gap:20px; }
+
+  .pcard-new{
     grid-template-columns: 1fr;
     min-height: unset;
     margin-bottom: 0;
   }
-  /* ← replace the old pcard-left block with this */
-  .pcard-left {
-    min-height: 260px;
+  .pcard-new:nth-child(even){
+  grid-template-columns: 1fr;
+}
+  .pcard-new:nth-child(even) .pcard-left,
+  .pcard-new:nth-child(even) .pcard-right{
+    order: initial;
+  }
+
+  .pcard-left{
+    min-height: unset;
+    height: auto;
+    aspect-ratio: 4 / 3;
     border-right: none;
     border-bottom: 1px solid #222;
-    padding: 0;          /* remove old padding that was pushing content */
+    padding: 0;
     overflow: hidden;
   }
-  .pcard-cover {
+
+  .pcard-cover{
     width: 100%;
     height: 100%;
-    min-height: 260px;
     object-fit: cover;
     display: block;
   }
-  .pcard-right {
-    padding: 28px 22px 32px;
-  }
-  .pcard-title-new {
-    font-size: 1.8rem;
-  }
-  .pcard-desc {
-    font-size: 13px;
-  }
+
+  .pcard-right{ padding: 28px 22px 32px; }
+  .pcard-title-new{ font-size: 1.8rem; }
+  .pcard-desc{ font-size: 13px; }
+  .pcard-pills{ padding-top: 20px; gap: 6px; }
 }
-
-
 
 /* ─── GENERAL MOBILE POLISH ─── */
 

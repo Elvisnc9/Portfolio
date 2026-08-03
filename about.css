@@ -1,0 +1,381 @@
+/* --- Reset & Base --- */
+:root {
+    --bg-color: #fdfdfd; /* Light off-white from images */
+    --text-color: #1a1a1a;
+    --gray-light: #f5f5f5;
+    --border-color: #e0e0e0;
+    --font-main: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Gradient Headline Trick --- */
+/* --- gradient headline (REPLACED) --- */
+.gradient-headline {
+  /* text is now much larger, matching reference */
+  font-size: 8rem; 
+  font-weight: 800;
+  line-height: 0.9; /* tighter for more overlap */
+  letter-spacing: -3px;
+  background-image: linear-gradient(100deg, #1a1a1a 10%, #d4d4d4 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  max-width: 1000px;
+  
+  /* added for stacking */
+  position: relative;
+  z-index: 1; /* text is below the image */
+}
+
+.gradient-headline-sub {
+    font-size: 3rem; /* Subheader size */
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    background-image: linear-gradient(100deg, #1a1a1a 10%, #d4d4d4 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* --- Arrow Icons in Circles --- */
+.icon-arrow {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-color);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.circle-border {
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.icon-arrow:hover {
+    background-color: var(--gray-light);
+}
+
+/* --- Header --- */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5rem;
+    background-color: var(--bg-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.25rem;
+}
+
+.nav-links, .social-links {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-pill, .social-pill {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    background-color: var(--gray-light);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: none;
+}
+
+.nav-pill.active {
+    background-color: var(--text-color);
+    color: white;
+}
+
+.social-pill {
+    padding: 0.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.125rem;
+}
+
+.menu-toggle {
+    margin-left: 0.5rem;
+}
+
+/* --- Main content wrapper --- */
+main {
+    padding: 5rem;
+}
+
+/* -- Hero About Section (Image 1) -- */
+.about-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 2rem;
+    position: relative; /* for absolute elements */
+}
+
+.profile-left, .profile-right {
+    flex: 1;
+    max-width: 250px;
+}
+
+.profile-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 2rem;
+}
+
+.designer-est {
+    font-size: 0.875rem;
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* Floating Elements (View Count & Icons) */
+.floating-elements {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 5rem;
+}
+
+.view-count {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.floating-icons {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+}
+
+/* Profile Image Handling */
+/* --- profile img wrapper (REPLACED) --- */
+.profile-img-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+  
+  /* added and modified for stacking and position */
+  position: relative;
+  z-index: 10; /* image is now stacked ON TOP of text */
+  /* transform pulls image content *up* into text area. 
+     Use a negative value, maybe start with -80px to see. */
+  transform: translateY(-80px); 
+}
+
+.profile-img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    filter: grayscale(100%); /* Force image to black and white */
+    object-fit: contain;
+}
+
+/* Profile Right Text & Skills */
+.profile-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    padding-top: 2rem;
+}
+
+.expert-webflow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 6rem; /* Large spacing as shown */
+}
+
+.passion-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 4rem; /* Spacing before skills */
+}
+
+.skills-list {
+    list-style: none;
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--text-color);
+}
+
+/* -- About Details Section (Image 2) -- */
+.about-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2rem;
+}
+
+.about-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.about-quote-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 6rem; /* Spacing before stats */
+}
+
+.about-quote {
+    width: 60%;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+/* -- Stats Grid -- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+    text-align: center;
+    border-right: 1px solid var(--border-color);
+}
+
+.stat-item:last-child {
+    border-right: none;
+}
+
+.stat-number {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.stat-desc {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* -- Featured Section Preview Area (From Image 2) -- */
+.featured-projects-preview {
+    margin-top: 6rem;
+    width: 100%;
+}
+
+.featured-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.featured-filters {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.project-pill {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 40px;
+    border: 1px solid var(--border-color);
+    background-color: var(--gray-light);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.project-pill.active {
+    background-color: var(--text-color);
+    color: white;
+}
+
+
+/* --- Breathing text animation (ADD to bottom) --- */
+@keyframes text-breathe {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-3px); /* subtle shift up */
+    opacity: 0.85; /* slight fade */
+  }
+}
+
+.text-breathe {
+  display: inline-block; /* allows transform on inline elements */
+  animation: text-breathe 4s ease-in-out infinite; /* slow, continuous loop */
+}
+/* --- Fade In Up animation (ADD to bottom) --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-on-load {
+  opacity: 0; /* start hidden */
+  animation: fadeInUp 0.8s ease-out forwards;
+}
