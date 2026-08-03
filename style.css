@@ -291,7 +291,7 @@ nav{
 .pcard-new {
   position: relative;
   width: 97%;
-  background: #141414;
+  background: var(--bg);
   border: 1px solid #222;
   border-radius: 20px;
   overflow: hidden;
@@ -309,10 +309,23 @@ nav{
   height: 100%;
   object-fit:contain;
   scale: 1 ;
-  aspect-ratio: 4 / 3;
   display: block;
   transition: transform .5s var(--ease-out);
 }
+
+/* ─── ALTERNATE LEFT/RIGHT PROJECT CARDS ─── */
+.pcard-new:nth-child(even) .pcard-left{
+  order:2;
+}
+.pcard-new:nth-child(even) .pcard-right{
+  order:1;
+}
+.pcard-new:nth-child(even){
+  display:grid;
+  grid-template-columns: 42% 58%; /* flipped ratio so text side matches image side proportionally */
+}
+
+
 
 .pcard-new:hover .pcard-cover {
   transform: scale(1.2);
@@ -320,11 +333,12 @@ nav{
 /* ── LEFT: phone stage ── */
 .pcard-left {
   position: relative;
-  background: #0a0a0a;
+  background: var(--bg);
   border-right: 1px solid #222;
   overflow: hidden;
   min-height: 250px;
 }
+
 
 
 
