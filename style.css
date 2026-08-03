@@ -593,153 +593,8 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
  
 /* ══════════════════════════════════════════
    ABOUT PAGE
-   Remove all old .about-slider / .about-slide
-   / .about-top / .about-pic rules and replace
-   with everything below.
+
 ══════════════════════════════════════════ */
-
-.about-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 24px 24px 2px;
-}
- 
-.about-h1 {
-  font-size: clamp(3.6rem, 9vw, 8rem);
-  font-weight: 900;
-  letter-spacing: -.0008em;
-  text-align: center;
-   font-family: 'Dancing Script', sans-serif;
-  margin-bottom: 20px;
-}
- 
-/* ─────────────────────────────────────────
-   CENTER-CARD CAROUSEL
-───────────────────────────────────────── */
- 
-#intro-veil {
-  position: fixed;
-  inset: 0;
-  background: #0d0d0d;
-  z-index: 9998;
-
-  transition: opacity 1s cubic-bezier(0.65,0,0.35,1);
-}
-body.light #intro-veil { background: #f4f4f4; }
-
-.cs-root {
-  position: relative;
-  width: 100%;
-  /* height = card height + vertical bleed from scale transform */
-  height: 450px;
-  margin-bottom: 52px;
-}
-
- 
-/* Clips left/right overflow so only ~3 cards peek out */
-.cs-viewport {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
- 
-/* Zero-size anchor point dead-centre of the viewport */
-.cs-track {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  cursor: grab;
-}
-.cs-track:active { cursor: grabbing; }
- 
-/* Each card — positioned relative to the track centre */
-.cs-slide {
-  position: absolute;
- 
-  /* ← card size */
-  width: 280px;
-  height: 360px;
- 
-  /* offset so the card itself is centred on the anchor */
-  margin-top:  -155px;   /* half of height */
-  margin-left: -140px;   /* half of width  */
- 
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--bg3);
- 
-  transition:
-    transform  0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    filter     0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity    0.35s ease,
-    box-shadow 0.45s ease;
- 
-  will-change: transform, filter;
-  box-shadow: 0 10px 32px rgba(0,0,0,0.45);
-}
- 
-.cs-slide.cs-active {
-  box-shadow: 0 22px 60px rgba(0,0,0,0.65);
-}
- 
-.cs-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-
-  user-select: none;
-}
- 
-/* ─────────────────────────────────────────
-   BIO / COLLAB / VALS / STORY
-───────────────────────────────────────── */
- 
-.about-bio-full {
-  max-width: 100%;
-  margin-bottom: 34px;
-  text-align: center;
-}
- 
-.about-bio-full p {
-  font-size: 13.5px;
-  color: var(--gray);
-  line-height: 1.8;
-}
- 
-.about-collab-p {
-  font-size: 15px;
-  color: var(--gray);
-  line-height: 1.8;
-  font-weight: 500;
-  margin-bottom: 20px;
-  color: var(--gray);
-  word-spacing: 0.04em;
-  text-align: center;
-  
-}
-
- 
-.vals {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 30px;
-  margin-bottom: 32px;
-}
-.vnum   { font-size: 50px; font-weight: 900; color: var(--border); margin-bottom: 6px; }
-.vtitle { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-.vdesc  { font-size: 16.5px;font-weight: 500; color: var(--gray); line-height: 1.7; }
- 
-.about-story { font-size: 13.5px; color: var(--gray); line-height: 1.85; }
-.about-story p { margin-bottom: 16px; }
-.about-story strong { color: var(--white); }
 
 
 body {
@@ -808,7 +663,6 @@ body {
 ───────────────────────────────────────── */
 @media (max-width: 600px) {
   nav { padding-left: 26px; padding-right: 26px; }
-  .about-inner { padding-left: 16px; padding-right: 16px; }
 
  
   .cs-root   { height: 350px; margin-bottom: 40px; }
@@ -821,8 +675,7 @@ body {
     overflow: hidden;
   }
  
-  .about-bio-full p { text-align: center; }
-  .vals { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+ 
 }
  
 
@@ -974,107 +827,91 @@ body.light .cbox {
 /* ─── FOOTER ─── */
 /* ─── FOOTER ─── */
 /* ─── FOOTER ─── */
-.footer-wrap {
-  border-top: 1px solid var(--border);
-  padding: 48px 40px 28px;
-  margin-top: 80px;
+/* ─── NEW FOOTER ─── */
+.footer-new{
+  background:#0a0a0a;
+  padding:60px 24px 28px;
+  margin-top:80px;
+  overflow:hidden;
 }
 
-.footer-inner {
-  max-width: 1160px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-  padding-bottom: 28px;
+.footer-marquee-row{
+  overflow:hidden;
+  white-space:nowrap;
+  margin-bottom:20px;
+}
+.fm-track{
+  display:inline-flex;
+  gap:60px;
+  animation:fm-scroll 18s linear infinite;
+}
+.fm-track span{
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+}
+@keyframes fm-scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
 }
 
-/* Brand */
-.footer-brand span {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: -0.02em;
+.footer-lets-talk{
+  text-align:center;
+  font-size:clamp(3.5rem,11vw,9rem);
+  font-weight:900;
+  letter-spacing:-0.03em;
+  font-family:'Clash Display',sans-serif;
+  background:linear-gradient(90deg,#555 0%,#fff 25%,#fff 75%,#555 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin:20px 0 44px;
 }
 
-/* Nav links */
-.footer-nav {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  justify-content: center;
+.footer-pills{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:50px;
+}
+.fpill{
+  background:#fff;
+  color:#111;
+  font-size:14px;
+  font-weight:700;
+  padding:14px 28px;
+  border-radius:100px;
+  text-decoration:none;
+  transition:transform .2s;
+}
+.fpill:hover{ transform:translateY(-2px); }
+.fpill-outline{
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.3);
 }
 
-.footer-nav a {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--gray);
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.2s ease;
+.footer-bottom-new{
+  display:flex;
+  justify-content:space-between;
+  max-width:1160px;
+  margin:0 auto;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  font-size:12px;
+  color:rgba(255,255,255,0.4);
 }
+.footer-bottom-new strong{ color:rgba(255,255,255,0.7); }
 
-.footer-nav a:hover {
-  color: var(--white);
+@media (max-width:600px){
+  .footer-new{ padding:40px 16px 20px; }
+  .fm-track span{ font-size:11px; }
+  .footer-bottom-new{ flex-direction:column; gap:8px; text-align:center; }
+  .fpill{ font-size:12px; padding:11px 20px; }
 }
-
-/* Socials */
-.footer-socials {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.footer-socials .sic {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  opacity: 0.5;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.footer-socials .sic:hover {
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-.footer-socials .sic img {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  display: block;
-}
-
-/* Bottom bar */
-.footer-bottom {
-  max-width: 1160px;
-  margin: 0 auto;
-  border-top: 1px solid var(--border);
-  padding-top: 18px;
-  text-align: center;
-  font-size: 11px;
-  color: var(--gray2);
-}
-
-/* Light mode */
-body.light .footer-wrap {
-  border-color: var(--border);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .footer-wrap {
-    padding: 36px 20px 20px;
-  }
-  .footer-nav {
-    gap: 16px;
-  }
-}
-
 /* ═════════════════════════════════
    PREMIUM SCROLL ANIMATIONS
 ═══════════════════════════════════════════ */
@@ -1156,12 +993,10 @@ body.light .browser-chrome{background:#ddd;border-color:#ccc}
   .section-header{padding:0 16px 22px}
  
   .ngrid{grid-template-columns:1fr}
-  .vals{grid-template-columns:1fr;gap:18px;padding:20px}
-  .about-top{flex-direction:column;align-items:center;text-align:center}
-  .about-bio p{font-size:13.5px;color:var(--gray);line-height:1.75;margin-bottom:9px; text-align: center;}
+
 
 }
-  .about-inner,.notes-inner,.contact-inner{padding-left:16px;padding-right:16px}
+ 
   .fgrid{grid-template-columns:1fr;gap:24px}
   .sicons{grid-template-columns:repeat(3,1fr)}
   .cbox{padding:28px 18px}
@@ -1172,20 +1007,6 @@ body.light .browser-chrome{background:#ddd;border-color:#ccc}
   .nav-btn{font-size:11.5px;padding:6px 10px}
 }
 
-@media (max-width: 600px) {
-  .fan-stage   { height: 340px; margin-bottom: 44px; }
-  .fan-track   { width: 170px; height: 240px; }
-  .fan-card    { border-radius: 14px; }
- 
-  /* Tighten the spread on mobile */
-  /* The JS uses 130px per step – override via CSS custom property trick isn't
-     possible without JS change, so just reduce stage overflow clip */
-  .fan-stage   { overflow: visible; }
- 
-  .about-bio-full p { text-align: center; }
-  .vals        { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
-  .about-inner { padding-left: 16px; padding-right: 16px; }
-}
 
 /* ─── PROJECT PAGE STYLES ─── */
 :root { --orange: #f97316; }
@@ -1519,82 +1340,3 @@ body.light .view-all-section { background: #f0f0f0; }
 
 }
 
-/* ─── ABOUT SPLIT LAYOUT ─── */
-.about-split {
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 60px;
-  align-items: flex-start;
-  max-width: 1000px;
-  margin: 0 0 20px;
-}
-
-.about-photo-wrap {
-  width: 100%;
-}
-
-.about-photo {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 20px 20px 24px 24px; /* arched top */
-  display: block;
-  filter: grayscale(20%);
-}
-
-.about-text {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding-top: 12px;
-}
-
-.about-tagline {
-  font-size: clamp(1.2rem, 3.2vw, 2.2rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.008em;
-  font-family: 'Dancing Script', sans-serif;
-  color: var(--white);
-}
-
-.about-para {
-  font-size: 15px;
-  color: var(--gray);
-  line-height: 1.8;
-  max-width: 480px;
-  font-weight: 500;
-}
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 860px) {
-  .about-split {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .about-photo-wrap {
- width: 90%;
-    margin: 0 auto;
-  }
-  .about-text {
-    text-align: center;
-    align-items: center;
-    padding-top: 0;
-  }
-  .about-para {
-    text-align: center;
-  }
-  .about-tagline {
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-photo-wrap {
-    width: 90%;
-  }
-  .about-tagline {
-    font-size: 1.5rem;
-  }
-}
