@@ -221,18 +221,17 @@ nav{
   border-radius:100px;padding:8px 16px;margin-bottom:22px;
 }
 .hero-h1{
-  display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
        position:relative;
-
     font-family:'Clash Display',sans-serif;
 
     font-weight: 800;
 
     font-size: clamp(7.5rem, 8vw, 7.2rem);
 
-    line-height: 0.8;
+    line-height: 1.09;
     letter-spacing: .003em;
 
     text-align: center;
@@ -1128,7 +1127,7 @@ body.light .cbox {
 
 @media (max-width: 1200Px){
   .hero-h1{
-     font-size:clamp(5.1rem,11.5vw,8.5rem);
+     font-size:clamp(4.5rem,10.5vw,6.5rem);
   }
 }
 
@@ -1141,7 +1140,7 @@ body.light .cbox {
     font-size: 1.6rem;
   }
   .hero-h1{
-     font-size:clamp(3.1rem,8vw,8.5rem);
+     font-size:clamp(2.5rem,10vw,8.5rem);
   }
   /* .hero-p{
 
