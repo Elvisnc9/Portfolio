@@ -676,6 +676,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
     font-size:25px;
 
     font-weight:600;
+   font-family: 'Dancing Script',sans-serif;
 
     margin:0;
 
@@ -837,7 +838,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
 }
 .section-title{
 
-    font-family:"Manrope",sans-serif;
+    font-family:'Dancing Script',sans-serif;
 
     font-size:clamp(4rem,8vw,6rem);
 
@@ -1397,19 +1398,38 @@ body.light .cbox {
   overflow:hidden;
   white-space:nowrap;
   margin-bottom:20px;
+  padding: 20px 0;   /* room for items to float up/down */
 }
+
 .fm-track{
   display:inline-flex;
+  align-items: center;
   gap:60px;
   animation:fm-scroll 18s linear infinite;
 }
+
 .fm-track span{
+  display: inline-block;
   font-size:15px;
   font-weight:600;
   letter-spacing:.06em;
   text-transform:uppercase;
-  color:rgba(255,255,255,0.35);
+
+  background: linear-gradient(90deg, #555 0%, #fff 50%, #555 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: contrast(115%);
 }
+
+/* stagger vertical position per word — tweak to taste */
+.fm-track .fm-1{ transform: translateY(-14px); }
+.fm-track .fm-2{ transform: translateY(10px); }
+.fm-track .fm-3{ transform: translateY(-8px); }
+.fm-track .fm-4{ transform: translateY(16px); }
+.fm-track .fm-5{ transform: translateY(-12px); }
+.fm-track .fm-6{ transform: translateY(6px); }
+
 @keyframes fm-scroll{
   from{ transform:translateX(0); }
   to{ transform:translateX(-50%); }
