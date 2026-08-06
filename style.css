@@ -1522,8 +1522,8 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
 }
 .stat-number-h1{
   position:relative;
-  left:16px;
-  bottom:30px;             /* leaves room for the caption below it */
+  left:50px;
+  bottom:25%;             /* leaves room for the caption below it */
   font-family:"Dancing Script",sans-serif;
   font-weight:800;
   line-height:.8;
@@ -1559,6 +1559,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
   position:absolute;
   right:30px;
     font-size:20px;
+  bottom: 20px;
     color:#000000;
  margin:0;
  font-weight: 600;
