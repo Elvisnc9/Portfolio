@@ -636,6 +636,8 @@ class="stack-image stack-${index+1}"
 
 `).join('')
 
+
+
 }
 
 
@@ -651,10 +653,15 @@ class="stack-image stack-${index+1}"
 
 ''
 
+
+
 }
 
-
-
+'<a 
+href="${p.liveUrl}"
+target="_blank"
+class="project-button2"><span> View More Project </span> </a>'
+  
 </section>
 
 
