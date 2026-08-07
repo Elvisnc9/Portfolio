@@ -1674,7 +1674,7 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
  text-align: start;
 }
 .cf-heading{
-  font-size:clamp(2.5rem,5vw,3.6rem);
+  font-size:clamp(1.5rem,5vw,3.6rem);
   font-weight:800;
   line-height:1.05;
   letter-spacing:-0.02em;
