@@ -1929,35 +1929,13 @@ body.light .b-dots span:nth-child(1){background:#ff5f57}
 ═══════════════════════════════════════════ */
 
 /* Large desktop tweak */
-@media(min-width:1200px){
-  .hero{padding:100px 24px 60px}
-  .pcard-img-wrap{height:300px}
-}
 
-/* Medium – single stack tablet-ish */
-@media(max-width:900px){
-  .projects-grid{
-    grid-template-columns:1fr;
-    max-width:580px;
-  }
-
-  .stack-section{
-    grid-template-columns:1fr;
-    max-width:580px;
-  }
-  .sicons{grid-template-columns:repeat(4,1fr)}
-
-  
-
-  
-}
 
 /* Small mobile */
 @media(max-width:600px){
   body{padding:0}
   .nav{margin-left:10px; margin-right:16px}
   .hero{padding:60px 20px 36px}
-  .projects-grid{padding:0 16px 56px;gap:16px}
   .stack-section{padding:0 16px 56px}
   .footer-wrap{padding:32px 16px 24px}
   .section-header{padding:0 16px 22px}
@@ -1988,7 +1966,6 @@ body.light .b-dots span:nth-child(1){background:#ff5f57}
     overflow:hidden;
 
     padding:80px 6%;
-
 }
 
 
@@ -2009,7 +1986,6 @@ body.light .b-dots span:nth-child(1){background:#ff5f57}
 
     justify-content:space-between;
 
-    gap:40px;
 
 }
 
@@ -2018,7 +1994,7 @@ body.light .b-dots span:nth-child(1){background:#ff5f57}
 
 .project-info {
 
-    flex:1;
+    flex:2.5;
 
 }
 
@@ -2220,8 +2196,7 @@ body.light .b-dots span:nth-child(1){background:#ff5f57}
     line-height:.9;
 
     letter-spacing:-0.05em;
-
-    margin:0;
+   margin-bottom:20%;
 
     text-transform:uppercase;
 
@@ -2242,7 +2217,8 @@ body.light .b-dots span:nth-child(1){background:#ff5f57}
 .screenshots-wrapper {
 
 
-    margin-top:150px;
+    margin-top:15%;
+
 
     width:100%;
 
