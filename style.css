@@ -1655,6 +1655,125 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
 
 /* ─── CONTACT ─── */
 /* ─── CONTACT ─── */
+
+.contact-inner{
+  max-width:100%;
+  margin:0 auto;
+}
+
+.cf-wrap{
+  display:grid;
+  grid-template-columns:1fr 1.45fr;
+  gap:60px;
+  margin-top: 10%;
+}
+
+
+.cf-left{
+ padding-left: 10px;
+ text-align: start;
+}
+.cf-heading{
+  font-size:clamp(2.5rem,5vw,3.6rem);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-0.02em;
+  color:var(--white);
+  margin-bottom:24px;
+  font-family:'Clash Display',sans-serif;
+}
+
+.cf-desc{
+  font-size:25px;
+  color:#000;
+  line-height:1.6;
+  font-family: 'Dancing script', sans-serif;
+  
+}
+
+.cf-right{
+  display:flex;
+  flex-direction:column;
+}
+
+.cf-row{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  align-items:start;
+  gap:20px;
+  padding:22px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.cf-row label{
+  font-size:15px;
+  text-align: start;
+  font-weight:700;
+  letter-spacing:.005em;
+  text-transform:uppercase;
+  color:black;
+  padding-top:6px;
+}
+
+.cf-row input,
+.cf-row select,
+.cf-row textarea{
+  width:100%;
+  background:none;
+  border:none;
+  outline:none;
+  font-family:'Clash Display',sans-serif;
+  font-size:17px;
+  color:var(--white);
+  padding:4px 0;
+  resize:none;
+}
+
+.cf-row input::placeholder,
+.cf-row textarea::placeholder{
+  color:var(--gray2);
+}
+
+.cf-row select{
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right center;
+}
+
+.cf-submit-row{
+  border-bottom:none;
+  padding-top:30px;
+}
+
+.cf-submit{
+  background:var(--white);
+  color:var(--bg);
+  border:none;
+  border-radius:8px;
+  padding:14px 24px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:opacity .2s;
+  width:fit-content;
+}
+.cf-submit:hover{ opacity:.85; }
+
+@media (max-width:768px){
+  .cf-wrap{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+  .cf-row{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+}
 .contact-inner {
   max-width: 1060px;
   margin: 0 auto;

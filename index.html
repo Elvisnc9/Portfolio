@@ -22,7 +22,7 @@
     <button class="nav-btn active" onclick="showPage('work',this)">Work</button>
     <button class="nav-btn" onclick="showPage('about',this)">About</button>
     <button class="nav-btn" onclick="showPage('notes',this)">Notes</button>
-    <button class="nav-btn" onclick="goToContact(this)">Contact</button>
+    <button class="nav-btn" onclick="showPage('contact',this)">Contact</button>
     <div class="nav-divider"></div>
   <button class="nav-theme" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
   </div>
@@ -250,7 +250,7 @@
   </div>
 <!-- ══════ CONTACT PAGE ══════ -->
 
- <section id="contact" class="contact-inner">
+ <section  class="contact-inner">
   <h1 class="sec-title reveal-up">Contact.</h1>
   <div class="cbox reveal-card">
     <div class="cbox-status">
@@ -754,6 +754,62 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<div id="contact" class="page">
+<section class="contact-inner">
+  <div class="cf-wrap">
+
+    <div class="cf-left">
+    
+      <h1 class="cf-heading reveal-up">The inquiry</h1>
+      <p class="cf-desc reveal-up">Tell us where you are now and where you want the work to go.</p>
+    </div>
+
+    <form class="cf-right reveal-up" onsubmit="return false;">
+
+      <div class="cf-row">
+        <label>Name</label>
+        <input type="text" placeholder="Your name">
+      </div>
+
+      <div class="cf-row">
+        <label>Email</label>
+        <input type="email" placeholder="name@example.com">
+      </div>
+
+      <div class="cf-row">
+        <label>Company</label>
+        <input type="text" placeholder="Studio, company, or venture">
+      </div>
+
+      <div class="cf-row">
+        <label>Project Type</label>
+               <input type="text" placeholder="Mobile app, SASS, Website, AI Integration">
+
+      </div>
+
+      <div class="cf-row">
+        <label>Budget</label>
+               <input type="text" placeholder="Indicate budget Range">
+
+      </div>
+
+      <div class="cf-row">
+        <label>Message</label>
+        <textarea rows="3" placeholder="What are you building, and what should it become?"></textarea>
+      </div>
+
+      <div class="cf-row cf-submit-row">
+        <label></label>
+        <button type="submit" class="cf-submit">Send Inquiry</button>
+      </div>
+
+    </form>
+
+  </div>
+</section>
 </div>
 
 <!-- ══════ PROJECT PAGE ══════ -->
