@@ -94,8 +94,8 @@ nav{
   border:1px solid var(--border);
   border-radius:100px;
   padding:7px 20px;
-  gap:4px;
-  width:100%;
+  gap:1;
+  width:90%;
   max-width:600px;      /* tweak this — bigger = wider pill */
   justify-content:space-between;
    backdrop-filter:blur(15px);
@@ -1773,6 +1773,9 @@ body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0
     grid-template-columns:1fr;
     gap:8px;
   }
+  .cf-heading{
+  font-size:clamp(2.5rem,5vw,3.6rem);
+}
 }
 .contact-inner {
   max-width: 1060px;
