@@ -1225,11 +1225,10 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   z-index: 10;
   font-family:'Manrope',sans-serif;
   transition: background 0.3s, border-color 0.3s, color 0.3s;}
-.more-badge-dot {
-  width: 12px;
-  height: 12px;
+.more-badge img {
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: #0bfc63;
   flex-shrink: 0;
 
 }
