@@ -14,7 +14,49 @@
 </head>
 <body class="light">
 
-  <div id="intro-veil"></div>   
+  <!-- ═══════════════════════════════════════
+     INTRO VEIL
+═══════════════════════════════════════ -->
+
+<div class="intro-veil">
+
+    <div class="intro-frame">
+
+        <!-- Vertical lines -->
+        <div class="intro-v-line intro-v1"></div>
+        <div class="intro-v-line intro-v2"></div>
+        <div class="intro-v-line intro-v3"></div>
+        <div class="intro-v-line intro-v4"></div>
+
+        <!-- Horizontal lines -->
+        <div class="intro-h-line intro-h1"></div>
+        <div class="intro-h-line intro-h2"></div>
+
+        <!-- Circle -->
+        <div class="intro-circle"></div>
+
+    </div>
+
+    <div class="intro-brand">
+
+    <span>E</span>
+    <span>L</span>
+    <span>V</span>
+    <span>I</span>
+    <span>S</span>
+</div>
+
+<div class="intro-subtitle">
+    SOFTWARE DEVELOPER
+</div>
+
+<!-- LOADER -->
+<div class="intro-loader">
+    <div class="loader-track">
+        <div class="loader-progress"></div>
+    </div>
+</div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -894,6 +936,7 @@
     return off;
   }
  
+  
   function render() {
     slides.forEach((slide, i) => {
       const off    = circularOffset(i);

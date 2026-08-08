@@ -316,6 +316,21 @@ function runIntro() {
   }, 700);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const veil = document.querySelector(".intro-veil");
+
+    if (!veil) return;
+
+    // Wait for the intro animation to finish
+    setTimeout(() => {
+
+        veil.classList.add("hide");
+
+    }, 3500);
+
+});
+
 /* ─── SHOW PROJECT (render then navigate) ─── */
 let pjCarIndex = 0;
 
