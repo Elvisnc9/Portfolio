@@ -934,38 +934,55 @@ CROWD.
       <p class="cf-desc reveal-up">Tell us where you are now and where you want the work to go.</p>
     </div>
 
-    <form class="cf-right reveal-up" id="contact-form" onsubmit="return false;">
+    <form class="cf-right reveal-up" id="contact-form" novalidate>
 
       <div class="cf-row">
+        <div class="cf-row-inner">
         <label>Name</label>
-        <input type="text" name="name" placeholder="Your name">
+        <input type="text" name="name" placeholder="Your name" id="name" required>
+        </div>
+        <small class="field-error"></small>
       </div>
 
       <div class="cf-row">
+                <div class="cf-row-inner">
         <label>Email</label>
-        <input type="email" name="email" placeholder="name@example.com">
+        <input type="email" name="email" placeholder="name@example.com" id="email" required>
+        </div>
+        <small class="field-error"></small>
       </div>
 
       <div class="cf-row">
+                <div class="cf-row-inner">
         <label>Company</label>
-        <input type="text" name="company" placeholder="Studio, company, or venture">
+        <input type="text" name="company" placeholder="Studio, company, or venture" id="company" required>
+       </div>
+        <small class="field-error"></small>
       </div>
 
       <div class="cf-row">
+                <div class="cf-row-inner">
         <label>Project Type</label>
-               <input type="text" name="project_type" placeholder="Mobile app, SASS, Website, AI Integration">
+               <input type="text" name="project_type" placeholder="Mobile app, SASS, Website, AI Integration" id="project_type" required>
+              </div> 
+               <small class="field-error"></small>
 
       </div>
 
       <div class="cf-row">
-        <label>Budget</label>
-               <input type="text" name="budget" placeholder="Indicate budget Range">
-
+                <div class="cf-row-inner">
+        <label>Budget <span> ºOptional</span></label>
+               <input type="text" name="budget" placeholder="Indicate budget Range" id="budget">
+               </div>
+               <small class="field-error"></small>
       </div>
 
       <div class="cf-row">
+                <div class="cf-row-inner">
         <label>Message</label>
-        <textarea rows="3" name="message" placeholder="What are you building, and what should it become?"></textarea>
+        <textarea rows="5" name="message" placeholder="What are you building, and what should it become?" required id="message"></textarea>
+       </div>
+        <small class="field-error"></small>
       </div>
 
       <div class="cf-row cf-submit-row">
@@ -996,8 +1013,8 @@ CROWD.
   <h2 class="footer-lets-talk">LET'S TALK</h2>
 
   <div class="footer-pills">
+     <a class="fpill" href="https://github.com/Elvisnc9" target="_blank">GitHub</a>
     <a class="fpill" href="https://instagram.com/elvisngwu" target="_blank">Instagram</a>
-    <a class="fpill" href="https://github.com/Elvisnc9" target="_blank">GitHub</a>
     <a class="fpill" href="https://x.com/ElvisDnc" target="_blank">Twitter</a>
        <a class="fpill" href="https://t.me/Elviznc" target="_blank">Telegram</a>
 
@@ -1009,106 +1026,124 @@ CROWD.
     <span>Developed by <strong>Elvis Nc</strong></span>
   </div>
 </footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 <script src="Script.js"></script>
 <script>
-(function () {
-  const track  = document.getElementById('csTrack');
-  
-  if (!track) return;
- 
-  const slides = Array.from(track.querySelectorAll('.cs-slide'));
-  const total  = slides.length;
- 
-  /* Card dimensions — must match CSS */
-  const CARD_W  = 240;   /* px, card width  */
-  const STEP    = 168;   /* px between card centers (tight overlap) */
- 
-  /* Start at the middle card */
-  let current = Math.floor(total / 2);
- 
-  /* ── Wrap offset to shortest circular path ── */
-  function circularOffset(i) {
-    let off = i - current;
-    /* wrap into range -(total/2) … +(total/2) so loop is seamless */
-    if (off >  total / 2) off -= total;
-    if (off < -total / 2) off += total;
-    return off;
-  }
- 
-  
-  function render() {
-    slides.forEach((slide, i) => {
-      const off    = circularOffset(i);
-      const abs    = Math.abs(off);
- 
-      const tx     = off * STEP;
-      const scale  = abs === 0 ? 1 : abs === 1 ? 0.82 : 0.68;
-      const bright = abs === 0 ? 1 : abs === 1 ? 0.48 : 0.28;
-      const sat    = abs === 0 ? 1 : 0;
-      const z      = total - abs;
- 
-      slide.style.transform = `translateX(${tx}px) scale(${scale})`;
-      slide.style.zIndex    = z;
-
-      slide.style.filter    = `brightness(${bright}) saturate(${sat})`;
-      slide.style.opacity   = abs > 2 ? 0 : 1;
-      slide.style.cursor    = abs === 0 ? 'default' : 'pointer';
-      slide.classList.toggle('cs-active', abs === 0);
-    });
-  }
- 
-  function go(idx) {
-    /* wrap infinitely */
-    current = ((idx % total) + total) % total;
-    render();
-  }
- 
-  /* Click a side card to centre it */
-  slides.forEach((slide, i) => {
-    slide.addEventListener('click', () => {
-      const off = circularOffset(i);
-      if (off !== 0) go(current + off);
-    });
+  emailjs.init({
+    publicKey: "c26k3i5tjilPkM4iH"
   });
- 
-  /* Drag / swipe */
-  let dragStart = null;
-  track.addEventListener('mousedown',  e => { dragStart = e.clientX; e.preventDefault(); });
-  track.addEventListener('touchstart', e => { dragStart = e.touches[0].clientX; }, { passive: true });
- 
-  const onEnd = endX => {
-    if (dragStart === null) return;
-    const diff = dragStart - endX;
-    if (Math.abs(diff) > 36) go(current + (diff > 0 ? 1 : -1));
-    dragStart = null;
-  };
- 
-  track.addEventListener('mouseup',    e => onEnd(e.clientX));
-  track.addEventListener('mouseleave', ()  => { dragStart = null; });
-  track.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientX));
- 
-  /* Keyboard */
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('about')?.classList.contains('active')) return;
-    if (e.key === 'ArrowLeft')  go(current - 1);
-    if (e.key === 'ArrowRight') go(current + 1);
-  });
-
-  window.csNext = () => go(current + 1);
- 
-  render();
-})();
 
 
 const form = document.getElementById("contact-form");
 
+
+const fields = {
+    name: {
+        input: document.getElementById("name"),
+        message: "Please enter your name."
+    },
+
+    email: {
+        input: document.getElementById("email"),
+        message: "Please enter a valid email address."
+    },
+
+    company: {
+        input: document.getElementById("company"),
+        message: "Please enter your company name."
+    },
+
+    project_type: {
+        input: document.getElementById("project_type"),
+        message: "Please tell me what you're building."
+    },
+
+ 
+    message: {
+        input: document.getElementById("message"),
+        message: "Please tell me a little about your project."
+    }
+};
+
+function validateField(field) {
+    const input = field.input;
+const error = input.closest(".cf-row").querySelector(".field-error");
+    if (!error) return true;
+
+    let message = "";
+
+    // Empty field
+    if (input.value.trim() === "") {
+        message = field.message;
+    }
+
+    // Email validation
+    if (
+        input.type === "email" &&
+        input.value.trim() !== ""
+    ) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(input.value.trim())) {
+            message = "Please enter a valid email address.";
+        }
+    }
+
+    if (message) {
+        error.textContent = message;
+        error.classList.add("show");
+
+        input.classList.add("input-error");
+
+        return false;
+    }
+
+    error.textContent = "";
+    error.classList.remove("show");
+
+    input.classList.remove("input-error");
+
+    return true;
+}
+
+Object.values(fields).forEach(field => {
+    field.input.addEventListener("input", () => {
+        validateField(field);
+    });
+
+    field.input.addEventListener("blur", () => {
+        validateField(field);
+    });
+});
+
 form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    let formIsValid = true;
+
+    Object.values(fields).forEach(field => {
+        const valid = validateField(field);
+
+        if (!valid) {
+            formIsValid = false;
+        }
+    });
+
+    if (!formIsValid) {
+        return;
+    }
 
     const button = form.querySelector("button[type='submit']");
 
     button.disabled = true;
     button.textContent = "SENDING...";
+
+  
 
     emailjs.sendForm(
         "service_7xl525y",
@@ -1124,7 +1159,8 @@ form.addEventListener("submit", function (e) {
             position: "right",
             close: true,
             style: {
-                background: "#111",
+                background: "#fff",
+                color: "#000",
                 borderRadius: "4px",
                 boxShadow: "0 10px 30px rgba(0,0,0,0.15)"
             }
@@ -1144,7 +1180,8 @@ form.addEventListener("submit", function (e) {
             position: "right",
             close: true,
             style: {
-                background: "#111",
+               background: "#fff",
+                color: "#000",
                 borderRadius: "4px",
                 boxShadow: "0 10px 30px rgba(0,0,0,0.15)"
             }
@@ -1161,16 +1198,7 @@ form.addEventListener("submit", function (e) {
 </script>
 
 
-<script
-  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-<script>
-  emailjs.init({
-    publicKey: "c26k3i5tjilPkM4iH"
-  });
-</script>
 
 </body>
 </html>

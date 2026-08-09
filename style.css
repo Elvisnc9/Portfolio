@@ -2558,12 +2558,20 @@ font-size:clamp(5rem,12vw,12rem);
 }
 
 .cf-row{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:22px 0;
+  border-bottom:none;   /* remove border from here */
+}
+
+.cf-row-inner{
   display:grid;
   grid-template-columns:150px 1fr;
   align-items:start;
   gap:20px;
-  padding:22px 0;
-  border-bottom:1px solid var(--border);
+  padding-bottom:22px;
+  border-bottom:1px solid var(--border);   /* border moved here */
 }
 
 .cf-row label{
@@ -2574,6 +2582,14 @@ font-size:clamp(5rem,12vw,12rem);
   text-transform:uppercase;
   color:black;
   padding-top:6px;
+}
+
+.cf-row span{
+  text-align: left;
+  color: #666;
+  padding-left:4px ;
+  text-transform: none;
+  font-size: 10px;
 }
 
 .cf-row input,
@@ -2614,8 +2630,8 @@ font-size:clamp(5rem,12vw,12rem);
   color:var(--bg);
   border:none;
   border-radius:8px;
-  padding:14px 24px;
-  font-size:13px;
+  padding:18px 28px;
+  font-size:15px;
   font-weight:700;
   letter-spacing:.04em;
   text-transform:uppercase;
@@ -2633,6 +2649,13 @@ font-size:clamp(5rem,12vw,12rem);
   .cf-row{
     grid-template-columns:1fr;
     gap:8px;
+  }
+   .cf-row-inner{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .field-error{
+    padding-left:0;   /* no label column to align under anymore */
   }
   .cf-heading{
   font-size:clamp(2.5rem,5vw,3.6rem);
@@ -2773,6 +2796,35 @@ body.light .cbox {
   padding: 20px 0;   /* room for items to float up/down */
 }
 
+
+.field-error {
+    display: relative;
+    margin-top: 6px;
+    width: 500px;
+    text-align: left;
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #f42727;
+
+    opacity: 0;
+    transform: translateY(-4px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.field-error.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.input-error {
+    border-color: #d00000 !important;
+}
 .fm-track{
   display:inline-flex;
   align-items: center;
