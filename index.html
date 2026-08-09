@@ -394,7 +394,7 @@
     </div>
     <h2>Let's Work Together</h2>
     <p>I'm currently open to freelance contracts, full-time roles, and interesting collaborations. If you have a project in mind or just want to talk, I'd love to hear from you.</p>
-    <a class="btn-primary cbox-btn" href="mailto:elvisngwu18@gmail.com">
+    <a class="btn-primary cbox-btn" href="mailto:elvescorps@outlook.com">
       Get in Touch 
     </a>
   </div>
@@ -930,38 +930,38 @@ CROWD.
       <p class="cf-desc reveal-up">Tell us where you are now and where you want the work to go.</p>
     </div>
 
-    <form class="cf-right reveal-up" onsubmit="return false;">
+    <form class="cf-right reveal-up" id="contact-form" onsubmit="return false;">
 
       <div class="cf-row">
         <label>Name</label>
-        <input type="text" placeholder="Your name">
+        <input type="text" name="name" placeholder="Your name">
       </div>
 
       <div class="cf-row">
         <label>Email</label>
-        <input type="email" placeholder="name@example.com">
+        <input type="email" name="email" placeholder="name@example.com">
       </div>
 
       <div class="cf-row">
         <label>Company</label>
-        <input type="text" placeholder="Studio, company, or venture">
+        <input type="text" name="company" placeholder="Studio, company, or venture">
       </div>
 
       <div class="cf-row">
         <label>Project Type</label>
-               <input type="text" placeholder="Mobile app, SASS, Website, AI Integration">
+               <input type="text" name="project_type" placeholder="Mobile app, SASS, Website, AI Integration">
 
       </div>
 
       <div class="cf-row">
         <label>Budget</label>
-               <input type="text" placeholder="Indicate budget Range">
+               <input type="text" name="budget" placeholder="Indicate budget Range">
 
       </div>
 
       <div class="cf-row">
         <label>Message</label>
-        <textarea rows="3" placeholder="What are you building, and what should it become?"></textarea>
+        <textarea rows="3" name="message" placeholder="What are you building, and what should it become?"></textarea>
       </div>
 
       <div class="cf-row cf-submit-row">
@@ -997,7 +997,7 @@ CROWD.
     <a class="fpill" href="https://x.com/ElvisDnc" target="_blank">Twitter</a>
        <a class="fpill" href="https://t.me/Elviznc" target="_blank">Telegram</a>
 
-    <a class="fpill fpill-outline" href="mailto:elvisngwu18@gmail.com">Contact Me</a>
+    <a class="fpill fpill-outline" href="mailto:elvescorps@outlook.com">Contact Me</a>
   </div>
 
   <div class="footer-bottom-new">
@@ -1009,6 +1009,7 @@ CROWD.
 <script>
 (function () {
   const track  = document.getElementById('csTrack');
+  
   if (!track) return;
  
   const slides = Array.from(track.querySelectorAll('.cs-slide'));
@@ -1044,6 +1045,7 @@ CROWD.
  
       slide.style.transform = `translateX(${tx}px) scale(${scale})`;
       slide.style.zIndex    = z;
+
       slide.style.filter    = `brightness(${bright}) saturate(${sat})`;
       slide.style.opacity   = abs > 2 ? 0 : 1;
       slide.style.cursor    = abs === 0 ? 'default' : 'pointer';
@@ -1092,6 +1094,46 @@ CROWD.
  
   render();
 })();
+
+
+const form = document.getElementById("contact-form");
+
+form.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    emailjs.sendForm(
+        "service_7xl525y",
+        "template_5spnapg",
+        this
+    )
+    .then(() => {
+
+        alert("Message sent successfully!");
+
+        form.reset();
+
+    })
+    .catch((error) => {
+
+        console.error("FAILED...", error);
+
+        alert("Something went wrong. Please try again.");
+
+    });
+
+});
+</script>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+
+<script>
+  emailjs.init({
+    publicKey: "c26k3i5tjilPkM4iH"
+  });
 </script>
 
 </body>
