@@ -1171,10 +1171,34 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 .pcard-cover {
   width: 100%;
   height: 100%;
-  object-fit:contain;
-  scale: 1 ;
+  object-fit:cover;
+  scale: 1.0;
   display: block;
   transition: transform .5s var(--ease-out);
+}
+
+.pcard-shots{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  width:100%;
+  height:100%;
+  padding:24px;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+.pcard-shot{
+  flex:1 1 0;      /* each image claims equal share of available width */
+  min-width:0;     /* lets flex actually shrink them instead of overflowing */
+  height:100%;
+  object-fit:contain;   /* scales proportionally, never distorts or overflows */
+  transition:transform .5s var(--ease-out);
+}
+
+.pcard-new:hover .pcard-shot{
+  transform:scale(1.08);   /* smaller hover scale than before — 1.2 on 3 images side by side will collide/overflow */
 }
 
 /* ─── ALTERNATE LEFT/RIGHT PROJECT CARDS ─── */
@@ -3448,6 +3472,7 @@ transform:translateX(180px) rotate(10deg);
     height: 100%;
     object-fit: cover;
     display: block;
+   
   }
 
   .pcard-right{ padding: 28px 22px 32px; }
