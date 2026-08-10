@@ -994,13 +994,31 @@ CROWD.
   </div>
 </footer>
 
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
+
+
+
 <script src="Script.js"></script>
 <script>
+
+
+
+const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+
+  
   emailjs.init({
     publicKey: "c26k3i5tjilPkM4iH"
   });
