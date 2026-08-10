@@ -1055,7 +1055,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 40%);
     .hero-heading {
         margin-top: 100px;
 
-        font-size: clamp(4.25rem, 11vw, 7rem);
+        font-size: clamp(4.05rem, 11vw, 7rem);
 
         line-height: .9;
 
