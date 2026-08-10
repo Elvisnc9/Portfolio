@@ -536,6 +536,7 @@ nav{
  
 }
 .nav-inner{
+    mix-blend-mode: difference;
   display:flex;align-items:center;gap:8px;
   border:1px solid var(--border);
   border-radius:100px;
@@ -549,7 +550,9 @@ nav{
 }
 .nav-btn{
   background:none;border:none;cursor:poro;
-  color:var(--white);
+    mix-blend-mode: difference;
+
+  color:#000;
   font-family:'Manrope',sans-serif;
   font-size:20px;font-weight:500;
   padding:20px 28px;border-radius:100px;
@@ -3515,12 +3518,13 @@ transform:translateX(180px) rotate(10deg);
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
   border: none;
   font-size: 25px;
   cursor: pointer;
   z-index: 500;
+  mix-blend-mode: difference;
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
@@ -3531,7 +3535,7 @@ transform:translateX(180px) rotate(10deg);
 #back-to-top.show{
   opacity: 1;
   visibility: visible;
-  transform: translateY(-12px);
+  transform: translateY(0);
 }
 
 
