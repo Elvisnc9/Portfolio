@@ -11,6 +11,9 @@ link.href = 'style.css'; // Path to your CSS file
 
 // Append the link element to the document head
 document.head.appendChild(link);
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
 
 
 /* ─── HELPERS ─── */
@@ -322,14 +325,23 @@ function runIntro() {
 document.addEventListener("DOMContentLoaded", () => {
 
     const veil = document.querySelector(".intro-veil");
-
     if (!veil) return;
 
-    // Wait for the intro animation to finish
-    setTimeout(() => {
+    // lock scroll immediately while veil is visible
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
+    setTimeout(() => {
         veil.classList.add("hide");
 
+        // force scroll to top in case anything shifted during load
+        window.scrollTo(0, 0);
+
+        // unlock scroll once the veil has visually faded out
+        setTimeout(() => {
+            document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
+        }, 800); // matches your .intro-veil transition duration
     }, 3500);
 
 });
