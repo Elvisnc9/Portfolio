@@ -601,13 +601,13 @@ nav{
   position: fixed;
   bottom: 32px;
   right: 32px;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: #fff;
   color: #000;
   border: none;
-  font-size: 25px;
+  font-size: 30px;
   cursor: pointer;
   z-index: 500;
   mix-blend-mode: difference;
