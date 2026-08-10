@@ -601,8 +601,8 @@ nav{
   position: fixed;
   bottom: 32px;
   right: 32px;
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: #fff;
   color: #000;
@@ -627,8 +627,8 @@ nav{
 
 @media (max-width:1024px) {
     #back-to-top{
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     font-size: 30px;
   }
 
