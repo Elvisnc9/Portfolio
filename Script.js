@@ -449,7 +449,7 @@ backToTop.addEventListener('click', () => {
 window.addEventListener('scroll', () => {
   const activePage = document.querySelector('.page.active');
   const isEligiblePage = activePage && (activePage.id === 'work' || activePage.id === 'about');
-  const scrolledEnough = window.scrollY > window.innerHeight* 0.3;
+  const scrolledEnough = window.scrollY > window.innerHeight* 0.25;
 
   backToTop.classList.toggle('show', isEligiblePage && scrolledEnough);
 }, { passive: true });
