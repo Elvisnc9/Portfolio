@@ -2012,11 +2012,11 @@ font-size:clamp(5rem,12vw,12rem);
 
 .testimonial-section{
 
-    max-width:1400px;
+    max-width:97%;
 
-    margin:100px auto;
+    margin-top:100px ;
 
-    padding:0 20px;
+   
 
 }
 
@@ -2045,6 +2045,7 @@ font-size:clamp(5rem,12vw,12rem);
 .testimonial-grid{
 
     display:grid;
+    
 
     grid-template-columns:repeat(3,1fr);
 
