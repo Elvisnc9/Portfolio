@@ -840,18 +840,18 @@ mask-image: linear-gradient(to top, transparent 0%, #000 35%);
 }
 
 .label-2{
-    top:45px;
-    right:300px;
+    top:50px;
+    right:35%;
 }
 
 .label-3{
-    top:55px;
-    right:20px;
+    top:50px;
+    right:10%;
 }
 
 .label-4{
-    top:40px;
-    left:450px;
+    top:50px;
+    left:30%;
 }
 
 
