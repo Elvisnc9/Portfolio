@@ -536,7 +536,7 @@ nav{
  
 }
 .nav-inner{
-    mix-blend-mode: difference;
+  position: relative;
   display:flex;align-items:center;gap:8px;
   border:1px solid var(--border);
   border-radius:100px;
@@ -547,20 +547,27 @@ nav{
   justify-content:space-between;
    backdrop-filter:blur(15px);
   -webkit-backdrop-filter:blur(15px);
+  isolation: isolate;
+  overflow: hidden;
 }
+
+
 .nav-btn{
-  background:none;border:none;cursor:poro;
+  background:none;
+  border:none;
+  cursor:poro;
     mix-blend-mode: difference;
 
-  color:#000;
+  color:#5f5c5c;
   font-family:'Manrope',sans-serif;
   font-size:20px;font-weight:500;
   padding:20px 28px;border-radius:100px;
   transition:color 0.2s var(--ease-out),background 0.2s var(--ease-out);
   white-space:nowrap;
 }
-.nav-btn:hover{color:var(--white)}
-.nav-btn.active{background:var(--white);color:#000;font-weight:600}
+.nav-btn:hover{color:#fff}
+.nav-btn.active{
+  background:#fff;color:#000; mix-blend-mode: normal; font-weight:600}
 .nav-divider{width:1px;height:18px;background:var(--border);margin:0 3px;flex-shrink:0}
 .nav-theme{
   background:none;border:none;cursor:poro;
