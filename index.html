@@ -1010,14 +1010,6 @@ CROWD.
 
 
 
-const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-
 
   emailjs.init({
     publicKey: "c26k3i5tjilPkM4iH"
@@ -1180,6 +1172,16 @@ form.addEventListener("submit", function (e) {
 
     });
 });
+
+const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+
+
 
 
 </script>

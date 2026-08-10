@@ -2681,6 +2681,22 @@ font-size:clamp(5rem,12vw,12rem);
   font-size: 10px;
 }
 
+.cf-row input::placeholder,
+.cf-row textarea::placeholder {
+  color: var(--gray2);
+  font-size: 12px;        /* or normal */
+  font-weight: 400;          /* lighter than typed text */
+  letter-spacing: 0.01em;
+  opacity: 1;                /* Firefox dims placeholders by default; this overrides that */
+  transition: color 0.2s ease;
+}
+
+/* optional: shift placeholder color on focus, for a subtle "listening" effect */
+.cf-row input:focus::placeholder,
+.cf-row textarea:focus::placeholder {
+  color: #999;
+}
+
 .cf-row input,
 .cf-row select,
 .cf-row textarea{
