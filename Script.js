@@ -71,7 +71,11 @@ if (currentPage === nextPage) {
   setActiveNav(btn);
 
   const finishEnter = () => {
-    if (id === 'work') playHeroIntro();
+    if (id === 'work') {
+  startParallax();
+} else {
+  stopParallax();
+}
 
     if (id === 'about') {
       carouselPaused = false;
@@ -330,6 +334,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3500);
 
 });
+
+
+/* ─── HERO PARALLAX ─── */
+let parallaxActive = false;
+let parallaxRAF = null;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function updateParallax() {
+  if (!parallaxActive) return;
+
+  const heroSection = document.querySelector('#work .hero-dash');
+  if (!heroSection) { parallaxRAF = null; return; }
+
+  const rect = heroSection.getBoundingClientRect();
+
+  // only calculate while hero is at least partially in view
+  if (rect.bottom > 0 && rect.top < window.innerHeight) {
+    const scrollY = window.scrollY;
+
+    const grid   = document.querySelector('#work .hero-grid');
+    const circle = document.querySelector('#work .hero-circle');
+    const content = document.querySelector('#work .hero-c');
+
+    if (grid)    grid.style.transform    = `translateY(${scrollY * 0.15}px)`;
+    if (circle)  circle.style.transform  = `translateY(${scrollY * 0.35}px)`;
+    if (content) content.style.transform = `translateY(${scrollY * 0.5}px)`;
+  }
+
+  parallaxRAF = requestAnimationFrame(updateParallax);
+}
+
+function startParallax() {
+  if (prefersReducedMotion) return;
+  if (parallaxActive) return;
+  parallaxActive = true;
+  parallaxRAF = requestAnimationFrame(updateParallax);
+}
+
+function stopParallax() {
+  parallaxActive = false;
+  if (parallaxRAF) cancelAnimationFrame(parallaxRAF);
+  parallaxRAF = null;
+
+  // reset transforms so hero looks normal when returning to page
+  const grid   = document.querySelector('#work .hero-grid');
+  const circle = document.querySelector('#work .hero-circle');
+  const content = document.querySelector('#work .hero-c');
+  if (grid)    grid.style.transform    = '';
+  if (circle)  circle.style.transform  = '';
+  if (content) content.style.transform = '';
+}
 
 /* ─── SHOW PROJECT (render then navigate) ─── */
 let pjCarIndex = 0;

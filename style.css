@@ -609,6 +609,12 @@ mask-image: linear-gradient(to top, transparent 0%, #000 35%);
 /* needed so floaters position against it */
 
 
+.hero-grid,
+.hero-circle,
+.hero-c{
+  will-change: transform;
+}
+
 .hero-grid{
 
     position:absolute;
@@ -619,6 +625,14 @@ mask-image: linear-gradient(to top, transparent 0%, #000 35%);
 
     z-index:1;
 
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-grid,
+  .hero-circle,
+  .hero-c{
+    transform: none !important;
+  }
 }
 
 .v-line{
@@ -825,7 +839,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 35%);
 
     font-family:"Manrope",sans-serif;
 
-    font-size:clamp(8.5rem,13vw,15rem);
+    font-size:clamp(9.0rem,14vw,15rem);
 
     font-weight:800;
 
