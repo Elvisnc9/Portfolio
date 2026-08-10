@@ -625,7 +625,7 @@ nav{
 }
 
 
-@media (max-width:1024) {
+@media (max-width:1024px) {
     #back-to-top{
     width: 100px;
     height: 100px;
