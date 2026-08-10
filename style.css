@@ -892,16 +892,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 35%);
 
 
 @media (max-width:1024px){
-  #back-to-top{
-    width: 70px;
-    height: 70px;
-    font-size: 30px;
-  }
-  #back-to-top.show{
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(-12px);
-}
+
 
    .hero-dash {
         position: relative;
@@ -3546,6 +3537,24 @@ transform:translateX(180px) rotate(10deg);
 }
 
 
+@media (max-width:1024) {
+    #back-to-top{
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+  }
+
+  
+}
+
+@media (max-width:900) {
+  #back-to-top{
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+  }
+
+}
 @media (max-width: 600px) {
   nav {
     padding: 16px 12px;
@@ -3681,6 +3690,17 @@ transform:translateX(180px) rotate(10deg);
   .ngrid {
     grid-template-columns: 1fr;
   }
+
+    #back-to-top{
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+  }
+  #back-to-top.show{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-12px);
+}
 
   /* Values grid: 1 col */
   .vals {
