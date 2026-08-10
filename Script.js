@@ -74,6 +74,10 @@ if (currentPage === nextPage) {
   setActiveNav(btn);
 
   const finishEnter = () => {
+
+    if (id === 'contact') {
+  resetFormErrors();
+}
     if (id === 'work') {
   startParallax();
 } else {
@@ -87,6 +91,8 @@ if (currentPage === nextPage) {
       stopCarousel();
     }
 
+    
+    
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         kickReveal();

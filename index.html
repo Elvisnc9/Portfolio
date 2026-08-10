@@ -1098,6 +1098,8 @@ Object.values(fields).forEach(field => {
     });
 });
 
+
+
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -1120,7 +1122,7 @@ form.addEventListener("submit", function (e) {
     button.disabled = true;
     button.textContent = "SENDING...";
 
-  
+
 
     emailjs.sendForm(
         "service_7xl525y",
@@ -1172,6 +1174,20 @@ form.addEventListener("submit", function (e) {
 
     });
 });
+
+  function resetFormErrors() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.querySelectorAll('.field-error').forEach(err => {
+    err.textContent = '';
+    err.classList.remove('show');
+  });
+
+  form.querySelectorAll('.input-error').forEach(input => {
+    input.classList.remove('input-error');
+  });
+}
 
 const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
   function raf(time) {
