@@ -79,6 +79,7 @@ if (currentPage === nextPage) {
   resetFormErrors();
 }
     if (id === 'work') {
+       initStackingCards();
   startParallax();
 } else {
   stopParallax();
@@ -150,6 +151,33 @@ function goBack() {
   showPage('work', document.querySelectorAll('.nav-btn')[0], { scrollToTop: true });
 }
 
+
+
+function initStackingCards() {
+  const cards = document.querySelectorAll('#work .pcard-new');
+  if (!cards.length) return;
+
+  function updateStack() {
+    cards.forEach((card, i) => {
+      const next = cards[i + 1];
+      if (!next) return;
+
+      const cardTop = card.getBoundingClientRect().top;
+      const nextTop = next.getBoundingClientRect().top;
+      const distance = nextTop - cardTop; // shrinks toward 0 as next card overtakes
+
+      const overlap = Math.max(0, 1 - distance / 300); // 0 → not covered, 1 → fully covered
+      const scale = 1 - overlap * 0.05;
+      const dim = 1 - overlap * 0.15;
+
+      card.style.transform = `scale(${scale})`;
+      card.style.filter = `brightness(${dim})`;
+    });
+  }
+
+  window.addEventListener('scroll', updateStack, { passive: true });
+  updateStack();
+}
 
 /* ─── SCROLL REVEAL ─── */
 let revealObserver;
