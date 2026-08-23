@@ -42,7 +42,6 @@ html{
 html body{
   background:var(--bg);color:var(--white);
     font-family: 'Manrope', sans-serif;
-  overflow-x:hidden;
   line-height:1.6;
   padding:0;
   scroll-behavior:smooth;
@@ -54,7 +53,6 @@ html body{
 /* ─── PAGES ─── */
 .page{display:none;
   min-height:calc(100vh - 70px);
-  overflow-x: hidden;
   width:100%;
   padding-top:80px;
 }
@@ -633,6 +631,7 @@ nav{
     bottom: 120px; 
   }
 
+
   
 }
 
@@ -1206,9 +1205,29 @@ display:inline-block;
   100% { transform: translateY(0%);   opacity: 1; }
 }
 /* ─── SECTION HEADER ─── */
-.section-header{
+
+
+.projects-section{
+  position: relative;
+  margin-bottom: 0; /* establishes the containing block for the sticky title */
+}
+.section-header2{
+
+  position: sticky;
+  top: 10%;
+  z-index: 0;
   text-align:center;
   padding:0 24px 28px;
+  background: var(--bg);
+}
+
+
+.section-header{
+
+
+  text-align:center;
+  padding:0 24px 28px;
+  background: var(--bg);
 }
 .sec-title{
   font-size:clamp(3.5rem,6vw,5.0rem);
@@ -1233,11 +1252,16 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   gap: 24px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 10px 100px;
+  padding: 0 10px 50px;
+}
+
+.pcard-stack-item{
+  height: 480px;
 }
 
 .pcard-new {
-  position: relative;
+    position: sticky;
+  top: 30%;
   -webkit-tap-highlight-color: transparent;
   width: 98%;
   background: var(--bg);
@@ -1252,7 +1276,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
      box-shadow:
         0 10px 30px rgba(0,0,0,.04),
         0 25px 50px rgba(0,0,0,.06);
-  margin-bottom: 16px;
+  margin-bottom: 40px;
   transition: border-color .3s, transform .35s var(--ease-spring), box-shadow .3s;
 }
 
@@ -2295,6 +2319,12 @@ font-size:clamp(5rem,12vw,12rem);
     
 
 }
+
+  .pcard-new{
+
+    top: 18%;
+  
+  }
 }
 
 
@@ -3626,6 +3656,7 @@ transform:translateX(180px) rotate(10deg);
 
   .pcard-new{
     grid-template-columns: 1fr;
+    top: 20%;
     min-height: unset;
     margin-bottom: 0;
   }
