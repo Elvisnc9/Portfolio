@@ -1038,7 +1038,7 @@ nav{
         
         /* Give the hero an intentional height */
 
-        min-height: 95%;
+        min-height: 5%;
 
         padding: 0;
         margin: 0;
@@ -1053,7 +1053,7 @@ mask-image: linear-gradient(to top, transparent 10%, #000 20%);
     }
 
        .hero-heading {
-        margin-top: 35%;
+        margin-top: 45%;
 
         font-size: clamp(9.5rem, 12vw, 15rem);
 
