@@ -1515,10 +1515,11 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 }
 
 .pcard-pills {
- position: absolute;
+ position: relative;
+ display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  bottom:20px
+  margin-top: 15%;
 }
 .pcard-pill {
   font-family: 'Manrope', sans-serif;
