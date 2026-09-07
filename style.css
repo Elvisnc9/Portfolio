@@ -1789,6 +1789,12 @@ font-size:clamp(5rem,12vw,12rem);
 .hero-title span{
 
     display:block;
+    text-align: center;
+  text-transform: uppercase;
+  font-family: "Manrope", sans-serif;
+  color: #9aa09c;
+  font-weight: 200;
+  line-height: 1.2;
 
     background: linear-gradient(
         90deg,
@@ -1801,7 +1807,7 @@ font-size:clamp(5rem,12vw,12rem);
 
     -webkit-background-clip:text;
     background-clip:text;
-    color:transparent;
+
 
     filter: contrast(115%);
 }
@@ -2416,7 +2422,7 @@ font-size:clamp(5rem,12vw,12rem);
 
 .hero-title{
 
-    font-size:clamp(3.3rem,8vw,4.8rem);
+    font-size:clamp(3.9rem,8vw,4.8rem);
 
     line-height:.9;
 
