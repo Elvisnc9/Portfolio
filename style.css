@@ -1099,8 +1099,8 @@ mask-image: linear-gradient(to top, transparent 10%, #000 20%);
         margin-bottom: 0;
 
         overflow: hidden;
-        -webkit-mask-image: linear-gradient(to top, transparent 40%, #000 40%);
-mask-image: linear-gradient(to top, transparent 5%, #000 30%);
+        -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 10%);
+mask-image: linear-gradient(to top, transparent 2%, #000 30%);
          
   
 
