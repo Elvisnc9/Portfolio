@@ -14,6 +14,8 @@
   href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
 />
  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js" type="module"></script>
+ <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
 </head>
 <body class="light">
@@ -1267,13 +1269,17 @@ form.addEventListener("submit", function (e) {
   });
 }
 
-const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+gsap.registerPlugin(ScrollTrigger);
 
+const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+
+lenis.on('scroll', ScrollTrigger.update);
+
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+
+gsap.ticker.lagSmoothing(0);
 
 
 

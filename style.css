@@ -681,6 +681,16 @@ nav{
     pointer-events:none;
 
     z-index:1;
+      box-shadow:
+
+        0 25px 38px rgba(0,0,0,.03),
+
+        0 25px 40px rgba(0,0,0,.05);
+   
+
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+  mask-image: linear-gradient(to top, transparent 0%, #000 40%);
+
 
 }
 
@@ -823,22 +833,22 @@ nav{
 /* ─── LABEL POSITIONS ─── */
 
 .label-1{
-    top:50px;
+    top:45%;
     left:60px;
 }
 
 .label-2{
-    top:50px;
+    top:25%;
     right:35%;
 }
 
 .label-3{
-    top:50px;
+    top:45%;
     right:10%;
 }
 
 .label-4{
-    top:50px;
+    top:25%;
     left:30%;
 }
 
@@ -851,7 +861,7 @@ nav{
   inset: 0;
   z-index: 5;
   margin-top: 10%;
-  margin-bottom: 15%;
+  margin-bottom: 8%;
 
   display: flex;
   flex-direction: column;
@@ -860,16 +870,7 @@ nav{
   text-align: center;
 
   will-change: transform;
-     box-shadow:
-
-        0 25px 38px rgba(0,0,0,.03),
-
-        0 25px 40px rgba(0,0,0,.05);
    
-
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
-  mask-image: linear-gradient(to top, transparent 0%, #000 45%);
-
 
 }
 
@@ -1034,24 +1035,25 @@ nav{
         position: relative;
 
         width: 100%;
-
+        
         /* Give the hero an intentional height */
-        height: 100vh;
-        min-height: 0;
+
+        min-height: 95%;
 
         padding: 0;
         margin: 0;
 
-        overflow: hidden;
-        -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 30%);
-mask-image: linear-gradient(to top, transparent 0%, #000 40%);
+               overflow: hidden;
+        -webkit-mask-image: linear-gradient(to top, transparent 10%, #000 20%);
+mask-image: linear-gradient(to top, transparent 10%, #000 20%);
+
          
   
 
     }
 
        .hero-heading {
-        margin-top: 20%;
+        margin-top: 35%;
 
         font-size: clamp(9.5rem, 12vw, 15rem);
 
@@ -1062,7 +1064,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 40%);
 
 
  .label-1{
-    top:20%;
+    top:40%;
     right: 10%;
 }
 
@@ -1077,8 +1079,25 @@ mask-image: linear-gradient(to top, transparent 0%, #000 40%);
 }
 
 .label-4{
-    top:18%;
+    top:25%;
     right: 29%;
+}
+
+
+.hero-c{
+  margin-bottom: 25%;
+}
+
+
+.hero-circle{
+  top: 18%;
+  left: 0.5%
+
+}
+
+.hero-grid{
+  
+
 }
 
 }

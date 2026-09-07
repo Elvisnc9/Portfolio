@@ -80,9 +80,9 @@ if (currentPage === nextPage) {
 }
     if (id === 'work') {
        initStackingCards();
-  startParallax();
+ 
 } else {
-  stopParallax();
+
 }
 
     if (id === 'about') {
@@ -458,7 +458,6 @@ function showProject(index) {
 window.addEventListener('DOMContentLoaded', () => {
   initCardParallax();
   runIntro();
-  startParallax();
 });
 
 
