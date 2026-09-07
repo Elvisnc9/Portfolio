@@ -1316,7 +1316,63 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 /* ═══════════════════════════
    NEW PROJECT CARDS
 ═══════════════════════════ */
+
+.project-tabs{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:28px;
+}
+
+.ptab{
+  background:none;
+  border:1px solid var(--border);
+  color:var(--gray);
+  font-family:'Manrope',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  padding:10px 22px;
+  border-radius:100px;
+  cursor:pointer;
+  transition:background .2s, color .2s, border-color .2s;
+  white-space:nowrap;
+}
+
+.ptab:hover{
+  border-color:#555;
+  color:var(--white);
+}
+
+.ptab.active{
+  background:var(--white);
+  color:var(--bg);
+  border-color:var(--white);
+}
+
+body.light .ptab.active{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+
+/* Hide filtered-out cards */
+.pcard-new.filtered-out{
+  display:none;
+}
+
+@media (max-width:600px){
+  .project-tabs{
+    gap:8px;
+  }
+  .ptab{
+    font-size:12px;
+    padding:8px 16px;
+  }
+}
 .projects-grid {
+
+
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;

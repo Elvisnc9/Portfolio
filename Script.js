@@ -80,6 +80,7 @@ if (currentPage === nextPage) {
 }
     if (id === 'work') {
        initStackingCards();
+       initProjectTabs();
  
 } else {
 
@@ -457,6 +458,7 @@ function showProject(index) {
 ═══════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   initCardParallax();
+  initProjectTabs();
   runIntro();
 });
 
@@ -494,7 +496,41 @@ backToTop.addEventListener('click', () => {
 window.addEventListener('scroll', () => {
   const activePage = document.querySelector('.page.active');
   const isEligiblePage = activePage ;
-  const scrolledEnough = window.scrollY > window.innerHeight* 0.45;
+  const scrolledEnough = window.scrollY > window.innerHeight* 0.65;
 
   backToTop.classList.toggle('show', isEligiblePage && scrolledEnough);
 }, { passive: true });
+
+
+/* ─── PROJECT FILTER TABS ─── */
+function initProjectTabs() {
+  const tabs = document.querySelectorAll('.ptab');
+  const cards = document.querySelectorAll('.pcard-new');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const filter = tab.dataset.filter;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      cards.forEach(card => {
+        const cats = (card.dataset.category || '').split(' ');
+        const show = filter === 'all' || cats.includes(filter);
+
+        if (show) {
+          card.classList.remove('filtered-out');
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+          }
+        } else {
+          card.classList.add('filtered-out');
+        }
+      });
+
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
+    });
+  });
+}
