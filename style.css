@@ -1515,10 +1515,10 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 }
 
 .pcard-pills {
-  display: flex;
+ position: absolute;
   flex-wrap: wrap;
   gap: 8px;
-  padding-top: 100px;
+  bottom:20px
 }
 .pcard-pill {
   font-family: 'Manrope', sans-serif;
@@ -1528,11 +1528,13 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   text-transform: uppercase;
   color: #000000;
   border: 1px solid #000000;
+ 
   border-radius: 100px;
   padding: 6px 16px;
-  background: transparent;
+  background:white;
   transition: border-color .2s, color .2s;
 }
+
 .pcard-new:hover .pcard-pill {
   border-color: #000000;
   color: #000000;
@@ -1566,7 +1568,7 @@ body.light .pcard-new       { background: #f2f2f2; border-color: #e0e0e0; }
 body.light .pcard-left      { background: #e6e6e6; border-color: #d8d8d8; }
 body.light .pf-phone        { border-color: #bbb; box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
 body.light .pcard-title-new { color: #111; }
-body.light .pcard-desc      { color: #666; }
+body.light .pcard-desc      { color: #000000; }
 body.light .pcard-pill      { color: #666; border-color: #d0d0d0; }
 body.light .pcard-cat       { color: #000000; }
 body.light .pcard-arrow-new { border-color: #ccc; color: #999; background: rgba(0,0,0,0.04); }
