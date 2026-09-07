@@ -1983,6 +1983,17 @@ font-size:clamp(5rem,12vw,12rem);
 
 }
 
+.about-me{
+  font-family:'Dancing Script',sans-serif;
+  width: 90%;
+
+   text-align: center;
+   margin-top: 10%;
+   margin-left: auto;
+   margin-right: auto;
+   font-size:clamp(7.5rem,3.5vw,2.0rem);
+}
+
 /* ═══════════════════════════════════════
                 STATS
 ═══════════════════════════════════════ */
@@ -2527,6 +2538,9 @@ font-size:clamp(5rem,12vw,12rem);
 
     justify-content:center;
 
+}
+.about-me{
+  font-size:clamp(3.5rem,3.5vw,2.0rem);
 }
 
 .about-description p{
