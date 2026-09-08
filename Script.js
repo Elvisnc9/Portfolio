@@ -141,6 +141,11 @@ const startEnter = () => {
 }
 
 
+function scrollToWorkContact(btn) {
+  const workNavBtn = document.querySelectorAll('.nav-btn')[0];
+  showPage('work', workNavBtn, { scrollToTop: false, targetSelector: '#work-contact' });
+}
+
 /* ─── GO TO CONTACT (on home page) ─── */
 function goToContact(btn) {
   showPage('work', btn, { scrollToTop: true, targetSelector: '#contact' });
