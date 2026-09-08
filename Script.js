@@ -501,7 +501,7 @@ backToTop.addEventListener('click', () => {
 window.addEventListener('scroll', () => {
   const activePage = document.querySelector('.page.active');
   const isEligiblePage = activePage ;
-  const scrolledEnough = window.scrollY > window.innerHeight* 0.65;
+  const scrolledEnough = window.scrollY > window.innerHeight* 2.05;
 
   backToTop.classList.toggle('show', isEligiblePage && scrolledEnough);
 }, { passive: true });
