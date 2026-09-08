@@ -503,29 +503,31 @@ window.addEventListener('scroll', () => {
 
 
 /* ─── PROJECT FILTER TABS ─── */
+let projectTabsInitialized = false;
+
 function initProjectTabs() {
+  if (projectTabsInitialized) return;
+  projectTabsInitialized = true;
+
   const tabs = document.querySelectorAll('.ptab');
-  const cards = document.querySelectorAll('.pcard-new');
+  const cards = document.querySelectorAll('#work .pcard-new');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const filter = tab.dataset.filter;
 
+      // Active tab
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
 
       cards.forEach(card => {
-        const cats = (card.dataset.category || '').split(' ');
-        const show = filter === 'all' || cats.includes(filter);
+        const category = (card.dataset.category || '').trim().toLowerCase();
 
-        if (show) {
-          card.classList.remove('filtered-out');
-          if (typeof gsap !== 'undefined') {
-            gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
-          }
-        } else {
-          card.classList.add('filtered-out');
-        }
+        const show =
+          filter === 'all' ||
+          category === filter;
+
+        card.classList.toggle('filtered-out', !show);
       });
 
       if (typeof ScrollTrigger !== 'undefined') {

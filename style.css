@@ -519,7 +519,34 @@ html body{
 
 
 
+/* ─── NOISE OVERLAY ─── */
+.noise-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 0;               /* above plain bg, below content — adjust if it fights a section */
+  pointer-events: none;
 
+  background-image: url('assets/noise-dots.png');
+  background-repeat: repeat;
+  background-size: 420px 420px;   /* matches the tile's native size */
+
+  opacity: 0.15;             /* tune this first if it feels too loud/quiet */
+  animation: noise-drift 18s linear infinite;
+  will-change: transform;
+}
+
+/* dark mode: flip black dots to white so they're visible against --bg */
+body:not(.light) .noise-overlay{
+  filter: invert(1);
+}
+
+
+
+@media (prefers-reduced-motion: reduce){
+  .noise-overlay{
+    animation: none;
+  }
+}
 
 
 
