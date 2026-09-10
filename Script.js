@@ -526,11 +526,8 @@ function initProjectTabs() {
       tab.classList.add('active');
 
       cards.forEach(card => {
-        const category = (card.dataset.category || '').trim().toLowerCase();
-
-        const show =
-          filter === 'all' ||
-          category === filter;
+       const categories = (card.dataset.category || '').trim().toLowerCase().split(/\s+/);
+const show = filter === 'all' || categories.includes(filter);
 
         card.classList.toggle('filtered-out', !show);
       });

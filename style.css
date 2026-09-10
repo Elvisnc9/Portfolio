@@ -1385,7 +1385,7 @@ body.light .ptab.active{
 
 /* Hide filtered-out cards */
 .pcard-new.filtered-out{
-  display:none;
+  display:none !important;
 }
 
 @media (max-width:600px){
