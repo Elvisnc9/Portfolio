@@ -2277,7 +2277,7 @@ font-size:clamp(5rem,12vw,12rem);
    margin-top: 3%;
    margin-left: auto;
    margin-right: auto;
-   font-size:clamp(10.5rem,6.5vw,6.0rem);
+   font-size:clamp(12.5rem,7.0vw,6.5rem);
      -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 10%);
 mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 
@@ -2303,7 +2303,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   left: 5px;
   top: 4px;
   bottom: 4px;
-  width: 2px;
+  width: 4px;
   background: var(--border);
 }
 .jr-line-fill{
@@ -2335,8 +2335,8 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   position: absolute;
   left: -30px;
   top: 4px;
-  width: 12px;
-  height: 12px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--bg);
   border: 2px solid var(--white);
@@ -2359,12 +2359,21 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   color: var(--gray);
   line-height: 1.6;
   max-width: 480px;
+
+}
+.jr-role{
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  color: var(--gray2);
+  line-height: 1.4;
+  margin-top: 6px;
+  text-transform: uppercase;
 }
 
 @media (max-width: 640px){
   .journey-section{ padding: 70px 6vw 50px; }
   .jr-wrap{ padding-left: 24px; }
-  .jr-dot{ left: -24px; width: 10px; height: 10px; }
+  .jr-dot{ left: -24px; width: 15px; height: 15px; }
 }
 
 
@@ -2399,8 +2408,8 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 }
 
 .stamp-ring{
-  width: 88px;
-  height: 88px;
+  width: 158px;
+  height: 158px;
   margin: 0 auto 14px;
   border-radius: 50%;
   border: 3px dashed var(--border);
@@ -2467,7 +2476,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   .cert-section{ padding: 70px 6vw 50px; }
   .cert-row{ gap: 28px; }
   .stamp{ width: 130px; }
-  .stamp-ring{ width: 72px; height: 72px; }
+  .stamp-ring{ width: 152px; height: 152px; }
   .stamp-initials{ font-size: 18px; }
 }
 /* ═══════════════════════════════════════
@@ -3016,7 +3025,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 
 }
 .about-me{
-  font-size:clamp(3.7rem,3.5vw,2.5rem);
+  font-size:clamp(4.7rem,3.5vw,2.5rem);
   margin-top: 10%;
 }
 
