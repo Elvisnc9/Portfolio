@@ -1112,7 +1112,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 0%);
 
   .btn{
     justify-content: center;
-    padding: 1.4rem 1.55rem;
+    padding: 1.2rem 1.05rem;
     font-size: 0.95rem;
   }
 
@@ -2807,35 +2807,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 }
 
 
-.rating{
 
-    display:flex;
-
-    align-items:center;
-
-    gap:5px;
-
-}
-
-.rating-score{
- font-family:'Manrope',sans-serif;
-    font-size:18px;
-
-    font-weight:600;
-
-    color:#222;
-
-}
-
-.rating-icon{
-
-    width:28px;
-
-    height:28px;
-
-    color:#098a38;
-
-}
 .testimonial-text{
 
     font-size:16px;
@@ -2889,6 +2861,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   
     
 
+
 }
 
   .pcard-new{
@@ -2922,7 +2895,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 
 .hero-title{
 
-    font-size:clamp(3.6rem,8vw,4.8rem);
+    font-size:clamp(3.35rem,8vw,4.8rem);
 
     line-height:.9;
 
@@ -3059,7 +3032,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
     gap:16px;
   }
   .testimonial-text{
-    font-size:14px;
+    font-size:12px;
   }
   .testimonial-footer h4{
     font-size:26px;
@@ -4350,7 +4323,7 @@ transform:translateX(180px) rotate(10deg);
 
   /* Section title smaller */
   .sec-title {
-    font-size: clamp(2.0rem, 8.1vw, 3.5rem);
+    font-size: clamp(2.0rem, 6.1vw, 3.5rem);
   }
 
   /* Project page two-col stacks */
