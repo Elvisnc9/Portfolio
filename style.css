@@ -2985,7 +2985,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 
 .hero-right p{
 
-    text-align:center;
+    display:none;
 
 }
 .hero-services{
@@ -4371,7 +4371,7 @@ transform:translateX(180px) rotate(10deg);
 
   /* Section title smaller */
   .sec-title {
-    font-size: clamp(2.7rem, 8.1vw, 3.5rem);
+    font-size: clamp(2.0rem, 8.1vw, 3.5rem);
   }
 
   /* Project page two-col stacks */
