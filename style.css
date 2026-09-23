@@ -1093,7 +1093,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 0%);
 
   .hero-subtext{
     max-width: 100%;
-    font-size: 0.75rem;
+    font-size: 0.99rem;
     margin-top: 1.25rem;
   }
 
@@ -1327,7 +1327,7 @@ display:inline-block;
   background: var(--bg);
 }
 .sec-title{
-  font-size:clamp(3.5rem,6vw,5.0rem);
+  font-size:clamp(4.4rem,6.5vw,5.5rem);
   font-weight:800;letter-spacing:-0.025em;
   text-align:  center;
   text-transform: uppercase;
@@ -2270,15 +2270,17 @@ font-size:clamp(5rem,12vw,12rem);
 }
 
 .about-me{
-  font-family:'Manrope',sans-serif;
-  font-weight:900;
+ font-family: 'Bebas Neue', sans-serif;
+  font-weight:550;
   width: 95%;
    text-align: center;
-   margin-top: 20%;
+   margin-top: 3%;
    margin-left: auto;
    margin-right: auto;
-   font-size:clamp(9.5rem,5.5vw,5.0rem);
-}
+   font-size:clamp(10.5rem,6.5vw,6.0rem);
+     -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 10%);
+mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
+
 
 
 
@@ -3014,7 +3016,8 @@ font-size:clamp(5rem,12vw,12rem);
 
 }
 .about-me{
-  font-size:clamp(3.5rem,3.5vw,2.0rem);
+  font-size:clamp(3.7rem,3.5vw,2.5rem);
+  margin-top: 10%;
 }
 
 .about-description p{
@@ -4359,7 +4362,7 @@ transform:translateX(180px) rotate(10deg);
 
   /* Section title smaller */
   .sec-title {
-    font-size: clamp(2rem, 8vw, 2.8rem);
+    font-size: clamp(2.7rem, 8.1vw, 3.5rem);
   }
 
   /* Project page two-col stacks */
