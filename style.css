@@ -2359,6 +2359,11 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   .journey-section{ padding: 70px 6vw 50px; }
   .jr-wrap{ padding-left: 24px; }
   .jr-dot{ left: -24px; width: 15px; height: 15px; }
+
+  .section-title{
+   font-size:clamp(2.5rem,5.0vw,4.5rem);
+
+  }
 }
 
 
