@@ -89,6 +89,8 @@ if (currentPage === nextPage) {
     if (id === 'about') {
       carouselPaused = false;
       startCarousel();
+      initJourneyLine();
+       initCertStamps();
     } else {
       stopCarousel();
     }
@@ -465,6 +467,8 @@ window.addEventListener('DOMContentLoaded', () => {
   initCardParallax();
   initProjectTabs();
   runIntro();
+  initJourneyLine();
+  initCertStamps();
 });
 
 
@@ -536,5 +540,38 @@ const show = filter === 'all' || categories.includes(filter);
         ScrollTrigger.refresh();
       }
     });
+  });
+}
+
+function initCertStamps() {
+  const stamps = document.querySelectorAll('.cert-section .stamp');
+  if (!stamps.length) return;
+
+  ScrollTrigger.getById('certStamps')?.kill();
+
+  stamps.forEach((el) => {
+    const angle = parseFloat(el.dataset.angle) || 0;
+    el.style.setProperty('--stamp-angle', angle + 'deg');
+  });
+
+  gsap.set(stamps, {
+    opacity: 0,
+    scale: 1.6,
+    rotate: (i, target) => (parseFloat(target.dataset.angle) || 0) * 3
+  });
+
+  gsap.to(stamps, {
+    opacity: 1,
+    scale: 1,
+    rotate: (i, target) => parseFloat(target.dataset.angle) || 0,
+    duration: 0.7,
+    ease: 'elastic.out(1, 0.6)',
+    stagger: 0.12,
+    scrollTrigger: {
+      id: 'certStamps',
+      trigger: '.cert-section',
+      start: 'top 80%',
+      toggleActions: 'play none none reverse'
+    }
   });
 }
