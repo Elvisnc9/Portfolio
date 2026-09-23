@@ -3234,6 +3234,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   max-width:100%;
   margin:0 auto;
   overflow: hidden;
+ 
 }
 
 .cf-wrap{
@@ -3404,8 +3405,8 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 }
 
 .cbox {
-  background: #161616;
-  border: 1px solid #2a2a2a;
+  background: #fdfdfd;
+  border: 0.5px solid #c2bdbd;
   border-radius: 24px;
   padding: 60px 48px;
   margin-top: 32px;
