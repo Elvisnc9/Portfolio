@@ -928,12 +928,16 @@ nav{
 
 /* ─── SUBTEXT ─── */
 .hero-subtext{
+   font-family: "Bebas Neue", sans-serif;
   max-width: 480px;
   margin: 1.5rem auto 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  font-weight: 100;
-  color: #000000;
+  font-size: 1.55rem;
+  line-height: 1.7;
+  color: grey;
+}
+
+.hero-subtext span{
+  color: #000;
 }
 
 /* ─── BUTTONS ─── */
@@ -948,9 +952,9 @@ nav{
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.5rem;
+  padding: 1.75rem 2.8rem;
   border-radius: 70px;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.2s ease, opacity 0.2s ease;
@@ -1019,7 +1023,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 0%);
   
 
     }  .hero-subtext{
-    font-size: 0.95rem;
+    font-size: 1.95rem;
   }
 
        .hero-heading {
@@ -1093,7 +1097,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 0%);
 
   .hero-subtext{
     max-width: 100%;
-    font-size: 0.99rem;
+    font-size: 1.2rem;
     margin-top: 1.25rem;
   }
 
@@ -1108,8 +1112,8 @@ mask-image: linear-gradient(to top, transparent 0%, #000 0%);
 
   .btn{
     justify-content: center;
-    padding: 0.9rem 1.25rem;
-    font-size: 0.85rem;
+    padding: 1.4rem 1.55rem;
+    font-size: 0.95rem;
   }
 
   .hero-fade{
@@ -1377,11 +1381,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   border-color:var(--white);
 }
 
-body.light .ptab.active{
-  background:#111;
-  color:#fff;
-  border-color:#111;
-}
+
 
 /* Hide filtered-out cards */
 .pcard-new.filtered-out{
@@ -1419,7 +1419,7 @@ body.light .ptab.active{
   width: 98%;
   background: var(--bg);
   border: 0px solid #222;
-  border-radius: 10px;
+  border-radius: 18px;
   overflow: hidden;
   display: grid;
   grid-template-columns: 55% 45%;
@@ -1488,9 +1488,9 @@ body.light .ptab.active{
 .pcard-left {
   position: relative;
   background-color: white;
-  border-right: 1px solid #222;
   overflow: hidden;
   min-height: 250px;
+  
 }
 
 
@@ -1590,12 +1590,14 @@ body.light .ptab.active{
   line-height: 1.02;
   color: #ffffff;
   margin-bottom: 14px;
+  color: #111
 }
 
 .pcard-desc {
   font-family:'clash Display',sans-serif;
   font-size: 16.5px;
-  color: #000000;
+  font-weight: 700;
+  color: rgb(87, 82, 82);
   line-height: 1.75;
   margin-bottom: 24px;
   max-width: 420px;
@@ -1610,7 +1612,7 @@ body.light .ptab.active{
 }
 .pcard-pill {
   font-family: 'Manrope', sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .07em;
   text-transform: uppercase;
@@ -1855,15 +1857,6 @@ body.light .ptab.active{
 }
 
 /* ── Light mode ── */
-body.light .pcard-new       { background: #f2f2f2; border-color: #e0e0e0; }
-body.light .pcard-left      { background: #e6e6e6; border-color: #d8d8d8; }
-body.light .pf-phone        { border-color: #bbb; box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
-body.light .pcard-title-new { color: #111; }
-body.light .pcard-desc      { color: #000000; }
-body.light .pcard-pill      { color: #666; border-color: #d0d0d0; }
-body.light .pcard-cat       { color: #000000; }
-body.light .pcard-arrow-new { border-color: #ccc; color: #999; background: rgba(0,0,0,0.04); }
-body.light .more-badge      { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: #777; }
 
 /* ── Responsive: tablet ── */
 
@@ -3487,11 +3480,6 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   transform: translateX(4px);
 }
 
-/* light mode */
-body.light .cbox {
-  background: #f2f2f2;
-  border-color: #e0e0e0;
-}
 
 @media (max-width: 1200Px){
   .hero-h1{
@@ -3688,18 +3676,7 @@ body.light .cbox {
 /* ═══════════════════════════════════════════
    LIGHT MODE
 ═══════════════════════════════════════════ */
-body.light{--bg:#ffffff;--bg2:#eaeaea;--bg3:#e0e0e0;--white:#111;--gray:#555;--gray2:#888;--border:#d0d0d0}
-body.light .nav-btn.active{background:#111;color:#fff}
-body.light .nav-inner{   backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);}
-  nav{background:transparent}
-body.light .btn-primary{background:#111;color:#fff}
-body.light .btn-primary:hover{background:#222}
-body.light .pcard-arrow{background:#111;color:#fff}
-body.light .ntab.active{background:#111;color:#fff;border-color:#111}
-body.light .marquee-wrap{background:#111;border-color:#111}
-body.light .marquee-track .ms{color:#fff}
-body.light .b-dots span:nth-child(1){background:#ff5f57}
+/*  */
 
 /* ═══════════════════════════════════════════
    RESPONSIVE
@@ -4261,7 +4238,7 @@ transform:translateX(180px) rotate(10deg);
     height: auto;
     aspect-ratio: 4 / 3;
     border-right: none;
-    border-bottom: 1px solid #222;
+  
     padding: 0;
     overflow: hidden;
   }
@@ -4276,7 +4253,7 @@ transform:translateX(180px) rotate(10deg);
 
   .pcard-right{ padding: 28px 22px 32px; }
   .pcard-title-new{ font-size: 1.8rem; }
-  .pcard-desc{ font-size: 13px; }
+  .pcard-desc{ font-size: 15px; font-weight: 600; }
   .pcard-pills{ padding-top: 20px; gap: 6px; }
 
 .screenshot-title{
