@@ -1093,6 +1093,8 @@ mask-image: linear-gradient(to top, transparent 0%, #000 0%);
     font-size: clamp(4.05rem, 11vw, 7rem);
     line-height: .9;
     letter-spacing: -.075em;
+      text-align: start;
+
   }
 
   .hero-subtext{
@@ -1163,17 +1165,7 @@ mask-image: linear-gradient(to top, transparent 2%, #000 5%);
 
    
 
-    .hero-heading {
-       
-
-        font-size: clamp(4.05rem, 11vw, 7rem);
-
-        line-height: .9;
-
-        letter-spacing: -.075em;
-        
-    }
-
+  
 
 
     .hero-fade{
