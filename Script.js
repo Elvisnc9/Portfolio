@@ -81,6 +81,7 @@ if (currentPage === nextPage) {
     if (id === 'work') {
        initStackingCards();
        initProjectTabs();
+       initTechFloat();
  
 } else {
 
@@ -469,6 +470,7 @@ window.addEventListener('DOMContentLoaded', () => {
   runIntro();
   initJourneyLine();
   initCertStamps();
+  initTechFloat();
 });
 
 
@@ -573,5 +575,25 @@ function initCertStamps() {
       start: 'top 80%',
       toggleActions: 'play none none reverse'
     }
+  });
+}
+
+
+
+function initTechFloat() {
+  const logos = document.querySelectorAll('.tstack-row .tlogo');
+  if (!logos.length) return;
+
+  gsap.killTweensOf(logos);
+
+  logos.forEach((el, i) => {
+    gsap.to(el, {
+      y: -10,
+      duration: 2.2 + Math.random() * 0.8,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+      delay: i * 0.15
+    });
   });
 }
