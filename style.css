@@ -1703,7 +1703,7 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   align-items: center;
   gap: 16px;
   min-width: 0;
-  flex: 1;
+  flex: 1.5;
 }
 
 .op-num{
@@ -1818,13 +1818,26 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
 @media (max-width: 900px){
   .op-row{
     flex-wrap: wrap;
-    row-gap: 13px;
+    row-gap: 23px;
   }
   .op-divider{ display: none; }
   .op-icon{display: none;}
   
   .op-stack{
    display: none;
+  }
+
+  .op-dash{
+    display: none;
+  }
+
+  .op-left{
+    flex: 1 1 100%;   /* ADD THIS — forces name onto its own full-width line */
+  }
+
+   .op-tag{
+    margin-left: 0;   /* ADD THIS — kills the desktop auto-push */
+    margin-right: 0;  /* ADD THIS */
   }
 }
 
@@ -1839,8 +1852,14 @@ mask-image: linear-gradient(to top, transparent 0%, #000 50%);}
   }
 
   .op-row{
-    padding: 16px 12px;
+    padding: 12px 12px;
   }
+
+.op-left{
+ flex:1;
+ 
+
+}
 
   .op-name{ font-size: 17px; }
   .op-icon{ width: 34px; height: 34px; }
