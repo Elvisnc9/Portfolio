@@ -1,0 +1,30 @@
+---
+// Stroke icons used across the site (24px grid, inherits currentColor).
+const paths = {
+  'arrow-up-right': 'M7 17L17 7M8 7h9v9',
+  'arrow-up': 'M12 19V5M6 11l6-6 6 6',
+  menu: 'M4 8h16M4 16h16',
+  close: 'M6 6l12 12M18 6L6 18',
+} as const;
+
+interface Props {
+  name: keyof typeof paths;
+  size?: number;
+}
+
+const { name, size = 16 } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d={paths[name]}></path>
+</svg>

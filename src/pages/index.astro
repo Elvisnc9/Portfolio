@@ -1,32 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Placeholder from '../components/Placeholder.astro';
 ---
 
-<BaseLayout>
-  <section class="placeholder">
-    <span class="mono-label">Home · Phase 2</span>
-    <h1>Home hub</h1>
-    <p>The bento dashboard and sections land in the next phase.</p>
-  </section>
+<BaseLayout active="Work">
+  <Placeholder label="Home · Phase 2" title="Home hub" text="The bento dashboard and sections land in the next phase." />
 </BaseLayout>
-
-<style>
-  .placeholder {
-    padding: 64px var(--gutter);
-    display: grid;
-    gap: 16px;
-  }
-
-  h1 {
-    font-family: var(--font-display);
-    font-weight: 900;
-    font-size: clamp(48px, 9vw, 128px);
-    line-height: 0.9;
-    letter-spacing: var(--tracking-tight);
-  }
-
-  p {
-    color: var(--muted);
-    max-width: 40ch;
-  }
-</style>

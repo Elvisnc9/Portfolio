@@ -1,14 +1,18 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
-import { site } from '../data/site';
+import Nav from '../components/Nav.astro';
+import { site, type NavLabel } from '../data/site';
 
 interface Props {
   title?: string;
   description?: string;
+  /** Highlights this link in the nav */
+  active?: NavLabel;
+  navCta?: 'talk' | 'email';
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, active, navCta } = Astro.props;
 const pageTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.owner}`;
 ---
 
@@ -33,6 +37,8 @@ const pageTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.own
     <ClientRouter />
   </head>
   <body>
+    <Nav active={active} cta={navCta} />
+
     <main id="top">
       <slot />
     </main>
