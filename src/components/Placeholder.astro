@@ -10,9 +10,9 @@ const { label, title, text } = Astro.props;
 ---
 
 <section class="placeholder">
-  <span class="mono-label">{label}</span>
-  <h1>{title}</h1>
-  <p>{text}</p>
+  <span class="mono-label" data-reveal>{label}</span>
+  <h1 data-reveal data-reveal-delay="0.08">{title}</h1>
+  <p data-reveal data-reveal-delay="0.16">{text}</p>
 </section>
 
 <style>
