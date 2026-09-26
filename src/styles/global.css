@@ -1,0 +1,173 @@
+/* Elves OS: global tokens + base styles.
+   Breakpoints (used in every component): tablet <= 1023px, mobile <= 640px. */
+
+:root {
+  /* Surfaces */
+  --bg: #f4f2ed;
+  --surface: #ffffff;
+  --surface-2: #eeebe4;
+  --line: #dcd8cf;
+  --grid-line: rgba(17, 17, 16, 0.05);
+
+  /* Text */
+  --text: #111110;
+  --muted: #5c5954;
+
+  /* Accents */
+  --orange: #ff6a3d;
+  --sky: #bfe3fa;
+  --note-peach: #ffd9c9;
+  --note-lime: #e4f5b8;
+  --note-butter: #ffe9a8;
+  --note-lilac: #e6deff;
+  --dark: #111110;
+  --on-dark: #f4f2ed;
+  --success: #22c55e;
+
+  /* Type */
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-body: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --tracking-tight: -0.05em;
+
+  /* Shape */
+  --radius-tile: 32px;
+  --radius-tile-lg: 40px;
+  --radius-pill: 999px;
+  --tap: 44px;
+
+  /* Layout */
+  --gutter: 40px;
+  --grid-size: 64px;
+  --grain-opacity: 0.48;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --gutter: 32px;
+    --grid-size: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: 16px;
+    --grid-size: 48px;
+    --radius-tile: 28px;
+  }
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+/* Shared helpers */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Grain noise overlay (sits above everything, never blocks clicks) */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background-image: url('/images/grain.png');
+  background-size: 140px 140px;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: multiply;
+}
+
+/* Lenis smooth scroll (recommended base styles) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
