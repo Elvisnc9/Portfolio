@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elves OS — Notes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{opacity:.9}
+.grain{background-image:url(/_blob/fc079bc4fb638828c8a01a1800e5d184);background-size:140px 140px}
+</style>
+</helmet>
+<div style="width: 1440px; height: 2500px; box-sizing: border-box; position: relative; display: flex; flex-direction: column; background-color: #F4F2ED; background-image: linear-gradient(rgba(17,17,16,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(17,17,16,.05) 1px, transparent 1px); background-size: 64px 64px; color: #111110; font-family: 'Geist', system-ui, sans-serif; overflow: hidden">
+
+<header style="padding: 24px 40px 0">
+<div style="height: 64px; box-sizing: border-box; padding: 0 10px 0 22px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCD8CF; display: flex; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" style="font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: -0.02em">ELVES<span style="color: #FF6A3D">·</span>CORPS</a>
+<nav style="display: flex; gap: 4px; font-size: 15px">
+<a href="Main.dc.html" style="padding: 10px 18px; border-radius: 999px; color: #5C5954">Work</a>
+<a href="About.dc.html" style="padding: 10px 18px; border-radius: 999px; color: #5C5954">About</a>
+<a href="Notes.dc.html" style="padding: 10px 18px; border-radius: 999px; background: #EEEBE4">Notes</a>
+<a href="Contact.dc.html" style="padding: 10px 18px; border-radius: 999px; color: #5C5954">Contact</a>
+</nav>
+<a href="Contact.dc.html" style="height: 44px; padding: 0 22px; border-radius: 999px; background: #FF6A3D; color: #111110; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px">Let's talk <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+</div>
+</header>
+
+<!-- HEADER -->
+<section style="padding: 48px 40px 40px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 16px; align-items: end">
+<div style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 24px">
+<a href="Main.dc.html" style="align-self: flex-start; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid #DCD8CF; background: #FFFFFF; font-size: 14px; font-weight: 500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back home</a>
+<div style="position: relative">
+<h1 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 128px; line-height: 0.9; letter-spacing: -0.055em">Notes<br>to self</h1>
+<span style="position: absolute; left: 640px; top: 4px; width: 100px; height: 100px; border-radius: 999px; background: #BFE3FA; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-12deg); font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 26px; line-height: 1">09<span style="font-family: 'Geist Mono', monospace; font-weight: 500; font-size: 10px; margin-top: 4px">NOTES</span></span>
+</div>
+<p style="margin: 0; max-width: 560px; font-size: 19px; line-height: 1.55; color: #5C5954">Short thoughts on building, design and technology. Written from Nigeria, for anyone who makes things.</p>
+</div>
+<div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 14px">
+<label style="display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 20px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCD8CF; font-size: 15px; color: #5C5954">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+<input type="search" placeholder="Search notes" aria-label="Search notes" style="flex-grow: 1; border: none; background: transparent; font: 400 16px 'Geist', sans-serif; color: #111110; outline: none">
+</label>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" onClick="{{pickAll}}" style="height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid {{f.allBorder}}; background: {{f.allBg}}; color: {{f.allFg}}; font: 600 14px 'Geist', sans-serif; cursor: pointer">All</button>
+<sc-for list="{{cats}}" as="k" hint-placeholder-count="4">
+<button type="button" onClick="{{k.pick}}" style="height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid {{k.border}}; background: {{k.bg}}; color: {{k.fg}}; font: 500 14px 'Geist', sans-serif; cursor: pointer">{{k.name}}</button>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- FEATURED -->
+<section style="padding: 24px 40px 56px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px">
+<article style="grid-column: 1 / span 8; position: relative; height: 440px; box-sizing: border-box; padding: 52px 56px; border-radius: 8px; background: #FFD9C9; transform: rotate(-1deg); box-shadow: 0 24px 60px rgba(17,17,16,.16); display: flex; flex-direction: column; justify-content: space-between">
+<span style="position: absolute; left: 50%; top: -14px; width: 130px; height: 30px; margin-left: -65px; background: rgba(255,255,255,.6); transform: rotate(-3deg)"></span>
+<div style="position: absolute; right: 40px; top: 40px; color: #FF6A3D"><svg width="56" height="56" viewBox="0 0 24 24"><path d="M12 0c.8 6.4 4.8 10.4 12 12-7.2 1.6-11.2 5.6-12 12-.8-6.4-4.8-10.4-12-12 7.2-1.6 11.2-5.6 12-12z" fill="currentColor"></path></svg></div>
+<div style="display: flex; gap: 8px"><span style="padding: 6px 12px; border-radius: 999px; background: #111110; color: #F4F2ED; font-family: 'Geist Mono', monospace; font-size: 11px">PINNED</span><span style="padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(17,17,16,.25); font-family: 'Geist Mono', monospace; font-size: 11px">BUILDING</span></div>
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 720px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -0.045em">Building from Africa</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.6; color: #3F3D39">Across Nigeria and the continent, a new generation of developers is proving that world-class products can come from anywhere. I want to be part of that story — not just contributing to global tech, but helping lead it. Great ideas don't need permission from a specific zip code.</p>
+</div>
+<a href="#read" style="align-self: flex-start; height: 48px; padding: 0 22px; border-radius: 999px; background: #111110; color: #F4F2ED; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px">Read note <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</article>
+<div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 16px">
+<div style="flex-grow: 1; position: relative; overflow: hidden; border-radius: 32px; background: #BFE3FA; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+<svg style="position: absolute; right: -10px; top: 20px" width="170" height="80" viewBox="0 0 190 90" fill="none"><path d="M4 60 C 30 10, 50 10, 70 50 S 110 90, 130 40 S 170 0, 186 30" stroke="#FF6A3D" stroke-width="10" stroke-linecap="round"></path></svg>
+<span style="font-family: 'Geist Mono', monospace; font-size: 12px">CURRENTLY THINKING ABOUT</span>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -0.04em">AI integrations &amp; new developer tools.</span>
+</div>
+<div style="border-radius: 32px; background: #FFFFFF; border: 1px solid #DCD8CF; padding: 24px 28px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #5C5954; margin-bottom: 8px">START HERE</span>
+<a href="#n4" style="height: 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #DCD8CF; font-weight: 500">Designing for trust <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+<a href="#n9" style="height: 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #DCD8CF; font-weight: 500">Beauty in simplicity <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+</div>
+</div>
+</section>
+
+<!-- CORKBOARD -->
+<section style="padding: 32px 52px 96px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 32px; row-gap: 48px">
+<sc-for list="{{shown}}" as="n" hint-placeholder-count="8">
+<a href="#note" style="position: relative; height: 340px; box-sizing: border-box; padding: 34px 28px 26px; border-radius: 6px; background: {{n.bg}}; color: #111110; transform: rotate({{n.rot}}); box-shadow: 0 18px 40px rgba(17,17,16,.14); display: flex; flex-direction: column; gap: 14px">
+<span style="position: absolute; left: 50%; top: -12px; width: 96px; height: 26px; margin-left: -48px; background: rgba(255,255,255,.6); transform: rotate(-3deg)"></span>
+<div style="display: flex; justify-content: space-between; font-family: 'Geist Mono', monospace; font-size: 11px; opacity: .65"><span>NOTE {{n.n}}</span><span>{{n.cat}}</span></div>
+<h3 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 23px; line-height: 1.1; letter-spacing: -0.035em">{{n.title}}</h3>
+<p style="margin: 0; flex-grow: 1; font-size: 15px; line-height: 1.55; color: #3F3D39">{{n.text}}</p>
+<span style="display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px">Read <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</a>
+</sc-for>
+</section>
+
+<!-- CTA -->
+<section style="padding: 0 40px 72px">
+<div style="position: relative; overflow: hidden; border-radius: 40px; background: #FF6A3D; padding: 56px 64px; display: flex; justify-content: space-between; align-items: center">
+<div style="position: absolute; right: 260px; bottom: -120px; width: 260px; height: 260px; border-radius: 999px; border: 34px solid rgba(17,17,16,.1); box-sizing: border-box"></div>
+<h2 style="position: relative; margin: 0; max-width: 760px; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 54px; line-height: 1; letter-spacing: -0.05em">Want to argue with a note? I'd love that.</h2>
+<a href="Contact.dc.html" style="position: relative; height: 60px; padding: 0 30px; border-radius: 999px; background: #111110; color: #F4F2ED; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px">Start a chat <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</section>
+
+<footer style="flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 40px; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-top: 1px solid #DCD8CF; font-size: 14px; color: #5C5954">
+<span>© 2026 Elves Corporation</span>
+<a href="Main.dc.html" style="color: #111110">Back home</a>
+</div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 150px; line-height: 0.82; letter-spacing: -0.04em; white-space: nowrap; margin-bottom: -18px">ELVES <span style="color: transparent; -webkit-text-stroke: 3px #FF6A3D">CORPS</span></div>
+</footer>
+
+<div class="grain" aria-hidden="true" style="position: absolute; inset: 0; opacity: .48; pointer-events: none; mix-blend-mode: multiply"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var active = (this.state && this.state.cat) || 'All';
+    var notes = [
+      { n: '02', cat: 'LIFE', title: 'Life & perspective', text: 'Stay curious, embrace change, and find meaning in the things we create, experience and learn along the way.', bg: '#FFFFFF', rot: '1.5deg' },
+      { n: '03', cat: 'BUILDING', title: 'Solving local, thinking global', text: 'The most interesting problems are close to home. Good engineering travels well.', bg: '#BFE3FA', rot: '-1.5deg' },
+      { n: '04', cat: 'DESIGN', title: 'Designing for trust', text: 'Whether it’s a fintech app or AR, people need to trust a product before they rely on it.', bg: '#E4F5B8', rot: '2deg' },
+      { n: '05', cat: 'TECH', title: 'The future is immersive', text: 'AR blends the digital and physical instead of replacing one with the other.', bg: '#FFE9A8', rot: '-1deg' },
+      { n: '06', cat: 'TECH', title: 'Growing with technology', text: 'Tech never stands still, and neither do I. Keep learning, experimenting, evolving.', bg: '#E6DEFF', rot: '-2deg' },
+      { n: '07', cat: 'LIFE', title: 'Beyond borders', text: 'Working with people across the world, sharing ideas and building things that reach further.', bg: '#FFD9C9', rot: '1deg' },
+      { n: '08', cat: 'BUILDING', title: 'African talent, global stage', text: 'A future where African talent, ideas and technology compete globally and create real opportunity.', bg: '#FFFFFF', rot: '-1.5deg' },
+      { n: '09', cat: 'DESIGN', title: 'Beauty in simplicity', text: 'Good products don’t need to be complicated. Clear experiences make technology feel natural.', bg: '#BFE3FA', rot: '2deg' }
+    ];
+    var names = ['Building', 'Design', 'Tech', 'Life'];
+    return {
+      f: active === 'All' ? { allBg: '#111110', allFg: '#F4F2ED', allBorder: '#111110' } : { allBg: '#FFFFFF', allFg: '#111110', allBorder: '#DCD8CF' },
+      pickAll: function () { self.setState({ cat: 'All' }); },
+      cats: names.map(function (nm) {
+        var on = active === nm;
+        return { name: nm, bg: on ? '#111110' : '#FFFFFF', fg: on ? '#F4F2ED' : '#111110', border: on ? '#111110' : '#DCD8CF', pick: function () { self.setState({ cat: nm }); } };
+      }),
+      shown: active === 'All' ? notes : notes.filter(function (n) { return n.cat === active.toUpperCase(); })
+    };
+  }
+}
+</script>
+</body>
+</html>
