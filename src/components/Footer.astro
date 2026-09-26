@@ -1,0 +1,130 @@
+---
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="meta">
+    <span>© {year} Elves Corporation</span>
+    <span class="built">Built with Flutter brain &amp; web hands</span>
+    <a class="to-top" href="#top" aria-label="Back to top">
+      <span class="to-top-text">Back to top</span>
+      <Icon name="arrow-up" />
+    </a>
+  </div>
+
+  <div class="wordmark" aria-hidden="true">
+    ELVES <br class="wordmark-break" /><span>CORPS</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 48px;
+    padding: 0 var(--gutter);
+    overflow: hidden;
+  }
+
+  .meta {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .to-top {
+    min-height: var(--tap);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+  }
+
+  .to-top :global(svg) {
+    transition: transform 0.2s;
+  }
+
+  .to-top:hover :global(svg) {
+    transform: translateY(-3px);
+  }
+
+  /* 150px at 1440 wide, always spans the full width */
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 10.4vw;
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    margin-bottom: -0.12em;
+    user-select: none;
+  }
+
+  /* Unbounded is a variable font with overlapping glyph contours, so a plain
+     stroke shows lines inside letters. Paint the stroke under a bg-colored
+     fill instead: the fill hides the overlaps, half the stroke shows (3px). */
+  .wordmark span {
+    color: var(--bg);
+    -webkit-text-stroke: 6px var(--orange);
+    paint-order: stroke fill;
+  }
+
+  .wordmark-break {
+    display: none;
+  }
+
+  /* Tablet: two-line wordmark (136px at 834) */
+  @media (max-width: 1023px) {
+    .meta {
+      padding: 16px 0;
+    }
+
+    .built {
+      display: none;
+    }
+
+    .wordmark {
+      font-size: 16.3vw;
+      line-height: 0.86;
+      margin-bottom: -0.1em;
+    }
+
+    .wordmark-break {
+      display: inline;
+    }
+  }
+
+  /* Mobile: round back-to-top button (68px wordmark at 390) */
+  @media (max-width: 640px) {
+    .meta {
+      padding: 14px 0;
+      font-size: 13px;
+    }
+
+    .to-top {
+      width: var(--tap);
+      height: var(--tap);
+      justify-content: center;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--line);
+    }
+
+    .to-top-text {
+      display: none;
+    }
+
+    .wordmark {
+      font-size: 17.4vw;
+      margin-bottom: -0.12em;
+    }
+
+    .wordmark span {
+      -webkit-text-stroke-width: 4px;
+    }
+  }
+</style>
