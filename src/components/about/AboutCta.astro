@@ -1,0 +1,136 @@
+---
+import Icon from '../Icon.astro';
+import { journey } from '../../data/about';
+
+const nextYear = Number(journey[journey.length - 1].year) + 1;
+const nextChapter = String(journey.length + 1).padStart(2, '0');
+---
+
+<section class="about-cta">
+  <div class="panel" data-reveal>
+    <div class="circle" aria-hidden="true"></div>
+    <div class="text">
+      <span class="mono">CHAPTER {nextChapter} · {nextYear}</span>
+      <h2>Let's write the next chapter together.</h2>
+    </div>
+    <a class="btn" href="/contact">Work with me <Icon name="arrow-right" size={18} /></a>
+  </div>
+</section>
+
+<style>
+  .about-cta {
+    padding: 0 var(--gutter) 72px;
+  }
+
+  .panel {
+    position: relative;
+    overflow: hidden;
+    padding: 56px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    border-radius: var(--radius-tile-lg);
+    background: var(--dark);
+    color: var(--on-dark);
+  }
+
+  .circle {
+    position: absolute;
+    right: -60px;
+    top: -120px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+
+  .text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #a3a09a;
+  }
+
+  h2 {
+    max-width: 780px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 54px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .btn {
+    position: relative;
+    flex-shrink: 0;
+    height: 60px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--radius-pill);
+    background: var(--on-dark);
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 17px;
+    transition: transform 0.2s;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 1023px) {
+    .panel {
+      padding: 44px 40px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    h2 {
+      font-size: 44px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .about-cta {
+      padding: 8px var(--gutter) 48px;
+    }
+
+    .panel {
+      padding: 30px 24px;
+      gap: 20px;
+      border-radius: 32px;
+    }
+
+    .circle {
+      top: -80px;
+      width: 190px;
+      height: 190px;
+    }
+
+    .mono {
+      font-size: 11px;
+    }
+
+    h2 {
+      font-size: 30px;
+      line-height: 1.02;
+    }
+
+    .btn {
+      height: 52px;
+      padding: 0 24px;
+      gap: 8px;
+      font-size: 15px;
+    }
+  }
+</style>
