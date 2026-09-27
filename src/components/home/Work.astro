@@ -6,12 +6,12 @@ import { experiments } from '../../data/home';
 
 // Bento sizes per tile, straight from the mockups.
 const layouts: Record<string, TileLayout> = {
-  'genspark-ai': { desktop: [7, 560], tablet: [6, 460], mobile: 420, pills: 'top', arrow: 'orange', cursor: true },
-  articos: { desktop: [5, 560], tablet: [3, 340], mobile: 260, pills: 'bottom', arrow: 'light' },
-  wealthfolio: { desktop: [5, 440], tablet: [3, 340], mobile: 300, pills: 'bottom' },
-  kidemis: { desktop: [4, 440], tablet: [2, 300], mobile: 240, pills: 'bottom' },
-  bitwyre: { desktop: [3, 440], tablet: [2, 300], mobile: 220, pills: 'bottom', stackPills: true, imageWidth: '86%' },
-  'muslim-matrimony': { desktop: [4, 400], tablet: [2, 300], mobile: 360, pills: 'top', stackPills: true },
+  'genspark-ai': { desktop: [7, 560], tablet: [6, 460], mobile: 420, pills: 'top', arrow: 'orange', cursor: true, speed: 0.96 },
+  articos: { desktop: [5, 560], tablet: [3, 340], mobile: 260, pills: 'bottom', arrow: 'light', speed: 1.05 },
+  wealthfolio: { desktop: [5, 440], tablet: [3, 340], mobile: 300, pills: 'bottom', speed: 1.04 },
+  kidemis: { desktop: [4, 440], tablet: [2, 300], mobile: 240, pills: 'bottom', speed: 0.96 },
+  bitwyre: { desktop: [3, 440], tablet: [2, 300], mobile: 220, pills: 'bottom', stackPills: true, imageWidth: '86%', speed: 1.06 },
+  'muslim-matrimony': { desktop: [4, 400], tablet: [2, 300], mobile: 360, pills: 'top', stackPills: true, speed: 1 },
 };
 
 interface Props {
@@ -81,28 +81,44 @@ const count = String(projects.length).padStart(2, '0');
 </section>
 
 <script>
+  import { gsap } from 'gsap';
+  import { Flip } from 'gsap/Flip';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(Flip, ScrollTrigger);
+
   document.addEventListener('astro:page-load', () => {
-    const section = document.querySelector('.work');
+    const section = document.querySelector<HTMLElement>('.work');
     if (!section) return;
 
     const buttons = section.querySelectorAll<HTMLButtonElement>('[data-filter]');
-    const tiles = section.querySelectorAll<HTMLAnchorElement>('[data-categories]');
+    const slots = [...section.querySelectorAll<HTMLElement>('.slot')];
+    const extras = section.querySelector<HTMLElement>('.experiments');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     buttons.forEach((button) =>
       button.addEventListener('click', () => {
         const filter = button.dataset.filter!;
         buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-        tiles.forEach((tile) => {
-          const match = filter === 'All' || tile.dataset.categories!.split(' ').includes(filter);
-          tile.classList.toggle('is-dimmed', !match);
-          // Dimmed tiles are skipped by keyboard and screen readers
-          if (match) {
-            tile.removeAttribute('tabindex');
-            tile.removeAttribute('aria-hidden');
-          } else {
-            tile.setAttribute('tabindex', '-1');
-            tile.setAttribute('aria-hidden', 'true');
-          }
+
+        // Remember where everything is, change the layout, then animate from the old spots
+        const state = Flip.getState([...slots, extras].filter(Boolean) as HTMLElement[]);
+        slots.forEach((slot) => {
+          const match = filter === 'All' || slot.dataset.categories!.split(' ').includes(filter);
+          slot.classList.toggle('is-out', !match);
+        });
+        extras?.classList.toggle('is-out', filter !== 'All');
+        section.classList.toggle('is-filtered', filter !== 'All');
+
+        if (reduced) return ScrollTrigger.refresh();
+        Flip.from(state, {
+          duration: 0.7,
+          ease: 'power3.inOut',
+          stagger: 0.04,
+          absolute: true,
+          onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, duration: 0.5, delay: 0.2 }),
+          onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.9, duration: 0.3 }),
+          onComplete: () => ScrollTrigger.refresh(),
         });
       }),
     );
@@ -190,6 +206,30 @@ const count = String(projects.length).padStart(2, '0');
     background: var(--text);
     color: var(--bg);
     font-weight: 600;
+  }
+
+  /* ---------- Filtered ---------- */
+  .work :global(.is-out) {
+    display: none !important;
+  }
+
+  .work.is-filtered :global(.slot) {
+    grid-column: span 6;
+    height: 460px;
+  }
+
+  @media (max-width: 1023px) {
+    .work.is-filtered :global(.slot) {
+      grid-column: span 3;
+      height: 340px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .work.is-filtered :global(.slot) {
+      grid-column: 1 / -1;
+      height: var(--h-m);
+    }
   }
 
   /* ---------- More experiments ---------- */

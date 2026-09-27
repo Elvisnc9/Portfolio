@@ -16,6 +16,8 @@ export interface TileLayout {
   cursor?: boolean;
   /** Width of a contained logo image */
   imageWidth?: string;
+  /** Scroll parallax speed of the card (keep within ~0.94–1.06 so cards never touch) */
+  speed?: number;
 }
 
 interface Props {
@@ -39,6 +41,7 @@ const style = [
   .join('; ');
 ---
 
+<div class="slot" style={style} data-categories={project.categories.join(' ')}>
 <a
   class:list={[
     'tile',
@@ -48,11 +51,10 @@ const style = [
     { 'pills--stack': layout.stackPills, 'compact-tablet': compactTablet },
   ]}
   href={`/work/${project.slug}`}
-  style={style}
-  data-categories={project.categories.join(' ')}
-  data-reveal
+  data-speed={layout.speed ?? 1}
+  data-unmask
 >
-  <div class="media" data-parallax="0.06">
+  <div class="media" data-parallax="0.1">
     {
       project.images.map((image) => (
         <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
@@ -95,19 +97,22 @@ const style = [
     )
   }
 </a>
+</div>
 
 <style>
-  .tile {
+  /* The slot is the grid cell (filtered and animated by the Work section) */
+  .slot {
     grid-column: span var(--span-d);
     height: var(--h-d);
+  }
+
+  .tile {
+    display: block;
+    height: 100%;
     position: relative;
     overflow: hidden;
     border-radius: var(--radius-tile);
     background: var(--bg);
-    transition:
-      opacity 0.35s,
-      filter 0.35s,
-      transform 0.35s;
   }
 
   .tone--dark {
@@ -115,17 +120,10 @@ const style = [
   }
 
   /* Filter state (set by the Work section script) */
-  .tile.is-dimmed {
-    opacity: 0.25;
-    filter: grayscale(1);
-    transform: scale(0.98);
-    pointer-events: none;
-  }
-
   /* ---------- Media ---------- */
   .media {
     position: absolute;
-    inset: 0;
+    inset: -6% 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -315,9 +313,12 @@ const style = [
 
   /* ========== Tablet ========== */
   @media (max-width: 1023px) {
-    .tile {
+    .slot {
       grid-column: span var(--span-t);
       height: var(--h-t);
+    }
+
+    .tile {
       border-radius: 30px;
     }
 
@@ -404,9 +405,12 @@ const style = [
 
   /* ========== Mobile ========== */
   @media (max-width: 640px) {
-    .tile {
+    .slot {
       grid-column: 1 / -1;
       height: var(--h-m);
+    }
+
+    .tile {
       border-radius: var(--radius-tile);
     }
 

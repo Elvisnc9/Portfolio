@@ -46,6 +46,24 @@ function reveals() {
   });
 }
 
+/** [data-unmask]: grows out of a smaller rounded window as it enters. Uses clip-path, not transform. */
+function unmasks() {
+  gsap.utils.toArray<HTMLElement>('[data-unmask]').forEach((el) => {
+    gsap.fromTo(
+      el,
+      { clipPath: 'inset(10% 8% 10% 8% round 32px)', autoAlpha: 0 },
+      {
+        clipPath: 'inset(0% 0% 0% 0% round 32px)',
+        autoAlpha: 1,
+        duration: 1,
+        ease: 'power3.out',
+        clearProps: 'clipPath,opacity,visibility',
+        scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+      },
+    );
+  });
+}
+
 /** [data-float]: a slow, endless bob. Each element gets its own rhythm. */
 function floats() {
   gsap.utils.toArray<HTMLElement>('[data-float]').forEach((el, i) => {
@@ -230,6 +248,7 @@ function setup() {
   const { signal } = listeners;
   ctx = gsap.context(() => {
     reveals();
+    unmasks();
     floats();
     counters();
     parallax();
