@@ -1,0 +1,351 @@
+---
+// Right column on desktop: email card, socials grid, "what happens next".
+// Tablet/mobile: the email card is replaced by the small tile in the header,
+// and "what happens next" moves above the socials.
+import Icon from '../Icon.astro';
+import { site, socials } from '../../data/site';
+
+const links = socials.filter((s) => s.href);
+const steps = [
+  'You send the brief — rough is fine.',
+  'I reply with questions and ideas.',
+  'We agree on a plan and start building.',
+];
+---
+
+<div class="side">
+  <div class="email-card" data-reveal>
+    <div class="ring" aria-hidden="true"></div>
+    <span class="mono">PREFER EMAIL?</span>
+    <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+    <button type="button" class="copy" data-copy-email={site.email}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="9" y="9" width="12" height="12" rx="2"></rect>
+        <path d="M5 15V5a2 2 0 0 1 2-2h10"></path>
+      </svg>
+      <span data-copy-label>Copy email</span>
+    </button>
+  </div>
+
+  <div class="socials-card" data-reveal data-reveal-delay="0.06">
+    <span class="mono mono--muted">FIND ME ELSEWHERE</span>
+    <ul class="socials">
+      {
+        links.map((s) => (
+          <li>
+            <a href={s.href} target="_blank" rel="noopener noreferrer">
+              <span class="social-icon" style={`background: ${s.bg}; color: ${s.fg}`} aria-hidden="true">
+                {s.k}
+              </span>
+              <span class="social-name">{s.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="next-card" data-reveal data-reveal-delay="0.12">
+    <span class="mono">WHAT HAPPENS NEXT</span>
+    <ol>
+      {
+        steps.map((step, i) => (
+          <li>
+            <span class:list={['step-num', { 'step-num--last': i === steps.length - 1 }]} aria-hidden="true">
+              {i + 1}
+            </span>
+            <span class="step-text">{step}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</div>
+
+<script>
+  /** Older-browser fallback: copy through a temporary, off-screen textarea */
+  function legacyCopy(text: string) {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0';
+    document.body.append(area);
+    area.select();
+    const ok = document.execCommand('copy');
+    area.remove();
+    return ok;
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
+      const label = button.querySelector('[data-copy-label]')!;
+      let timer: number | undefined;
+      button.addEventListener('click', async () => {
+        const email = button.dataset.copyEmail!;
+        let copied = false;
+        try {
+          await navigator.clipboard.writeText(email);
+          copied = true;
+        } catch {
+          copied = legacyCopy(email);
+        }
+        if (!copied) {
+          // Select the address so the visitor can copy it themselves
+          const link = button.parentElement?.querySelector('.email');
+          if (link) window.getSelection()?.selectAllChildren(link);
+        }
+        label.textContent = copied ? 'Copied!' : 'Selected — press Ctrl+C';
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => (label.textContent = 'Copy email'), 2000);
+      });
+    });
+  });
+</script>
+
+<style>
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .mono--muted {
+    color: var(--muted);
+  }
+
+  /* ---------- Email ---------- */
+  .email-card {
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border-radius: 32px;
+    background: var(--orange);
+    color: var(--dark);
+  }
+
+  .ring {
+    position: absolute;
+    right: -50px;
+    top: -50px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 24px solid rgba(17, 17, 16, 0.1);
+  }
+
+  .email {
+    position: relative;
+    align-self: flex-start;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.035em;
+    overflow-wrap: anywhere;
+  }
+
+  .email:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+
+  .copy {
+    position: relative;
+    align-self: flex-start;
+    height: var(--tap);
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--dark);
+    color: var(--on-dark);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* ---------- Socials ---------- */
+  .socials-card {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border-radius: 32px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .socials {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 16px;
+    justify-items: center;
+  }
+
+  .socials a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .social-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 17px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+
+  .socials a:hover .social-icon {
+    transform: translateY(-3px) rotate(-4deg);
+  }
+
+  .social-name {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ---------- Next steps ---------- */
+  .next-card {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 32px;
+    background: var(--sky);
+    color: var(--dark);
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  ol li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .step-num {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--dark);
+    color: var(--on-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .step-num--last {
+    background: var(--orange);
+    color: var(--dark);
+  }
+
+  .step-text {
+    padding-top: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    .side {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .email-card {
+      display: none;
+    }
+
+    .next-card {
+      order: -1;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .side {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .mono {
+      font-size: 11px;
+    }
+
+    .socials-card,
+    .next-card {
+      padding: 22px;
+      border-radius: 28px;
+    }
+
+    .socials-card {
+      gap: 16px;
+    }
+
+    .socials {
+      row-gap: 14px;
+    }
+
+    .social-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      font-size: 13px;
+    }
+
+    .social-name {
+      font-size: 11px;
+    }
+
+    .next-card,
+    ol {
+      gap: 14px;
+    }
+
+    ol li {
+      gap: 12px;
+    }
+
+    .step-num {
+      width: 30px;
+      height: 30px;
+      font-size: 12px;
+    }
+
+    .step-text {
+      padding-top: 4px;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+  }
+</style>

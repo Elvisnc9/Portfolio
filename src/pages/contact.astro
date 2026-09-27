@@ -1,8 +1,339 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Placeholder from '../components/Placeholder.astro';
+import ContactSide from '../components/contact/ContactSide.astro';
+import { site } from '../data/site';
 ---
 
-<BaseLayout title="Contact" active="Contact" navCta="email">
-  <Placeholder label="Contact · coming soon" title="Contact" text="This page is built in a later phase." />
+<BaseLayout
+  title="Contact"
+  active="Contact"
+  navCta="email"
+  description="Start a project with Elvis Ngwu: mobile apps, websites, SaaS and AI integration. Freelance, full-time and collaborations."
+>
+  <section class="head">
+    <div class="intro">
+      <span class="status" data-reveal><span class="dot" aria-hidden="true"></span>AVAILABLE FOR NEW PROJECTS</span>
+      <h1 data-reveal data-reveal-delay="0.06">Got an idea?<br class="hide-mobile" /> Let's <span>build it.</span></h1>
+      <p data-reveal data-reveal-delay="0.12">
+        <span class="hide-mobile">Freelance contracts, full-time roles and interesting collaborations. Tell me a little about what you're building and I'll get back to you.</span>
+        <span class="show-mobile">Freelance, full-time roles and interesting collaborations. Tell me what you're building.</span>
+      </p>
+
+      <!-- Tablet + mobile: small clock and email tiles -->
+      <div class="mini-tiles">
+        <div class="mini mini--clock">
+          <span class="mono mono--muted">LOCAL · WAT</span>
+          <time class="mini-time" data-contact-clock>--:--</time>
+        </div>
+        <a class="mini mini--email" href={`mailto:${site.email}`}>
+          <span class="mono">PREFER EMAIL?</span>
+          <span class="mini-email">{site.email.replace('@', '@​')}</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Desktop: clock tile -->
+    <div class="clock-tile" data-reveal data-reveal-delay="0.1">
+      <div class="clock-row mono mono--muted"><span>MY LOCAL TIME</span><span>NG · WAT</span></div>
+      <time class="clock" data-contact-clock>--:--</time>
+      <span class="clock-note">Works with teams worldwide.</span>
+    </div>
+  </section>
+
+  <section class="main">
+    <div class="form-col">
+      <!-- Contact form: step 5.2 -->
+    </div>
+    <div class="side-col">
+      <ContactSide />
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  import { lagosTime } from '../scripts/time';
+
+  let timer: number | undefined;
+
+  document.addEventListener('astro:page-load', () => {
+    const clocks = document.querySelectorAll<HTMLElement>('[data-contact-clock]');
+    if (!clocks.length) return;
+    const tick = () => clocks.forEach((c) => (c.textContent = lagosTime()));
+    tick();
+    timer = window.setInterval(tick, 15_000);
+  });
+
+  document.addEventListener('astro:before-swap', () => window.clearInterval(timer));
+</script>
+
+<style>
+  .show-mobile {
+    display: none;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .mono--muted {
+    color: var(--muted);
+  }
+
+  /* ---------- Header ---------- */
+  .head {
+    padding: 56px var(--gutter) 40px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+    align-items: end;
+  }
+
+  .intro {
+    grid-column: 1 / span 8;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .status {
+    align-self: flex-start;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    50% {
+      box-shadow: 0 0 0 7px rgba(34, 197, 94, 0.08);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dot {
+      animation: none;
+    }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 108px;
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  h1 span {
+    color: var(--orange);
+  }
+
+  .intro p {
+    max-width: 600px;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .mini-tiles {
+    display: none;
+  }
+
+  .clock-tile {
+    grid-column: 10 / span 3;
+    height: 230px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 32px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .clock-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .clock {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .clock-note {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  /* ---------- Form + side ---------- */
+  .main {
+    padding: 0 var(--gutter) 80px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+  }
+
+  .form-col {
+    grid-column: 1 / span 7;
+  }
+
+  .side-col {
+    grid-column: 8 / span 5;
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    .head {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    h1 {
+      font-size: 80px;
+    }
+
+    .clock-tile {
+      display: none;
+    }
+
+    .mini-tiles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini {
+      height: 140px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 28px;
+    }
+
+    .mini--clock {
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .mini--email {
+      background: var(--orange);
+      color: var(--dark);
+    }
+
+    .mini-time {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 44px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mini-email {
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-bottom: 64px;
+    }
+
+    .form-col,
+    .side-col {
+      width: 100%;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .hide-mobile {
+      display: none;
+    }
+
+    .show-mobile {
+      display: inline;
+    }
+
+    .head {
+      padding: 28px var(--gutter) 24px;
+    }
+
+    .intro {
+      gap: 18px;
+    }
+
+    .status {
+      padding: 7px 12px;
+      gap: 7px;
+      font-size: 10px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+    }
+
+    h1 {
+      font-size: 44px;
+      line-height: 0.95;
+    }
+
+    .intro p {
+      font-size: 16px;
+    }
+
+    .mono {
+      font-size: 10px;
+    }
+
+    .mini-tiles {
+      gap: 10px;
+    }
+
+    .mini {
+      height: 120px;
+      padding: 16px;
+      border-radius: 24px;
+    }
+
+    .mini-time {
+      font-size: 34px;
+    }
+
+    .mini-email {
+      font-size: 14px;
+    }
+
+    .main {
+      padding: 0 var(--gutter) 48px;
+      gap: 16px;
+    }
+  }
+</style>

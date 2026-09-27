@@ -3,7 +3,7 @@ import Icon from '../Icon.astro';
 import SectionHead from '../SectionHead.astro';
 import { site, socials, whatsapp } from '../../data/site';
 
-const links = socials.filter((s) => s.href);
+const links = socials.filter((s) => s.href && !s.contactOnly);
 ---
 
 <section id="contact" class="contact">
