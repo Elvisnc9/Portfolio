@@ -6,15 +6,16 @@ import { stats } from '../../data/home';
 ---
 
 <section class="about-hero">
-  <div class="stage">
+  <div class="stage" data-lean>
     <div class="topline">
       <span class="pill">ABOUT ME</span>
       <span class="meta"><span class="hide-mobile">SOFTWARE DEVELOPER · </span>EST. {stats.years.since} · NIGERIA</span>
     </div>
 
-    <div class="circle" aria-hidden="true" data-parallax="0.1"></div>
+    <div class="circle" aria-hidden="true" data-speed="0.7"></div>
     <img
       class="portrait"
+      data-speed="0.9"
       src="/images/portrait.webp"
       alt={`Portrait of ${site.owner}`}
       width="760"
@@ -24,10 +25,10 @@ import { stats } from '../../data/home';
       decoding="async"
     />
 
-    <span class="chip chip--hi">Hi, I'm Elvis</span>
-    <span class="chip chip--stack">Flutter · Serverpod · AI</span>
+    <span class="chip chip--hi" data-speed="1.4">Hi, I'm Elvis</span>
+    <span class="chip chip--stack" data-speed="1.25">Flutter · Serverpod · AI</span>
 
-    <h1 class="name">ELVIS <br class="name-break" />NGWU</h1>
+    <h1 class="name" data-speed="1.1">ELVIS <br class="name-break" />NGWU</h1>
   </div>
 
   <div class="intro" data-reveal>

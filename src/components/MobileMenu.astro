@@ -92,7 +92,7 @@ const { active } = Astro.props;
 
     document.querySelectorAll('[data-menu-open]').forEach((btn) => btn.addEventListener('click', open));
     menu.querySelector('[data-menu-close]')?.addEventListener('click', close);
-    // Close when a link is chosen (covers same-page anchors like /#work)
+    // Close when a link is chosen (covers same-page anchors like #work)
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
 
     // Close automatically if the window grows back to desktop width.

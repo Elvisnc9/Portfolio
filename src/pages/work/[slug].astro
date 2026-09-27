@@ -42,7 +42,7 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
 
 <BaseLayout title={project.title} active="Work" description={summary}>
   <section class="crumbs">
-    <BackLink href="/#work" label="All work" />
+    <BackLink href="/work" label="All work" />
     <span class="mono">
       <span class="hide-mobile">WORK / {project.title.toUpperCase()} · CASE {pad(index + 1)} OF {pad(total)}</span>
       <span class="show-mobile">CASE {pad(index + 1)} / {pad(total)}</span>

@@ -105,11 +105,26 @@ function speedParallax() {
   gsap.utils.toArray<HTMLElement>('[data-speed]').forEach((el) => {
     const speed = Number(el.dataset.speed) || 1;
     const section = el.closest('section') ?? el.parentElement ?? el;
-    gsap.to(el, {
-      y: () => (1 - speed) * section.offsetHeight * 0.6,
-      ease: 'none',
-      scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
-    });
+    const nearTop = section.getBoundingClientRect().top + window.scrollY < window.innerHeight * 0.5;
+    if (nearTop) {
+      // Hero sections: start at rest, then spread apart as the section scrolls away
+      gsap.to(el, {
+        y: () => (1 - speed) * section.offsetHeight * 0.6,
+        ease: 'none',
+        scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
+      });
+    } else {
+      // Further down: drift across the whole pass through the screen, centred on rest
+      gsap.fromTo(
+        el,
+        { y: (speed - 1) * 120 },
+        {
+          y: (1 - speed) * 120,
+          ease: 'none',
+          scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true },
+        },
+      );
+    }
   });
 }
 
@@ -117,30 +132,35 @@ function speedParallax() {
 const finePointer = window.matchMedia('(pointer: fine)');
 let listeners: AbortController | null = null;
 
-/** Hero toys lean toward the mouse, faster toys more. Uses x + rotation so scroll parallax (y) is untouched. */
+/**
+ * [data-lean] containers: their [data-speed] children lean toward the mouse, faster ones more.
+ * Uses x + rotation so scroll parallax (y) is untouched; rotation is added on top of
+ * whatever tilt the element already has.
+ */
 function pointerParallax(signal: AbortSignal) {
   if (!finePointer.matches) return;
-  document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
-    const toys = [...hero.querySelectorAll<HTMLElement>('[data-speed]')].map((el) => {
+  document.querySelectorAll<HTMLElement>('[data-lean]').forEach((stage) => {
+    const items = [...stage.querySelectorAll<HTMLElement>('[data-speed]')].map((el) => {
       const speed = Number(el.dataset.speed) || 1;
       return {
         speed,
+        baseRotation: Number(gsap.getProperty(el, 'rotation')) || 0,
         x: gsap.quickTo(el, 'x', { duration: 0.9, ease: 'power3.out' }),
         r: gsap.quickTo(el, 'rotation', { duration: 0.9, ease: 'power3.out' }),
       };
     });
-    hero.addEventListener(
+    stage.addEventListener(
       'pointermove',
       (e) => {
         const nx = e.clientX / window.innerWidth - 0.5;
-        toys.forEach((t) => {
+        items.forEach((t) => {
           t.x(nx * 44 * t.speed);
-          t.r(nx * 8 * t.speed);
+          t.r(t.baseRotation + nx * 8 * t.speed);
         });
       },
       { signal },
     );
-    hero.addEventListener('pointerleave', () => toys.forEach((t) => (t.x(0), t.r(0))), { signal });
+    stage.addEventListener('pointerleave', () => items.forEach((t) => (t.x(0), t.r(t.baseRotation))), { signal });
   });
 }
 

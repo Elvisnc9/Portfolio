@@ -18,7 +18,8 @@ Visual source of truth: /design-reference (read its README). Match it closely at
 ## Motion (src/scripts/motion.ts)
 Add behaviour with data attributes instead of new scripts:
 - data-reveal (+ data-reveal-delay): fade up on scroll into view
-- data-speed="1.4": scroll parallax vs its section (>1 rushes, <1 lags); hero toys also lean toward the mouse
+- data-speed="1.4": scroll parallax vs its section (>1 rushes, <1 lags)
+- data-lean on a container: its data-speed children lean toward the mouse (home hero, about stage, case hero)
 - data-parallax="0.15": small drift for decoration
 - data-float: gentle endless bob · data-count: "20+" counts up · data-magnetic: button pulls toward the cursor
 - data-stamp inside data-stamp-surface (+ data-stamp-order): rubber-stamp slam (certificates)
@@ -29,6 +30,7 @@ Everything is off under prefers-reduced-motion. Pointer effects only run on fine
 /about (centered grayscale portrait with "ELVIS NGWU" over it, stats, stack, services, certificates "Certified & stamped", journey chapter viewer)
 /notes (+ /notes/[slug]) (corkboard of taped sticky notes, category filters)
 /contact (form with chips, email tile, socials, "what happens next")
+/work (all work: the Work section as a page; the nav Work link goes here)
 /work/[slug] (case studies)
 
 ## Workflow rules
