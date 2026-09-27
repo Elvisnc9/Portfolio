@@ -18,9 +18,17 @@ export const navLinks = [
 
 export type NavLabel = (typeof navLinks)[number]['label'];
 
+// Links with an empty href are hidden until filled in.
+// `menu` = also shown in the mobile menu.
 export const socials = [
-  { label: 'GitHub', href: 'https://github.com/Elvisnc9' },
+  { label: 'GitHub', href: 'https://github.com/Elvisnc9', menu: true },
   // TODO: add your LinkedIn profile URL
-  { label: 'LinkedIn', href: '' },
-  { label: 'WhatsApp', href: 'https://wa.me/2349056982116' },
+  { label: 'LinkedIn', href: '', menu: true },
+  { label: 'X', href: 'https://x.com/ElvisNgwu', menu: false },
+  { label: 'WhatsApp', href: 'https://wa.me/2349056982116', menu: true },
+  // TODO: add your pub.dev publisher URL
+  { label: 'pub.dev', href: '', menu: false },
 ];
+
+export const whatsapp = socials.find((s) => s.label === 'WhatsApp')!.href;
+export const cvUrl = '/NGWU_ELVIS_CV.pdf';

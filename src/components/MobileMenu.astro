@@ -48,7 +48,7 @@ const { active } = Astro.props;
     <div class="socials">
       {
         socials
-          .filter((s) => s.href)
+          .filter((s) => s.href && s.menu)
           .map((s) => (
             <a href={s.href} target="_blank" rel="noopener noreferrer">
               {s.label}
@@ -62,6 +62,8 @@ const { active } = Astro.props;
 </dialog>
 
 <script>
+  import { lagosTime } from '../scripts/time';
+
   function setupMenu() {
     const menu = document.querySelector<HTMLDialogElement>('#mobile-menu');
     if (!menu) return;
@@ -71,12 +73,7 @@ const { active } = Astro.props;
 
     const tick = () => {
       if (!clock) return;
-      clock.textContent = new Intl.DateTimeFormat('en-GB', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-        timeZone: 'Africa/Lagos',
-      }).format(new Date());
+      clock.textContent = lagosTime();
     };
 
     const open = () => {
