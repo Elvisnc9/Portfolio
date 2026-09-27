@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactSide from '../components/contact/ContactSide.astro';
+import ContactForm from '../components/contact/ContactForm.astro';
 import { site } from '../data/site';
 ---
 
@@ -42,7 +43,7 @@ import { site } from '../data/site';
 
   <section class="main">
     <div class="form-col">
-      <!-- Contact form: step 5.2 -->
+      <ContactForm />
     </div>
     <div class="side-col">
       <ContactSide />
