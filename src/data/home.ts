@@ -67,14 +67,3 @@ export const testimonials: { quote: string; short?: string; name: string; compan
     tone: 'surface',
   },
 ];
-
-/** Home preview of the notes board (the full list moves to a content collection in the Notes phase) */
-export const notesPreview = {
-  total: 9,
-  items: [
-    { n: '01', title: 'Building from Africa', text: 'World-class products can come from anywhere. Great ideas don’t need permission from a zip code.', bg: '#FFD9C9', rot: -2 },
-    { n: '02', title: 'Designing for trust', text: 'People need to trust a product before they rely on it. That balance is where good products are made.', bg: '#BFE3FA', rot: 1.5 },
-    { n: '03', title: 'The future is immersive', text: 'AR blends the digital and physical instead of replacing one with the other.', bg: '#F4F2ED', rot: -1 },
-    { n: '04', title: 'Beauty in simplicity', text: 'Good products don’t need to be complicated. Clear experiences make tech feel natural.', bg: '#E4F5B8', rot: 2 },
-  ],
-};

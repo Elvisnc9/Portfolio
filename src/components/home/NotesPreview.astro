@@ -1,8 +1,10 @@
 ---
 import SectionHead from '../SectionHead.astro';
-import { notesPreview } from '../../data/home';
+import { getNotes, noteNumber, noteUrl } from '../../lib/notes';
 
-const total = String(notesPreview.total).padStart(2, '0');
+const notes = await getNotes();
+const previews = notes.filter((note) => note.data.home).slice(0, 4);
+const total = noteNumber(notes.length);
 ---
 
 <section id="notes" class="notes">
@@ -12,12 +14,14 @@ const total = String(notesPreview.total).padStart(2, '0');
 
   <ul class="board" aria-label="Latest notes">
     {
-      notesPreview.items.map((note, i) => (
-        <li class="sticky" style={`--note-bg: ${note.bg}; --rot: ${note.rot}deg`} data-reveal data-reveal-delay={String(i * 0.08)}>
+      previews.map((note, i) => (
+        <li class="sticky" style={`--note-bg: ${note.data.color}; --rot: ${note.data.rotate}deg`} data-reveal data-reveal-delay={String(i * 0.08)}>
           <span class="tape" aria-hidden="true" />
-          <span class="note-num">NOTE {note.n}</span>
-          <h3>{note.title}</h3>
-          <p>{note.text}</p>
+          <span class="note-num">NOTE {noteNumber(note.data.n)}</span>
+          <h3>
+            <a href={noteUrl(note)}>{note.data.title}</a>
+          </h3>
+          <p>{note.data.excerptShort ?? note.data.excerpt}</p>
         </li>
       ))
     }
@@ -61,6 +65,23 @@ const total = String(notesPreview.total).padStart(2, '0');
   .sticky:hover {
     transform: rotate(0deg) translateY(-6px);
     box-shadow: 0 26px 50px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Stretched link: the title link covers the whole note */
+  h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .sticky:focus-within {
+    outline: 2px solid var(--orange);
+    outline-offset: 4px;
+  }
+
+  h3 a:focus-visible {
+    outline: none;
   }
 
   .tape {
