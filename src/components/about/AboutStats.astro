@@ -1,0 +1,268 @@
+---
+import { stack, stats } from '../../data/home';
+
+const tiles = [
+  { eyebrow: 'SHIPPED', ...pick(stats.shipped), tone: 'orange' },
+  { eyebrow: 'TEAMWORK', ...pick(stats.teamwork), tone: 'sky' },
+  { eyebrow: `SINCE ${stats.years.since}`, ...pick(stats.years), tone: 'dark' },
+];
+
+function pick(s: { value: string; label: string; short: string }) {
+  return { value: s.value, caption: s.label, short: s.short };
+}
+---
+
+<section class="about-stats" aria-label="In numbers">
+  {
+    tiles.map((t, i) => (
+      <div class={`stat stat--${t.tone}`} data-reveal data-reveal-delay={String(i * 0.06)}>
+        <span class="eyebrow">{t.eyebrow}</span>
+        <div class="stat-body">
+          <span class="value">{t.value}</span>
+          <span class="caption">
+            <span class="full">{t.caption}</span>
+            <span class="short">{t.short}</span>
+          </span>
+        </div>
+      </div>
+    ))
+  }
+
+  <div class="stack" data-reveal data-reveal-delay="0.18">
+    <div class="stack-head">
+      <span>MY STACK</span><span>{String(stack.length).padStart(2, '0')} APPS</span>
+    </div>
+    <ul class="apps">
+      {
+        stack.map((s) => (
+          <li>
+            <span class="app-icon" style={`background: ${s.bg}; color: ${s.fg}`} aria-hidden="true">
+              {s.k}
+            </span>
+            <span class="app-name">{s.name}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .about-stats {
+    padding: 16px var(--gutter);
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .stat {
+    grid-column: span 2;
+    height: 240px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 30px;
+    color: var(--dark);
+  }
+
+  .stat--orange {
+    background: var(--orange);
+  }
+
+  .stat--sky {
+    background: var(--sky);
+  }
+
+  .stat--dark {
+    background: var(--dark);
+    color: var(--on-dark);
+  }
+
+  .stat--dark .eyebrow {
+    opacity: 0.7;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .stat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .caption {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .short {
+    display: none;
+  }
+
+  /* ---------- Stack ---------- */
+  .stack {
+    grid-column: span 6;
+    height: 240px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 30px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .stack-head {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .apps {
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+  }
+
+  .apps li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .app-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+
+  .apps li:hover .app-icon {
+    transform: translateY(-3px) rotate(-4deg);
+  }
+
+  .app-name {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    .about-stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      grid-column: span 1;
+      height: 200px;
+      padding: 22px;
+    }
+
+    .stack {
+      grid-column: 1 / -1;
+      height: auto;
+      padding: 22px;
+      gap: 20px;
+    }
+
+    .apps {
+      row-gap: 18px;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .about-stats {
+      padding: 12px var(--gutter);
+      gap: 10px;
+    }
+
+    .stat {
+      height: 140px;
+      padding: 16px;
+      border-radius: 24px;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+    }
+
+    .stat-body {
+      gap: 2px;
+    }
+
+    .value {
+      font-size: 32px;
+    }
+
+    .caption {
+      font-size: 11px;
+    }
+
+    .full {
+      display: none;
+    }
+
+    .short {
+      display: inline;
+    }
+
+    .stack {
+      padding: 20px;
+      gap: 14px;
+      border-radius: 24px;
+    }
+
+    .stack-head {
+      font-size: 11px;
+    }
+
+    .apps {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      row-gap: 14px;
+    }
+
+    .apps li {
+      gap: 6px;
+    }
+
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      font-size: 15px;
+    }
+
+    .app-name {
+      font-size: 11px;
+    }
+  }
+</style>

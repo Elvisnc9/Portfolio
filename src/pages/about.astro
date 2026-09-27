@@ -1,8 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Placeholder from '../components/Placeholder.astro';
+import AboutHero from '../components/about/AboutHero.astro';
+import AboutStats from '../components/about/AboutStats.astro';
+import Services from '../components/about/Services.astro';
 ---
 
-<BaseLayout title="About" active="About">
-  <Placeholder label="About · coming soon" title="About" text="This page is built in a later phase." />
+<BaseLayout
+  title="About"
+  active="About"
+  description="Elvis Ngwu builds websites, mobile apps and AI-powered products from Nigeria. Stack, services, certificates and the journey so far."
+>
+  <AboutHero />
+  <AboutStats />
+  <Services />
 </BaseLayout>

@@ -1,9 +1,10 @@
 // Copy and lists for the home page. Edit text here, not in components.
 
+/** "short" labels are used where space is tight (About page on mobile) */
 export const stats = {
-  shipped: { value: '20+', label: 'apps & websites' },
-  teamwork: { value: '10+', label: 'collaborations' },
-  years: { value: '4+', label: 'years building', since: 2022 },
+  shipped: { value: '20+', label: 'apps & websites', short: 'apps & sites' },
+  teamwork: { value: '10+', label: 'collaborations', short: 'collabs' },
+  years: { value: '4+', label: 'years building', short: 'years', since: 2022 },
 };
 
 /** "k" is the two-letter monogram shown on the app icon */
