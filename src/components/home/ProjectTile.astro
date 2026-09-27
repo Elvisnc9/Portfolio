@@ -1,0 +1,456 @@
+---
+import Icon from '../Icon.astro';
+import type { Project } from '../../data/projects';
+
+export interface TileLayout {
+  /** [grid columns, height px] at desktop (12 cols) and tablet (6 cols); mobile is full width */
+  desktop: [number, number];
+  tablet: [number, number];
+  mobile: number;
+  /** Where the name pills sit on desktop/tablet (mobile is always top) */
+  pills: 'top' | 'bottom';
+  /** Stack the pills vertically on desktop (narrow tiles) */
+  stackPills?: boolean;
+  arrow?: 'orange' | 'light';
+  /** Floating "View case" cursor badge (desktop only) */
+  cursor?: boolean;
+  /** Width of a contained logo image */
+  imageWidth?: string;
+}
+
+interface Props {
+  project: Project;
+  layout: TileLayout;
+}
+
+const { project, layout } = Astro.props;
+const compactTablet = layout.tablet[0] <= 2;
+
+const style = [
+  `--bg: ${project.bg}`,
+  `--span-d: ${layout.desktop[0]}`,
+  `--h-d: ${layout.desktop[1]}px`,
+  `--span-t: ${layout.tablet[0]}`,
+  `--h-t: ${layout.tablet[1]}px`,
+  `--h-m: ${layout.mobile}px`,
+  layout.imageWidth ? `--img-w: ${layout.imageWidth}` : '',
+]
+  .filter(Boolean)
+  .join('; ');
+---
+
+<a
+  class:list={[
+    'tile',
+    `tile--${project.media}`,
+    `tone--${project.tone}`,
+    `pills--${layout.pills}`,
+    { 'pills--stack': layout.stackPills, 'compact-tablet': compactTablet },
+  ]}
+  href={`/work/${project.slug}`}
+  style={style}
+  data-categories={project.categories.join(' ')}
+  data-reveal
+>
+  <div class="media">
+    {
+      project.images.map((image) => (
+        <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
+      ))
+    }
+  </div>
+
+  <div class="pills">
+    <span class="pill pill--title">
+      {
+        project.shortTitle ? (
+          <>
+            <span class="full">{project.title}</span>
+            <span class="short">{project.shortTitle}</span>
+          </>
+        ) : (
+          project.title
+        )
+      }
+    </span>
+    <span class="pill pill--tag">{project.tag}</span>
+  </div>
+
+  {
+    layout.arrow && (
+      <span class={`arrow arrow--${layout.arrow}`} aria-hidden="true">
+        <Icon name="arrow-up-right" size={22} />
+      </span>
+    )
+  }
+
+  {
+    layout.cursor && (
+      <span class="cursor" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4 2l16 9-7 2-3 7z" />
+        </svg>
+        View case
+      </span>
+    )
+  }
+</a>
+
+<style>
+  .tile {
+    grid-column: span var(--span-d);
+    height: var(--h-d);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-tile);
+    background: var(--bg);
+    transition:
+      opacity 0.35s,
+      filter 0.35s,
+      transform 0.35s;
+  }
+
+  .tone--dark {
+    border: 1px solid var(--line);
+  }
+
+  /* Filter state (set by the Work section script) */
+  .tile.is-dimmed {
+    opacity: 0.25;
+    filter: grayscale(1);
+    transform: scale(0.98);
+    pointer-events: none;
+  }
+
+  /* ---------- Media ---------- */
+  .media {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .media img {
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .tile--contain img {
+    width: var(--img-w, 100%);
+    height: auto;
+  }
+
+  .tile--cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tile--phones .media {
+    align-items: flex-end;
+    gap: 28px;
+  }
+
+  .tile--phones img {
+    width: 240px;
+    height: 470px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 26px 26px 0 0;
+    box-shadow: 0 30px 60px rgba(17, 17, 16, 0.2);
+  }
+
+  .tile--phones img + img {
+    height: 410px;
+  }
+
+  .tile--phone-bottom .media {
+    align-items: flex-end;
+  }
+
+  .tile--phone-bottom img {
+    height: 330px;
+    width: auto;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .tile:hover .media img {
+    transform: scale(1.03);
+  }
+
+  .tile--phones:hover img,
+  .tile--phone-bottom:hover img {
+    transform: translateY(-10px);
+  }
+
+  .tile--phones:hover img + img {
+    transform: translateY(-4px);
+  }
+
+  /* ---------- Pills ---------- */
+  .pills {
+    position: absolute;
+    left: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .pills--top .pills {
+    top: 24px;
+  }
+
+  .pills--bottom .pills {
+    bottom: 24px;
+  }
+
+  .pills--stack .pills {
+    left: 20px;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pills--stack.pills--top .pills {
+    top: 20px;
+  }
+
+  .pills--stack.pills--bottom .pills {
+    bottom: 20px;
+  }
+
+  .pill {
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .pill--title {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .short {
+    display: none;
+  }
+
+  .tone--light .pill--title {
+    background: var(--dark);
+    color: var(--on-dark);
+  }
+
+  .tone--light .pill--tag {
+    background: var(--surface);
+    color: var(--dark);
+  }
+
+  .tone--dark .pill--title {
+    background: var(--on-dark);
+    color: var(--dark);
+  }
+
+  .tone--dark .pill--tag {
+    background: rgba(244, 242, 237, 0.14);
+    color: var(--on-dark);
+  }
+
+  .tone--vivid .pill--title {
+    background: var(--surface);
+    color: var(--dark);
+  }
+
+  .tone--vivid .pill--tag {
+    background: var(--dark);
+    color: var(--surface);
+  }
+
+  /* ---------- Arrow + cursor ---------- */
+  .arrow {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--dark);
+    transition: transform 0.3s;
+  }
+
+  .arrow--orange {
+    background: var(--orange);
+  }
+
+  .arrow--light {
+    background: var(--on-dark);
+  }
+
+  .tile:hover .arrow {
+    transform: rotate(45deg);
+  }
+
+  .cursor {
+    position: absolute;
+    left: 60%;
+    top: 46%;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: var(--radius-pill);
+    background: var(--dark);
+    color: var(--on-dark);
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 12px 30px rgba(17, 17, 16, 0.3);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .tile:hover .cursor {
+    transform: translate(-8px, -8px);
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    .tile {
+      grid-column: span var(--span-t);
+      height: var(--h-t);
+      border-radius: 30px;
+    }
+
+    .pills,
+    .pills--stack .pills {
+      left: 18px;
+      flex-direction: row;
+      gap: 6px;
+    }
+
+    .pills--top .pills,
+    .pills--stack.pills--top .pills {
+      top: 18px;
+    }
+
+    .pills--bottom .pills,
+    .pills--stack.pills--bottom .pills {
+      bottom: 18px;
+    }
+
+    .compact-tablet .pills {
+      left: 16px;
+    }
+
+    .compact-tablet.pills--top .pills {
+      top: 16px;
+    }
+
+    .compact-tablet.pills--bottom .pills {
+      bottom: 16px;
+    }
+
+    .compact-tablet .pill--tag {
+      display: none;
+    }
+
+    .pill {
+      padding: 7px 13px;
+    }
+
+    .pill--title {
+      font-size: 14px;
+    }
+
+    .full {
+      display: none;
+    }
+
+    .short {
+      display: inline;
+    }
+
+    .tile--phones .media {
+      gap: 22px;
+    }
+
+    .tile--phones img {
+      width: 200px;
+      height: 390px;
+      border-radius: 22px 22px 0 0;
+    }
+
+    .tile--phones img + img {
+      height: 340px;
+    }
+
+    .tile--phone-bottom img {
+      height: 236px;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .arrow {
+      right: 20px;
+      top: 20px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .arrow--light,
+    .cursor {
+      display: none;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .tile {
+      grid-column: 1 / -1;
+      height: var(--h-m);
+      border-radius: var(--radius-tile);
+    }
+
+    .pills,
+    .pills--bottom .pills,
+    .pills--stack.pills--bottom .pills,
+    .compact-tablet.pills--bottom .pills {
+      top: 16px;
+      bottom: auto;
+      left: 16px;
+    }
+
+    .compact-tablet .pill--tag {
+      display: inline;
+    }
+
+    .pill {
+      padding: 7px 12px;
+    }
+
+    .tile--phones .media {
+      gap: 14px;
+    }
+
+    .tile--phones img {
+      width: 150px;
+      height: 320px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .tile--phones img + img {
+      height: 280px;
+    }
+
+    .tile--phone-bottom img {
+      height: 290px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .arrow {
+      right: 16px;
+      top: 16px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>

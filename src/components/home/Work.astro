@@ -1,0 +1,395 @@
+---
+import Icon from '../Icon.astro';
+import ProjectTile, { type TileLayout } from './ProjectTile.astro';
+import { projects } from '../../data/projects';
+import { experiments } from '../../data/home';
+
+// Bento sizes per tile, straight from the mockups.
+const layouts: Record<string, TileLayout> = {
+  'genspark-ai': { desktop: [7, 560], tablet: [6, 460], mobile: 420, pills: 'top', arrow: 'orange', cursor: true },
+  articos: { desktop: [5, 560], tablet: [3, 340], mobile: 260, pills: 'bottom', arrow: 'light' },
+  wealthfolio: { desktop: [5, 440], tablet: [3, 340], mobile: 300, pills: 'bottom' },
+  kidemis: { desktop: [4, 440], tablet: [2, 300], mobile: 240, pills: 'bottom' },
+  bitwyre: { desktop: [3, 440], tablet: [2, 300], mobile: 220, pills: 'bottom', stackPills: true, imageWidth: '86%' },
+  'muslim-matrimony': { desktop: [4, 400], tablet: [2, 300], mobile: 360, pills: 'top', stackPills: true },
+};
+
+const filters = ['All', 'Mobile', 'Web', 'AI'];
+const count = String(projects.length).padStart(2, '0');
+---
+
+<section id="work" class="work">
+  <header class="head">
+    <div class="title-wrap" data-reveal>
+      <h2>Selected<br />work</h2>
+      <span class="badge" aria-label={`${projects.length} projects`}>{count}</span>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter projects" data-reveal data-reveal-delay="0.1">
+      {
+        filters.map((f, i) => (
+          <button type="button" data-filter={f} aria-pressed={i === 0 ? 'true' : 'false'}>
+            {f}
+          </button>
+        ))
+      }
+    </div>
+  </header>
+
+  {projects.map((project) => <ProjectTile project={project} layout={layouts[project.slug]} />)}
+
+  <div class="experiments" data-reveal>
+    <div class="exp-head">
+      <h3>More experiments</h3>
+      <span class="mono"><span class="hide-mobile">SIDE QUESTS · </span>{String(experiments.length).padStart(2, '0')}</span>
+    </div>
+    <ul class="exp-list">
+      {
+        experiments.map((p) => {
+          const Tag = p.href ? 'a' : 'div';
+          return (
+            <li>
+              <Tag class="exp-row" href={p.href}>
+                <span class="exp-icon" style={`background: ${p.bg}`} aria-hidden="true">
+                  {p.k}
+                </span>
+                <span class="exp-text">
+                  <span class="exp-name">{p.name}</span>
+                  <span class="exp-type">{p.type}</span>
+                </span>
+                {p.href && <Icon name="arrow-up-right" size={18} />}
+              </Tag>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const section = document.querySelector('#work');
+    if (!section) return;
+
+    const buttons = section.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const tiles = section.querySelectorAll<HTMLAnchorElement>('[data-categories]');
+
+    buttons.forEach((button) =>
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter!;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+        tiles.forEach((tile) => {
+          const match = filter === 'All' || tile.dataset.categories!.split(' ').includes(filter);
+          tile.classList.toggle('is-dimmed', !match);
+          // Dimmed tiles are skipped by keyboard and screen readers
+          if (match) {
+            tile.removeAttribute('tabindex');
+            tile.removeAttribute('aria-hidden');
+          } else {
+            tile.setAttribute('tabindex', '-1');
+            tile.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }),
+    );
+  });
+</script>
+
+<style>
+  .work {
+    padding: 72px var(--gutter) 96px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+    scroll-margin-top: 24px;
+  }
+
+  /* ---------- Header ---------- */
+  .head {
+    grid-column: 1 / -1;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  /* Shrink-wraps the title so the badge can sit at the end of "Selected" */
+  .title-wrap {
+    position: relative;
+    width: fit-content;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 96px;
+    line-height: 0.92;
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .badge {
+    position: absolute;
+    left: calc(100% - 20px);
+    top: -30px;
+    width: 84px;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--sky);
+    color: var(--dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    transform: rotate(-12deg);
+  }
+
+  .filters {
+    display: flex;
+    padding: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .filters button {
+    height: var(--tap);
+    padding: 0 22px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 14px;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .filters button:hover {
+    color: var(--text);
+  }
+
+  .filters button[aria-pressed='true'] {
+    background: var(--text);
+    color: var(--bg);
+    font-weight: 600;
+  }
+
+  /* ---------- More experiments ---------- */
+  .experiments {
+    grid-column: span 8;
+    height: 400px;
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: var(--radius-tile);
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .exp-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: -0.04em;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .exp-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+  }
+
+  .exp-row {
+    height: 84px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .exp-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    color: var(--dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .exp-text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .exp-name {
+    font-weight: 600;
+    font-size: 17px;
+  }
+
+  .exp-type {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    .work {
+      padding: 56px var(--gutter) 80px;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .head {
+      margin-bottom: 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 22px;
+    }
+
+    h2 {
+      font-size: 72px;
+      line-height: 0.93;
+    }
+
+    .badge {
+      left: calc(100% - 16px);
+      top: -26px;
+      width: 70px;
+      height: 70px;
+      font-size: 19px;
+    }
+
+    .experiments {
+      grid-column: 1 / -1;
+      height: auto;
+      padding: 28px 28px 12px;
+      gap: 14px;
+      border-radius: 30px;
+    }
+
+    h3 {
+      font-size: 26px;
+    }
+
+    .exp-list {
+      column-gap: 24px;
+    }
+
+    .exp-row {
+      height: 78px;
+      gap: 14px;
+    }
+
+    .exp-icon {
+      width: 46px;
+      height: 46px;
+      font-size: 15px;
+    }
+
+    .exp-name {
+      font-size: 16px;
+    }
+
+    .exp-type {
+      font-size: 12px;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .hide-mobile {
+      display: none;
+    }
+
+    .work {
+      padding: 48px var(--gutter) 64px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .head {
+      margin-bottom: 16px;
+      align-items: stretch;
+      gap: 20px;
+    }
+
+    h2 {
+      font-size: 50px;
+      line-height: 0.95;
+    }
+
+    .badge {
+      left: calc(100% - 12px);
+      top: -22px;
+      width: 58px;
+      height: 58px;
+      font-size: 16px;
+    }
+
+    .filters {
+      padding: 4px;
+    }
+
+    .filters button {
+      flex-grow: 1;
+      padding: 0;
+    }
+
+    .experiments {
+      padding: 22px 20px 8px;
+      gap: 12px;
+      border-radius: var(--radius-tile);
+    }
+
+    h3 {
+      font-size: 22px;
+    }
+
+    .mono {
+      font-size: 11px;
+    }
+
+    .exp-list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .exp-row {
+      height: 72px;
+    }
+
+    .exp-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      font-size: 14px;
+    }
+  }
+</style>

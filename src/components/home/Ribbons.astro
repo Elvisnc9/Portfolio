@@ -1,0 +1,157 @@
+---
+import Sparkle from '../Sparkle.astro';
+import { ribbon } from '../../data/home';
+
+// The words appear twice per half so each half is wider than the screen;
+// the track then holds two halves and slides by -50% for a seamless loop.
+const half = [...ribbon, ...ribbon];
+const bands = [
+  { cls: 'band band--dark', star: 'var(--orange)' },
+  { cls: 'band band--orange', star: 'var(--dark)' },
+];
+---
+
+<section class="ribbons" aria-hidden="true">
+  {
+    bands.map((band) => (
+      <div class={band.cls}>
+        <div class="track">
+          {[0, 1].map(() =>
+            half.map((word) => (
+              <>
+                <span>{word}</span>
+                <Sparkle size={22} color={band.star} />
+              </>
+            )),
+          )}
+        </div>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  .ribbons {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+  }
+
+  .band {
+    position: absolute;
+    left: -60px;
+    right: -60px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .band--dark {
+    top: 40px;
+    background: var(--text);
+    color: var(--bg);
+    transform: rotate(2deg);
+  }
+
+  .band--orange {
+    top: 70px;
+    background: var(--orange);
+    color: var(--dark);
+    transform: rotate(-2.5deg);
+  }
+
+  .track {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding-right: 28px;
+    animation: ribbon 40s linear infinite;
+  }
+
+  .band--orange .track {
+    animation-direction: reverse;
+  }
+
+  .track :global(svg) {
+    flex-shrink: 0;
+  }
+
+  @keyframes ribbon {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .ribbons {
+      height: 170px;
+    }
+
+    .band {
+      left: -50px;
+      right: -50px;
+      height: 62px;
+      font-size: 22px;
+    }
+
+    .band--dark {
+      top: 38px;
+      transform: rotate(2.5deg);
+    }
+
+    .band--orange {
+      top: 66px;
+      transform: rotate(-3deg);
+    }
+
+    .track {
+      gap: 24px;
+      padding-right: 24px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ribbons {
+      height: 150px;
+    }
+
+    .band {
+      left: -40px;
+      right: -40px;
+      height: 52px;
+      font-size: 18px;
+    }
+
+    .band--dark {
+      top: 34px;
+      transform: rotate(3deg);
+    }
+
+    .band--orange {
+      top: 62px;
+      transform: rotate(-4deg);
+    }
+
+    .track {
+      gap: 18px;
+      padding-right: 18px;
+    }
+
+    .track :global(svg) {
+      width: 16px;
+      height: 16px;
+    }
+  }
+</style>
