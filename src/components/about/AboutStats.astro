@@ -18,7 +18,7 @@ function pick(s: { value: string; label: string; short: string }) {
       <div class={`stat stat--${t.tone}`} data-reveal data-reveal-delay={String(i * 0.06)}>
         <span class="eyebrow">{t.eyebrow}</span>
         <div class="stat-body">
-          <span class="value">{t.value}</span>
+          <span class="value" data-count>{t.value}</span>
           <span class="caption">
             <span class="full">{t.caption}</span>
             <span class="short">{t.short}</span>

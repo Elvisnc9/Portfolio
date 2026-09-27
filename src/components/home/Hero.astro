@@ -11,8 +11,8 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
 <section class="hero" aria-label="Intro">
   <!-- A: headline -->
   <div class="tile tile--a" data-reveal>
-    <div class="deco-circle" aria-hidden="true"></div>
-    <div class="deco-arch" aria-hidden="true"></div>
+    <div class="deco-circle" aria-hidden="true" data-parallax="0.12"></div>
+    <div class="deco-arch" aria-hidden="true" data-parallax="-0.1"></div>
     <Sparkle class="deco-sparkle" size={64} />
 
     <div class="chips">
@@ -53,7 +53,7 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
     <div class="ring" aria-hidden="true"></div>
     <span class="mono">SHIPPED</span>
     <div class="stat-body">
-      <span class="stat-value">{stats.shipped.value}</span>
+      <span class="stat-value" data-count>{stats.shipped.value}</span>
       <span class="stat-label">{stats.shipped.label}</span>
     </div>
   </div>
@@ -106,7 +106,7 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
     </svg>
     <span class="mono">TEAMWORK</span>
     <div class="stat-body">
-      <span class="stat-value">{stats.teamwork.value}</span>
+      <span class="stat-value" data-count>{stats.teamwork.value}</span>
       <span class="stat-label"><span class="hide-tablet-down">major </span>{stats.teamwork.label}</span>
     </div>
   </div>
@@ -128,7 +128,7 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
   <div class="tile tile--h stat stat--dark" data-reveal data-reveal-delay="0.12">
     <span class="mono">SINCE {stats.years.since}</span>
     <div class="stat-body">
-      <span class="stat-value">{stats.years.value}</span>
+      <span class="stat-value" data-count>{stats.years.value}</span>
       <span class="stat-label">{stats.years.label}</span>
     </div>
   </div>

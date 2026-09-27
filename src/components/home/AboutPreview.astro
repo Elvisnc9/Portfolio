@@ -26,7 +26,7 @@ const tiles = [
           <div class={`stat stat--${t.tone}`} data-reveal data-reveal-delay={String(i * 0.08)}>
             <span class="stat-label">{t.eyebrow}</span>
             <div class="stat-body">
-              <span class="stat-value">{t.value}</span>
+              <span class="stat-value" data-count>{t.value}</span>
               <span class="stat-caption">{t.caption}</span>
             </div>
           </div>

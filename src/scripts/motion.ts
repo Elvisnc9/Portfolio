@@ -46,11 +46,85 @@ function reveals() {
   });
 }
 
+/** [data-float]: a slow, endless bob. Each element gets its own rhythm. */
+function floats() {
+  gsap.utils.toArray<HTMLElement>('[data-float]').forEach((el, i) => {
+    gsap.to(el, {
+      y: gsap.utils.random(-9, -5),
+      rotation: gsap.utils.random(-4, 4),
+      duration: gsap.utils.random(2.2, 3.4),
+      delay: i * 0.12,
+      ease: 'sine.inOut',
+      yoyo: true,
+      repeat: -1,
+    });
+  });
+}
+
+/** [data-count]: numbers like "20+" count up from 0 the first time they're seen. */
+function counters() {
+  gsap.utils.toArray<HTMLElement>('[data-count]').forEach((el) => {
+    const match = el.textContent?.trim().match(/^(\d+)(.*)$/);
+    if (!match) return;
+    const target = Number(match[1]);
+    const suffix = match[2];
+    const counter = { value: 0 };
+    gsap.to(counter, {
+      value: target,
+      duration: 1.4,
+      ease: 'power2.out',
+      snap: { value: 1 },
+      onUpdate: () => (el.textContent = `${counter.value}${suffix}`),
+      scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+    });
+    el.textContent = `0${suffix}`;
+  });
+}
+
+/** [data-parallax="0.2"]: drift against the scroll. Positive = moves up faster. */
+function parallax() {
+  gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {
+    const speed = Number(el.dataset.parallax) || 0.15;
+    gsap.fromTo(
+      el,
+      { y: speed * 160 },
+      {
+        y: speed * -160,
+        ease: 'none',
+        scrollTrigger: { trigger: el.parentElement ?? el, start: 'top bottom', end: 'bottom top', scrub: true },
+      },
+    );
+  });
+}
+
+/** Ribbons run faster while the page scrolls, then ease back to their cruising speed. */
+let ribbonTick: (() => void) | null = null;
+
+function ribbons() {
+  const animations = [...document.querySelectorAll<HTMLElement>('.ribbons .track')].flatMap((t) => t.getAnimations());
+  if (!animations.length || !lenis) return;
+  let boost = 1;
+  lenis.on('scroll', ({ velocity }: { velocity: number }) => {
+    boost = Math.max(boost, 1 + Math.min(Math.abs(velocity) / 6, 5));
+  });
+  ribbonTick = () => {
+    boost += (1 - boost) * 0.06;
+    animations.forEach((a) => (a.playbackRate = boost));
+  };
+  gsap.ticker.add(ribbonTick);
+}
+
 function setup() {
   if (reducedMotion.matches) return;
 
   startLenis();
-  ctx = gsap.context(reveals);
+  ctx = gsap.context(() => {
+    reveals();
+    floats();
+    counters();
+    parallax();
+  });
+  ribbons();
   // Fonts change text heights, so recalculate trigger positions once loaded
   document.fonts.ready.then(() => ScrollTrigger.refresh());
 }
@@ -59,6 +133,8 @@ function teardown() {
   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
   ctx?.revert();
   ctx = null;
+  if (ribbonTick) gsap.ticker.remove(ribbonTick);
+  ribbonTick = null;
   stopLenis();
 }
 
