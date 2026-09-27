@@ -1,0 +1,355 @@
+---
+import { testimonials } from '../../data/home';
+---
+
+<section class="testimonials" aria-labelledby="kind-words-title">
+  <div class="intro" data-reveal>
+    <span class="pill">KIND WORDS</span>
+    <h2 id="kind-words-title">Word in the group chat</h2>
+    <p>What clients said after we shipped.</p>
+  </div>
+
+  <ul class="chat">
+    {
+      testimonials.map((t, i) => (
+        <li class={`msg msg--${i % 2 === 0 ? 'in' : 'out'} tone--${t.tone}`} data-reveal data-reveal-delay={String(i * 0.08)}>
+          <blockquote>
+            {t.short ? (
+              <>
+                <span class="full">{t.quote}</span>
+                <span class="short">{t.short}</span>
+              </>
+            ) : (
+              t.quote
+            )}
+          </blockquote>
+          <span class="author">
+            {t.name && (
+              <>
+                <b>{t.name}</b> ·{' '}
+              </>
+            )}
+            {t.company}
+          </span>
+        </li>
+      ))
+    }
+    <li class="typing" aria-hidden="true" data-reveal data-reveal-delay="0.35">
+      <span></span><span></span><span></span>
+    </li>
+  </ul>
+</section>
+
+<style>
+  .testimonials {
+    padding: 64px var(--gutter) 96px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+
+  .intro {
+    grid-column: 1 / span 4;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pill {
+    align-self: flex-start;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 0.98;
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .intro p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  /* ---------- Chat ---------- */
+  .chat {
+    grid-column: 6 / span 7;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .msg {
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .msg:first-child {
+    max-width: 560px;
+  }
+
+  .msg:nth-child(4) {
+    max-width: 440px;
+  }
+
+  .msg--in {
+    align-self: flex-start;
+  }
+
+  .msg--out {
+    align-self: flex-end;
+    align-items: flex-end;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 20px 24px;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .msg--in blockquote {
+    border-radius: 28px 28px 28px 8px;
+  }
+
+  .msg--out blockquote {
+    border-radius: 28px 28px 8px 28px;
+  }
+
+  .tone--orange blockquote {
+    padding: 22px 26px;
+    background: var(--orange);
+    color: var(--dark);
+    font-size: 20px;
+    line-height: 1.45;
+    font-weight: 500;
+  }
+
+  .tone--surface blockquote {
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .tone--sky blockquote {
+    background: var(--sky);
+    color: var(--dark);
+  }
+
+  .short {
+    display: none;
+  }
+
+  .author {
+    padding: 0 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .author b {
+    color: var(--text);
+  }
+
+  /* Typing indicator */
+  .typing {
+    align-self: flex-start;
+    padding: 18px 22px;
+    display: flex;
+    gap: 6px;
+    border-radius: 28px 28px 28px 8px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .typing span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--muted);
+    animation: typing 1.2s ease-in-out infinite;
+  }
+
+  .typing span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .typing span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes typing {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateY(-4px);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typing span {
+      animation: none;
+    }
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    .testimonials {
+      padding: 24px var(--gutter) 72px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .intro {
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: 50px;
+      line-height: 0.95;
+    }
+
+    .intro p {
+      display: none;
+    }
+
+    .chat {
+      gap: 16px;
+    }
+
+    .msg:first-child {
+      max-width: 520px;
+    }
+
+    .msg:nth-child(4) {
+      max-width: 420px;
+    }
+
+    .msg:nth-child(2),
+    .msg:nth-child(3) {
+      max-width: 480px;
+    }
+
+    blockquote {
+      padding: 18px 22px;
+      font-size: 16px;
+    }
+
+    .tone--orange blockquote {
+      padding: 20px 24px;
+      font-size: 19px;
+    }
+
+    .msg--in blockquote {
+      border-radius: 26px 26px 26px 8px;
+    }
+
+    .msg--out blockquote {
+      border-radius: 26px 26px 8px 26px;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .testimonials {
+      padding: 24px var(--gutter) 64px;
+      gap: 14px;
+    }
+
+    .intro {
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+
+    h2 {
+      font-size: 34px;
+      line-height: 0.98;
+    }
+
+    .chat {
+      gap: 14px;
+    }
+
+    .msg {
+      gap: 6px;
+    }
+
+    .msg:first-child {
+      max-width: 320px;
+    }
+
+    .msg:nth-child(2),
+    .msg:nth-child(3) {
+      max-width: 300px;
+    }
+
+    .msg:nth-child(4) {
+      max-width: 280px;
+    }
+
+    .full {
+      display: none;
+    }
+
+    .short {
+      display: inline;
+    }
+
+    blockquote {
+      padding: 16px 18px;
+      font-size: 15px;
+    }
+
+    .tone--orange blockquote {
+      padding: 18px 20px;
+      font-size: 16px;
+    }
+
+    .msg--in blockquote,
+    .typing {
+      border-radius: 24px 24px 24px 6px;
+    }
+
+    .msg--out blockquote {
+      border-radius: 24px 24px 6px 24px;
+    }
+
+    .author {
+      padding: 0 6px;
+      font-size: 12px;
+    }
+
+    .typing {
+      padding: 16px 18px;
+      gap: 5px;
+    }
+
+    .typing span {
+      width: 8px;
+      height: 8px;
+    }
+  }
+</style>
