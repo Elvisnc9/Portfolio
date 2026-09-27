@@ -1,0 +1,466 @@
+---
+import Icon from '../Icon.astro';
+import Sparkle from '../Sparkle.astro';
+import type { Project } from '../../data/projects';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: Project;
+  caseStudy: CollectionEntry<'work'>['data'];
+}
+
+const { project, caseStudy } = Astro.props;
+const { kind, summary, summaryShort, live } = caseStudy;
+const onDark = project.tone !== 'light';
+const [first, second] = project.images;
+---
+
+<section class="case-hero">
+  <div class:list={['tile', `media--${project.media}`, { 'on-dark': onDark }]} style={`--bg: ${project.bg}`}>
+    <div class="circle" aria-hidden="true"></div>
+    <div class="arch" aria-hidden="true"></div>
+    <Sparkle class="spark" size={64} color={onDark ? 'var(--orange)' : 'var(--dark)'} />
+
+    {
+      project.media === 'phones' && second ? (
+        <>
+          <img class="phone phone--back" src={second.src} alt={second.alt} width={second.width} height={second.height} fetchpriority="high" />
+          <img class="phone phone--front" src={first.src} alt={first.alt} width={first.width} height={first.height} fetchpriority="high" />
+        </>
+      ) : (
+        <img class="screen" src={first.src} alt={first.alt} width={first.width} height={first.height} fetchpriority="high" />
+      )
+    }
+
+    <div class="chips">
+      <span class="chip chip--kind">{kind}</span>
+      {
+        live && (
+          <span class="chip chip--live">
+            <span class="dot" aria-hidden="true" />
+            {live.status}
+          </span>
+        )
+      }
+    </div>
+
+    <div class="text">
+      <h1>{project.title}</h1>
+      <p>
+        {
+          summaryShort ? (
+            <>
+              <span class="hide-mobile">{summary}</span>
+              <span class="show-mobile">{summaryShort}</span>
+            </>
+          ) : (
+            summary
+          )
+        }
+      </p>
+      {
+        live && (
+          <a class="cta cta--inside" href={live.href} target="_blank" rel="noopener noreferrer">
+            {live.cta} <Icon name="arrow-up-right" size={18} />
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  {
+    live && (
+      <a class="cta cta--below" href={live.href} target="_blank" rel="noopener noreferrer">
+        {live.cta} <Icon name="arrow-up-right" size={18} />
+      </a>
+    )
+  }
+</section>
+
+<style>
+  .case-hero {
+    padding: 0 var(--gutter) 16px;
+  }
+
+  .show-mobile,
+  .cta.cta--below {
+    display: none;
+  }
+
+  .tile {
+    position: relative;
+    overflow: hidden;
+    height: 640px;
+    padding: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: var(--radius-tile-lg);
+    background: var(--bg);
+    color: var(--dark);
+  }
+
+  .on-dark {
+    color: var(--on-dark);
+  }
+
+  /* ---------- Decoration ---------- */
+  .circle {
+    position: absolute;
+    right: 120px;
+    top: 90px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+
+  .arch {
+    position: absolute;
+    right: 520px;
+    bottom: -40px;
+    width: 200px;
+    height: 200px;
+    border: 24px solid var(--sky);
+    border-bottom: 0;
+    border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+  }
+
+  .tile :global(.spark) {
+    position: absolute;
+    right: 60px;
+    top: 48px;
+  }
+
+  /* ---------- Media ---------- */
+  .phone {
+    position: absolute;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .phone--back {
+    right: 380px;
+    top: 130px;
+    width: 230px;
+    height: 500px;
+    border-radius: 30px;
+    transform: rotate(-8deg);
+    box-shadow: 0 30px 70px rgba(17, 17, 16, 0.25);
+  }
+
+  .phone--front {
+    right: 150px;
+    top: 70px;
+    width: 250px;
+    height: 540px;
+    border-radius: 32px;
+    transform: rotate(6deg);
+    box-shadow: 0 30px 70px rgba(17, 17, 16, 0.28);
+  }
+
+  /* Single image as a tilted screen card over the circle */
+  .screen {
+    position: absolute;
+    right: 110px;
+    top: 50%;
+    width: 560px;
+    height: auto;
+    border-radius: 24px;
+    transform: translateY(-50%) rotate(4deg);
+    box-shadow: 0 30px 70px rgba(17, 17, 16, 0.3);
+  }
+
+  .media--cover .screen {
+    height: 420px;
+    object-fit: cover;
+  }
+
+  .media--phone-bottom .screen {
+    right: 260px;
+    top: 90px;
+    width: auto;
+    height: 480px;
+    border-radius: 28px;
+    transform: rotate(6deg);
+  }
+
+  /* ---------- Text ---------- */
+  .chips {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .chip--kind {
+    background: var(--dark);
+    color: var(--on-dark);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .on-dark .chip--kind {
+    background: var(--on-dark);
+    color: var(--dark);
+  }
+
+  .chip--live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    color: var(--dark);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+  }
+
+  .text {
+    position: relative;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 104px;
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  .text p {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #3f3d39;
+  }
+
+  .on-dark .text p {
+    color: rgba(244, 242, 237, 0.8);
+  }
+
+  .cta {
+    height: 54px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: var(--radius-pill);
+    background: var(--dark);
+    color: var(--on-dark);
+    font-weight: 600;
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+
+  .cta--inside {
+    align-self: flex-start;
+  }
+
+  .on-dark .cta--inside {
+    background: var(--on-dark);
+    color: var(--dark);
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+  }
+
+  /* ========== Tablet + mobile: text on top, media at the bottom ========== */
+  @media (max-width: 1023px) {
+    .tile {
+      height: 760px;
+      padding: 40px;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+
+    .circle {
+      left: 50%;
+      right: auto;
+      top: auto;
+      bottom: -100px;
+      width: 440px;
+      height: 440px;
+      translate: -50% 0;
+    }
+
+    .arch {
+      display: none;
+    }
+
+    .tile :global(.spark) {
+      right: 40px;
+      top: 40px;
+      width: 48px;
+      height: 48px;
+    }
+
+    h1 {
+      font-size: 72px;
+    }
+
+    .text p {
+      font-size: 18px;
+    }
+
+    .phone--back {
+      left: 18%;
+      right: auto;
+      top: auto;
+      bottom: -40px;
+      width: 200px;
+      height: 430px;
+    }
+
+    .phone--front {
+      right: 18%;
+      top: auto;
+      bottom: -20px;
+      width: 214px;
+      height: 460px;
+    }
+
+    .screen,
+    .media--cover .screen {
+      left: 50%;
+      right: auto;
+      top: auto;
+      bottom: 40px;
+      /* Capped so the image stays below the text (about 330px of room) */
+      width: min(78%, 480px);
+      height: auto;
+      transform: translateX(-50%) rotate(3deg);
+    }
+
+    .media--cover .screen {
+      aspect-ratio: 16 / 10;
+    }
+
+    /* Restate position: the desktop rule for this media type is more specific */
+    .media--phone-bottom .screen {
+      left: 50%;
+      right: auto;
+      top: auto;
+      bottom: -30px;
+      width: auto;
+      height: 380px;
+      transform: translateX(-50%) rotate(4deg);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hide-mobile {
+      display: none;
+    }
+
+    .show-mobile {
+      display: inline;
+    }
+
+    .case-hero {
+      padding: 0 var(--gutter) 12px;
+    }
+
+    .tile {
+      height: 600px;
+      padding: 24px;
+      gap: 14px;
+      border-radius: 32px;
+    }
+
+    .circle {
+      bottom: -80px;
+      width: 340px;
+      height: 340px;
+    }
+
+    .tile :global(.spark) {
+      display: none;
+    }
+
+    .chips {
+      gap: 6px;
+    }
+
+    .chip {
+      padding: 6px 11px;
+    }
+
+    .chip--kind {
+      font-size: 10px;
+    }
+
+    .chip--live {
+      gap: 5px;
+      font-size: 12px;
+    }
+
+    .text {
+      gap: 14px;
+    }
+
+    h1 {
+      font-size: 46px;
+      line-height: 0.92;
+    }
+
+    .text p {
+      font-size: 15px;
+    }
+
+    .phone--back {
+      left: 40px;
+      bottom: -30px;
+      width: 150px;
+      height: 320px;
+      border-radius: 22px;
+    }
+
+    .phone--front {
+      right: 36px;
+      bottom: -10px;
+      width: 160px;
+      height: 340px;
+      border-radius: 24px;
+    }
+
+    .screen,
+    .media--cover .screen {
+      bottom: 30px;
+      width: 88%;
+      border-radius: 18px;
+    }
+
+    .media--phone-bottom .screen {
+      height: 300px;
+      border-radius: 22px;
+    }
+
+    /* Mobile: button moves out of the tile, full width */
+    .cta.cta--inside {
+      display: none;
+    }
+
+    .cta.cta--below {
+      display: flex;
+      margin-top: 8px;
+      font-size: 15px;
+    }
+  }
+</style>

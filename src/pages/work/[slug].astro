@@ -1,0 +1,696 @@
+---
+import { getEntry, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BackLink from '../../components/BackLink.astro';
+import CaseHero from '../../components/work/CaseHero.astro';
+import NextProject from '../../components/work/NextProject.astro';
+import { projects, type Project } from '../../data/projects';
+
+export async function getStaticPaths() {
+  return Promise.all(
+    projects.map(async (project, i) => {
+      const entry = await getEntry('work', project.slug);
+      if (!entry) throw new Error(`Missing case study: src/content/work/${project.slug}.md`);
+      return {
+        params: { slug: project.slug },
+        props: { project, caseStudy: entry.data, index: i, next: projects[(i + 1) % projects.length] },
+      };
+    }),
+  );
+}
+
+interface Props {
+  project: Project;
+  caseStudy: CollectionEntry<'work'>['data'];
+  index: number;
+  next: Project;
+}
+
+const { project, caseStudy, index, next } = Astro.props;
+const { facts, brief, challenge, whatIDid, outcome, features, quote, summary } = caseStudy;
+const total = projects.length;
+const pad = (n: number) => String(n).padStart(2, '0');
+
+// Story cards, numbered in the order they appear
+const cards = [
+  challenge && { key: 'challenge', label: 'THE CHALLENGE', ...challenge },
+  whatIDid && { key: 'did', label: 'WHAT I DID', ...whatIDid },
+  outcome && { key: 'outcome', label: 'THE OUTCOME', ...outcome },
+].filter(Boolean) as { key: string; label: string; title?: string; text?: string }[];
+
+const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? String(features.length);
+---
+
+<BaseLayout title={project.title} active="Work" description={summary}>
+  <section class="crumbs">
+    <BackLink href="/#work" label="All work" />
+    <span class="mono">
+      <span class="hide-mobile">WORK / {project.title.toUpperCase()} · CASE {pad(index + 1)} OF {pad(total)}</span>
+      <span class="show-mobile">CASE {pad(index + 1)} / {pad(total)}</span>
+    </span>
+  </section>
+
+  <CaseHero project={project} caseStudy={caseStudy} />
+
+  {
+    facts.length > 0 && (
+      <section class="facts" style={`--count: ${facts.length}`}>
+        {facts.map((f, i) => (
+          <div class="fact" data-reveal data-reveal-delay={String(i * 0.05)}>
+            <span class="mono mono--muted">{f.label}</span>
+            <span class="fact-value">{f.value}</span>
+          </div>
+        ))}
+      </section>
+    )
+  }
+
+  {
+    brief && (
+      <section class="brief" data-reveal>
+        <h2>The brief</h2>
+        <p>
+          {brief.lead} {brief.muted && <span>{brief.muted}</span>}
+        </p>
+      </section>
+    )
+  }
+
+  {
+    cards.length > 0 && (
+      <section class="cards" style={`--count: ${cards.length}`}>
+        {cards.map((c, i) => (
+          <div class={`card card--${c.key}`} data-reveal data-reveal-delay={String(i * 0.06)}>
+            {c.key === 'did' && (
+              <svg class="squiggle" viewBox="0 0 190 90" fill="none" aria-hidden="true">
+                <path d="M4 60 C 30 10, 50 10, 70 50 S 110 90, 130 40 S 170 0, 186 30" stroke="var(--orange)" stroke-width="10" stroke-linecap="round" />
+              </svg>
+            )}
+            <div class="card-head">
+              <span class="mono">
+                {pad(i + 1)} · {c.label}
+              </span>
+              {c.key === 'challenge' && (
+                <span class="q" aria-hidden="true">
+                  ?
+                </span>
+              )}
+            </div>
+            <div class="card-body">
+              {c.title && <span class="card-title">{c.title}</span>}
+              {c.text && <p>{c.text}</p>}
+            </div>
+          </div>
+        ))}
+      </section>
+    )
+  }
+
+  {
+    features.length > 0 && (
+      <section class="features">
+        <div class="features-head" data-reveal>
+          <h2>Inside the app</h2>
+          <span>{featureCount} of the features, up close.</span>
+        </div>
+        <div class="features-grid">
+          {features.map((f, i) => (
+            <div class:list={['feature', { 'feature--dark': f.dark }]} data-reveal data-reveal-delay={String(i * 0.08)}>
+              <span class="mono">FEATURE {pad(i + 1)}</span>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+              <div class="feature-circle" aria-hidden="true" />
+              <img src={f.image} alt={f.alt} loading="lazy" decoding="async" />
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    quote && (
+      <section class="quote">
+        <div class="quote-head" data-reveal>
+          <span class="pill">FROM THE TEAM</span>
+          <h2>What they said</h2>
+        </div>
+        <figure class="bubble" data-reveal data-reveal-delay="0.08">
+          <blockquote>{quote.text}</blockquote>
+          <figcaption>
+            {quote.name && (
+              <>
+                <b>{quote.name}</b> ·{' '}
+              </>
+            )}
+            {quote.role}
+          </figcaption>
+        </figure>
+      </section>
+    )
+  }
+
+  <NextProject project={next} position={((index + 1) % total) + 1} total={total} />
+</BaseLayout>
+
+<style>
+  .show-mobile {
+    display: none;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .mono--muted {
+    color: var(--muted);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  /* ---------- Breadcrumb ---------- */
+  .crumbs {
+    padding: 36px var(--gutter) 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .crumbs > .mono {
+    color: var(--muted);
+    text-align: right;
+  }
+
+  /* ---------- Facts ---------- */
+  .facts {
+    padding: 0 var(--gutter) 96px;
+    display: grid;
+    grid-template-columns: repeat(min(var(--count), 4), minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .fact {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .fact-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.03em;
+  }
+
+  /* ---------- Brief ---------- */
+  .brief {
+    padding: 0 var(--gutter) 64px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+
+  .brief h2 {
+    grid-column: 1 / span 4;
+  }
+
+  .brief p {
+    grid-column: 6 / span 7;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  .brief p span {
+    color: var(--muted);
+  }
+
+  /* ---------- Story cards ---------- */
+  .cards {
+    padding: 0 var(--gutter) 104px;
+    display: grid;
+    grid-template-columns: repeat(var(--count), minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    border-radius: 32px;
+  }
+
+  .card--challenge {
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .card--challenge .mono {
+    color: var(--muted);
+  }
+
+  .card--did {
+    background: var(--sky);
+    color: var(--dark);
+  }
+
+  .card--outcome {
+    background: var(--orange);
+    color: var(--dark);
+  }
+
+  .squiggle {
+    position: absolute;
+    right: -10px;
+    top: 20px;
+    width: 150px;
+    height: 70px;
+  }
+
+  .card-head {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .q {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--note-peach);
+    color: var(--dark);
+    font-family: var(--font-display);
+    font-weight: 800;
+  }
+
+  .card-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .card p {
+    font-size: 19px;
+    line-height: 1.55;
+  }
+
+  .card--outcome p {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Features ---------- */
+  .features {
+    padding: 0 var(--gutter) 104px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .features-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  .features-head span {
+    font-size: 17px;
+    color: var(--muted);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .feature {
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 36px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .feature .mono,
+  .feature p {
+    color: var(--muted);
+  }
+
+  .feature--dark {
+    border-color: var(--dark);
+    background: var(--dark);
+    color: var(--on-dark);
+  }
+
+  .feature--dark .mono,
+  .feature--dark p {
+    color: #a3a09a;
+  }
+
+  .feature h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: -0.04em;
+  }
+
+  .feature p {
+    font-size: 17px;
+  }
+
+  .feature-circle {
+    position: absolute;
+    left: 50%;
+    bottom: -160px;
+    width: 420px;
+    height: 420px;
+    translate: -50% 0;
+    border-radius: 50%;
+    background: var(--note-peach);
+  }
+
+  .feature--dark .feature-circle {
+    background: var(--orange);
+  }
+
+  .feature img {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 260px;
+    height: 380px;
+    translate: -50% 0;
+    object-fit: cover;
+    object-position: 50% 12%;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 24px 60px rgba(17, 17, 16, 0.2);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .feature:hover img {
+    transform: translateY(-10px);
+  }
+
+  /* ---------- Quote ---------- */
+  .quote {
+    padding: 0 var(--gutter) 104px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+    align-items: center;
+  }
+
+  .quote-head {
+    grid-column: 1 / span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pill {
+    align-self: flex-start;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .quote h2 {
+    font-size: 48px;
+    line-height: 0.98;
+  }
+
+  .bubble {
+    grid-column: 6 / span 7;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 28px 32px;
+    border-radius: 32px 32px 32px 8px;
+    background: var(--sky);
+    color: var(--dark);
+    font-size: 22px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  figcaption {
+    padding-left: 10px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  figcaption b {
+    color: var(--text);
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    h2 {
+      font-size: 52px;
+    }
+
+    .facts {
+      padding-bottom: 72px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .brief {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .brief p {
+      font-size: 22px;
+    }
+
+    .cards {
+      padding-bottom: 80px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      min-height: 260px;
+      padding: 28px;
+    }
+
+    .features {
+      padding-bottom: 80px;
+    }
+
+    .features-head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .feature {
+      height: 520px;
+      padding: 32px;
+    }
+
+    .feature img {
+      width: 220px;
+      height: 330px;
+    }
+
+    .quote {
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .hide-mobile {
+      display: none;
+    }
+
+    .show-mobile {
+      display: inline;
+    }
+
+    .mono {
+      font-size: 11px;
+    }
+
+    h2 {
+      font-size: 36px;
+    }
+
+    .crumbs {
+      padding: 20px var(--gutter) 14px;
+    }
+
+    .facts {
+      padding: 0 var(--gutter) 56px;
+      gap: 10px;
+    }
+
+    .fact {
+      padding: 16px;
+      gap: 8px;
+      border-radius: 22px;
+    }
+
+    .fact .mono {
+      font-size: 10px;
+    }
+
+    .fact-value {
+      font-size: 15px;
+      letter-spacing: -0.02em;
+    }
+
+    .brief {
+      padding: 0 var(--gutter) 48px;
+      gap: 18px;
+    }
+
+    .brief p {
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .cards {
+      padding: 0 var(--gutter) 56px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .card {
+      min-height: 0;
+      padding: 22px;
+      gap: 16px;
+      border-radius: 26px;
+    }
+
+    .q {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+    }
+
+    .card-title {
+      font-size: 28px;
+    }
+
+    .card p {
+      font-size: 16px;
+    }
+
+    .features {
+      padding: 0 var(--gutter) 56px;
+      gap: 24px;
+    }
+
+    .features-head span {
+      font-size: 15px;
+    }
+
+    .features-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .feature {
+      height: 460px;
+      padding: 24px;
+      border-radius: 28px;
+    }
+
+    .feature h3 {
+      font-size: 28px;
+    }
+
+    .feature p {
+      font-size: 15px;
+    }
+
+    .feature-circle {
+      width: 320px;
+      height: 320px;
+      bottom: -130px;
+    }
+
+    .feature img {
+      width: 200px;
+      height: 290px;
+      border-radius: 22px 22px 0 0;
+    }
+
+    .quote {
+      padding: 0 var(--gutter) 56px;
+      gap: 18px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+
+    .quote h2 {
+      font-size: 32px;
+    }
+
+    blockquote {
+      padding: 22px 22px;
+      border-radius: 26px 26px 26px 6px;
+      font-size: 18px;
+    }
+
+    figcaption {
+      font-size: 13px;
+    }
+  }
+</style>

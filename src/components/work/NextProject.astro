@@ -1,0 +1,202 @@
+---
+import Icon from '../Icon.astro';
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+  position: number;
+  total: number;
+}
+
+const { project, position, total } = Astro.props;
+const onDark = project.tone !== 'light';
+const image = project.images[0];
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="next">
+  <a class:list={['card', `media--${project.media}`, { 'on-dark': onDark }]} href={`/work/${project.slug}`} style={`--bg: ${project.bg}`} data-reveal>
+    <div class="text">
+      <span class="mono">NEXT PROJECT · {pad(position)} OF {pad(total)}</span>
+      <div class="name">
+        <span class="title">{project.shortTitle ?? project.title}</span>
+        <span class="tag">{project.tag}</span>
+      </div>
+      <span class="arrow" aria-hidden="true"><Icon name="arrow-right" size={22} /></span>
+    </div>
+    <div class="media">
+      <img src={image.src} alt="" width={image.width} height={image.height} loading="lazy" decoding="async" />
+    </div>
+  </a>
+</section>
+
+<style>
+  .next {
+    padding: 0 var(--gutter) 72px;
+  }
+
+  .card {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+    border-radius: var(--radius-tile-lg);
+    background: var(--bg);
+    color: var(--dark);
+  }
+
+  .on-dark {
+    color: var(--on-dark);
+  }
+
+  .text {
+    grid-column: 1 / span 5;
+    padding: 48px 0 48px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  .name {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 80px;
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  .tag {
+    font-size: 17px;
+    opacity: 0.7;
+  }
+
+  .arrow {
+    align-self: flex-start;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--dark);
+    transition: transform 0.3s;
+  }
+
+  .card:hover .arrow {
+    transform: translateX(6px);
+  }
+
+  .media {
+    grid-column: 6 / span 7;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .media img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .card:hover .media img {
+    transform: scale(1.03);
+  }
+
+  .media--cover .media img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .media--phones .media,
+  .media--phone-bottom .media {
+    align-items: flex-end;
+  }
+
+  .media--phones .media img,
+  .media--phone-bottom .media img {
+    width: auto;
+    height: 340px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 24px 24px 0 0;
+  }
+
+  @media (max-width: 1023px) {
+    .card {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .text {
+      padding: 40px 40px 24px;
+      gap: 28px;
+    }
+
+    .title {
+      font-size: 64px;
+    }
+
+    .media {
+      height: 280px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .next {
+      padding: 0 var(--gutter) 48px;
+    }
+
+    .card {
+      border-radius: 32px;
+    }
+
+    .text {
+      padding: 28px 24px 16px;
+      gap: 22px;
+    }
+
+    .mono {
+      font-size: 11px;
+    }
+
+    .title {
+      font-size: 44px;
+    }
+
+    .tag {
+      font-size: 15px;
+    }
+
+    .arrow {
+      width: 52px;
+      height: 52px;
+    }
+
+    .media {
+      height: 220px;
+    }
+
+    .media--phones .media img,
+    .media--phone-bottom .media img {
+      height: 200px;
+    }
+  }
+</style>
