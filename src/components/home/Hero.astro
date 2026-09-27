@@ -1,136 +1,92 @@
 ---
-import Icon from '../Icon.astro';
+// Home hero: the name, plus floating "desktop toys".
+// Each toy is two layers:
+//   .toy  (outer) positions + tilts it and carries data-speed for GSAP scroll parallax
+//   .anim (inner) runs the CSS bob/spin loop
+// so a GSAP transform on the outer layer never fights the CSS animation.
+// Tilt uses the CSS `rotate` property (not transform) for the same reason.
+// Positions come from Main/Tablet/Mobile.dc.html; x values are % of the width.
 import Sparkle from '../Sparkle.astro';
-import { site, cvUrl } from '../../data/site';
-import { stack, stats, trustedBy, heroQuote } from '../../data/home';
-import { latestShip } from '../../data/projects';
-
-const { project: ship, subtitle: shipSubtitle } = latestShip;
+import { site } from '../../data/site';
+import { stats } from '../../data/home';
 ---
 
-<section class="hero" aria-label="Intro">
-  <!-- A: headline -->
-  <div class="tile tile--a" data-reveal>
-    <div class="deco-circle" aria-hidden="true" data-parallax="0.12"></div>
-    <div class="deco-arch" aria-hidden="true" data-parallax="-0.1"></div>
-    <Sparkle class="deco-sparkle" size={64} />
+<section class="hero" aria-labelledby="hero-name">
+  <h1 id="hero-name" class="name-block">
+    <span class="name">Elvis</span>
+    <span class="visually-hidden">Ngwu,</span>
+    <span class="role">SOFTWARE DEVELOPER<span class="caret" aria-hidden="true"></span></span>
+  </h1>
 
-    <div class="chips">
-      <span class="chip">{site.owner.toUpperCase()}</span>
-      <span class="chip chip--muted">SOFTWARE DEVELOPER</span>
+  <div class="toys" aria-hidden="true">
+    <div class="toy toy--star" data-speed="1.4">
+      <div class="anim spin"><Sparkle size={170} color="var(--orange)" /></div>
     </div>
 
-    <div class="intro">
-      <h1>I make things that probably didn't need to exist.</h1>
-      <p>
-        But now that they do, you might like them.<span class="hide-mobile">
-          Mobile apps, websites and AI products</span
-        ><span class="hide-tablet-down">, built from Nigeria for everywhere</span><span class="hide-mobile">.</span>
-      </p>
-      <div class="buttons">
-        <a class="btn btn--dark" href="/contact">Hire me <Icon name="arrow-right" size={18} /></a>
-        <a class="btn btn--light" href={cvUrl} download>Download CV</a>
+    <div class="toy toy--star-dark" data-speed="0.7">
+      <div class="anim spin-r"><Sparkle size={44} color="var(--dark)" /></div>
+    </div>
+
+    <div class="toy toy--available" data-speed="1.2">
+      <div class="anim bob">
+        <span class="available">
+          {site.available ? 'Available' : 'Booked'}
+          <span class:list={['toggle', { 'is-on': site.available }]}><span></span></span>
+        </span>
       </div>
     </div>
-  </div>
 
-  <!-- B: clock + availability -->
-  <div class="tile tile--b" data-reveal data-reveal-delay="0.06">
-    <div class="label-row mono">
-      <span class="hide-mobile">LOCAL TIME</span>
-      <span class="hide-mobile"><span class="hide-tablet">NG · </span>WAT</span>
-      <span class="show-mobile">LOCAL · NG WAT</span>
+    <div class="toy toy--code" data-speed="0.8">
+      <div class="anim bob2"><span class="code">&lt;/&gt;</span></div>
     </div>
-    <time class="clock" data-hero-clock>--:--</time>
-    <div class="status">
-      <span>Available<span class="hide-tablet-down"> for work</span></span>
-      <span class={`toggle ${site.available ? 'is-on' : ''}`} aria-hidden="true"><span></span></span>
-    </div>
-  </div>
 
-  <!-- C: shipped -->
-  <div class="tile tile--c stat stat--orange" data-reveal data-reveal-delay="0.12">
-    <div class="ring" aria-hidden="true"></div>
-    <span class="mono">SHIPPED</span>
-    <div class="stat-body">
-      <span class="stat-value" data-count>{stats.shipped.value}</span>
-      <span class="stat-label">{stats.shipped.label}</span>
+    <div class="toy toy--e" data-speed="1.6">
+      <div class="anim bob3"><span class="e">e.</span></div>
     </div>
-  </div>
 
-  <!-- D: latest ship -->
-  <a class="tile tile--d" href={`/work/${ship.slug}`} style={`--tile-bg: ${ship.bg}`} data-reveal data-reveal-delay="0.18">
-    {
-      ship.images.map((image, i) => (
-        <img
-          class={`phone phone--${i + 1}`}
-          src={image.src}
-          alt={image.alt}
-          width={image.width}
-          height={image.height}
-          loading="eager"
-          decoding="async"
-        />
-      ))
-    }
-    <span class="ship-pill">LATEST SHIP</span>
-    <div class="ship-body">
-      <span class="ship-title">{ship.title}</span>
-      <span class="ship-sub">{shipSubtitle}</span>
-      <span class="ship-cta hide-tablet-down">View case <Icon name="arrow-right" /></span>
+    <div class="toy toy--cursor" data-speed="0.9">
+      <div class="anim bob">
+        <span class="cursor">
+          <svg width="30" height="30" viewBox="0 0 24 24">
+            <path d="M3 2l18 8-8 2.5L10 21z" fill="#111110" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path>
+          </svg>
+          <span class="cursor-label">you’re here</span>
+        </span>
+      </div>
     </div>
-  </a>
 
-  <!-- E: stack -->
-  <div class="tile tile--e" data-reveal data-reveal-delay="0.06">
-    <div class="label-row mono">
-      <span>MY STACK</span><span>{String(stack.length).padStart(2, '0')} APPS</span>
+    <div class="toy toy--clock" data-speed="1.1">
+      <div class="anim bob4">
+        <span class="clock"><span class="clock-dot"></span><time data-hero-clock>--:--</time> · NG</span>
+      </div>
     </div>
-    <ul class="apps">
-      {
-        stack.map((s) => (
-          <li>
-            <span class="app-icon" title={s.name} data-float>
-              <img src={s.icon} alt={s.name} width="64" height="64" loading="lazy" decoding="async" />
-            </span>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
 
-  <!-- F: teamwork -->
-  <div class="tile tile--f stat stat--sky" data-reveal data-reveal-delay="0.12">
-    <svg class="squiggle" viewBox="0 0 190 90" fill="none" aria-hidden="true">
-      <path d="M4 60 C 30 10, 50 10, 70 50 S 110 90, 130 40 S 170 0, 186 30" stroke="var(--orange)" stroke-width="10" stroke-linecap="round"></path>
-    </svg>
-    <span class="mono">TEAMWORK</span>
-    <div class="stat-body">
-      <span class="stat-value" data-count>{stats.teamwork.value}</span>
-      <span class="stat-label"><span class="hide-tablet-down">major </span>{stats.teamwork.label}</span>
+    <div class="toy toy--circle" data-speed="0.6">
+      <div class="anim bob2"><span class="circle"></span></div>
+    </div>
+
+    <div class="toy toy--arch" data-speed="1.3">
+      <div class="anim bob3"><span class="arch"></span></div>
+    </div>
+
+    <div class="toy toy--dot-dark" data-speed="0.5">
+      <div class="anim bob4"><span class="dot dot--dark"></span></div>
+    </div>
+
+    <div class="toy toy--dot-orange" data-speed="1.8">
+      <div class="anim bob3"><span class="dot dot--orange"></span></div>
     </div>
   </div>
 
-  <!-- G: trusted by -->
-  <div class="tile tile--g" data-reveal data-reveal-delay="0.18">
-    <div class="label-row mono">
-      <span>TRUSTED BY</span><span class="hide-tablet-down">{stats.years.value} YEARS</span>
-    </div>
-    <ul class="clients">
-      {trustedBy.map((name) => <li>{name}</li>)}
-    </ul>
-    <p class="quote hide-tablet-down">
-      “{heroQuote.text}” <span>— {heroQuote.name}, {heroQuote.company}</span>
-    </p>
-  </div>
-
-  <!-- H: since (tablet + mobile only) -->
-  <div class="tile tile--h stat stat--dark" data-reveal data-reveal-delay="0.12">
-    <span class="mono">SINCE {stats.years.since}</span>
-    <div class="stat-body">
-      <span class="stat-value" data-count>{stats.years.value}</span>
-      <span class="stat-label">{stats.years.label}</span>
-    </div>
+  <div class="bottom">
+    <span>EST. {stats.years.since}</span>
+    <a class="scroll" href="#work" aria-label="Scroll to selected work">
+      SCROLL
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 5v14M6 13l6 6 6-6"></path>
+      </svg>
+    </a>
+    <span>MOBILE · WEB · AI</span>
   </div>
 </section>
 
@@ -151,203 +107,79 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
 </script>
 
 <style>
-  /* ---------- Grid ---------- */
+  /* ---------- Stage ---------- */
   .hero {
-    padding: 16px var(--gutter) 56px;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-rows: repeat(3, 250px);
-    gap: 16px;
-  }
-
-  .tile {
     position: relative;
+    height: 800px;
     overflow: hidden;
-    padding: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .name-block {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border-radius: var(--radius-tile);
-    background: var(--surface);
-    border: 1px solid var(--line);
+    align-items: center;
+    gap: 34px;
   }
 
-  .tile--a {
-    grid-column: 1 / span 7;
-    grid-row: 1 / span 2;
-    padding: 44px;
-  }
-  .tile--b {
-    grid-column: 8 / span 3;
-  }
-  .tile--c {
-    grid-column: 11 / span 2;
-  }
-  .tile--d {
-    grid-column: 8 / span 5;
-    grid-row: 2;
-  }
-  .tile--e {
-    grid-column: 1 / span 4;
-    justify-content: flex-start;
-    gap: 16px;
-    padding: 24px;
-  }
-  .tile--f {
-    grid-column: 5 / span 3;
-  }
-  .tile--g {
-    grid-column: 8 / span 5;
-  }
-  .tile--h {
-    display: none;
+  /* 330px at 1440 wide */
+  .name {
+    font-family: var(--font-name);
+    font-weight: 800;
+    font-size: min(22.9vw, 330px);
+    line-height: 0.82;
+    letter-spacing: -0.045em;
   }
 
-  /* ---------- Shared bits ---------- */
-  .mono {
+  .role {
+    display: flex;
+    align-items: center;
     font-family: var(--font-mono);
-    font-size: 12px;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
-  }
-
-  .label-row {
-    display: flex;
-    justify-content: space-between;
-    color: var(--muted);
-  }
-
-  .show-mobile {
-    display: none;
-  }
-
-  /* ---------- A: headline ---------- */
-  .deco-circle {
-    position: absolute;
-    right: -120px;
-    bottom: -150px;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: var(--orange);
-  }
-
-  .deco-arch {
-    position: absolute;
-    right: 150px;
-    bottom: -40px;
-    width: 180px;
-    height: 180px;
-    border: 22px solid var(--sky);
-    border-bottom: 0;
-    border-radius: var(--radius-pill) var(--radius-pill) 0 0;
-  }
-
-  .tile--a :global(.deco-sparkle) {
-    position: absolute;
-    right: 60px;
-    top: 56px;
-  }
-
-  .chips {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .chip {
-    padding: 7px 14px;
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-  }
-
-  .chip--muted {
-    color: var(--muted);
-  }
-
-  .intro {
-    position: relative;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-  }
-
-  h1 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 54px;
-    line-height: 1.02;
-    letter-spacing: -0.04em;
-  }
-
-  .intro p {
+    font-weight: 500;
     font-size: 20px;
-    line-height: 1.45;
-    color: var(--muted);
+    letter-spacing: 0.32em;
   }
 
-  .buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  .caret {
+    display: inline-block;
+    width: 12px;
+    height: 22px;
+    margin-left: 6px;
+    background: var(--orange);
+    animation: blink 1s steps(1) infinite;
   }
 
-  .btn {
-    height: 54px;
-    padding: 0 26px;
+  /* ---------- Toys ---------- */
+  .toy {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .toy :global(svg) {
+    display: block;
+  }
+
+  .available {
+    padding: 8px 8px 8px 16px;
     display: flex;
     align-items: center;
     gap: 10px;
     border-radius: var(--radius-pill);
-    font-size: 16px;
-    transition: transform 0.2s;
-  }
-
-  .btn:hover {
-    transform: translateY(-2px);
-  }
-
-  .btn--dark {
-    background: var(--text);
-    color: var(--bg);
-    font-weight: 600;
-  }
-
-  .btn--light {
-    padding: 0 24px;
     background: var(--surface);
     border: 1px solid var(--line);
-    font-weight: 500;
-  }
-
-  /* ---------- B: clock ---------- */
-  .clock {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 64px;
-    line-height: 1;
-    letter-spacing: -0.05em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .status {
-    padding-top: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--line);
+    box-shadow: 0 14px 30px rgba(17, 17, 16, 0.1);
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
+    white-space: nowrap;
   }
 
   .toggle {
-    width: 52px;
-    height: 30px;
+    width: 50px;
+    height: 28px;
     padding: 3px;
     display: flex;
     border-radius: var(--radius-pill);
@@ -366,645 +198,290 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
     background: var(--surface);
   }
 
-  /* ---------- Stat tiles (C, F, H) ---------- */
-  .stat {
-    border: 0;
-    color: var(--dark);
-  }
-
-  .stat--orange {
-    background: var(--orange);
-  }
-
-  .stat--sky {
+  .code {
+    width: 74px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
     background: var(--sky);
+    color: var(--dark);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 20px;
   }
 
-  .stat--dark {
-    background: var(--dark);
-    color: var(--on-dark);
+  .e {
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    background: var(--orange);
+    box-shadow: 0 18px 34px rgba(255, 106, 61, 0.35);
+    color: var(--dark);
+    font-family: var(--font-name);
+    font-weight: 800;
+    font-size: 40px;
   }
 
-  .stat--dark .mono {
-    opacity: 0.7;
-  }
-
-  .stat-body {
-    position: relative;
+  .cursor {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    align-items: flex-start;
+    gap: 2px;
   }
 
-  .stat-value {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -0.05em;
+  .cursor-label {
+    margin-left: 21px;
+    padding: 5px 11px;
+    border-radius: 999px 999px 999px 4px;
+    background: var(--dark);
+    color: var(--on-dark);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
   }
 
-  .stat-label {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .ring {
-    position: absolute;
-    right: -40px;
-    top: -40px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 18px solid rgba(17, 17, 16, 0.12);
-  }
-
-  .squiggle {
-    position: absolute;
-    right: -10px;
-    top: 18px;
-    width: 190px;
-    height: 90px;
-  }
-
-  /* ---------- D: latest ship ---------- */
-  .tile--d {
-    padding: 28px;
-    border: 0;
-    background: var(--tile-bg);
-    color: var(--dark);
-  }
-
-  .phone {
-    position: absolute;
-    object-fit: cover;
-    object-position: top;
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .phone--1 {
-    right: 36px;
-    top: 26px;
-    width: 150px;
-    height: 320px;
-    border-radius: 22px;
-    transform: rotate(8deg);
-    box-shadow: 0 24px 48px rgba(17, 17, 16, 0.22);
-  }
-
-  .phone--2 {
-    right: 170px;
-    top: 60px;
-    width: 130px;
-    height: 280px;
-    border-radius: 20px;
-    transform: rotate(-6deg);
-    box-shadow: 0 24px 48px rgba(17, 17, 16, 0.18);
-  }
-
-  .tile--d:hover .phone--1 {
-    transform: rotate(11deg) translateY(-10px);
-  }
-
-  .tile--d:hover .phone--2 {
-    transform: rotate(-9deg) translateY(-6px);
-  }
-
-  .ship-pill {
-    position: relative;
-    align-self: flex-start;
-    padding: 6px 12px;
+  .clock {
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     border-radius: var(--radius-pill);
     background: var(--dark);
     color: var(--on-dark);
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
+    font-size: 13px;
+    white-space: nowrap;
   }
 
-  .ship-body {
-    position: relative;
+  .clock-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+
+  .circle {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: var(--sky);
+  }
+
+  .arch {
+    display: block;
+    width: 90px;
+    height: 45px;
+    border: 14px solid var(--orange);
+    border-bottom: 0;
+    border-radius: 90px 90px 0 0;
+  }
+
+  .dot {
+    display: block;
+    border-radius: 50%;
+  }
+
+  .dot--dark {
+    width: 18px;
+    height: 18px;
+    background: var(--dark);
+  }
+
+  .dot--orange {
+    width: 14px;
+    height: 14px;
+    background: var(--orange);
+  }
+
+  /* Desktop positions (1440 × 800) */
+  .toy--star { left: 10.42%; top: 90px; }
+  .toy--star-dark { right: 26.39%; top: 110px; }
+  .toy--available { right: 9.03%; top: 200px; rotate: 6deg; }
+  .toy--code { left: 27.78%; top: 140px; rotate: -8deg; }
+  .toy--e { left: 8.33%; bottom: 170px; rotate: -12deg; }
+  .toy--cursor { right: 18.06%; bottom: 190px; }
+  .toy--clock { left: 25%; bottom: 110px; rotate: -4deg; }
+  .toy--circle { right: -3.47%; bottom: 50px; }
+  .toy--arch { right: 36.11%; bottom: 90px; }
+  .toy--dot-dark { left: 4.17%; top: 380px; }
+  .toy--dot-orange { right: 6.25%; top: 120px; }
+
+  /* ---------- Bottom bar ---------- */
+  .bottom {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 24px;
+    z-index: 3;
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .ship-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 30px;
-    letter-spacing: -0.04em;
-  }
-
-  .ship-sub {
-    font-size: 14px;
-    color: #3f3d39;
-  }
-
-  .ship-cta {
-    margin-top: 8px;
-    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 6px;
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .ship-cta :global(svg) {
-    transition: transform 0.2s;
-  }
-
-  .tile--d:hover .ship-cta :global(svg) {
-    transform: translateX(4px);
-  }
-
-  /* ---------- E: stack ---------- */
-  .apps {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    justify-items: center;
-    align-content: center;
-    flex-grow: 1;
-  }
-
-  .apps li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* Logo on its own, no tile: bigger, with a soft shadow, floating (motion.ts) */
-  .app-icon {
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-  }
-
-  .app-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 10px rgba(17, 17, 16, 0.14));
-  }
-
-  .apps li:hover .app-icon {
-    transform: translateY(-3px) rotate(-4deg);
-  }
-
-  /* ---------- G: trusted by ---------- */
-  .clients {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .clients li {
-    padding: 8px 14px;
-    border-radius: var(--radius-pill);
-    background: var(--surface-2);
-    font-weight: 500;
-    font-size: 14px;
-  }
-
-  .quote {
-    font-size: 15px;
-    line-height: 1.45;
+    font-family: var(--font-mono);
+    font-size: 12px;
     color: var(--muted);
   }
 
-  .quote span {
+  .scroll {
+    min-height: var(--tap);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
     color: var(--text);
+    animation: nudge 1.8s ease-in-out infinite;
   }
 
-  /* ========== Tablet ========== */
+  /* ---------- Loops (from the mockups) ---------- */
+  .bob { animation: bob 3.4s ease-in-out infinite; }
+  .bob2 { animation: bob 4.1s ease-in-out 0.7s infinite; }
+  .bob3 { animation: bob 3.7s ease-in-out 1.3s infinite; }
+  .bob4 { animation: bob 5s ease-in-out 0.3s infinite; }
+  .spin { animation: spin 18s linear infinite; }
+  .spin-r { animation: spin 26s linear infinite reverse; }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim,
+    .scroll,
+    .caret {
+      animation: none;
+    }
+  }
+
+  /* ========== Tablet (834 × 720) ========== */
   @media (max-width: 1023px) {
-    .hide-tablet-down {
+    .hero {
+      height: 720px;
+    }
+
+    .name-block {
+      gap: 26px;
+    }
+
+    /* 220px at 834 wide */
+    .name {
+      font-size: 26.4vw;
+    }
+
+    .role {
+      font-size: 15px;
+      letter-spacing: 0.28em;
+    }
+
+    .caret {
+      width: 9px;
+      height: 16px;
+    }
+
+    .toy--star :global(svg) { width: 120px; height: 120px; }
+    .toy--star-dark :global(svg) { width: 34px; height: 34px; }
+
+    .available { font-size: 13px; }
+    .toggle { width: 44px; height: 24px; }
+
+    .code { width: 60px; height: 60px; border-radius: 18px; font-size: 17px; }
+    .e { width: 78px; height: 78px; border-radius: 21px; font-size: 32px; }
+    .cursor :global(svg) { width: 26px; height: 26px; }
+    .cursor-label { margin-left: 18px; font-size: 12px; }
+    .clock { font-size: 12px; }
+    .circle { width: 110px; height: 110px; }
+
+    .toy--star { left: 6%; top: 70px; }
+    .toy--star-dark { right: 29.98%; top: 90px; }
+    .toy--available { right: 7.19%; top: 120px; }
+    .toy--code { left: 29.98%; top: 110px; }
+    .toy--e { left: 7.19%; bottom: 150px; }
+    .toy--cursor { right: 13.19%; bottom: 170px; }
+    .toy--clock { left: 31.18%; bottom: 90px; }
+    .toy--circle { right: -4.8%; bottom: 40px; }
+
+    .toy--arch,
+    .toy--dot-dark,
+    .toy--dot-orange {
       display: none;
     }
 
-    .hero {
-      padding: 14px var(--gutter) 48px;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      grid-template-rows: none;
-      gap: 14px;
-    }
-
-    .tile {
-      grid-column: span 2;
-      grid-row: auto;
-      padding: 22px;
-      border-radius: 30px;
-    }
-
-    .tile--a {
-      grid-column: span 6;
-      justify-content: flex-start;
-      gap: 26px;
-      padding: 36px;
-    }
-
-    .tile--b,
-    .tile--c,
-    .tile--f {
-      height: 220px;
-    }
-
-    .tile--d,
-    .tile--e {
-      grid-column: span 3;
-      height: 300px;
-      order: 1;
-    }
-
-    .tile--d {
-      padding: 24px;
-    }
-
-    .tile--g {
-      grid-column: span 4;
-      height: 200px;
-      order: 1;
-    }
-
-    .tile--h {
-      display: flex;
-      height: 200px;
-      order: 1;
-    }
-
-    .deco-circle {
-      right: -110px;
-      width: 360px;
-      height: 360px;
-    }
-
-    .deco-arch {
-      width: 150px;
-      height: 150px;
-      border-width: 18px;
-    }
-
-    .tile--a :global(.deco-sparkle) {
-      right: 40px;
-      top: 40px;
-      width: 48px;
-      height: 48px;
-    }
-
-    .intro {
-      display: contents;
-    }
-
-    h1 {
-      position: relative;
-      max-width: 580px;
-      font-size: 46px;
-      line-height: 1.03;
-    }
-
-    .intro p {
-      position: relative;
-      max-width: 460px;
-      font-size: 18px;
-      line-height: 1.5;
-    }
-
-    .buttons {
-      position: relative;
-    }
-
-    .btn {
-      padding: 0 24px;
-    }
-
-    .btn--light {
-      padding: 0 22px;
-    }
-
-    .mono {
+    .bottom {
       font-size: 11px;
     }
+  }
 
-    .clock {
-      font-size: 44px;
+  /* ========== Mobile (390 × 640) ========== */
+  @media (max-width: 640px) {
+    .hero {
+      height: 640px;
     }
 
-    .status {
-      padding-top: 12px;
-      font-size: 13px;
-    }
-
-    .toggle {
-      width: 46px;
-      height: 28px;
-    }
-
-    .stat-value {
-      font-size: 50px;
-    }
-
-    .stat-body {
-      gap: 4px;
-    }
-
-    .stat-label {
-      font-size: 13px;
-    }
-
-    .ring {
-      right: -36px;
-      top: -36px;
-      width: 110px;
-      height: 110px;
-      border-width: 16px;
-    }
-
-    .squiggle {
-      right: -8px;
-      top: 16px;
-      width: 140px;
-      height: 66px;
-    }
-
-    .phone--1 {
-      right: 20px;
-      top: 34px;
-      width: 120px;
-      height: 260px;
-      border-radius: 18px;
-    }
-
-    .phone--2 {
-      right: 128px;
-      top: 90px;
-      width: 100px;
-      height: 220px;
-      border-radius: 16px;
-    }
-
-    .ship-pill {
-      padding: 5px 10px;
-      font-size: 10px;
-    }
-
-    .ship-body {
-      gap: 4px;
-    }
-
-    .ship-title {
-      font-size: 24px;
-    }
-
-    .ship-sub {
-      font-size: 13px;
-    }
-
-    .tile--e {
+    .name-block {
       gap: 18px;
     }
 
-    .apps {
-      gap: 18px 0;
+    /* The mockup's 128px clips real Syne at 390 wide (the word is ~3.35em wide),
+       so size it to fill ~92% of the screen instead (~107px at 390) */
+    .name {
+      font-size: 27.5vw;
     }
 
-    .tile--g {
-      justify-content: space-between;
-    }
-
-    .clients {
-      gap: 7px;
-    }
-
-    .clients li {
-      padding: 7px 13px;
-      font-size: 13px;
-    }
-  }
-
-  /* Tablet only (not mobile) */
-  @media (min-width: 641px) and (max-width: 1023px) {
-    .hide-tablet {
-      display: none;
-    }
-  }
-
-  /* ========== Mobile ========== */
-  @media (max-width: 640px) {
-    .hide-mobile {
-      display: none;
-    }
-
-    .show-mobile {
-      display: inline;
-    }
-
-    .hero {
-      padding: 12px var(--gutter) 40px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .tile {
-      grid-column: span 1;
-      padding: 18px;
-      border-radius: var(--radius-tile);
-    }
-
-    .tile--a,
-    .tile--d,
-    .tile--e,
-    .tile--g {
-      grid-column: span 2;
-    }
-
-    /* Mobile order: A B C D E F H G */
-    .tile--d,
-    .tile--e,
-    .tile--f,
-    .tile--h {
-      order: 1;
-    }
-
-    .tile--g {
-      order: 2;
-      height: auto;
-      justify-content: flex-start;
-      gap: 14px;
-      padding: 20px;
-    }
-
-    .tile--a {
-      gap: 22px;
-      padding: 24px;
-    }
-
-    .tile--b,
-    .tile--c {
-      height: 190px;
-    }
-
-    .tile--f,
-    .tile--h {
-      height: 170px;
-    }
-
-    .tile--d {
-      height: 300px;
-      padding: 22px;
-    }
-
-    .tile--e {
-      height: auto;
-      gap: 16px;
-      padding: 20px;
-    }
-
-    .deco-circle {
-      right: -90px;
-      bottom: -110px;
-      width: 240px;
-      height: 240px;
-    }
-
-    .deco-arch {
-      right: 90px;
-      bottom: -30px;
-      width: 110px;
-      height: 110px;
-      border-width: 14px;
-    }
-
-    .tile--a :global(.deco-sparkle) {
-      display: none;
-    }
-
-    .chips {
-      gap: 6px;
-    }
-
-    .chip {
-      padding: 6px 12px;
+    .role {
       font-size: 11px;
+      letter-spacing: 0.24em;
     }
 
-    h1 {
-      font-size: 32px;
-      line-height: 1.05;
+    .caret {
+      width: 6px;
+      height: 12px;
     }
 
-    .intro p {
-      max-width: 290px;
-      font-size: 16px;
+    .toy--star :global(svg) { width: 84px; height: 84px; }
+    .toy--star-dark :global(svg) { width: 26px; height: 26px; }
+
+    .available { font-size: 12px; }
+    .toggle { width: 38px; height: 22px; }
+
+    .code { width: 48px; height: 48px; border-radius: 14px; font-size: 14px; }
+    .e { width: 60px; height: 60px; border-radius: 16px; font-size: 26px; }
+    .cursor :global(svg) { width: 22px; height: 22px; }
+    .cursor-label { margin-left: 15px; font-size: 11px; }
+    .circle { width: 90px; height: 90px; }
+
+    .toy--star { left: 4.62%; top: 60px; }
+    .toy--star-dark { right: 38.46%; top: 70px; }
+    .toy--available { right: 4.1%; top: 120px; }
+    .toy--e { left: 6.67%; bottom: 150px; }
+    .toy--cursor { right: 10.26%; bottom: 170px; }
+    .toy--code { left: 38.46%; top: auto; bottom: 90px; }
+    .toy--circle { right: -9.23%; bottom: 60px; }
+
+    .toy--clock {
+      display: none;
     }
 
-    .buttons {
-      gap: 8px;
-      padding-bottom: 90px;
-    }
-
-    .btn {
-      height: 50px;
-      padding: 0 22px;
-      gap: 8px;
-      font-size: 15px;
-    }
-
-    .btn--light {
-      padding: 0 18px;
-    }
-
-    .mono {
+    .bottom {
       font-size: 10px;
-    }
-
-    .tile--e .mono,
-    .tile--g .mono {
-      font-size: 11px;
-    }
-
-    .clock {
-      font-size: 38px;
-    }
-
-    .status {
-      padding-top: 0;
-      border-top: 0;
-      font-size: 12px;
-    }
-
-    .toggle {
-      width: 44px;
-      height: 26px;
-    }
-
-    .stat-value {
-      font-size: 44px;
-    }
-
-    .tile--f .stat-value,
-    .tile--h .stat-value {
-      font-size: 40px;
-    }
-
-    .stat-label {
-      font-size: 12px;
-    }
-
-    .ring {
-      right: -30px;
-      top: -30px;
-      width: 90px;
-      height: 90px;
-      border-width: 14px;
-    }
-
-    .squiggle {
-      width: 110px;
-      height: 52px;
-      top: 14px;
-    }
-
-    .phone--1 {
-      right: 18px;
-      width: 116px;
-      height: 250px;
-    }
-
-    .phone--2 {
-      right: 120px;
-      top: 80px;
-    }
-
-    .ship-title {
-      font-size: 22px;
-    }
-
-    .apps {
-      gap: 14px 0;
-    }
-
-    .app-icon {
-      width: 46px;
-      height: 46px;
-    }
-
-    .clients {
-      gap: 6px;
-    }
-
-    .clients li {
-      padding: 7px 12px;
     }
   }
 </style>

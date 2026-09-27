@@ -9,14 +9,14 @@ Visual source of truth: /design-reference (read its README). Match it closely at
 - Background #F4F2ED with a faint 64px grid (lines rgba(17,17,16,.05)) + a subtle grain noise overlay (multiply).
 - Surfaces #FFFFFF, surface-2 #EEEBE4, borders #DCD8CF, text #111110, muted #5C5954.
 - Accents: orange #FF6A3D (main), sky #BFE3FA, pastel note colors #FFD9C9 #E4F5B8 #FFE9A8 #E6DEFF. Dark tiles #111110.
-- Fonts (Google Fonts): Unbounded (headings, 700–900, tight letter-spacing ≈ -0.05em), Geist (body), Geist Mono (small uppercase labels).
+- Fonts (Google Fonts): Unbounded (headings, 700–900, tight letter-spacing ≈ -0.05em), Geist (body), Geist Mono (small uppercase labels), Syne 800 (the huge "Elvis" in the home hero only).
 - Shapes: big rounded tiles (radius 28–40px), pill buttons/chips (999px), orange circles + sky-blue arches as abstract decoration, 4-point star sparkle icon.
 - Brand wordmark "ELVES CORPS" in Unbounded 900, with "CORPS" as orange outline text. Used in nav (small) and as a giant footer.
 - Section titles on home: huge Unbounded title + round orange arrow button that links to the full page.
 - Min touch target 44px. No emoji in UI.
 
 ## Site map
-/ (home hub: bento dashboard hero, ribbons, project tiles, About/Notes/Contact previews with big title + arrow)
+/ (home hub: name hero "Elvis" with floating toys (each has data-speed for GSAP scroll parallax), ribbons, project tiles, About/Notes/Contact previews with big title + arrow)
 /about (centered grayscale portrait with "ELVIS NGWU" over it, stats, stack, services, certificates "Certified & stamped", journey chapter viewer)
 /notes (+ /notes/[slug]) (corkboard of taped sticky notes, category filters)
 /contact (form with chips, email tile, socials, "what happens next")

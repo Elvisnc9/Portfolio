@@ -28,6 +28,8 @@
   --font-display: 'Unbounded', system-ui, sans-serif;
   --font-body: 'Geist', system-ui, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, monospace;
+  /* Home hero name only */
+  --font-name: 'Syne', var(--font-display);
   --tracking-tight: -0.05em;
 
   /* Shape */
