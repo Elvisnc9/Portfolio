@@ -49,9 +49,14 @@ const count = String(projects.length).padStart(2, '0');
           const Tag = p.href ? 'a' : 'div';
           return (
             <li>
-              <Tag class="exp-row" href={p.href}>
+              <Tag
+                class="exp-row"
+                href={p.href}
+                target={p.href?.startsWith('http') ? '_blank' : undefined}
+                rel={p.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
                 <span class="exp-icon" style={`background: ${p.bg}`} aria-hidden="true">
-                  {p.k}
+                  <Icon name={p.icon} size={22} />
                 </span>
                 <span class="exp-text">
                   <span class="exp-name">{p.name}</span>

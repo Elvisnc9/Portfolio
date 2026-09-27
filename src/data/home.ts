@@ -7,17 +7,19 @@ export const stats = {
   years: { value: '4+', label: 'years building', short: 'years', since: 2022 },
 };
 
-/** "k" is the two-letter monogram shown on the app icon */
+/** Tech stack, shown as logos only (the name is the image's alt text and tooltip) */
 export const stack = [
-  { k: 'Fl', name: 'Flutter', bg: '#02569B', fg: '#FFFFFF' },
-  { k: 'Da', name: 'Dart', bg: '#0175C2', fg: '#FFFFFF' },
-  { k: 'Kt', name: 'Kotlin', bg: '#7F52FF', fg: '#FFFFFF' },
-  { k: 'Sp', name: 'Serverpod', bg: '#BFE3FA', fg: '#111110' },
-  { k: 'Fb', name: 'Firebase', bg: '#FFCA28', fg: '#111110' },
-  { k: 'Nd', name: 'Node.js', bg: '#3C873A', fg: '#FFFFFF' },
-  { k: 'Pg', name: 'Postgres', bg: '#336791', fg: '#FFFFFF' },
-  { k: 'n8', name: 'n8n', bg: '#FF6A3D', fg: '#111110' },
+  { name: 'Flutter', icon: '/images/stack/flutter.png' },
+  { name: 'Dart', icon: '/images/stack/dart.png' },
+  { name: 'Kotlin', icon: '/images/stack/kotlin.png' },
+  { name: 'Serverpod', icon: '/images/stack/serverpod.png' },
+  { name: 'Firebase', icon: '/images/stack/firebase.png' },
+  { name: 'Node.js', icon: '/images/stack/nodejs.png' },
+  { name: 'PostgreSQL', icon: '/images/stack/postgres.png' },
+  { name: 'n8n', icon: '/images/stack/n8n.png' },
 ];
+
+export const stackByName = (name: string) => stack.find((s) => s.name === name);
 
 export const trustedBy = ['Genspark', 'Bitwyre', 'Kidemis', 'Articos', 'Activedge', 'Nikah Forever'];
 
@@ -25,14 +27,20 @@ export const heroQuote = { text: 'Looks premium and works beautifully.', name: '
 
 export const ribbon = ['MOBILE APPS', 'WEBSITES', 'SAAS', 'AI INTEGRATION'];
 
-/** Side projects. Add an href to make a row clickable. */
-export const experiments: { k: string; name: string; type: string; bg: string; href?: string }[] = [
-  { k: 'Bl', name: 'Blail', type: 'Mobile app', bg: '#FFD9C9' },
-  { k: 'Em', name: 'Elves Meet', type: 'Video calling app', bg: '#BFE3FA' },
-  { k: 'Cp', name: 'Campipal', type: 'Mobile app', bg: '#E4F5B8' },
-  { k: 'Vd', name: 'Voice Detection', type: 'AI experiment', bg: '#E6DEFF' },
-  { k: 'Ge', name: 'Genie', type: 'AR / Mobile', bg: '#FFE9A8' },
-  { k: 'Au', name: 'Aurelle', type: 'Frontend', bg: '#F4F2ED' },
+/** Side projects. `icon` is a name from Icon.astro. Add an href to make a row clickable. */
+export const experiments: {
+  icon: 'mail' | 'video' | 'campus' | 'waveform' | 'ar' | 'layout';
+  name: string;
+  type: string;
+  bg: string;
+  href?: string;
+}[] = [
+  { icon: 'mail', name: 'Blail', type: 'Hands-free email app', bg: '#FFD9C9' },
+  { icon: 'video', name: 'Elves Meet', type: 'Video calling app', bg: '#BFE3FA' },
+  { icon: 'campus', name: 'Campipal', type: 'Campus app', bg: '#E4F5B8', href: 'https://play.google.com/store/apps/details?id=com.mobile.campuspalng.app' },
+  { icon: 'waveform', name: 'Voice Detection', type: 'AI experiment', bg: '#E6DEFF' },
+  { icon: 'ar', name: 'Genie', type: 'AR app', bg: '#FFE9A8' },
+  { icon: 'layout', name: 'Aurelle', type: 'Frontend', bg: '#F4F2ED' },
 ];
 
 export const aboutChips = ['Based in Nigeria', 'BSc Computer Science', 'Flutter · Serverpod · AI'];

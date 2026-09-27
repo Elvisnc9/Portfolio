@@ -24,8 +24,7 @@ export type NavLabel = (typeof navLinks)[number]['label'];
 // `k`, `bg`, `fg` = the app-icon tile on the contact page.
 export const socials = [
   { label: 'GitHub', href: 'https://github.com/Elvisnc9', menu: true, k: 'Gh', bg: '#111110', fg: '#F4F2ED' },
-  // TODO: add your LinkedIn profile URL
-  { label: 'LinkedIn', href: '', menu: true, k: 'in', bg: '#0A66C2', fg: '#FFFFFF' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/elviznc', menu: true, k: 'in', bg: '#0A66C2', fg: '#FFFFFF' },
   { label: 'X', href: 'https://x.com/ElvisNgwu', menu: false, k: 'X', bg: '#EEEBE4', fg: '#111110' },
   { label: 'WhatsApp', href: 'https://wa.me/2349056982116', menu: true, k: 'Wa', bg: '#25D366', fg: '#111110' },
   { label: 'Telegram', href: 'https://t.me/Elviznc', menu: false, contactOnly: true, k: 'Tg', bg: '#BFE3FA', fg: '#111110' },

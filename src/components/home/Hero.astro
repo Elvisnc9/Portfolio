@@ -90,10 +90,9 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
       {
         stack.map((s) => (
           <li>
-            <span class="app-icon" style={`background: ${s.bg}; color: ${s.fg}`} aria-hidden="true">
-              {s.k}
+            <span class="app-icon" title={s.name}>
+              <img src={s.icon} alt={s.name} width="64" height="64" loading="lazy" decoding="async" />
             </span>
-            <span class="app-name">{s.name}</span>
           </li>
         ))
       }
@@ -526,8 +525,10 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 8px 12px;
+    gap: 12px;
     justify-items: center;
+    align-content: center;
+    flex-grow: 1;
   }
 
   .apps li {
@@ -537,26 +538,27 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
     gap: 6px;
   }
 
+  /* Logo only: neutral tile so every brand colour reads the same way */
   .app-icon {
-    width: 58px;
-    height: 58px;
+    width: 64px;
+    height: 64px;
+    padding: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 17px;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 16px;
+    border-radius: 18px;
+    background: var(--surface-2);
     transition: transform 0.2s;
+  }
+
+  .app-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .apps li:hover .app-icon {
     transform: translateY(-3px) rotate(-4deg);
-  }
-
-  .app-name {
-    font-size: 11px;
-    color: var(--muted);
   }
 
   /* ---------- G: trusted by ---------- */
