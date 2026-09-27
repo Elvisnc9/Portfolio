@@ -20,9 +20,11 @@ const paths = {
 interface Props {
   name: keyof typeof paths;
   size?: number;
+  /** Line thickness (default 2) */
+  stroke?: number;
 }
 
-const { name, size = 16 } = Astro.props;
+const { name, size = 16, stroke = 2 } = Astro.props;
 ---
 
 <svg
@@ -31,7 +33,7 @@ const { name, size = 16 } = Astro.props;
   viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
-  stroke-width="2"
+  stroke-width={stroke}
   stroke-linecap="round"
   stroke-linejoin="round"
   aria-hidden="true"

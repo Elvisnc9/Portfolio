@@ -90,7 +90,7 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
       {
         stack.map((s) => (
           <li>
-            <span class="app-icon" title={s.name}>
+            <span class="app-icon" title={s.name} data-float>
               <img src={s.icon} alt={s.name} width="64" height="64" loading="lazy" decoding="async" />
             </span>
           </li>
@@ -538,16 +538,13 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
     gap: 6px;
   }
 
-  /* Logo only: neutral tile so every brand colour reads the same way */
+  /* Logo on its own, no tile: bigger, with a soft shadow, floating (motion.ts) */
   .app-icon {
-    width: 64px;
-    height: 64px;
-    padding: 13px;
+    width: 52px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 18px;
-    background: var(--surface-2);
     transition: transform 0.2s;
   }
 
@@ -555,6 +552,7 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
     width: 100%;
     height: 100%;
     object-fit: contain;
+    filter: drop-shadow(0 8px 10px rgba(17, 17, 16, 0.14));
   }
 
   .apps li:hover .app-icon {
@@ -997,10 +995,8 @@ const { project: ship, subtitle: shipSubtitle } = latestShip;
     }
 
     .app-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      font-size: 15px;
+      width: 46px;
+      height: 46px;
     }
 
     .clients {

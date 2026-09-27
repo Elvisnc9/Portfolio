@@ -36,7 +36,7 @@ function pick(s: { value: string; label: string; short: string }) {
       {
         stack.map((s) => (
           <li>
-            <span class="app-icon" title={s.name}>
+            <span class="app-icon" title={s.name} data-float>
               <img src={s.icon} alt={s.name} width="64" height="64" loading="lazy" decoding="async" />
             </span>
           </li>
@@ -149,16 +149,13 @@ function pick(s: { value: string; label: string; short: string }) {
     gap: 8px;
   }
 
-  /* Logo only: neutral tile so every brand colour reads the same way */
+  /* Logo on its own, no tile: bigger, with a soft shadow, floating (motion.ts) */
   .app-icon {
-    width: 68px;
-    height: 68px;
-    padding: 14px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    background: var(--surface-2);
     transition: transform 0.2s;
   }
 
@@ -166,6 +163,7 @@ function pick(s: { value: string; label: string; short: string }) {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    filter: drop-shadow(0 8px 10px rgba(17, 17, 16, 0.14));
   }
 
   .apps li:hover .app-icon {
@@ -255,10 +253,8 @@ function pick(s: { value: string; label: string; short: string }) {
     }
 
     .app-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      font-size: 15px;
+      width: 46px;
+      height: 46px;
     }
 
   }

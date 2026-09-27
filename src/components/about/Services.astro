@@ -6,9 +6,7 @@ import { services } from '../../data/about';
   {
     services.map((s, i) => (
       <div class="service" data-reveal data-reveal-delay={String(i * 0.06)}>
-        <span class="num" style={`background: ${s.bg}`}>
-          {s.n}
-        </span>
+        <span class="num" aria-hidden="true">{s.n}</span>
         <div class="text">
           <h3>{s.title}</h3>
           <p>{s.text}</p>
@@ -27,7 +25,7 @@ import { services } from '../../data/about';
   }
 
   .service {
-    height: 220px;
+    height: 260px;
     padding: 26px;
     display: flex;
     flex-direction: column;
@@ -42,17 +40,17 @@ import { services } from '../../data/about';
     transform: translateY(-4px);
   }
 
+  /* Big outlined number, same treatment as the journey years: the stroke is
+     painted under a surface-coloured fill to hide the variable font overlaps */
   .num {
-    width: 46px;
-    height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 14px;
-    color: var(--dark);
     font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 14px;
+    font-weight: 900;
+    font-size: 88px;
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    color: var(--surface);
+    -webkit-text-stroke: 5px var(--orange);
+    paint-order: stroke fill;
   }
 
   .text {
@@ -81,7 +79,7 @@ import { services } from '../../data/about';
     }
 
     .service {
-      height: 200px;
+      height: 240px;
     }
   }
 
@@ -92,16 +90,14 @@ import { services } from '../../data/about';
     }
 
     .service {
-      height: 170px;
+      height: 200px;
       padding: 18px;
       border-radius: 24px;
     }
 
     .num {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      font-size: 12px;
+      font-size: 56px;
+      -webkit-text-stroke-width: 4px;
     }
 
     .text {

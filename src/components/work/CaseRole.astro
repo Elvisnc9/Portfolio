@@ -27,7 +27,7 @@ const tools = stack.map(stackByName).filter((t) => t !== undefined);
             <span class="mono mono--soft">BUILT WITH</span>
             <ul>
               {tools.map((t) => (
-                <li title={t!.name}>
+                <li title={t!.name} data-float>
                   <img src={t!.icon} alt={t!.name} width="40" height="40" loading="lazy" decoding="async" />
                 </li>
               ))}
@@ -133,18 +133,21 @@ const tools = stack.map(stackByName).filter((t) => t !== undefined);
     gap: 10px;
   }
 
+  /* Logos float on the dark panel, no tiles */
+  .tools ul {
+    gap: 20px;
+  }
+
   .tools li {
-    width: 60px;
-    height: 60px;
-    padding: 12px;
-    border-radius: 18px;
-    background: var(--on-dark);
+    width: 52px;
+    height: 52px;
   }
 
   .tools img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45));
   }
 
   .points {
@@ -236,10 +239,8 @@ const tools = stack.map(stackByName).filter((t) => t !== undefined);
     }
 
     .tools li {
-      width: 52px;
-      height: 52px;
-      padding: 10px;
-      border-radius: 16px;
+      width: 44px;
+      height: 44px;
     }
 
     .points li {

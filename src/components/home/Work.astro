@@ -55,8 +55,8 @@ const count = String(projects.length).padStart(2, '0');
                 target={p.href?.startsWith('http') ? '_blank' : undefined}
                 rel={p.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
-                <span class="exp-icon" style={`background: ${p.bg}`} aria-hidden="true">
-                  <Icon name={p.icon} size={22} />
+                <span class="exp-icon" aria-hidden="true" data-float>
+                  <Icon name={p.icon} size={34} stroke={2.6} />
                 </span>
                 <span class="exp-text">
                   <span class="exp-name">{p.name}</span>
@@ -233,6 +233,7 @@ const count = String(projects.length).padStart(2, '0');
     border-top: 1px solid var(--line);
   }
 
+  /* Icon on its own, no tile: bigger, bolder, floating (see motion.ts) */
   .exp-icon {
     width: 48px;
     height: 48px;
@@ -240,11 +241,7 @@ const count = String(projects.length).padStart(2, '0');
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 14px;
-    color: var(--dark);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 16px;
+    color: var(--text);
   }
 
   .exp-text {
@@ -311,12 +308,6 @@ const count = String(projects.length).padStart(2, '0');
     .exp-row {
       height: 78px;
       gap: 14px;
-    }
-
-    .exp-icon {
-      width: 46px;
-      height: 46px;
-      font-size: 15px;
     }
 
     .exp-name {
@@ -393,8 +384,6 @@ const count = String(projects.length).padStart(2, '0');
     .exp-icon {
       width: 44px;
       height: 44px;
-      border-radius: 13px;
-      font-size: 14px;
     }
   }
 </style>
