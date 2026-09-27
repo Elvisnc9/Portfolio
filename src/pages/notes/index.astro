@@ -1,0 +1,716 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BackLink from '../../components/BackLink.astro';
+import Icon from '../../components/Icon.astro';
+import Sparkle from '../../components/Sparkle.astro';
+import StickyNote from '../../components/notes/StickyNote.astro';
+import NotesCta from '../../components/notes/NotesCta.astro';
+import { getNotes, noteNumber, noteUrl } from '../../lib/notes';
+
+const notes = await getNotes();
+const pinned = notes.find((note) => note.data.pinned);
+const board = notes.filter((note) => note !== pinned);
+const startHere = notes.filter((note) => note.data.startHere);
+const categories = ['Building', 'Design', 'Tech', 'Life'];
+
+const currentlyThinking = 'AI integrations & new developer tools.';
+---
+
+<BaseLayout
+  title="Notes"
+  active="Notes"
+  description="Short thoughts from Elvis Ngwu on building, design and technology. Written from Nigeria, for anyone who makes things."
+>
+  <!-- Header -->
+  <section class="head">
+    <div class="intro">
+      <BackLink href="/" label="Back home" />
+      <div class="title-wrap" data-reveal>
+        <h1>Notes<br />to self</h1>
+        <span class="badge" aria-hidden="true">{noteNumber(notes.length)}<span>NOTES</span></span>
+      </div>
+      <p class="lede" data-reveal data-reveal-delay="0.08">
+        Short thoughts on building, design and technology. Written from Nigeria<span class="hide-mobile">, for anyone who makes things</span>.
+      </p>
+    </div>
+
+    <div class="tools" data-reveal data-reveal-delay="0.12">
+      <label class="search">
+        <Icon name="search" size={18} />
+        <input type="search" placeholder="Search notes" aria-label="Search notes" data-note-search />
+      </label>
+      <div class="filters" role="group" aria-label="Filter by category">
+        {
+          ['All', ...categories].map((cat, i) => (
+            <button type="button" data-note-filter={cat} aria-pressed={i === 0 ? 'true' : 'false'}>
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Pinned note + side cards -->
+  {
+    pinned && (
+      <section class="featured">
+        <article class="pinned" style={`--note-bg: ${pinned.data.color}`} data-reveal>
+          <span class="tape" aria-hidden="true" />
+          <Sparkle class="pinned-spark" size={56} color="var(--orange)" />
+          <div class="tags">
+            <span class="tag tag--dark">PINNED</span>
+            <span class="tag">{pinned.data.category.toUpperCase()}</span>
+          </div>
+          <div class="pinned-body">
+            <h2>{pinned.data.title}</h2>
+            <p>
+              {pinned.data.excerptShort ? (
+                <>
+                  <span class="hide-mobile">{pinned.data.excerpt}</span>
+                  <span class="show-mobile">{pinned.data.excerptShort}</span>
+                </>
+              ) : (
+                pinned.data.excerpt
+              )}
+            </p>
+          </div>
+          <a class="read-btn" href={noteUrl(pinned)}>
+            Read note <Icon name="arrow-right" />
+          </a>
+        </article>
+
+        <div class="side">
+          <div class="thinking" data-reveal data-reveal-delay="0.08">
+            <svg class="squiggle" viewBox="0 0 190 90" fill="none" aria-hidden="true">
+              <path d="M4 60 C 30 10, 50 10, 70 50 S 110 90, 130 40 S 170 0, 186 30" stroke="var(--orange)" stroke-width="10" stroke-linecap="round" />
+            </svg>
+            <span class="mono">CURRENTLY THINKING ABOUT</span>
+            <span class="thinking-text">{currentlyThinking}</span>
+          </div>
+
+          {startHere.length > 0 && (
+            <div class="start" data-reveal data-reveal-delay="0.14">
+              <span class="mono mono--muted">START HERE</span>
+              {startHere.map((note) => (
+                <a href={noteUrl(note)}>
+                  {note.data.title} <Icon name="arrow-up-right" />
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Corkboard -->
+  <section class="board-wrap" aria-label="All notes">
+    <p class="visually-hidden" aria-live="polite" data-note-count></p>
+    <ul class="board">
+      {
+        board.map((note, i) => (
+          <li data-category={note.data.category} data-text={`${note.data.title} ${note.data.excerpt} ${note.data.category}`.toLowerCase()}>
+            <StickyNote note={note} delay={(i % 4) * 0.06} />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="empty" hidden data-note-empty>
+      <p>No notes match that yet.</p>
+      <button type="button" data-note-reset>Show all notes</button>
+    </div>
+  </section>
+
+  <NotesCta />
+</BaseLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const search = document.querySelector<HTMLInputElement>('[data-note-search]');
+    if (!search) return;
+
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-note-filter]')];
+    const items = [...document.querySelectorAll<HTMLElement>('.board > li')];
+    const empty = document.querySelector<HTMLElement>('[data-note-empty]')!;
+    const count = document.querySelector<HTMLElement>('[data-note-count]')!;
+    let category = 'All';
+
+    function apply() {
+      const query = search!.value.trim().toLowerCase();
+      let shown = 0;
+      items.forEach((item) => {
+        const match =
+          (category === 'All' || item.dataset.category === category) && (!query || item.dataset.text!.includes(query));
+        item.hidden = !match;
+        if (match) shown++;
+      });
+      empty.hidden = shown > 0;
+      count.textContent = `${shown} ${shown === 1 ? 'note' : 'notes'} shown`;
+    }
+
+    function setCategory(next: string) {
+      category = next;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.noteFilter === next)));
+      apply();
+    }
+
+    buttons.forEach((b) => b.addEventListener('click', () => setCategory(b.dataset.noteFilter!)));
+    search.addEventListener('input', apply);
+    document.querySelector('[data-note-reset]')?.addEventListener('click', () => {
+      search.value = '';
+      setCategory('All');
+    });
+  });
+</script>
+
+<style>
+  .show-mobile {
+    display: none;
+  }
+
+  /* ---------- Header ---------- */
+  .head {
+    padding: 48px var(--gutter) 40px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+    align-items: end;
+  }
+
+  .intro {
+    grid-column: 1 / span 8;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .title-wrap {
+    position: relative;
+    width: fit-content;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 128px;
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  .badge {
+    position: absolute;
+    left: calc(100% + 24px);
+    top: 4px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--sky);
+    color: var(--dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1;
+    transform: rotate(-12deg);
+  }
+
+  .badge span {
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 10px;
+  }
+
+  .lede {
+    max-width: 560px;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .tools {
+    grid-column: 9 / span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .search {
+    height: 56px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    transition: border-color 0.2s;
+  }
+
+  .search:focus-within {
+    border-color: var(--text);
+  }
+
+  .search input {
+    flex-grow: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    font: 400 16px var(--font-body);
+    outline: none;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filters button {
+    flex-shrink: 0;
+    height: var(--tap);
+    padding: 0 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 500;
+    font-size: 14px;
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .filters button:hover {
+    border-color: var(--text);
+  }
+
+  .filters button[aria-pressed='true'] {
+    border-color: var(--dark);
+    background: var(--dark);
+    color: var(--on-dark);
+    font-weight: 600;
+  }
+
+  /* ---------- Pinned + side ---------- */
+  .featured {
+    padding: 24px var(--gutter) 56px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .pinned {
+    grid-column: 1 / span 8;
+    position: relative;
+    min-height: 440px;
+    padding: 52px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    border-radius: 8px;
+    background: var(--note-bg);
+    color: var(--dark);
+    box-shadow: 0 24px 60px rgba(17, 17, 16, 0.16);
+    transform: rotate(-1deg);
+  }
+
+  .pinned .tape {
+    position: absolute;
+    left: 50%;
+    top: -14px;
+    width: 130px;
+    height: 30px;
+    margin-left: -65px;
+    background: rgba(255, 255, 255, 0.6);
+    transform: rotate(-3deg);
+  }
+
+  .pinned :global(.pinned-spark) {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 8px;
+  }
+
+  .tag {
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(17, 17, 16, 0.25);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .tag--dark {
+    border-color: var(--dark);
+    background: var(--dark);
+    color: var(--on-dark);
+  }
+
+  .pinned-body {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pinned h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .pinned p {
+    font-size: 19px;
+    line-height: 1.6;
+    color: #3f3d39;
+  }
+
+  .read-btn {
+    align-self: flex-start;
+    height: 48px;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--dark);
+    color: var(--on-dark);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .read-btn :global(svg) {
+    transition: transform 0.2s;
+  }
+
+  .read-btn:hover :global(svg) {
+    transform: translateX(4px);
+  }
+
+  .side {
+    grid-column: 9 / span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .mono--muted {
+    margin-bottom: 8px;
+    color: var(--muted);
+  }
+
+  .thinking {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    border-radius: 32px;
+    background: var(--sky);
+    color: var(--dark);
+  }
+
+  .squiggle {
+    position: absolute;
+    right: -10px;
+    top: 16px;
+    width: 150px;
+    height: 70px;
+  }
+
+  .thinking-text {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  .start {
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 32px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .start a {
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    font-weight: 500;
+  }
+
+  .start a :global(svg) {
+    transition: transform 0.2s;
+  }
+
+  .start a:hover :global(svg) {
+    transform: rotate(45deg);
+  }
+
+  /* ---------- Corkboard ---------- */
+  .board-wrap {
+    padding: 32px 52px 96px;
+  }
+
+  .board {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 48px 32px;
+  }
+
+  .board > li[hidden] {
+    display: none;
+  }
+
+  .empty {
+    padding: 48px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .empty[hidden] {
+    display: none;
+  }
+
+  .empty button {
+    height: var(--tap);
+    padding: 0 20px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--dark);
+    background: var(--dark);
+    color: var(--on-dark);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    .head {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 28px;
+    }
+
+    h1 {
+      font-size: 96px;
+    }
+
+    .badge {
+      width: 86px;
+      height: 86px;
+      font-size: 22px;
+    }
+
+    .featured {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .pinned {
+      grid-column: 1 / -1;
+      min-height: 0;
+      padding: 44px 40px;
+    }
+
+    .pinned h2 {
+      font-size: 44px;
+    }
+
+    .side {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .thinking-text {
+      font-size: 24px;
+    }
+
+    .board-wrap {
+      padding: 24px var(--gutter) 80px;
+    }
+
+    .board {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px 24px;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .hide-mobile {
+      display: none;
+    }
+
+    .show-mobile {
+      display: inline;
+    }
+
+    .head {
+      padding: 24px var(--gutter) 20px;
+      gap: 18px;
+    }
+
+    .intro {
+      gap: 18px;
+    }
+
+    .title-wrap {
+      width: auto;
+    }
+
+    h1 {
+      font-size: 54px;
+      line-height: 0.92;
+    }
+
+    .badge {
+      left: auto;
+      right: 8px;
+      top: -4px;
+      width: 70px;
+      height: 70px;
+      font-size: 20px;
+    }
+
+    .badge span {
+      margin-top: 3px;
+      font-size: 9px;
+    }
+
+    .lede {
+      font-size: 16px;
+    }
+
+    .tools {
+      gap: 18px;
+    }
+
+    .search {
+      height: 52px;
+      padding: 0 18px;
+    }
+
+    /* Swipeable filter row */
+    .filters {
+      flex-wrap: nowrap;
+      gap: 6px;
+      margin: 0 calc(var(--gutter) * -1);
+      padding: 0 var(--gutter);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filters button {
+      padding: 0 16px;
+    }
+
+    .featured {
+      padding: 20px 20px 36px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pinned {
+      padding: 34px 24px 24px;
+      gap: 16px;
+      justify-content: flex-start;
+      box-shadow: 0 20px 44px rgba(17, 17, 16, 0.16);
+    }
+
+    .pinned .tape {
+      top: -12px;
+      width: 100px;
+      height: 26px;
+      margin-left: -50px;
+    }
+
+    .pinned :global(.pinned-spark) {
+      display: none;
+    }
+
+    .tags {
+      gap: 6px;
+    }
+
+    .tag {
+      padding: 5px 10px;
+      font-size: 10px;
+    }
+
+    .pinned-body {
+      gap: 16px;
+    }
+
+    .pinned h2 {
+      font-size: 30px;
+      line-height: 1.02;
+    }
+
+    .pinned p {
+      font-size: 15px;
+    }
+
+    .read-btn {
+      height: 46px;
+      padding: 0 20px;
+      font-size: 14px;
+    }
+
+    /* The mobile mockup drops the side cards */
+    .side {
+      display: none;
+    }
+
+    .board-wrap {
+      padding: 12px 20px 56px;
+    }
+
+    .board {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 16px;
+    }
+  }
+</style>

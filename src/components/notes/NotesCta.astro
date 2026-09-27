@@ -1,0 +1,118 @@
+---
+import Icon from '../Icon.astro';
+---
+
+<section class="notes-cta">
+  <div class="panel" data-reveal>
+    <div class="ring" aria-hidden="true"></div>
+    <h2>Want to argue with a note? I'd love that.</h2>
+    <a class="btn" href="/contact">Start a chat <Icon name="arrow-right" size={18} /></a>
+  </div>
+</section>
+
+<style>
+  .notes-cta {
+    padding: 0 var(--gutter) 72px;
+  }
+
+  .panel {
+    position: relative;
+    overflow: hidden;
+    padding: 56px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    border-radius: var(--radius-tile-lg);
+    background: var(--orange);
+    color: var(--dark);
+  }
+
+  .ring {
+    position: absolute;
+    right: 260px;
+    bottom: -120px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 34px solid rgba(17, 17, 16, 0.1);
+  }
+
+  h2 {
+    position: relative;
+    max-width: 760px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 54px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .btn {
+    position: relative;
+    flex-shrink: 0;
+    height: 60px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--radius-pill);
+    background: var(--dark);
+    color: var(--on-dark);
+    font-weight: 600;
+    font-size: 17px;
+    transition: transform 0.2s;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 1023px) {
+    .panel {
+      padding: 44px 40px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .ring {
+      right: -60px;
+    }
+
+    h2 {
+      font-size: 44px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .notes-cta {
+      padding: 0 var(--gutter) 48px;
+    }
+
+    .panel {
+      padding: 30px 24px;
+      gap: 22px;
+      border-radius: 32px;
+    }
+
+    .ring {
+      bottom: -80px;
+      width: 180px;
+      height: 180px;
+      border-width: 26px;
+    }
+
+    h2 {
+      font-size: 30px;
+      line-height: 1.02;
+    }
+
+    .btn {
+      height: 52px;
+      padding: 0 24px;
+      gap: 8px;
+      font-size: 15px;
+    }
+  }
+</style>

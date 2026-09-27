@@ -1,0 +1,141 @@
+---
+// A note card pinned to the corkboard. The whole card links to the note.
+import Icon from '../Icon.astro';
+import { noteNumber, noteUrl, type Note } from '../../lib/notes';
+
+interface Props {
+  note: Note;
+  delay?: number;
+}
+
+const { note, delay = 0 } = Astro.props;
+const { n, title, category, excerpt, color, rotate } = note.data;
+---
+
+<a
+  class="sticky"
+  href={noteUrl(note)}
+  style={`--note-bg: ${color}; --rot: ${rotate}deg`}
+  data-reveal
+  data-reveal-delay={String(delay)}
+>
+  <span class="tape" aria-hidden="true"></span>
+  <span class="meta">
+    <span class="num">NOTE {noteNumber(n)}</span>
+    <span>{category.toUpperCase()}</span>
+  </span>
+  <h3>{title}</h3>
+  <p>{excerpt}</p>
+  <span class="read">Read <Icon name="arrow-right" size={14} /></span>
+</a>
+
+<style>
+  .sticky {
+    position: relative;
+    height: 340px;
+    padding: 34px 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-radius: 6px;
+    background: var(--note-bg);
+    color: var(--dark);
+    box-shadow: 0 18px 40px rgba(17, 17, 16, 0.14);
+    transform: rotate(var(--rot));
+    transition:
+      transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.35s;
+  }
+
+  .sticky:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 0 26px 50px rgba(17, 17, 16, 0.18);
+  }
+
+  .tape {
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    width: 96px;
+    height: 26px;
+    margin-left: -48px;
+    background: rgba(255, 255, 255, 0.6);
+    transform: rotate(-3deg);
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    opacity: 0.65;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+
+  p {
+    flex-grow: 1;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #3f3d39;
+  }
+
+  .read {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .read :global(svg) {
+    transition: transform 0.2s;
+  }
+
+  .sticky:hover .read :global(svg) {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 640px) {
+    .sticky {
+      height: 200px;
+      padding: 24px 16px 16px;
+      gap: 10px;
+      box-shadow: 0 14px 30px rgba(17, 17, 16, 0.14);
+    }
+
+    .tape {
+      top: -9px;
+      width: 64px;
+      height: 18px;
+      margin-left: -32px;
+    }
+
+    .meta {
+      font-size: 10px;
+    }
+
+    .num,
+    p {
+      display: none;
+    }
+
+    h3 {
+      flex-grow: 1;
+      font-size: 16px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .read {
+      gap: 5px;
+      font-size: 13px;
+    }
+  }
+</style>
