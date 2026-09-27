@@ -1,0 +1,250 @@
+---
+// "My part": the role Elvis played on the team, what he did, and the tools used.
+import { stackByName } from '../../data/home';
+
+interface Props {
+  title: string;
+  summary: string;
+  points: string[];
+  stack: string[];
+}
+
+const { title, summary, points, stack } = Astro.props;
+const tools = stack.map(stackByName).filter((t) => t !== undefined);
+---
+
+<section class="role" aria-labelledby="role-title">
+  <div class="panel" data-reveal>
+    <div class="ring" aria-hidden="true"></div>
+
+    <div class="intro">
+      <span class="mono">MY PART</span>
+      <h2 id="role-title">{title}</h2>
+      <p>{summary}</p>
+      {
+        tools.length > 0 && (
+          <div class="tools">
+            <span class="mono mono--soft">BUILT WITH</span>
+            <ul>
+              {tools.map((t) => (
+                <li title={t!.name}>
+                  <img src={t!.icon} alt={t!.name} width="40" height="40" loading="lazy" decoding="async" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+
+    {
+      points.length > 0 && (
+        <ul class="points">
+          {points.map((point) => (
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12l5 5L20 7" />
+                </svg>
+              </span>
+              {point}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .role {
+    padding: 0 var(--gutter) 104px;
+  }
+
+  .panel {
+    position: relative;
+    overflow: hidden;
+    padding: 56px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+    row-gap: 32px;
+    border-radius: var(--radius-tile-lg);
+    background: var(--dark);
+    color: var(--on-dark);
+  }
+
+  .ring {
+    position: absolute;
+    right: -160px;
+    top: -160px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 44px solid rgba(255, 106, 61, 0.9);
+  }
+
+  .intro {
+    grid-column: 1 / span 6;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--orange);
+  }
+
+  .mono--soft {
+    color: #a3a09a;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+  }
+
+  .intro p {
+    max-width: 520px;
+    font-size: 19px;
+    line-height: 1.55;
+    color: rgba(244, 242, 237, 0.8);
+  }
+
+  .tools {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tools ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tools li {
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    border-radius: 18px;
+    background: var(--on-dark);
+  }
+
+  .tools img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .points {
+    grid-column: 8 / span 5;
+    position: relative;
+    align-self: end;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .points li {
+    padding: 18px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border-radius: 20px;
+    background: rgba(244, 242, 237, 0.08);
+    border: 1px solid rgba(244, 242, 237, 0.12);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .check {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--dark);
+  }
+
+  @media (max-width: 1023px) {
+    .role {
+      padding-bottom: 80px;
+    }
+
+    .panel {
+      padding: 44px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .ring {
+      right: -120px;
+    }
+
+    h2 {
+      font-size: 44px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .role {
+      padding-bottom: 56px;
+    }
+
+    .panel {
+      padding: 30px 22px;
+      gap: 22px;
+      border-radius: 32px;
+    }
+
+    .ring {
+      width: 190px;
+      height: 190px;
+      right: -80px;
+      top: -80px;
+      border-width: 30px;
+    }
+
+    .mono {
+      font-size: 11px;
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+
+    .intro p {
+      font-size: 16px;
+    }
+
+    .tools li {
+      width: 52px;
+      height: 52px;
+      padding: 10px;
+      border-radius: 16px;
+    }
+
+    .points li {
+      padding: 14px 16px;
+      font-size: 15px;
+    }
+  }
+</style>

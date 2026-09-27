@@ -1,0 +1,177 @@
+---
+// "The problem": what the product solves, and the pain points behind it.
+interface Props {
+  text: string;
+  points: string[];
+}
+
+const { text, points } = Astro.props;
+---
+
+<section class="problem" aria-labelledby="problem-title">
+  <div class="head" data-reveal>
+    <span class="pill">WHAT IT SOLVES</span>
+    <h2 id="problem-title">The problem</h2>
+  </div>
+  <div class="body">
+    <p class="statement" data-reveal data-reveal-delay="0.06">{text}</p>
+    {
+      points.length > 0 && (
+        <ol class="points">
+          {points.map((point, i) => (
+            <li data-reveal data-reveal-delay={String(0.1 + i * 0.06)}>
+              <span class="num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              {point}
+            </li>
+          ))}
+        </ol>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .problem {
+    padding: 0 var(--gutter) 104px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+
+  .head {
+    grid-column: 1 / span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .pill {
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    background: var(--note-peach);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .body {
+    grid-column: 6 / span 7;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .statement {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  .points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .points li {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-radius: 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .num {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--note-peach);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 12px;
+  }
+
+  @media (max-width: 1023px) {
+    .problem {
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    h2 {
+      font-size: 52px;
+    }
+
+    .statement {
+      font-size: 22px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .problem {
+      padding-bottom: 56px;
+      gap: 18px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+
+    h2 {
+      font-size: 36px;
+    }
+
+    .body {
+      gap: 20px;
+    }
+
+    .statement {
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .points {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .points li {
+      padding: 16px;
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      border-radius: 20px;
+      font-size: 15px;
+    }
+
+    .num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+    }
+  }
+</style>

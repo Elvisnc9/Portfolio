@@ -4,6 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BackLink from '../../components/BackLink.astro';
 import CaseHero from '../../components/work/CaseHero.astro';
 import NextProject from '../../components/work/NextProject.astro';
+import CaseProblem from '../../components/work/CaseProblem.astro';
+import CaseRole from '../../components/work/CaseRole.astro';
+import CaseHighlights from '../../components/work/CaseHighlights.astro';
+import CaseGallery from '../../components/work/CaseGallery.astro';
 import { projects, type Project } from '../../data/projects';
 
 export async function getStaticPaths() {
@@ -27,16 +31,11 @@ interface Props {
 }
 
 const { project, caseStudy, index, next } = Astro.props;
-const { facts, brief, challenge, whatIDid, outcome, features, quote, summary } = caseStudy;
+const { facts, brief, problem, role, highlights, gallery, features, quote, summary } = caseStudy;
+// "MY ROLE" always leads the fact tiles when a role is set
+const allFacts = role ? [{ label: 'MY ROLE', value: role.title }, ...facts] : facts;
 const total = projects.length;
 const pad = (n: number) => String(n).padStart(2, '0');
-
-// Story cards, numbered in the order they appear
-const cards = [
-  challenge && { key: 'challenge', label: 'THE CHALLENGE', ...challenge },
-  whatIDid && { key: 'did', label: 'WHAT I DID', ...whatIDid },
-  outcome && { key: 'outcome', label: 'THE OUTCOME', ...outcome },
-].filter(Boolean) as { key: string; label: string; title?: string; text?: string }[];
 
 const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? String(features.length);
 ---
@@ -53,9 +52,9 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
   <CaseHero project={project} caseStudy={caseStudy} />
 
   {
-    facts.length > 0 && (
-      <section class="facts" style={`--count: ${facts.length}`}>
-        {facts.map((f, i) => (
+    allFacts.length > 0 && (
+      <section class="facts" style={`--count: ${allFacts.length}`}>
+        {allFacts.map((f, i) => (
           <div class="fact" data-reveal data-reveal-delay={String(i * 0.05)}>
             <span class="mono mono--muted">{f.label}</span>
             <span class="fact-value">{f.value}</span>
@@ -76,35 +75,11 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
     )
   }
 
-  {
-    cards.length > 0 && (
-      <section class="cards" style={`--count: ${cards.length}`}>
-        {cards.map((c, i) => (
-          <div class={`card card--${c.key}`} data-reveal data-reveal-delay={String(i * 0.06)}>
-            {c.key === 'did' && (
-              <svg class="squiggle" viewBox="0 0 190 90" fill="none" aria-hidden="true">
-                <path d="M4 60 C 30 10, 50 10, 70 50 S 110 90, 130 40 S 170 0, 186 30" stroke="var(--orange)" stroke-width="10" stroke-linecap="round" />
-              </svg>
-            )}
-            <div class="card-head">
-              <span class="mono">
-                {pad(i + 1)} · {c.label}
-              </span>
-              {c.key === 'challenge' && (
-                <span class="q" aria-hidden="true">
-                  ?
-                </span>
-              )}
-            </div>
-            <div class="card-body">
-              {c.title && <span class="card-title">{c.title}</span>}
-              {c.text && <p>{c.text}</p>}
-            </div>
-          </div>
-        ))}
-      </section>
-    )
-  }
+  {problem && <CaseProblem text={problem.text} points={problem.points} />}
+
+  {role && <CaseRole title={role.title} summary={role.summary} points={role.points} stack={role.stack} />}
+
+  {highlights.length > 0 && <CaseHighlights items={highlights} />}
 
   {
     features.length > 0 && (
@@ -127,6 +102,8 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
       </section>
     )
   }
+
+  {gallery.length > 1 && <CaseGallery images={gallery} />}
 
   {
     quote && (
@@ -193,7 +170,7 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
   .facts {
     padding: 0 var(--gutter) 96px;
     display: grid;
-    grid-template-columns: repeat(min(var(--count), 4), minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 16px;
   }
 
@@ -237,98 +214,6 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
 
   .brief p span {
     color: var(--muted);
-  }
-
-  /* ---------- Story cards ---------- */
-  .cards {
-    padding: 0 var(--gutter) 104px;
-    display: grid;
-    grid-template-columns: repeat(var(--count), minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .card {
-    position: relative;
-    overflow: hidden;
-    min-height: 320px;
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 24px;
-    border-radius: 32px;
-  }
-
-  .card--challenge {
-    background: var(--surface);
-    border: 1px solid var(--line);
-  }
-
-  .card--challenge .mono {
-    color: var(--muted);
-  }
-
-  .card--did {
-    background: var(--sky);
-    color: var(--dark);
-  }
-
-  .card--outcome {
-    background: var(--orange);
-    color: var(--dark);
-  }
-
-  .squiggle {
-    position: absolute;
-    right: -10px;
-    top: 20px;
-    width: 150px;
-    height: 70px;
-  }
-
-  .card-head {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .q {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    background: var(--note-peach);
-    color: var(--dark);
-    font-family: var(--font-display);
-    font-weight: 800;
-  }
-
-  .card-body {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .card-title {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 40px;
-    line-height: 1;
-    letter-spacing: -0.045em;
-  }
-
-  .card p {
-    font-size: 19px;
-    line-height: 1.55;
-  }
-
-  .card--outcome p {
-    font-size: 17px;
-    line-height: 1.5;
   }
 
   /* ---------- Features ---------- */
@@ -511,17 +396,6 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
       font-size: 22px;
     }
 
-    .cards {
-      padding-bottom: 80px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-    }
-
-    .card {
-      min-height: 260px;
-      padding: 28px;
-    }
-
     .features {
       padding-bottom: 80px;
     }
@@ -600,33 +474,6 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
     .brief p {
       font-size: 18px;
       line-height: 1.45;
-    }
-
-    .cards {
-      padding: 0 var(--gutter) 56px;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 10px;
-    }
-
-    .card {
-      min-height: 0;
-      padding: 22px;
-      gap: 16px;
-      border-radius: 26px;
-    }
-
-    .q {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-    }
-
-    .card-title {
-      font-size: 28px;
-    }
-
-    .card p {
-      font-size: 16px;
     }
 
     .features {

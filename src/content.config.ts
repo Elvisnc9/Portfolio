@@ -30,8 +30,6 @@ const notes = defineCollection({
 // Case studies: one markdown file per project in src/content/work, named by the
 // project's slug in src/data/projects.ts (which holds the tile colours and images).
 // Every section is optional: leave a field out and that section is not shown.
-const card = z.object({ title: z.string().optional(), text: z.string().optional() });
-
 const work = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/work' }),
   schema: z.object({
@@ -40,15 +38,29 @@ const work = defineCollection({
     /** One or two sentences under the title */
     summary: z.string(),
     summaryShort: z.string().optional(),
-    /** Live product link: status chip + main button */
-    live: z.object({ status: z.string(), cta: z.string(), href: z.string().url() }).optional(),
-    /** Fact tiles: role, timeline, platform, team... */
+    /** Where it lives. "play" shows the Google Play badge, "web" the website button */
+    live: z.object({ store: z.enum(['play', 'web']), href: z.string().url() }).optional(),
+    /** Fact tiles (MY ROLE is added automatically from `role`) */
     facts: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
     /** "The brief": lead sentence + a softer tail in muted colour */
     brief: z.object({ lead: z.string(), muted: z.string().optional() }).optional(),
-    challenge: card.optional(),
-    whatIDid: card.optional(),
-    outcome: card.optional(),
+    /** "The problem": what the product solves, plus the pain points */
+    problem: z.object({ text: z.string(), points: z.array(z.string()).default([]) }).optional(),
+    /** "My part": your role on the team. `stack` = names from the stack list in home.ts */
+    role: z
+      .object({
+        title: z.string(),
+        summary: z.string(),
+        points: z.array(z.string()).default([]),
+        stack: z.array(z.string()).default([]),
+      })
+      .optional(),
+    /** "What it does": key capabilities */
+    highlights: z.array(z.object({ title: z.string(), text: z.string() })).default([]),
+    /** "Screens": phone screenshots; paths in /public */
+    gallery: z
+      .array(z.object({ src: z.string(), alt: z.string(), width: z.number(), height: z.number() }))
+      .default([]),
     /** "Inside the app" feature tiles; image is a path in /public */
     features: z
       .array(z.object({ title: z.string(), text: z.string(), image: z.string(), alt: z.string(), dark: z.boolean().default(false) }))

@@ -1,0 +1,156 @@
+---
+// "Screens": a row of phone screenshots. Swipes sideways on small screens.
+interface Props {
+  images: { src: string; alt: string; width: number; height: number }[];
+}
+
+const { images } = Astro.props;
+---
+
+<section class="gallery" aria-labelledby="gallery-title">
+  <div class="head" data-reveal>
+    <h2 id="gallery-title">Screens</h2>
+    <span>{images.length} screens from the app.</span>
+  </div>
+  <ul class="row">
+    {
+      images.map((image, i) => (
+        <li data-reveal data-reveal-delay={String(i * 0.08)}>
+          <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .gallery {
+    padding: 0 var(--gutter) 104px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .head span {
+    font-size: 17px;
+    color: var(--muted);
+  }
+
+  /* Screens sit on a sky panel, alternately tilted like prints on a table */
+  .row {
+    margin: 0;
+    padding: 56px 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    border-radius: var(--radius-tile-lg);
+    background: var(--sky);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .row li {
+    flex-shrink: 0;
+    width: 260px;
+    scroll-snap-align: center;
+    transform: rotate(-2deg);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .row li:nth-child(even) {
+    transform: rotate(2deg) translateY(24px);
+  }
+
+  .row li:hover {
+    transform: rotate(0deg) translateY(-6px);
+  }
+
+  .row img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 28px;
+    background: var(--surface);
+    box-shadow: 0 24px 50px rgba(17, 17, 16, 0.2);
+  }
+
+  @media (max-width: 1023px) {
+    .gallery {
+      padding-bottom: 80px;
+    }
+
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    h2 {
+      font-size: 52px;
+    }
+
+    .row {
+      justify-content: flex-start;
+      padding: 44px 32px 60px;
+      gap: 28px;
+    }
+
+    .row li {
+      width: 220px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gallery {
+      padding-bottom: 56px;
+      gap: 24px;
+    }
+
+    h2 {
+      font-size: 36px;
+    }
+
+    .head span {
+      font-size: 15px;
+    }
+
+    .row {
+      margin: 0 calc(var(--gutter) * -1);
+      padding: 32px var(--gutter) 48px;
+      gap: 18px;
+      border-radius: 0;
+      scroll-padding: 0 var(--gutter);
+    }
+
+    .row li {
+      width: 190px;
+      scroll-snap-align: start;
+    }
+
+    .row img {
+      border-radius: 22px;
+    }
+  }
+</style>

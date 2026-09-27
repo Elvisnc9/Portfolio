@@ -11,6 +11,9 @@ interface Props {
 
 const { project, caseStudy } = Astro.props;
 const { kind, summary, summaryShort, live } = caseStudy;
+const onPlay = live?.store === 'play';
+const ctaLabel = onPlay ? 'Get it on Google Play' : 'Visit website';
+const ctaIcon = onPlay ? '/images/stack/google-play.png' : '/images/stack/web.png';
 const onDark = project.tone !== 'light';
 const [first, second] = project.images;
 ---
@@ -37,8 +40,12 @@ const [first, second] = project.images;
       {
         live && (
           <span class="chip chip--live">
-            <span class="dot" aria-hidden="true" />
-            {live.status}
+            {onPlay ? (
+              <img class="chip-logo" src="/images/stack/google-play.png" alt="" width="16" height="16" />
+            ) : (
+              <span class="dot" aria-hidden="true" />
+            )}
+            {onPlay ? 'On Google Play' : 'Live on the web'}
           </span>
         )
       }
@@ -61,7 +68,8 @@ const [first, second] = project.images;
       {
         live && (
           <a class="cta cta--inside" href={live.href} target="_blank" rel="noopener noreferrer">
-            {live.cta} <Icon name="arrow-up-right" size={18} />
+            <img class="cta-logo" src={ctaIcon} alt="" width="22" height="22" />
+            {ctaLabel} <Icon name="arrow-up-right" size={18} />
           </a>
         )
       }
@@ -71,7 +79,8 @@ const [first, second] = project.images;
   {
     live && (
       <a class="cta cta--below" href={live.href} target="_blank" rel="noopener noreferrer">
-        {live.cta} <Icon name="arrow-up-right" size={18} />
+        <img class="cta-logo" src={ctaIcon} alt="" width="22" height="22" />
+        {ctaLabel} <Icon name="arrow-up-right" size={18} />
       </a>
     )
   }
@@ -218,6 +227,21 @@ const [first, second] = project.images;
     color: var(--dark);
     font-size: 13px;
     font-weight: 600;
+  }
+
+  .chip-logo {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Logo sits on a small white disc so it reads on the dark button */
+  .cta-logo {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    margin-left: -10px;
+    border-radius: 50%;
+    background: var(--surface);
   }
 
   .dot {

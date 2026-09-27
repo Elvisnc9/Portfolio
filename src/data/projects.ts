@@ -89,7 +89,14 @@ export const projects: Project[] = [
     bg: '#E0245E',
     tone: 'vivid',
     media: 'phone-bottom',
-    images: [img('matrimony', 'Muslim Matrimony app screen', 166, 296)],
+    images: [
+      {
+        src: '/images/projects/matrimony-requests.png',
+        alt: 'Muslim Matrimony: only people who match your preferences can contact you',
+        width: 810,
+        height: 1440,
+      },
+    ],
   },
 ];
 
