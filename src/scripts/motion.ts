@@ -39,6 +39,8 @@ function reveals() {
       duration: 0.8,
       ease: 'power3.out',
       delay: Number(el.dataset.revealDelay ?? 0),
+      // Hand transforms back to CSS afterwards so hover/rotate styles still work
+      clearProps: 'transform,opacity,visibility',
       scrollTrigger: { trigger: el, start: 'top 88%', once: true },
     });
   });
