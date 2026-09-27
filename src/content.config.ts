@@ -27,4 +27,34 @@ const notes = defineCollection({
   }),
 });
 
-export const collections = { notes };
+// Case studies: one markdown file per project in src/content/work, named by the
+// project's slug in src/data/projects.ts (which holds the tile colours and images).
+// Every section is optional: leave a field out and that section is not shown.
+const card = z.object({ title: z.string().optional(), text: z.string().optional() });
+
+const work = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/work' }),
+  schema: z.object({
+    /** Small dark chip in the hero, e.g. "MOBILE APP · AI" */
+    kind: z.string(),
+    /** One or two sentences under the title */
+    summary: z.string(),
+    summaryShort: z.string().optional(),
+    /** Live product link: status chip + main button */
+    live: z.object({ status: z.string(), cta: z.string(), href: z.string().url() }).optional(),
+    /** Fact tiles: role, timeline, platform, team... */
+    facts: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
+    /** "The brief": lead sentence + a softer tail in muted colour */
+    brief: z.object({ lead: z.string(), muted: z.string().optional() }).optional(),
+    challenge: card.optional(),
+    whatIDid: card.optional(),
+    outcome: card.optional(),
+    /** "Inside the app" feature tiles; image is a path in /public */
+    features: z
+      .array(z.object({ title: z.string(), text: z.string(), image: z.string(), alt: z.string(), dark: z.boolean().default(false) }))
+      .default([]),
+    quote: z.object({ text: z.string(), name: z.string().optional(), role: z.string() }).optional(),
+  }),
+});
+
+export const collections = { notes, work };
