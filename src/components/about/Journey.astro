@@ -22,14 +22,28 @@ const upNext = (i: number) =>
         <span><span data-pct-label>{pct(startChapter)}</span><span class="hide-mobile"> THROUGH</span></span>
       </div>
       <div class="bar" aria-hidden="true"><div class="bar-fill" data-bar style={`width: ${pct(startChapter)}`}></div></div>
-      <div class="years" role="group" aria-label="Choose a year">
-        {
-          journey.map((ch, i) => (
-            <button type="button" data-go={i} aria-pressed={i === startChapter ? 'true' : 'false'}>
-              {ch.year}
-            </button>
-          ))
-        }
+      <div class="controls">
+        <div class="years" role="group" aria-label="Choose a year">
+          {
+            journey.map((ch, i) => (
+              <button type="button" data-go={i} aria-pressed={i === startChapter ? 'true' : 'false'}>
+                {ch.year}
+              </button>
+            ))
+          }
+        </div>
+        <button type="button" class="autoplay" data-autoplay aria-pressed="true" aria-label="Pause chapter autoplay">
+          <svg class="autoplay-ring" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="21" class="ring-track" />
+            <circle cx="24" cy="24" r="21" class="ring-fill" data-autoplay-ring />
+          </svg>
+          <svg class="autoplay-icon icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect x="5" y="4" width="5" height="16" rx="1.5" /><rect x="14" y="4" width="5" height="16" rx="1.5" />
+          </svg>
+          <svg class="autoplay-icon icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z" />
+          </svg>
+        </button>
       </div>
     </div>
   </header>
@@ -127,6 +141,15 @@ const upNext = (i: number) =>
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /** Seconds each chapter stays up while autoplaying */
+  const AUTOPLAY_SECONDS = 6;
+  const RING = 2 * Math.PI * 21;
+
+  let cleanup: (() => void) | null = null;
 
   document.addEventListener('astro:page-load', () => {
     const root = document.querySelector<HTMLElement>('#journey');
@@ -140,13 +163,25 @@ const upNext = (i: number) =>
     const pctLabel = root.querySelector('[data-pct-label]')!;
     const bar = root.querySelector<HTMLElement>('[data-bar]')!;
     const status = root.querySelector('[data-status]')!;
+    const toggle = root.querySelector<HTMLButtonElement>('[data-autoplay]')!;
+    const ring = root.querySelector<SVGCircleElement>('[data-autoplay-ring]')!;
     const pad = (n: number) => String(n).padStart(2, '0');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const years = chapters.map((ch) => Number(ch.querySelector('.year')?.textContent?.trim()));
 
     let current = Number(root.dataset.start);
+    // Autoplay: on unless the visitor prefers reduced motion; runs only while visible
+    let playing = !reduced;
+    let inView = false;
+    let countdown: gsap.core.Tween | null = null;
+    const listeners = new AbortController();
 
-    function show(index: number, from?: HTMLElement) {
+    ring.style.strokeDasharray = String(RING);
+    ring.style.strokeDashoffset = String(RING);
+
+    function show(index: number, from?: HTMLElement, auto = false) {
       if (index === current) return;
+      const previousYear = years[current];
       current = index;
       const pct = `${Math.round(((index + 1) / total) * 100)}%`;
 
@@ -156,7 +191,8 @@ const upNext = (i: number) =>
       stepLabel.textContent = `CHAPTER ${pad(index + 1)} OF ${pad(total)}`;
       pctLabel.textContent = pct;
       bar.style.width = pct;
-      status.textContent = `Chapter ${index + 1} of ${total}: ${yearButtons[index].textContent?.trim()}`;
+      // Only announce changes the visitor made, not every autoplay tick
+      if (!auto) status.textContent = `Chapter ${index + 1} of ${total}: ${years[index]}`;
 
       const chapter = chapters[index];
       if (!reduced) {
@@ -165,6 +201,18 @@ const upNext = (i: number) =>
           { autoAlpha: 0, y: 24 },
           { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power3.out', clearProps: 'transform,opacity,visibility' },
         );
+        // The outlined year rolls from the previous chapter's year to this one
+        const yearEl = chapter.querySelector<HTMLElement>('.year');
+        if (yearEl) {
+          const roll = { value: previousYear };
+          gsap.to(roll, {
+            value: years[index],
+            duration: 0.6,
+            ease: 'power2.out',
+            snap: { value: 1 },
+            onUpdate: () => (yearEl.textContent = String(roll.value)),
+          });
+        }
       }
 
       // The clicked button may have just been hidden with its old chapter:
@@ -177,13 +225,81 @@ const upNext = (i: number) =>
       }
     }
 
+    function renderToggle() {
+      toggle.setAttribute('aria-pressed', String(playing));
+      toggle.setAttribute('aria-label', playing ? 'Pause chapter autoplay' : 'Play chapters automatically');
+      toggle.classList.toggle('is-playing', playing);
+    }
+
+    /** Restart the countdown ring; when it fills, move to the next chapter */
+    function schedule() {
+      countdown?.kill();
+      countdown = null;
+      if (!playing || !inView || document.hidden) {
+        gsap.set(ring, { strokeDashoffset: RING });
+        return;
+      }
+      countdown = gsap.fromTo(
+        ring,
+        { strokeDashoffset: RING },
+        {
+          strokeDashoffset: 0,
+          duration: AUTOPLAY_SECONDS,
+          ease: 'none',
+          onComplete: () => {
+            show((current + 1) % total, undefined, true);
+            schedule();
+          },
+        },
+      );
+    }
+
+    function setPlaying(next: boolean) {
+      playing = next;
+      renderToggle();
+      schedule();
+    }
+
+    // Any manual choice hands control to the visitor
     root.querySelectorAll<HTMLButtonElement>('[data-go]').forEach((button) =>
-      button.addEventListener('click', () => {
-        const go = button.dataset.go!;
-        const target = go === 'next' ? (current + 1) % total : go === 'prev' ? (current - 1 + total) % total : Number(go);
-        show(target, button);
-      }),
+      button.addEventListener(
+        'click',
+        () => {
+          const go = button.dataset.go!;
+          const target = go === 'next' ? (current + 1) % total : go === 'prev' ? (current - 1 + total) % total : Number(go);
+          show(target, button);
+          setPlaying(false);
+        },
+        { signal: listeners.signal },
+      ),
     );
+
+    toggle.addEventListener('click', () => setPlaying(!playing), { signal: listeners.signal });
+    document.addEventListener('visibilitychange', schedule, { signal: listeners.signal });
+
+    // Only count down while the journey is on screen
+    const watch = ScrollTrigger.create({
+      trigger: root,
+      start: 'top 65%',
+      end: 'bottom 35%',
+      onToggle: (self) => {
+        inView = self.isActive;
+        schedule();
+      },
+    });
+
+    renderToggle();
+
+    cleanup = () => {
+      countdown?.kill();
+      watch.kill();
+      listeners.abort();
+    };
+  });
+
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.();
+    cleanup = null;
   });
 </script>
 
@@ -254,9 +370,68 @@ const upNext = (i: number) =>
     transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
   .years {
+    flex-grow: 1;
     display: flex;
     gap: 8px;
+  }
+
+  /* Autoplay toggle: countdown ring around a pause/play icon */
+  .autoplay {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .autoplay-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .ring-track,
+  .ring-fill {
+    fill: none;
+    stroke-width: 3;
+  }
+
+  .ring-track {
+    stroke: var(--line);
+  }
+
+  .ring-fill {
+    stroke: var(--orange);
+    stroke-linecap: round;
+  }
+
+  .icon-play {
+    margin-left: 2px;
+  }
+
+  .autoplay .icon-pause,
+  .autoplay.is-playing .icon-play {
+    display: none;
+  }
+
+  .autoplay.is-playing .icon-pause {
+    display: block;
   }
 
   .years button {
@@ -744,6 +919,15 @@ const upNext = (i: number) =>
     .years button {
       height: var(--tap);
       font-size: 12px;
+    }
+
+    .controls {
+      gap: 6px;
+    }
+
+    .autoplay {
+      width: var(--tap);
+      height: var(--tap);
     }
 
     .chapters {

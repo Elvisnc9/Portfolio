@@ -22,7 +22,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <span class="title">{project.shortTitle ?? project.title}</span>
         <span class="tag">{project.tag}</span>
       </div>
-      <span class="arrow" aria-hidden="true"><Icon name="arrow-right" size={22} /></span>
+      <span class="arrow" aria-hidden="true" data-magnetic><Icon name="arrow-right" size={22} /></span>
     </div>
     <div class="media">
       <img src={image.src} alt="" width={image.width} height={image.height} loading="lazy" decoding="async" />

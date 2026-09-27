@@ -97,6 +97,94 @@ function parallax() {
   });
 }
 
+/**
+ * [data-speed="1.4"]: scroll parallax relative to the element's section.
+ * 1 = moves with the page, >1 rushes ahead, <1 lags behind.
+ */
+function speedParallax() {
+  gsap.utils.toArray<HTMLElement>('[data-speed]').forEach((el) => {
+    const speed = Number(el.dataset.speed) || 1;
+    const section = el.closest('section') ?? el.parentElement ?? el;
+    gsap.to(el, {
+      y: () => (1 - speed) * section.offsetHeight * 0.6,
+      ease: 'none',
+      scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
+    });
+  });
+}
+
+// Pointer effects only make sense with a mouse, and their listeners must go on page change
+const finePointer = window.matchMedia('(pointer: fine)');
+let listeners: AbortController | null = null;
+
+/** Hero toys lean toward the mouse, faster toys more. Uses x + rotation so scroll parallax (y) is untouched. */
+function pointerParallax(signal: AbortSignal) {
+  if (!finePointer.matches) return;
+  document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
+    const toys = [...hero.querySelectorAll<HTMLElement>('[data-speed]')].map((el) => {
+      const speed = Number(el.dataset.speed) || 1;
+      return {
+        speed,
+        x: gsap.quickTo(el, 'x', { duration: 0.9, ease: 'power3.out' }),
+        r: gsap.quickTo(el, 'rotation', { duration: 0.9, ease: 'power3.out' }),
+      };
+    });
+    hero.addEventListener(
+      'pointermove',
+      (e) => {
+        const nx = e.clientX / window.innerWidth - 0.5;
+        toys.forEach((t) => {
+          t.x(nx * 44 * t.speed);
+          t.r(nx * 8 * t.speed);
+        });
+      },
+      { signal },
+    );
+    hero.addEventListener('pointerleave', () => toys.forEach((t) => (t.x(0), t.r(0))), { signal });
+  });
+}
+
+/** [data-magnetic]: buttons lean toward the cursor, then spring back. */
+function magnetic(signal: AbortSignal) {
+  if (!finePointer.matches) return;
+  gsap.utils.toArray<HTMLElement>('[data-magnetic]').forEach((el) => {
+    const x = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3.out' });
+    const y = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3.out' });
+    el.addEventListener(
+      'pointermove',
+      (e) => {
+        const box = el.getBoundingClientRect();
+        x((e.clientX - (box.left + box.width / 2)) * 0.35);
+        y((e.clientY - (box.top + box.height / 2)) * 0.35);
+      },
+      { signal },
+    );
+    el.addEventListener('pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.4)' }), {
+      signal,
+    });
+  });
+}
+
+/**
+ * [data-stamp]: slams down like a rubber stamp. Its [data-stamp-surface] ancestor
+ * (the paper) fades in first and thuds on impact; an optional .ink child spreads out.
+ */
+function stamps() {
+  gsap.utils.toArray<HTMLElement>('[data-stamp]').forEach((stamp) => {
+    const surface = stamp.closest<HTMLElement>('[data-stamp-surface]') ?? stamp;
+    const ink = stamp.querySelector('.ink');
+    const order = Number(surface.dataset.stampOrder ?? 0);
+    const tl = gsap.timeline({ delay: order * 0.18, scrollTrigger: { trigger: surface, start: 'top 85%', once: true } });
+    tl.from(surface, { autoAlpha: 0, y: 40, duration: 0.55, ease: 'power3.out' })
+      .from(stamp, { autoAlpha: 0, scale: 2.8, y: -90, rotation: -25, duration: 0.36, ease: 'power4.in' }, '-=0.15')
+      .fromTo(surface, { y: 7, scale: 0.985 }, { y: 0, scale: 1, duration: 0.6, ease: 'elastic.out(1, 0.35)' })
+      .to(stamp, { rotation: 2, duration: 0.08, yoyo: true, repeat: 1, ease: 'power1.inOut' }, '<');
+    if (ink) tl.fromTo(ink, { scale: 0.7, autoAlpha: 0.6 }, { scale: 1.8, autoAlpha: 0, duration: 0.7, ease: 'power2.out' }, '<');
+    // Give transforms back to CSS once it has landed (hover styles)
+    tl.set([surface, stamp], { clearProps: 'transform,opacity,visibility' });
+  });
+}
+
 /** Ribbons run faster while the page scrolls, then ease back to their cruising speed. */
 let ribbonTick: (() => void) | null = null;
 
@@ -118,11 +206,17 @@ function setup() {
   if (reducedMotion.matches) return;
 
   startLenis();
+  listeners = new AbortController();
+  const { signal } = listeners;
   ctx = gsap.context(() => {
     reveals();
     floats();
     counters();
     parallax();
+    speedParallax();
+    pointerParallax(signal);
+    magnetic(signal);
+    stamps();
   });
   ribbons();
   // Fonts change text heights, so recalculate trigger positions once loaded
@@ -131,6 +225,8 @@ function setup() {
 
 function teardown() {
   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  listeners?.abort();
+  listeners = null;
   ctx?.revert();
   ctx = null;
   if (ribbonTick) gsap.ticker.remove(ribbonTick);

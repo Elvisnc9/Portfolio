@@ -31,7 +31,7 @@ const { title, href, label, labelCompact } = Astro.props;
 
   <a class="link" href={href} aria-label={`${title.join(' ')}, open page`}>
     <h2>{title[0]}<br />{title[1]}</h2>
-    <span class="arrow" aria-hidden="true"><Icon name="arrow-up-right" size={38} /></span>
+    <span class="arrow" aria-hidden="true" data-magnetic><Icon name="arrow-up-right" size={38} /></span>
   </a>
 </div>
 
@@ -83,8 +83,12 @@ const { title, href, label, labelCompact } = Astro.props;
     transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .link:hover .arrow {
-    transform: rotate(45deg) scale(1.05);
+  .arrow :global(svg) {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .link:hover .arrow :global(svg) {
+    transform: rotate(45deg);
   }
 
   @media (max-width: 1023px) {

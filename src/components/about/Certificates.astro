@@ -17,8 +17,9 @@ const visible = certificates.filter((c) => !c.draft);
   <ul class="grid" style={`--cols: ${visible.length}`}>
     {
       visible.map((c, i) => (
-        <li class="card" data-reveal data-reveal-delay={String(i * 0.06)}>
-          <span class="stamp" style={`--ring: ${c.ring}; --fill: ${c.fill}; --rot: ${c.rot}deg`} aria-hidden="true">
+        <li class="card" data-stamp-surface data-stamp-order={i}>
+          <span class="stamp" style={`--ring: ${c.ring}; --fill: ${c.fill}; --rot: ${c.rot}deg`} aria-hidden="true" data-stamp>
+            <span class="ink" />
             <span class="stamp-k">{c.k}</span>
             <span class="stamp-label">CERTIFIED</span>
           </span>
@@ -110,6 +111,7 @@ const visible = certificates.filter((c) => !c.draft);
   }
 
   .stamp {
+    position: relative;
     align-self: flex-start;
     width: 96px;
     height: 96px;
@@ -129,6 +131,16 @@ const visible = certificates.filter((c) => !c.draft);
     transition:
       rotate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
       scale 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* Ink ring that spreads when the stamp lands (motion.ts) */
+  .ink {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 3px solid var(--ring);
+    opacity: 0;
+    pointer-events: none;
   }
 
   .card:hover .stamp {

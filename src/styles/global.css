@@ -139,6 +139,12 @@ button {
   white-space: nowrap;
 }
 
+/* Magnetic elements are moved by GSAP every frame (motion.ts); a CSS
+   transition on transform would make them lag, so keep colour transitions only */
+[data-magnetic] {
+  transition-property: background-color, color, border-color, box-shadow, opacity !important;
+}
+
 /* Grain noise overlay (sits above everything, never blocks clicks) */
 .grain {
   position: fixed;

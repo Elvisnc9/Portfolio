@@ -52,7 +52,7 @@ const style = [
   data-categories={project.categories.join(' ')}
   data-reveal
 >
-  <div class="media">
+  <div class="media" data-parallax="0.06">
     {
       project.images.map((image) => (
         <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />

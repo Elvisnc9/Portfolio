@@ -15,6 +15,15 @@ Visual source of truth: /design-reference (read its README). Match it closely at
 - Section titles on home: huge Unbounded title + round orange arrow button that links to the full page.
 - Min touch target 44px. No emoji in UI.
 
+## Motion (src/scripts/motion.ts)
+Add behaviour with data attributes instead of new scripts:
+- data-reveal (+ data-reveal-delay): fade up on scroll into view
+- data-speed="1.4": scroll parallax vs its section (>1 rushes, <1 lags); hero toys also lean toward the mouse
+- data-parallax="0.15": small drift for decoration
+- data-float: gentle endless bob · data-count: "20+" counts up · data-magnetic: button pulls toward the cursor
+- data-stamp inside data-stamp-surface (+ data-stamp-order): rubber-stamp slam (certificates)
+Everything is off under prefers-reduced-motion. Pointer effects only run on fine pointers (mouse).
+
 ## Site map
 / (home hub: name hero "Elvis" with floating toys (each has data-speed for GSAP scroll parallax), ribbons, project tiles, About/Notes/Contact previews with big title + arrow)
 /about (centered grayscale portrait with "ELVIS NGWU" over it, stats, stack, services, certificates "Certified & stamped", journey chapter viewer)

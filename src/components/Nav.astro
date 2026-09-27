@@ -31,7 +31,7 @@ const { active, cta = 'talk' } = Astro.props;
         cta === 'email' ? (
           <a class="cta cta--email" href={`mailto:${site.email}`}>{site.email}</a>
         ) : (
-          <a class="cta cta--talk" href="/contact">
+          <a class="cta cta--talk" href="/contact" data-magnetic>
             Let's talk <Icon name="arrow-up-right" />
           </a>
         )
