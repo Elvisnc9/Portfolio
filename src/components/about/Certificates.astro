@@ -1,0 +1,265 @@
+---
+import Icon from '../Icon.astro';
+import { certificates } from '../../data/about';
+
+const visible = certificates.filter((c) => !c.draft);
+---
+
+<section id="certificates" class="certs" aria-labelledby="certs-title">
+  <header class="head" data-reveal>
+    <div class="title">
+      <span class="pill">CERTIFICATES</span>
+      <h2 id="certs-title">Certified <span>&amp;</span> stamped</h2>
+    </div>
+    <p>A few things made official along the way.</p>
+  </header>
+
+  <ul class="grid" style={`--cols: ${visible.length}`}>
+    {
+      visible.map((c, i) => (
+        <li class="card" data-reveal data-reveal-delay={String(i * 0.06)}>
+          <span class="stamp" style={`--ring: ${c.ring}; --fill: ${c.fill}; --rot: ${c.rot}deg`} aria-hidden="true">
+            <span class="stamp-k">{c.k}</span>
+            <span class="stamp-label">CERTIFIED</span>
+          </span>
+          <div class="info">
+            <span class="issuer">
+              {c.issuer} · {c.year}
+            </span>
+            <h3>{c.title}</h3>
+            {c.url && (
+              <a class="verify" href={c.url} target="_blank" rel="noopener noreferrer">
+                View certificate <Icon name="arrow-up-right" />
+              </a>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .certs {
+    padding: 24px var(--gutter) 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pill {
+    align-self: flex-start;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+  }
+
+  h2 span {
+    color: var(--orange);
+  }
+
+  .head p {
+    padding-bottom: 8px;
+    font-size: 17px;
+    color: var(--muted);
+  }
+
+  /* ---------- Cards ---------- */
+  .grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    height: 300px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .stamp {
+    align-self: flex-start;
+    width: 96px;
+    height: 96px;
+    margin: 6px 0 0 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: 50%;
+    border: 2.5px dashed var(--ring);
+    outline: 2px solid var(--ring);
+    outline-offset: 4px;
+    background: var(--fill);
+    color: var(--dark);
+    rotate: var(--rot);
+    transition:
+      rotate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      scale 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .card:hover .stamp {
+    rotate: 0deg;
+    scale: 0.94;
+  }
+
+  .stamp-k {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+  }
+
+  .stamp-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .issuer {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+
+  .verify {
+    align-self: flex-start;
+    min-height: var(--tap);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .verify:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* ========== Tablet ========== */
+  @media (max-width: 1023px) {
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    h2 {
+      font-size: 56px;
+    }
+
+    .head p {
+      padding-bottom: 0;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      height: 260px;
+    }
+  }
+
+  /* ========== Mobile ========== */
+  @media (max-width: 640px) {
+    .certs {
+      padding: 16px var(--gutter) 32px;
+      gap: 20px;
+    }
+
+    .title {
+      gap: 20px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+
+    h2 {
+      font-size: 40px;
+      line-height: 0.95;
+    }
+
+    .head p {
+      display: none;
+    }
+
+    .grid {
+      gap: 10px;
+    }
+
+    .card {
+      height: 250px;
+      padding: 16px;
+    }
+
+    .stamp {
+      width: 76px;
+      height: 76px;
+    }
+
+    .stamp-k {
+      font-size: 16px;
+    }
+
+    .issuer {
+      font-size: 10px;
+    }
+
+    h3 {
+      font-size: 15px;
+    }
+  }
+</style>
