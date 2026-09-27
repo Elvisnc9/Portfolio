@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elves OS — Notes mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{opacity:.9}
+.grain{background-image:url(/_blob/fc079bc4fb638828c8a01a1800e5d184);background-size:140px 140px}
+</style>
+</helmet>
+<div style="width: 390px; height: 2350px; box-sizing: border-box; position: relative; display: flex; flex-direction: column; background-color: #F4F2ED; background-image: linear-gradient(rgba(17,17,16,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(17,17,16,.05) 1px, transparent 1px); background-size: 48px 48px; color: #111110; font-family: 'Geist', system-ui, sans-serif; overflow: hidden">
+
+<header style="padding: 16px 16px 0">
+<div style="height: 60px; box-sizing: border-box; padding: 0 8px 0 18px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCD8CF; display: flex; align-items: center; justify-content: space-between">
+<a href="Mobile.dc.html" style="font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 15px; letter-spacing: -0.02em">ELVES<span style="color: #FF6A3D">·</span>CORPS</a>
+<a href="MobileMenu.dc.html" aria-label="Open menu" style="width: 44px; height: 44px; border-radius: 999px; background: #FF6A3D; color: #111110; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg></a>
+</div>
+</header>
+
+<section style="padding: 24px 16px 20px; display: flex; flex-direction: column; gap: 18px">
+<a href="Mobile.dc.html" style="align-self: flex-start; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #DCD8CF; background: #FFFFFF; font-size: 14px; font-weight: 500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back home</a>
+<div style="position: relative">
+<h1 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 54px; line-height: 0.92; letter-spacing: -0.055em">Notes<br>to self</h1>
+<span style="position: absolute; right: 8px; top: -4px; width: 70px; height: 70px; border-radius: 999px; background: #BFE3FA; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-12deg); font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 20px; line-height: 1">09<span style="font-family: 'Geist Mono', monospace; font-weight: 500; font-size: 9px; margin-top: 3px">NOTES</span></span>
+</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #5C5954">Short thoughts on building, design and technology. Written from Nigeria.</p>
+<label style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCD8CF; color: #5C5954">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+<input type="search" placeholder="Search notes" aria-label="Search notes" style="flex-grow: 1; border: none; background: transparent; font: 400 16px 'Geist', sans-serif; color: #111110; outline: none">
+</label>
+<div style="display: flex; gap: 6px; overflow: hidden">
+<button type="button" onClick="{{pickAll}}" style="flex-shrink: 0; height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid {{f.allBorder}}; background: {{f.allBg}}; color: {{f.allFg}}; font: 600 14px 'Geist', sans-serif">All</button>
+<sc-for list="{{cats}}" as="k" hint-placeholder-count="4">
+<button type="button" onClick="{{k.pick}}" style="flex-shrink: 0; height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid {{k.border}}; background: {{k.bg}}; color: {{k.fg}}; font: 500 14px 'Geist', sans-serif">{{k.name}}</button>
+</sc-for>
+</div>
+</section>
+
+<section style="padding: 20px 20px 36px">
+<article style="position: relative; box-sizing: border-box; padding: 34px 24px 24px; border-radius: 8px; background: #FFD9C9; transform: rotate(-1deg); box-shadow: 0 20px 44px rgba(17,17,16,.16); display: flex; flex-direction: column; gap: 16px">
+<span style="position: absolute; left: 50%; top: -12px; width: 100px; height: 26px; margin-left: -50px; background: rgba(255,255,255,.6); transform: rotate(-3deg)"></span>
+<div style="display: flex; gap: 6px"><span style="padding: 5px 10px; border-radius: 999px; background: #111110; color: #F4F2ED; font-family: 'Geist Mono', monospace; font-size: 10px">PINNED</span><span style="padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(17,17,16,.25); font-family: 'Geist Mono', monospace; font-size: 10px">BUILDING</span></div>
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 30px; line-height: 1.02; letter-spacing: -0.045em">Building from Africa</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #3F3D39">A new generation of developers is proving that world-class products can come from anywhere. Great ideas don't need permission from a specific zip code.</p>
+<a href="#read" style="align-self: flex-start; height: 46px; padding: 0 20px; border-radius: 999px; background: #111110; color: #F4F2ED; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px">Read note <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</article>
+</section>
+
+<section style="padding: 12px 20px 56px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; row-gap: 24px">
+<sc-for list="{{shown}}" as="n" hint-placeholder-count="8">
+<a href="#note" style="position: relative; height: 200px; box-sizing: border-box; padding: 24px 16px 16px; border-radius: 6px; background: {{n.bg}}; color: #111110; transform: rotate({{n.rot}}); box-shadow: 0 14px 30px rgba(17,17,16,.14); display: flex; flex-direction: column; gap: 10px">
+<span style="position: absolute; left: 50%; top: -9px; width: 64px; height: 18px; margin-left: -32px; background: rgba(255,255,255,.6); transform: rotate(-3deg)"></span>
+<span style="font-family: 'Geist Mono', monospace; font-size: 10px; opacity: .65">{{n.cat}}</span>
+<h3 style="margin: 0; flex-grow: 1; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 16px; line-height: 1.15; letter-spacing: -0.03em">{{n.title}}</h3>
+<span style="display: flex; align-items: center; gap: 5px; font-weight: 600; font-size: 13px">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</a>
+</sc-for>
+</section>
+
+<section style="padding: 0 16px 48px">
+<div style="position: relative; overflow: hidden; border-radius: 32px; background: #FF6A3D; padding: 30px 24px; display: flex; flex-direction: column; gap: 22px">
+<div style="position: absolute; right: -60px; bottom: -80px; width: 180px; height: 180px; border-radius: 999px; border: 26px solid rgba(17,17,16,.1); box-sizing: border-box"></div>
+<h2 style="position: relative; margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 30px; line-height: 1.02; letter-spacing: -0.05em">Want to argue with a note? I'd love that.</h2>
+<a href="MobileContact.dc.html" style="position: relative; align-self: flex-start; height: 52px; padding: 0 24px; border-radius: 999px; background: #111110; color: #F4F2ED; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px">Start a chat <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</section>
+
+<footer style="flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 16px; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-top: 1px solid #DCD8CF; font-size: 13px; color: #5C5954">
+<span>© 2026 Elves Corporation</span>
+<a href="Mobile.dc.html" style="color: #111110; height: 44px; display: flex; align-items: center">Home</a>
+</div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 68px; line-height: 0.86; letter-spacing: -0.04em; margin-bottom: -8px">ELVES<br><span style="color: transparent; -webkit-text-stroke: 2px #FF6A3D">CORPS</span></div>
+</footer>
+
+<div class="grain" aria-hidden="true" style="position: absolute; inset: 0; opacity: .48; pointer-events: none; mix-blend-mode: multiply"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2350}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var active = (this.state && this.state.cat) || 'All';
+    var notes = [
+      { cat: 'LIFE', title: 'Life & perspective', bg: '#FFFFFF', rot: '1.5deg' },
+      { cat: 'BUILDING', title: 'Solving local, thinking global', bg: '#BFE3FA', rot: '-1.5deg' },
+      { cat: 'DESIGN', title: 'Designing for trust', bg: '#E4F5B8', rot: '-1deg' },
+      { cat: 'TECH', title: 'The future is immersive', bg: '#FFE9A8', rot: '1.5deg' },
+      { cat: 'TECH', title: 'Growing with technology', bg: '#E6DEFF', rot: '1deg' },
+      { cat: 'LIFE', title: 'Beyond borders', bg: '#FFD9C9', rot: '-1.5deg' },
+      { cat: 'BUILDING', title: 'African talent, global stage', bg: '#FFFFFF', rot: '-1deg' },
+      { cat: 'DESIGN', title: 'Beauty in simplicity', bg: '#BFE3FA', rot: '1.5deg' }
+    ];
+    var names = ['Building', 'Design', 'Tech', 'Life'];
+    return {
+      f: active === 'All' ? { allBg: '#111110', allFg: '#F4F2ED', allBorder: '#111110' } : { allBg: '#FFFFFF', allFg: '#111110', allBorder: '#DCD8CF' },
+      pickAll: function () { self.setState({ cat: 'All' }); },
+      cats: names.map(function (nm) {
+        var on = active === nm;
+        return { name: nm, bg: on ? '#111110' : '#FFFFFF', fg: on ? '#F4F2ED' : '#111110', border: on ? '#111110' : '#DCD8CF', pick: function () { self.setState({ cat: nm }); } };
+      }),
+      shown: active === 'All' ? notes : notes.filter(function (n) { return n.cat === active.toUpperCase(); })
+    };
+  }
+}
+</script>
+</body>
+</html>

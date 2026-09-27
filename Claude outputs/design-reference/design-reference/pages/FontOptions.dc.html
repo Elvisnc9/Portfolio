@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hero name — font options</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=Fraunces:ital,opsz,wght@1,9..144,900&amp;family=Dela+Gothic+One&amp;family=Climate+Crisis&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; height: 1000px; box-sizing: border-box; padding: 48px; background-color: #F4F2ED; background-image: linear-gradient(rgba(17,17,16,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(17,17,16,.05) 1px, transparent 1px); background-size: 64px 64px; color: #111110; font-family: 'Geist', sans-serif; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end">
+<h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.02em">Pick the font for “Elvis”</h2>
+<span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #5C5954">A IS IN THE HERO NOW · TELL ME A, B, C OR D</span>
+</div>
+<div style="flex-grow: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+
+<div style="position: relative; border-radius: 32px; background: #FFFFFF; border: 2px solid #FF6A3D; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden">
+<div style="display: flex; justify-content: space-between; font-family: 'Geist Mono', monospace; font-size: 12px"><span>A · SYNE EXTRABOLD</span><span style="padding: 4px 10px; border-radius: 999px; background: #FF6A3D">CURRENT</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 18px"><span style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 170px; line-height: 0.82; letter-spacing: -0.045em">Elvis</span><span style="font-family: 'Geist Mono', monospace; font-size: 13px; letter-spacing: 0.3em">SOFTWARE DEVELOPER</span></div>
+<span style="font-size: 14px; color: #5C5954">Artsy and confident. Wide, sculpted letters: feels like a design studio.</span>
+</div>
+
+<div style="position: relative; border-radius: 32px; background: #FFFFFF; border: 1px solid #DCD8CF; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden">
+<div style="font-family: 'Geist Mono', monospace; font-size: 12px">B · FRAUNCES BLACK ITALIC</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 18px"><span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 180px; line-height: 0.8; letter-spacing: -0.04em">Elvis</span><span style="font-family: 'Geist Mono', monospace; font-size: 13px; letter-spacing: 0.3em">SOFTWARE DEVELOPER</span></div>
+<span style="font-size: 14px; color: #5C5954">Warm, soft and a little playful. Editorial, like a magazine cover.</span>
+</div>
+
+<div style="position: relative; border-radius: 32px; background: #FFFFFF; border: 1px solid #DCD8CF; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden">
+<div style="font-family: 'Geist Mono', monospace; font-size: 12px">C · DELA GOTHIC ONE</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 18px"><span style="font-family: 'Dela Gothic One', sans-serif; font-size: 150px; line-height: 0.9; letter-spacing: -0.03em">Elvis</span><span style="font-family: 'Geist Mono', monospace; font-size: 13px; letter-spacing: 0.3em">SOFTWARE DEVELOPER</span></div>
+<span style="font-size: 14px; color: #5C5954">Chunky and bold, with a Japanese-poster feel. Loud and memorable.</span>
+</div>
+
+<div style="position: relative; border-radius: 32px; background: #FFFFFF; border: 1px solid #DCD8CF; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden">
+<div style="font-family: 'Geist Mono', monospace; font-size: 12px">D · CLIMATE CRISIS</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 18px"><span style="font-family: 'Climate Crisis', sans-serif; font-size: 130px; line-height: 0.9; letter-spacing: -0.02em">Elvis</span><span style="font-family: 'Geist Mono', monospace; font-size: 13px; letter-spacing: 0.3em">SOFTWARE DEVELOPER</span></div>
+<span style="font-size: 14px; color: #5C5954">Heavy, stretched and dramatic. Very statement, very unusual.</span>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elves OS — Mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{opacity:.9}
+.grain{background-image:url(/_blob/fc079bc4fb638828c8a01a1800e5d184);background-size:140px 140px}
+.bob{animation:bob 3.4s ease-in-out infinite}
+.bob2{animation:bob 4.1s ease-in-out .7s infinite}
+.bob3{animation:bob 3.7s ease-in-out 1.3s infinite}
+.bob4{animation:bob 5s ease-in-out .3s infinite}
+.nudge{animation:nudge 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media (prefers-reduced-motion: reduce){.bob,.bob2,.bob3,.bob4,.nudge{animation:none}}
+.spin{animation:spin 18s linear infinite}
+.spin-r{animation:spin 26s linear infinite reverse}
+.blink{animation:blink 1s steps(1) infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.spin,.spin-r,.blink{animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 7600px; box-sizing: border-box; position: relative; display: flex; flex-direction: column; background-color: {{c.bg}}; background-image: linear-gradient({{c.grid}} 1px, transparent 1px), linear-gradient(90deg, {{c.grid}} 1px, transparent 1px); background-size: 48px 48px; color: {{c.text}}; font-family: 'Geist', system-ui, sans-serif; overflow: hidden">
+
+<!-- DOCK NAV -->
+<header style="padding: 16px 16px 0">
+<div style="height: 60px; box-sizing: border-box; padding: 0 8px 0 18px; border-radius: 999px; background: {{c.surf}}; border: 1px solid {{c.line}}; display: flex; align-items: center; justify-content: space-between">
+<a href="#top" style="font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 15px; letter-spacing: -0.02em">ELVES<span style="color: #FF6A3D">·</span>CORPS</a>
+<div style="display: flex; gap: 6px">
+<a href="MobileMenu.dc.html" aria-label="Open menu" style="width: 44px; height: 44px; border-radius: 999px; background: #FF6A3D; color: #111110; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg></a>
+</div>
+</div>
+</header>
+
+<!-- HERO: name + floating desktop toys -->
+<section id="top" style="position: relative; height: 640px; overflow: hidden; display: flex; align-items: center; justify-content: center">
+<h1 style="position: relative; z-index: 1; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 18px">
+<span style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 128px; line-height: 0.82; letter-spacing: -0.045em">Elvis</span>
+<span style="font-family: 'Geist Mono', monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.24em; color: {{c.text}}; display: flex; align-items: center">SOFTWARE DEVELOPER<span class="blink" style="display: inline-block; width: 6px; height: 12px; margin-left: 6px; background: #FF6A3D"></span></span>
+</h1>
+<div data-speed="1.4" style="position: absolute; left: 18px; top: 60px; transform: rotate(0deg); z-index: 2"><div class="spin"><svg width="84" height="84" viewBox="0 0 24 24"><path d="M12 0c.8 6.4 4.8 10.4 12 12-7.2 1.6-11.2 5.6-12 12-.8-6.4-4.8-10.4-12-12 7.2-1.6 11.2-5.6 12-12z" fill="#FF6A3D"></path></svg></div></div>
+<div data-speed="1.2" style="position: absolute; right: 16px; top: 120px; transform: rotate(6deg); z-index: 2"><div class="bob"><span style="display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 16px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCD8CF; box-shadow: 0 14px 30px rgba(17,17,16,.10); font-size: 12px; font-weight: 600; white-space: nowrap">Available<span style="width: 38px; height: 22px; box-sizing: border-box; border-radius: 999px; background: #22C55E; padding: 3px; display: flex; justify-content: flex-end"><span style="width: 16px; height: 16px; border-radius: 999px; background: #FFFFFF"></span></span></span></div></div>
+<div data-speed="0.7" style="position: absolute; right: 150px; top: 70px; transform: rotate(0deg); z-index: 2"><div class="spin-r"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 0c.8 6.4 4.8 10.4 12 12-7.2 1.6-11.2 5.6-12 12-.8-6.4-4.8-10.4-12-12 7.2-1.6 11.2-5.6 12-12z" fill="#111110"></path></svg></div></div>
+<div data-speed="1.6" style="position: absolute; left: 26px; bottom: 150px; transform: rotate(-12deg); z-index: 2"><div class="bob3"><span style="width: 60px; height: 60px; border-radius: 16px; background: #FF6A3D; box-shadow: 0 18px 34px rgba(255,106,61,.35); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 26px; color: #111110">e.</span></div></div>
+<div data-speed="0.9" style="position: absolute; right: 40px; bottom: 170px; transform: rotate(0deg); z-index: 2"><div class="bob"><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 2l18 8-8 2.5L10 21z" fill="#111110" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path></svg><span style="margin-left: 15px; padding: 5px 11px; border-radius: 999px 999px 999px 4px; background: #111110; color: #F4F2ED; font-size: 11px; font-weight: 600; white-space: nowrap">you’re here</span></span></div></div>
+<div data-speed="0.8" style="position: absolute; left: 150px; bottom: 90px; transform: rotate(-8deg); z-index: 2"><div class="bob2"><span style="width: 48px; height: 48px; border-radius: 14px; background: #BFE3FA; display: flex; align-items: center; justify-content: center; font-family: 'Geist Mono', monospace; font-weight: 500; font-size: 14px; color: #111110">&lt;/&gt;</span></div></div>
+<div data-speed="0.6" style="position: absolute; right: -36px; bottom: 60px; transform: rotate(0deg); z-index: 2"><div class="bob2"><span style="display: block; width: 90px; height: 90px; border-radius: 999px; background: #BFE3FA; "></span></div></div>
+<div style="position: absolute; left: 16px; right: 16px; bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Geist Mono', monospace; font-size: 10px; color: {{c.muted}}; z-index: 3">
+<span>EST. 2022</span>
+<a href="#work" class="nudge" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: {{c.text}}">SCROLL<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></a>
+<span>MOBILE · WEB · AI</span>
+</div>
+</section>
+
+<!-- RIBBONS -->
+<section aria-hidden="true" style="position: relative; height: 150px; overflow: hidden">
+<div style="position: absolute; left: -40px; top: 34px; width: 900px; height: 52px; background: {{c.text}}; color: {{c.bg}}; transform: rotate(3deg); display: flex; align-items: center; gap: 18px; padding-left: 30px; box-sizing: border-box; white-space: nowrap; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 17px">
+<sc-for list="{{ribbon}}" as="r" hint-placeholder-count="8"><span>{{r}}</span><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c.8 6.4 4.8 10.4 12 12-7.2 1.6-11.2 5.6-12 12-.8-6.4-4.8-10.4-12-12 7.2-1.6 11.2-5.6 12-12z" fill="#FF6A3D"></path></svg></sc-for>
+</div>
+<div style="position: absolute; left: -40px; top: 62px; width: 900px; height: 52px; background: #FF6A3D; color: #111110; transform: rotate(-4deg); display: flex; align-items: center; gap: 18px; padding-left: 80px; box-sizing: border-box; white-space: nowrap; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 17px">
+<sc-for list="{{ribbon}}" as="r" hint-placeholder-count="8"><span>{{r}}</span><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c.8 6.4 4.8 10.4 12 12-7.2 1.6-11.2 5.6-12 12-.8-6.4-4.8-10.4-12-12 7.2-1.6 11.2-5.6 12-12z" fill="#111110"></path></svg></sc-for>
+</div>
+</section>
+
+<!-- WORK -->
+<section id="work" style="padding: 48px 16px 64px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 16px">
+<div style="position: relative">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 50px; line-height: 0.95; letter-spacing: -0.05em">Selected<br>work</h2>
+<span style="position: absolute; left: 212px; top: -8px; width: 58px; height: 58px; border-radius: 999px; background: #BFE3FA; color: #111110; display: flex; align-items: center; justify-content: center; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 16px; transform: rotate(-12deg)">06</span>
+</div>
+<div style="display: flex; padding: 4px; border-radius: 999px; background: {{c.surf}}; border: 1px solid {{c.line}}">
+<button type="button" style="flex-grow: 1; height: 44px; border-radius: 999px; border: none; background: {{c.text}}; color: {{c.bg}}; font: 600 14px 'Geist', sans-serif">All</button>
+<button type="button" style="flex-grow: 1; height: 44px; border-radius: 999px; border: none; background: transparent; color: {{c.muted}}; font: 500 14px 'Geist', sans-serif">Mobile</button>
+<button type="button" style="flex-grow: 1; height: 44px; border-radius: 999px; border: none; background: transparent; color: {{c.muted}}; font: 500 14px 'Geist', sans-serif">Web</button>
+<button type="button" style="flex-grow: 1; height: 44px; border-radius: 999px; border: none; background: transparent; color: {{c.muted}}; font: 500 14px 'Geist', sans-serif">AI</button>
+</div>
+</div>
+
+<a href="MobileCase.dc.html" style="height: 420px; position: relative; overflow: hidden; border-radius: 28px; background: #E6ECF5; display: flex; justify-content: center; align-items: flex-end; gap: 14px">
+<img src="/_blob/d7b9e6b8c78c0082f8403afbd5cba156" alt="Genspark AI Slides screen" style="width: 150px; height: 320px; object-fit: cover; object-position: top; border-radius: 20px 20px 0 0; box-shadow: 0 24px 48px rgba(17,17,16,.2)">
+<img src="/_blob/964cc60930b489dc91e3a9d0e0b2386c" alt="Genspark AI Docs screen" style="width: 150px; height: 280px; object-fit: cover; object-position: top; border-radius: 20px 20px 0 0; box-shadow: 0 24px 48px rgba(17,17,16,.2)">
+<div style="position: absolute; left: 16px; top: 16px; display: flex; gap: 6px"><span style="padding: 7px 12px; border-radius: 999px; background: #111110; color: #F4F2ED; font-weight: 600; font-size: 14px">Genspark AI</span><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; color: #111110; font-size: 12px">Mobile · AI</span></div>
+</a>
+
+<sc-for list="{{tiles}}" as="t" hint-placeholder-count="5">
+<a href="#project" style="height: {{t.h}}; position: relative; overflow: hidden; border-radius: 28px; background: {{t.bg}}; display: flex; align-items: {{t.align}}; justify-content: center">
+<img src="{{t.img}}" alt="{{t.alt}}" style="width: {{t.w}}; height: {{t.ih}}; object-fit: {{t.fit}}; border-radius: {{t.r}}">
+<div style="position: absolute; left: 16px; top: 16px; display: flex; gap: 6px"><span style="padding: 7px 12px; border-radius: 999px; background: {{t.pillBg}}; color: {{t.pillFg}}; font-weight: 600; font-size: 14px">{{t.title}}</span><span style="padding: 7px 12px; border-radius: 999px; background: {{t.tagBg}}; color: {{t.tagFg}}; font-size: 12px">{{t.tag}}</span></div>
+</a>
+</sc-for>
+
+<div style="border-radius: 28px; background: {{c.surf}}; border: 1px solid {{c.line}}; padding: 22px 20px 8px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h3 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.04em">More experiments</h3>
+<span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: {{c.muted}}">06</span>
+</div>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{others}}" as="p" hint-placeholder-count="6">
+<a href="#more" style="height: 72px; display: flex; align-items: center; gap: 14px; border-top: 1px solid {{c.line}}">
+<span style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 13px; background: {{p.bg}}; color: #111110; display: flex; align-items: center; justify-content: center; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px">{{p.k}}</span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 16px">{{p.name}}</span><span style="font-size: 12px; color: {{c.muted}}">{{p.type}}</span></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding: 48px 16px 64px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: {{c.muted}}">WHO’S BEHIND THIS</span>
+<a href="MobileAbout.dc.html" aria-label="About me — open page" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 50px; line-height: 0.93; letter-spacing: -0.05em">About<br>me</h2>
+<span style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 999px; background: #FF6A3D; color: #111110; display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span>
+</a>
+</div>
+<p style="margin: 0; padding-top: 20px; border-top: 1px solid {{c.line}}; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.18; letter-spacing: -0.035em">I build apps and websites that feel as good as they <span style="color: #FF6A3D">perform.</span></p>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="padding: 8px 12px; border-radius: 999px; background: {{c.surf}}; border: 1px solid {{c.line}}; font-size: 13px; font-weight: 500">Based in Nigeria</span>
+<span style="padding: 8px 12px; border-radius: 999px; background: {{c.surf}}; border: 1px solid {{c.line}}; font-size: 13px; font-weight: 500">BSc Computer Science</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<div style="height: 130px; border-radius: 24px; background: #FF6A3D; color: #111110; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between"><span style="font-family: 'Geist Mono', monospace; font-size: 10px">SHIPPED</span><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -0.05em; line-height: 1">20+</span><span style="font-size: 11px; font-weight: 500">apps &amp; sites</span></div></div>
+<div style="height: 130px; border-radius: 24px; background: #BFE3FA; color: #111110; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between"><span style="font-family: 'Geist Mono', monospace; font-size: 10px">TEAMWORK</span><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -0.05em; line-height: 1">10+</span><span style="font-size: 11px; font-weight: 500">collabs</span></div></div>
+<div style="height: 130px; border-radius: 24px; background: #111110; color: #F4F2ED; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between"><span style="font-family: 'Geist Mono', monospace; font-size: 10px; opacity: .7">SINCE 2022</span><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -0.05em; line-height: 1">4+</span><span style="font-size: 11px; font-weight: 500">years</span></div></div>
+</div>
+</section>
+
+<!-- TESTIMONIALS AS CHAT -->
+<section style="padding: 24px 16px 64px; display: flex; flex-direction: column; gap: 14px">
+<span style="align-self: flex-start; padding: 6px 12px; border-radius: 999px; border: 1px solid {{c.line}}; font-family: 'Geist Mono', monospace; font-size: 11px">KIND WORDS</span>
+<h2 style="margin: 0 0 16px; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 34px; line-height: 0.98; letter-spacing: -0.05em">Word in the group chat</h2>
+<div style="align-self: flex-start; max-width: 320px; display: flex; flex-direction: column; gap: 6px">
+<p style="margin: 0; padding: 18px 20px; border-radius: 24px 24px 24px 6px; background: #FF6A3D; color: #111110; font-size: 16px; line-height: 1.45; font-weight: 500">You delivered something that looks premium and works beautifully. I couldn't have asked for a better result.</p>
+<span style="font-size: 12px; color: {{c.muted}}; padding-left: 6px"><b style="color: {{c.text}}">Saleem</b> · Nikah Forever</span>
+</div>
+<div style="align-self: flex-end; max-width: 300px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
+<p style="margin: 0; padding: 16px 18px; border-radius: 24px 24px 6px 24px; background: {{c.surf}}; border: 1px solid {{c.line}}; font-size: 15px; line-height: 1.5">Communication was excellent, delivered on time, and the final product exceeded every expectation.</p>
+<span style="font-size: 12px; color: {{c.muted}}; padding-right: 6px"><b style="color: {{c.text}}">Michelle</b> · Kidemis</span>
+</div>
+<div style="align-self: flex-start; max-width: 300px; display: flex; flex-direction: column; gap: 6px">
+<p style="margin: 0; padding: 16px 18px; border-radius: 24px 24px 24px 6px; background: #BFE3FA; color: #111110; font-size: 15px; line-height: 1.5">Multiple integrations and moving parts, but Elvis handled them with confidence.</p>
+<span style="font-size: 12px; color: {{c.muted}}; padding-left: 6px"><b style="color: {{c.text}}">[Name]</b> · PM, Genspark</span>
+</div>
+<div style="align-self: flex-end; max-width: 280px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
+<p style="margin: 0; padding: 16px 18px; border-radius: 24px 24px 6px 24px; background: {{c.surf}}; border: 1px solid {{c.line}}; font-size: 15px; line-height: 1.5">Elvis, you crushed it when you switched to backend.</p>
+<span style="font-size: 12px; color: {{c.muted}}; padding-right: 6px"><b style="color: {{c.text}}">Sandra</b> · Activedge</span>
+</div>
+<div style="align-self: flex-start; display: flex; gap: 5px; padding: 16px 18px; border-radius: 24px 24px 24px 6px; background: {{c.surf}}; border: 1px solid {{c.line}}">
+<span style="width: 8px; height: 8px; border-radius: 999px; background: {{c.muted}}"></span><span style="width: 8px; height: 8px; border-radius: 999px; background: {{c.muted}}; opacity: .7"></span><span style="width: 8px; height: 8px; border-radius: 999px; background: {{c.muted}}; opacity: .4"></span>
+</div>
+</section>
+
+<!-- NOTES (swipe stickies) -->
+<section id="notes" style="padding: 24px 0 72px; display: flex; flex-direction: column; gap: 32px">
+<div style="padding: 0 16px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: {{c.muted}}">09 NOTES</span>
+<a href="MobileNotes.dc.html" aria-label="Notes to self — open page" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 50px; line-height: 0.93; letter-spacing: -0.05em">Notes<br>to self</h2>
+<span style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 999px; background: #FF6A3D; color: #111110; display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span>
+</a>
+</div>
+<div style="display: flex; gap: 18px; padding: 10px 0 10px 24px; overflow: hidden">
+<sc-for list="{{notes}}" as="n" hint-placeholder-count="4">
+<article style="position: relative; width: 250px; height: 290px; flex-shrink: 0; box-sizing: border-box; padding: 30px 22px 22px; border-radius: 6px; background: {{n.bg}}; color: #111110; transform: rotate({{n.rot}}); box-shadow: 0 16px 34px rgba(0,0,0,.18); display: flex; flex-direction: column; gap: 12px">
+<span style="position: absolute; left: 50%; top: -11px; width: 84px; height: 22px; margin-left: -42px; background: rgba(255,255,255,.55); transform: rotate(-3deg)"></span>
+<span style="font-family: 'Geist Mono', monospace; font-size: 11px; opacity: .6">NOTE {{n.n}}</span>
+<h3 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.1; letter-spacing: -0.035em">{{n.title}}</h3>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #3F3D39">{{n.text}}</p>
+</article>
+</sc-for>
+</div>
+</section>
+
+<!-- CONTACT PANEL -->
+<section id="contact" style="padding: 8px 16px 48px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: {{c.muted}}">LET’S TALK</span>
+<a href="MobileContact.dc.html" aria-label="Contact me — open page" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 50px; line-height: 0.93; letter-spacing: -0.05em">Contact<br>me</h2>
+<span style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 999px; background: #FF6A3D; color: #111110; display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"></path></svg></span>
+</a>
+</div>
+<div style="position: relative; overflow: hidden; border-radius: 32px; background: #FF6A3D; color: #111110; padding: 26px 20px; display: flex; flex-direction: column; gap: 22px">
+<span style="align-self: flex-start; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(17,17,16,.35); font-family: 'Geist Mono', monospace; font-size: 10px">AVAILABLE FOR NEW PROJECTS</span>
+<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 38px; line-height: 0.98; letter-spacing: -0.055em">Got an idea? Let's build it.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Freelance, full-time roles and interesting collaborations.</p>
+<a href="mailto:elvescorps@outlook.com" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: -0.02em; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px">elvescorps@outlook.com</a>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="MobileContact.dc.html" style="height: 68px; padding: 0 8px 0 20px; border-radius: 20px; background: #111110; color: #F4F2ED; display: flex; justify-content: space-between; align-items: center"><span style="font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.03em">Start a project</span><span style="width: 50px; height: 50px; border-radius: 999px; background: #FF6A3D; color: #111110; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+<a href="mailto:elvescorps@outlook.com" style="height: 54px; padding: 0 20px; border-radius: 20px; border: 1px solid rgba(17,17,16,.35); display: flex; justify-content: space-between; align-items: center; font-weight: 500; font-size: 15px">Send an email <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+<div style="display: flex; gap: 6px; flex-wrap: wrap">
+<a href="#gh" style="padding: 11px 15px; border-radius: 999px; background: #111110; color: #F4F2ED; font-size: 14px">GitHub</a>
+<a href="#li" style="padding: 11px 15px; border-radius: 999px; background: #111110; color: #F4F2ED; font-size: 14px">LinkedIn</a>
+<a href="#x" style="padding: 11px 15px; border-radius: 999px; background: #111110; color: #F4F2ED; font-size: 14px">X</a>
+<a href="#wa" style="padding: 11px 15px; border-radius: 999px; background: #111110; color: #F4F2ED; font-size: 14px">WhatsApp</a>
+</div>
+</div>
+</section>
+
+<!-- WORDMARK FOOTER -->
+<footer style="flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 16px; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-top: 1px solid {{c.line}}; font-size: 13px; color: {{c.muted}}">
+<span>© 2026 Elves Corporation</span>
+<a href="#top" aria-label="Back to top" style="width: 44px; height: 44px; border-radius: 999px; border: 1px solid {{c.line}}; display: flex; align-items: center; justify-content: center; color: {{c.text}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+</div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 68px; line-height: 0.86; letter-spacing: -0.04em; margin-bottom: -8px">ELVES<br><span style="color: transparent; -webkit-text-stroke: 2px #FF6A3D">CORPS</span></div>
+</footer>
+
+<div class="grain" aria-hidden="true" style="position: absolute; inset: 0; opacity: {{c.grainOp}}; pointer-events: none; mix-blend-mode: {{c.blend}}"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"grain":{"editor":"range","min":0,"max":1,"step":0.05,"default":0.6},"$preview":{"width":390,"height":7600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var s = this.state || {};
+    var theme = 'light';
+    var isDark = theme === 'dark';
+    var g = this.props.grain == null ? 0.6 : this.props.grain;
+    var c = isDark
+      ? { bg: '#0B0B0C', surf: '#151517', surf2: '#222226', line: '#2A2A2E', text: '#F3F1EC', muted: '#A3A09A', grid: 'rgba(243,241,236,.04)', grainOp: g, blend: 'screen' }
+      : { bg: '#F4F2ED', surf: '#FFFFFF', surf2: '#EEEBE4', line: '#DCD8CF', text: '#111110', muted: '#5C5954', grid: 'rgba(17,17,16,.05)', grainOp: g * 0.8, blend: 'multiply' };
+    var self = this;
+    var jb = [
+      { step: '01', year: '2022', role: 'Student · Getting started', text: 'Started Computer Science and learned how software gets built.' },
+      { step: '02', year: '2023', role: 'Developer · Exploring', text: 'Went deep on Flutter, JavaScript, backends and APIs.' },
+      { step: '03', year: '2024', role: 'Freelancer · Building', text: 'Shipped for real users: Campipal, Bailey, Elves Meet.' },
+      { step: '04', year: '2025', role: 'CS graduate', text: 'Degree done. Focus on complete, professional products.' },
+      { step: '05', year: '2026', role: 'AI & cloud', text: 'AI integrations, cloud and new developer workflows.' }
+    ];
+    return {
+      c: c, isDark: isDark, isLight: !isDark,
+      toggle: function () { self.setState({ theme: isDark ? 'light' : 'dark' }); },
+      stack: [
+        { k: 'Fl', name: 'Flutter', bg: '#02569B', fg: '#FFFFFF' },
+        { k: 'Da', name: 'Dart', bg: '#0175C2', fg: '#FFFFFF' },
+        { k: 'Kt', name: 'Kotlin', bg: '#7F52FF', fg: '#FFFFFF' },
+        { k: 'Sp', name: 'Serverpod', bg: '#BFE3FA', fg: '#111110' },
+        { k: 'Fb', name: 'Firebase', bg: '#FFCA28', fg: '#111110' },
+        { k: 'Nd', name: 'Node.js', bg: '#3C873A', fg: '#FFFFFF' },
+        { k: 'Pg', name: 'Postgres', bg: '#336791', fg: '#FFFFFF' },
+        { k: 'n8', name: 'n8n', bg: '#FF6A3D', fg: '#111110' }
+      ],
+      ribbon: ['MOBILE APPS', 'WEBSITES', 'SAAS', 'AI INTEGRATION', 'MOBILE APPS', 'WEBSITES', 'SAAS', 'AI INTEGRATION'],
+      tiles: [
+        { title: 'Articos', tag: 'SaaS · AI', h: '260px', bg: '#15110B', align: 'center', img: '/_blob/35e7d52a43fb654d72e79bb9a93e3822', alt: 'Articos landing page', w: '100%', ih: 'auto', fit: 'contain', r: '0', pillBg: '#F4F2ED', pillFg: '#111110', tagBg: 'rgba(244,242,237,.16)', tagFg: '#F4F2ED' },
+        { title: 'Wealthfolio', tag: 'Web · Finance', h: '300px', bg: '#0B0B0C', align: 'center', img: '/_blob/8f3d75cadc09b4edb9ed4e1ee9bceeb2', alt: 'Wealthfolio dashboards', w: '100%', ih: '100%', fit: 'cover', r: '0', pillBg: '#F4F2ED', pillFg: '#111110', tagBg: '#111110', tagFg: '#F4F2ED' },
+        { title: 'Kidemis', tag: 'Web · Biotech', h: '240px', bg: '#BFE3FA', align: 'center', img: '/_blob/b9818b78e90f0f23faa5f1e960e77dbd', alt: 'Kidemis brand', w: '100%', ih: 'auto', fit: 'contain', r: '0', pillBg: '#111110', pillFg: '#F4F2ED', tagBg: '#FFFFFF', tagFg: '#111110' },
+        { title: 'Bitwyre', tag: 'Web · Crypto', h: '220px', bg: '#000000', align: 'center', img: '/_blob/cfcb392e96c07de44c66fa13bd889cee', alt: 'Bitwyre logo', w: '80%', ih: 'auto', fit: 'contain', r: '0', pillBg: '#F4F2ED', pillFg: '#111110', tagBg: 'rgba(244,242,237,.16)', tagFg: '#F4F2ED' },
+        { title: 'Muslim Matrimony', tag: 'Mobile', h: '360px', bg: '#E0245E', align: 'flex-end', img: '/_blob/1ec153793d3d10e277c25d259818c476', alt: 'Muslim Matrimony app screen', w: 'auto', ih: '290px', fit: 'contain', r: '16px 16px 0 0', pillBg: '#FFFFFF', pillFg: '#111110', tagBg: '#111110', tagFg: '#FFFFFF' }
+      ],
+      others: [
+        { k: 'Bl', name: 'Blail', type: 'Mobile app', bg: '#FFD9C9' },
+        { k: 'Em', name: 'Elves Meet', type: 'Video calling app', bg: '#BFE3FA' },
+        { k: 'Cp', name: 'Campipal', type: 'Mobile app', bg: '#E4F5B8' },
+        { k: 'Vd', name: 'Voice Detection', type: 'AI experiment', bg: '#E6DEFF' },
+        { k: 'Ge', name: 'Genie', type: 'AR / Mobile', bg: '#FFE9A8' },
+        { k: 'Au', name: 'Aurelle', type: 'Frontend', bg: '#F4F2ED' }
+      ],
+      journey: jb.map(function (j, i) {
+        var last = i === jb.length - 1;
+        return Object.assign({}, j, { bg: last ? '#FF6A3D' : c.surf, fg: last ? '#111110' : c.text, border: last ? '#FF6A3D' : c.line });
+      }),
+      notes: [
+        { n: '01', title: 'Building from Africa', text: 'World-class products can come from anywhere. Great ideas don’t need permission from a zip code.', bg: '#FFD9C9', rot: '-2deg' },
+        { n: '02', title: 'Designing for trust', text: 'People need to trust a product before they rely on it.', bg: '#BFE3FA', rot: '1.5deg' },
+        { n: '03', title: 'The future is immersive', text: 'AR blends the digital and physical instead of replacing one with the other.', bg: '#F4F2ED', rot: '-1deg' },
+        { n: '04', title: 'Beauty in simplicity', text: 'Good products don’t need to be complicated.', bg: '#E4F5B8', rot: '2deg' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
