@@ -18,8 +18,10 @@ let ctx: gsap.Context | null = null;
 const raf = (time: number) => lenis?.raf(time * 1000);
 
 function startLenis() {
-  // Same-page links are handled by scrollToLink() below
-  lenis = new Lenis();
+  // Same-page links are handled by scrollToLink() below.
+  // A higher lerp catches up faster: smooth but light, not floaty.
+  // Touch keeps native scrolling (Lenis default), which already feels light on phones.
+  lenis = new Lenis({ lerp: 0.16, wheelMultiplier: 1 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(raf);
   gsap.ticker.lagSmoothing(0);
@@ -296,7 +298,13 @@ function scrollToLink(event: MouseEvent) {
   history.replaceState(history.state, '', url.hash || url.pathname);
   // Let the mobile menu finish closing (it pauses scrolling while open)
   window.setTimeout(() => {
-    if (lenis) lenis.scrollTo(target ?? 0, { offset: target ? -16 : 0, duration: 1.2 });
+    if (lenis)
+      lenis.scrollTo(target ?? 0, {
+        offset: target ? -16 : 0,
+        duration: 0.9,
+        // Fast start, gentle landing
+        easing: (t: number) => 1 - Math.pow(1 - t, 4),
+      });
     else if (target) target.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     else window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
   }, 60);

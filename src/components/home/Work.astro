@@ -91,10 +91,9 @@ const count = String(projects.length).padStart(2, '0');
 
 <script>
   import { gsap } from 'gsap';
-  import { Flip } from 'gsap/Flip';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  gsap.registerPlugin(Flip, ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener('astro:page-load', () => {
     const section = document.querySelector<HTMLElement>('.work');
@@ -105,29 +104,49 @@ const count = String(projects.length).padStart(2, '0');
     const extras = section.querySelector<HTMLElement>('.experiments');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const items = [...slots, extras].filter(Boolean) as HTMLElement[];
+    let fadeOut: gsap.core.Tween | null = null;
+    let fadeIn: gsap.core.Tween | null = null;
+
+    function applyFilter(filter: string) {
+      slots.forEach((slot) => {
+        const match = filter === 'All' || slot.dataset.categories!.split(' ').includes(filter);
+        slot.classList.toggle('is-out', !match);
+      });
+      extras?.classList.toggle('is-out', filter !== 'All');
+      section!.classList.toggle('is-filtered', filter !== 'All');
+      // The grid's height just changed: re-measure every scroll effect below it
+      ScrollTrigger.refresh();
+    }
+
     buttons.forEach((button) =>
       button.addEventListener('click', () => {
         const filter = button.dataset.filter!;
         buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
 
-        // Remember where everything is, change the layout, then animate from the old spots
-        const state = Flip.getState([...slots, extras].filter(Boolean) as HTMLElement[]);
-        slots.forEach((slot) => {
-          const match = filter === 'All' || slot.dataset.categories!.split(' ').includes(filter);
-          slot.classList.toggle('is-out', !match);
-        });
-        extras?.classList.toggle('is-out', filter !== 'All');
-        section.classList.toggle('is-filtered', filter !== 'All');
+        if (reduced) return applyFilter(filter);
 
-        if (reduced) return ScrollTrigger.refresh();
-        Flip.from(state, {
-          duration: 0.7,
-          ease: 'power3.inOut',
-          stagger: 0.04,
-          absolute: true,
-          onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, duration: 0.5, delay: 0.2 }),
-          onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.9, duration: 0.3 }),
-          onComplete: () => ScrollTrigger.refresh(),
+        // Fade out, change the layout while nothing is visible, fade the matches in.
+        // Nothing moves across the page, so the grid never spills over the next section.
+        // A quick second click cancels the running switch cleanly
+        fadeOut?.kill();
+        fadeIn?.kill();
+        const visible = items.filter((el) => !el.classList.contains('is-out'));
+        fadeOut = gsap.to(visible, {
+          autoAlpha: 0,
+          scale: 0.97,
+          duration: 0.2,
+          ease: 'power1.in',
+          onComplete: () => {
+            applyFilter(filter);
+            // Created only now, so it targets the cards that match the new filter
+            const shown = items.filter((el) => !el.classList.contains('is-out'));
+            fadeIn = gsap.fromTo(
+              shown,
+              { autoAlpha: 0, y: 16, scale: 0.97 },
+              { autoAlpha: 1, y: 0, scale: 1, duration: 0.35, stagger: 0.05, ease: 'power2.out', clearProps: 'transform,opacity,visibility' },
+            );
+          },
         });
       }),
     );
