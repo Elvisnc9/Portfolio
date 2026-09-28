@@ -1,20 +1,14 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactSide from '../components/contact/ContactSide.astro';
-import ContactForm from '../components/contact/ContactForm.astro';
-import { site } from '../data/site';
+import ContactSide from './ContactSide.astro';
+import ContactForm from './ContactForm.astro';
+import { site } from '../../data/site';
 ---
 
-<BaseLayout
-  title="Contact"
-  active="Contact"
-  navCta="email"
-  description="Start a project with Elvis Ngwu: mobile apps, websites, SaaS and AI integration. Freelance, full-time and collaborations."
->
+<div id="contact" class="contact-section">
   <section class="head">
     <div class="intro">
       <span class="status" data-reveal><span class="dot" aria-hidden="true"></span>AVAILABLE FOR NEW PROJECTS</span>
-      <h1 data-reveal data-reveal-delay="0.06">Got an idea?<br class="hide-mobile" /> Let's <span>build it.</span></h1>
+      <h2 class="contact-title" data-reveal data-reveal-delay="0.06">Got an idea?<br class="hide-mobile" /> Let's <span>build it.</span></h2>
       <p data-reveal data-reveal-delay="0.12">
         <span class="hide-mobile">Freelance contracts, full-time roles and interesting collaborations. Tell me a little about what you're building and I'll get back to you.</span>
         <span class="show-mobile">Freelance, full-time roles and interesting collaborations. Tell me what you're building.</span>
@@ -49,10 +43,10 @@ import { site } from '../data/site';
       <ContactSide />
     </div>
   </section>
-</BaseLayout>
+</div>
 
 <script>
-  import { lagosTime } from '../scripts/time';
+  import { lagosTime } from '../../scripts/time';
 
   let timer: number | undefined;
 
@@ -131,7 +125,7 @@ import { site } from '../data/site';
     }
   }
 
-  h1 {
+  .contact-title {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 108px;
@@ -139,7 +133,7 @@ import { site } from '../data/site';
     letter-spacing: -0.055em;
   }
 
-  h1 span {
+  .contact-title span {
     color: var(--orange);
   }
 
@@ -210,7 +204,7 @@ import { site } from '../data/site';
       align-items: stretch;
     }
 
-    h1 {
+    .contact-title {
       font-size: 80px;
     }
 
@@ -301,7 +295,7 @@ import { site } from '../data/site';
       height: 7px;
     }
 
-    h1 {
+    .contact-title {
       font-size: 44px;
       line-height: 0.95;
     }

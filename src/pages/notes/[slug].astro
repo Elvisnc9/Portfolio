@@ -33,7 +33,7 @@ const { n, title, category, excerpt, color, pinned } = note.data;
 
 <BaseLayout title={title} active="Notes" description={excerpt}>
   <section class="note-page">
-    <BackLink href="/notes" label="All notes" />
+    <BackLink href="/#notes" label="All notes" />
 
     <article class="note" style={`--note-bg: ${color}`} data-reveal>
       <span class="tape" aria-hidden="true"></span>

@@ -9,11 +9,13 @@ export const site = {
   available: true,
 };
 
+// One-page site: Work goes to the top of the home page, the rest scroll to their section.
+// `section` is what the nav highlights while scrolling (scrollspy in Nav.astro).
 export const navLinks = [
-  { label: 'Work', href: '/work' },
-  { label: 'About', href: '/about' },
-  { label: 'Notes', href: '/notes' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Work', href: '/', section: 'top' },
+  { label: 'About', href: '/#about', section: 'about' },
+  { label: 'Notes', href: '/#notes', section: 'notes' },
+  { label: 'Contact', href: '/#contact', section: 'contact' },
 ] as const;
 
 export type NavLabel = (typeof navLinks)[number]['label'];

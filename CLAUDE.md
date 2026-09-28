@@ -25,13 +25,14 @@ Add behaviour with data attributes instead of new scripts:
 - data-stamp inside data-stamp-surface (+ data-stamp-order): rubber-stamp slam (certificates)
 Everything is off under prefers-reduced-motion. Pointer effects only run on fine pointers (mouse).
 
-## Site map
-/ (home hub: name hero "Elvis" with floating toys (each has data-speed for GSAP scroll parallax), ribbons, project tiles, About/Notes/Contact previews with big title + arrow)
-/about (centered grayscale portrait with "ELVIS NGWU" over it, stats, stack, services, certificates "Certified & stamped", journey chapter viewer)
-/notes (+ /notes/[slug]) (corkboard of taped sticky notes, category filters)
-/contact (form with chips, email tile, socials, "what happens next")
-/work (all work: the Work section as a page; the nav Work link goes here)
-/work/[slug] (case studies)
+## Site map (one page)
+/ is the whole site, in this order: hero "Elvis" with floating toys, ribbons, #work (selected work + filters + experiments),
+#about (portrait hero, stats + stack, services, certificates "Certified & stamped", journey), testimonials,
+#notes (corkboard with search + category filters), #contact (form, email, socials, what happens next).
+Nav: Work -> "/" (top), About/Notes/Contact -> "/#section" (smooth scroll; scrollspy highlights the current one).
+Tablet: nav links written out like desktop; the home hero and About hero fill the screen, centred. Phones use the menu.
+Separate pages only for detail: /work/[slug] (case studies) and /notes/[slug] (a note).
+Old /about, /notes, /contact, /work redirect to their sections (astro.config.mjs).
 
 ## Workflow rules
 - One phase at a time. After each step: tell me what changed, how to check it, then commit with a clear message.

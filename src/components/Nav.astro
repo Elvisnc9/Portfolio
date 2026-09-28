@@ -19,7 +19,7 @@ const { active, cta = 'talk' } = Astro.props;
     <nav class="links" aria-label="Main">
       {
         navLinks.map((link) => (
-          <a href={link.href} aria-current={link.label === active ? 'page' : undefined}>
+          <a href={link.href} data-nav-section={link.section} aria-current={link.label === active ? 'page' : undefined}>
             {link.label}
           </a>
         ))
@@ -31,7 +31,7 @@ const { active, cta = 'talk' } = Astro.props;
         cta === 'email' ? (
           <a class="cta cta--email" href={`mailto:${site.email}`}>{site.email}</a>
         ) : (
-          <a class="cta cta--talk" href="/contact" data-magnetic>
+          <a class="cta cta--talk" href="/#contact" data-magnetic>
             Let's talk <Icon name="arrow-up-right" />
           </a>
         )
@@ -51,6 +51,42 @@ const { active, cta = 'talk' } = Astro.props;
 </header>
 
 <MobileMenu active={active} />
+
+<script>
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { gsap } from 'gsap';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Scrollspy (home page only): highlight the nav link for the section in view.
+  // "Work" covers the hero and the work grid. Triggers are killed on page change by motion.ts.
+  document.addEventListener('astro:page-load', () => {
+    if (location.pathname !== '/') return;
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-nav-section]')];
+    const setActive = (section: string) =>
+      links.forEach((a) => {
+        if (a.dataset.navSection === section) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
+      });
+
+    const regions: [string, Element | null][] = [
+      ['top', document.querySelector('.hero')],
+      ['top', document.querySelector('#work')],
+      ['about', document.querySelector('#about')],
+      ['notes', document.querySelector('#notes')],
+      ['contact', document.querySelector('#contact')],
+    ];
+    regions.forEach(([section, el]) => {
+      if (!el) return;
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 45%',
+        end: 'bottom 45%',
+        onToggle: (self) => self.isActive && setActive(section),
+      });
+    });
+  });
+</script>
 
 <style>
   .site-header {
@@ -95,7 +131,7 @@ const { active, cta = 'talk' } = Astro.props;
   }
 
   .links a:hover,
-  .links a[aria-current='page'] {
+  .links a[aria-current] {
     background: var(--surface-2);
     color: var(--text);
   }
@@ -144,26 +180,33 @@ const { active, cta = 'talk' } = Astro.props;
     background: transparent;
   }
 
-  /* Tablet: links move into the menu, CTA drops its arrow */
+  /* Tablet: same written-out links as desktop, a little tighter */
   @media (max-width: 1023px) {
     .site-header {
       padding-top: 20px;
     }
 
+    .dock {
+      padding-left: 18px;
+      gap: 10px;
+    }
+
     .brand {
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .links {
-      display: none;
+      gap: 2px;
+      font-size: 14px;
     }
 
-    .menu-btn {
-      display: flex;
+    .links a {
+      padding: 10px 12px;
     }
 
     .cta {
-      padding: 0 20px;
+      padding: 0 16px;
+      font-size: 14px;
     }
 
     .cta--talk :global(svg) {
@@ -186,11 +229,13 @@ const { active, cta = 'talk' } = Astro.props;
       font-size: 15px;
     }
 
+    .links,
     .cta {
       display: none;
     }
 
     .menu-btn {
+      display: flex;
       border: 0;
       background: var(--orange);
       color: var(--dark);

@@ -18,7 +18,8 @@ let ctx: gsap.Context | null = null;
 const raf = (time: number) => lenis?.raf(time * 1000);
 
 function startLenis() {
-  lenis = new Lenis({ anchors: true });
+  // Same-page links are handled by scrollToLink() below
+  lenis = new Lenis();
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(raf);
   gsap.ticker.lagSmoothing(0);
@@ -275,6 +276,33 @@ function teardown() {
 
 document.addEventListener('astro:page-load', setup);
 document.addEventListener('astro:before-swap', teardown);
+
+/**
+ * One-page navigation: links to the current page ("/" or "/#section") scroll there
+ * smoothly instead of navigating. Runs in the capture phase and prevents the default,
+ * so the ClientRouter leaves these clicks alone. Links to other pages are untouched.
+ */
+function scrollToLink(event: MouseEvent) {
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+  if (!link || link.target === '_blank') return;
+  const url = new URL(link.href, location.href);
+  if (url.origin !== location.origin || url.pathname !== location.pathname) return;
+
+  const target = url.hash && url.hash !== '#top' ? document.querySelector<HTMLElement>(url.hash) : null;
+  if (url.hash && url.hash !== '#top' && !target) return;
+
+  event.preventDefault();
+  history.replaceState(history.state, '', url.hash || url.pathname);
+  // Let the mobile menu finish closing (it pauses scrolling while open)
+  window.setTimeout(() => {
+    if (lenis) lenis.scrollTo(target ?? 0, { offset: target ? -16 : 0, duration: 1.2 });
+    else if (target) target.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    else window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+  }, 60);
+}
+
+document.addEventListener('click', scrollToLink, { capture: true });
 
 // The mobile menu locks scrolling while it is open
 document.addEventListener('menu:toggle', (e) => {

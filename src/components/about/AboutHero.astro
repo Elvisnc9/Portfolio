@@ -28,13 +28,13 @@ import { stats } from '../../data/home';
     <span class="chip chip--hi" data-speed="1.4">Hi, I'm Elvis</span>
     <span class="chip chip--stack" data-speed="1.25">Flutter · Serverpod · AI</span>
 
-    <h1 class="name" data-speed="1.1">ELVIS <br class="name-break" />NGWU</h1>
+    <h2 class="name" data-speed="1.1">ELVIS <br class="name-break" />NGWU</h2>
   </div>
 
   <div class="intro" data-reveal>
     <p>{aboutIntro}</p>
     <div class="buttons">
-      <a class="btn btn--dark" href="/contact">Work with me <Icon name="arrow-right" size={18} /></a>
+      <a class="btn btn--dark" href="/#contact">Work with me <Icon name="arrow-right" size={18} /></a>
       <a class="btn btn--light" href={cvUrl} download><span><span class="hide-mobile">Download </span>CV</span></a>
     </div>
   </div>
@@ -43,6 +43,16 @@ import { stats } from '../../data/home';
 <style>
   .about-hero {
     padding: 24px var(--gutter);
+  }
+
+  /* Tablet: the About hero fills the screen with its content centred */
+  @media (min-width: 641px) and (max-width: 1023px) {
+    .about-hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   /* ---------- Portrait stage ---------- */

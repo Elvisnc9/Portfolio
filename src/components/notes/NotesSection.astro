@@ -1,10 +1,7 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import BackLink from '../../components/BackLink.astro';
-import Icon from '../../components/Icon.astro';
-import Sparkle from '../../components/Sparkle.astro';
-import StickyNote from '../../components/notes/StickyNote.astro';
-import NotesCta from '../../components/notes/NotesCta.astro';
+import Icon from '../Icon.astro';
+import Sparkle from '../Sparkle.astro';
+import StickyNote from './StickyNote.astro';
 import { getNotes, noteNumber, noteUrl } from '../../lib/notes';
 
 const notes = await getNotes();
@@ -16,17 +13,12 @@ const categories = ['Building', 'Design', 'Tech', 'Life'];
 const currentlyThinking = 'AI integrations & new developer tools.';
 ---
 
-<BaseLayout
-  title="Notes"
-  active="Notes"
-  description="Short thoughts from Elvis Ngwu on building, design and technology. Written from Nigeria, for anyone who makes things."
->
+<div id="notes" class="notes-section">
   <!-- Header -->
   <section class="head">
     <div class="intro">
-      <BackLink href="/" label="Back home" />
       <div class="title-wrap" data-reveal>
-        <h1>Notes<br />to self</h1>
+        <h2 class="notes-title">Notes<br />to self</h2>
         <span class="badge" aria-hidden="true" data-speed="1.3">{noteNumber(notes.length)}<span>NOTES</span></span>
       </div>
       <p class="lede" data-reveal data-reveal-delay="0.08">
@@ -122,8 +114,7 @@ const currentlyThinking = 'AI integrations & new developer tools.';
     </div>
   </section>
 
-  <NotesCta />
-</BaseLayout>
+</div>
 
 <script>
   document.addEventListener('astro:page-load', () => {
@@ -190,7 +181,7 @@ const currentlyThinking = 'AI integrations & new developer tools.';
     width: fit-content;
   }
 
-  h1 {
+  .notes-title {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 128px;
@@ -529,7 +520,7 @@ const currentlyThinking = 'AI integrations & new developer tools.';
       gap: 28px;
     }
 
-    h1 {
+    .notes-title {
       font-size: 96px;
     }
 
@@ -598,7 +589,7 @@ const currentlyThinking = 'AI integrations & new developer tools.';
       width: auto;
     }
 
-    h1 {
+    .notes-title {
       font-size: 54px;
       line-height: 0.92;
     }

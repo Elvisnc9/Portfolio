@@ -1,20 +1,34 @@
 ---
+// The whole site is this one page. Nav links scroll to #work, #about, #notes, #contact.
+// Only case studies (/work/[slug]) and notes (/notes/[slug]) are separate pages.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
 import Ribbons from '../components/home/Ribbons.astro';
 import Work from '../components/home/Work.astro';
-import AboutPreview from '../components/home/AboutPreview.astro';
+import AboutHero from '../components/about/AboutHero.astro';
+import AboutStats from '../components/about/AboutStats.astro';
+import Services from '../components/about/Services.astro';
+import Certificates from '../components/about/Certificates.astro';
+import Journey from '../components/about/Journey.astro';
 import Testimonials from '../components/home/Testimonials.astro';
-import NotesPreview from '../components/home/NotesPreview.astro';
-import ContactPanel from '../components/home/ContactPanel.astro';
+import NotesSection from '../components/notes/NotesSection.astro';
+import ContactSection from '../components/contact/ContactSection.astro';
 ---
 
 <BaseLayout>
   <Hero />
   <Ribbons />
   <Work />
-  <AboutPreview />
+
+  <div id="about" class="about-section">
+    <AboutHero />
+    <AboutStats />
+    <Services />
+    <Certificates />
+    <Journey />
+  </div>
+
   <Testimonials />
-  <NotesPreview />
-  <ContactPanel />
+  <NotesSection />
+  <ContactSection />
 </BaseLayout>

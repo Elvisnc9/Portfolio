@@ -23,7 +23,7 @@ const { active } = Astro.props;
   <nav class="list" aria-label="Menu">
     {
       navLinks.map((link, i) => (
-        <a href={link.href} aria-current={link.label === active ? 'page' : undefined}>
+        <a href={link.href} data-nav-section={link.section} aria-current={link.label === active ? 'page' : undefined}>
           <span class="label">
             <span class="num">{String(i + 1).padStart(2, '0')}</span>
             <span class="word">{link.label}</span>
@@ -95,12 +95,12 @@ const { active } = Astro.props;
     // Close when a link is chosen (covers same-page anchors like #work)
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
 
-    // Close automatically if the window grows back to desktop width.
+    // Close automatically if the window grows past phone width (the nav shows its links there).
     // Window-level listener, so drop the previous page's one first.
     resizeWatch?.abort();
     resizeWatch = new AbortController();
     window
-      .matchMedia('(min-width: 1024px)')
+      .matchMedia('(min-width: 641px)')
       .addEventListener('change', (e) => e.matches && menu.open && close(), { signal: resizeWatch.signal });
   }
 
@@ -263,11 +263,11 @@ const { active } = Astro.props;
     transform: rotate(45deg);
   }
 
-  .list a[aria-current='page'] .word {
+  .list a[aria-current] .word {
     color: var(--orange);
   }
 
-  .list a[aria-current='page'] .arrow {
+  .list a[aria-current] .arrow {
     border-color: var(--orange);
     background: var(--orange);
     color: var(--dark);
