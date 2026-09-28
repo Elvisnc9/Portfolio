@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import SocialIcon from './SocialIcon.astro';
 import { navLinks, site, socials, type NavLabel } from '../data/site';
 
 interface Props {
@@ -51,6 +52,7 @@ const { active } = Astro.props;
           .filter((s) => s.href && s.menu)
           .map((s) => (
             <a href={s.href} target="_blank" rel="noopener noreferrer">
+              <SocialIcon name={s.label} size={16} brand={false} />
               {s.label}
             </a>
           ))
@@ -339,9 +341,10 @@ const { active } = Astro.props;
 
   .socials a {
     height: var(--tap);
-    padding: 0 16px;
+    padding: 0 16px 0 14px;
     display: flex;
     align-items: center;
+    gap: 8px;
     border-radius: var(--radius-pill);
     background: var(--dark);
     color: var(--on-dark);

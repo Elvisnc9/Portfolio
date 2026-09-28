@@ -1,11 +1,19 @@
 ---
 import ContactSide from './ContactSide.astro';
+import FloatingToys from '../FloatingToys.astro';
 import ContactForm from './ContactForm.astro';
 import { site } from '../../data/site';
 ---
 
 <div id="contact" class="contact-section">
-  <section class="head">
+  <section class="head" data-lean>
+    <FloatingToys
+      toys={[
+        { kind: 'star', pos: 'right: 4%; top: 20px', size: 60, speed: 1.4, mobile: true },
+        { kind: 'cursor', pos: 'right: 18%; top: 40px', label: 'say hi', speed: 0.9 },
+        { kind: 'dot', pos: 'right: 30%; top: 110px', size: 14, speed: 1.7, anim: 'bob4' },
+      ]}
+    />
     <div class="intro">
       <span class="status" data-reveal><span class="dot" aria-hidden="true"></span>AVAILABLE FOR NEW PROJECTS</span>
       <h2 class="contact-title" data-reveal data-reveal-delay="0.06">Got an idea?<br class="hide-mobile" /> Let's <span>build it.</span></h2>
@@ -77,6 +85,8 @@ import { site } from '../../data/site';
 
   /* ---------- Header ---------- */
   .head {
+    position: relative;
+    isolation: isolate;
     padding: 56px var(--gutter) 40px;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));

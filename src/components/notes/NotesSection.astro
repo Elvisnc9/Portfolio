@@ -1,6 +1,7 @@
 ---
 import Icon from '../Icon.astro';
 import Sparkle from '../Sparkle.astro';
+import FloatingToys from '../FloatingToys.astro';
 import StickyNote from './StickyNote.astro';
 import { getNotes, noteNumber, noteUrl } from '../../lib/notes';
 
@@ -15,7 +16,15 @@ const currentlyThinking = 'AI integrations & new developer tools.';
 
 <div id="notes" class="notes-section">
   <!-- Header -->
-  <section class="head">
+  <section class="head" data-lean>
+    <FloatingToys
+      toys={[
+        { kind: 'e', pos: 'right: 6%; top: 40px', rotate: 8, speed: 1.5, anim: 'bob3' },
+        { kind: 'circle', pos: 'right: -3%; top: 150px', size: 90, speed: 0.6, anim: 'bob2' },
+        { kind: 'star-dark', pos: 'right: 24%; top: 60px', size: 30, speed: 0.8 },
+        { kind: 'dot', pos: 'right: 6%; top: 16px', size: 14, speed: 1.6, anim: 'bob4', mobile: true },
+      ]}
+    />
     <div class="intro">
       <div class="title-wrap" data-reveal>
         <h2 class="notes-title">Notes<br />to self</h2>
@@ -162,6 +171,8 @@ const currentlyThinking = 'AI integrations & new developer tools.';
 
   /* ---------- Header ---------- */
   .head {
+    position: relative;
+    isolation: isolate;
     padding: 48px var(--gutter) 40px;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));

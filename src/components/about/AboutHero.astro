@@ -1,5 +1,6 @@
 ---
 import Icon from '../Icon.astro';
+import FloatingToys from '../FloatingToys.astro';
 import { site, cvUrl } from '../../data/site';
 import { aboutIntro } from '../../data/about';
 import { stats } from '../../data/home';
@@ -7,6 +8,19 @@ import { stats } from '../../data/home';
 
 <section class="about-hero">
   <div class="stage" data-lean>
+    <FloatingToys
+      toys={[
+        { kind: 'star', pos: 'left: 6%; top: 90px', size: 72, speed: 1.3, mobile: true },
+        { kind: 'e', pos: 'right: 6%; top: 120px', rotate: -10, speed: 1.5, anim: 'bob3', mobile: true },
+        { kind: 'star-dark', pos: 'right: 26%; top: 70px', size: 34, speed: 0.7 },
+        { kind: 'dot', pos: 'left: 30%; top: 60px', size: 16, speed: 1.7, anim: 'bob4' },
+        { kind: 'code', pos: 'left: 4%; top: 52%', rotate: -8, speed: 0.8, anim: 'bob2' },
+        { kind: 'cursor', pos: 'left: 22%; top: 58%', label: 'that’s me', speed: 0.9 },
+        { kind: 'arch', pos: 'right: 10%; bottom: 34%', speed: 1.2, anim: 'bob3' },
+        { kind: 'circle', pos: 'left: -2%; bottom: 24%', size: 110, speed: 0.6, anim: 'bob2' },
+      ]}
+    />
+
     <div class="topline">
       <span class="pill">ABOUT ME</span>
       <span class="meta"><span class="hide-mobile">SOFTWARE DEVELOPER · </span>EST. {stats.years.since} · NIGERIA</span>
@@ -58,6 +72,7 @@ import { stats } from '../../data/home';
   /* ---------- Portrait stage ---------- */
   .stage {
     position: relative;
+    isolation: isolate;
     container-type: inline-size;
     height: 800px;
     overflow: hidden;

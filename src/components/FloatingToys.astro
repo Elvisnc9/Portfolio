@@ -1,0 +1,200 @@
+---
+// Background "desktop toys" (same family as the home hero) for any section.
+// Each toy: outer .toy = position + tilt + data-speed (scroll parallax, mouse lean if an
+// ancestor has data-lean); inner .anim = the CSS bob/spin loop.
+// The layer sits behind its parent's content: give the parent `position: relative;
+// isolation: isolate;` and the toys can never cover text or catch clicks.
+import Sparkle from './Sparkle.astro';
+
+export interface Toy {
+  kind: 'star' | 'star-dark' | 'code' | 'e' | 'circle' | 'arch' | 'dot' | 'dot-dark' | 'cursor';
+  /** CSS position, e.g. "left: 6%; top: 12%" */
+  pos: string;
+  speed: number;
+  /** Size in px for stars, circles and dots */
+  size?: number;
+  rotate?: number;
+  /** Bubble text for the cursor */
+  label?: string;
+  anim?: 'bob' | 'bob2' | 'bob3' | 'bob4' | 'spin' | 'spin-r';
+  /** Also show on phones (hidden there by default to keep small screens clean) */
+  mobile?: boolean;
+}
+
+interface Props {
+  toys: Toy[];
+}
+
+const { toys } = Astro.props;
+const defaultAnim = (kind: Toy['kind']) => (kind === 'star' ? 'spin' : kind === 'star-dark' ? 'spin-r' : 'bob');
+---
+
+<div class="toys-layer" aria-hidden="true">
+  {
+    toys.map((toy) => (
+      <div
+        class:list={['toy', { 'toy--desktop-only': !toy.mobile }]}
+        style={`${toy.pos}; --rot: ${toy.rotate ?? 0}deg; --size: ${toy.size ?? 0}px`}
+        data-speed={toy.speed}
+      >
+        <div class={`anim ${toy.anim ?? defaultAnim(toy.kind)}`}>
+          {toy.kind === 'star' && <Sparkle size={toy.size ?? 64} color="var(--orange)" />}
+          {toy.kind === 'star-dark' && <Sparkle size={toy.size ?? 36} color="var(--dark)" />}
+          {toy.kind === 'code' && <span class="code">&lt;/&gt;</span>}
+          {toy.kind === 'e' && <span class="e">e.</span>}
+          {toy.kind === 'circle' && <span class="circle" />}
+          {toy.kind === 'arch' && <span class="arch" />}
+          {toy.kind === 'dot' && <span class="dot dot--orange" />}
+          {toy.kind === 'dot-dark' && <span class="dot dot--dark" />}
+          {toy.kind === 'cursor' && (
+            <span class="cursor">
+              <svg width="26" height="26" viewBox="0 0 24 24">
+                <path d="M3 2l18 8-8 2.5L10 21z" fill="#111110" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round" />
+              </svg>
+              <span class="cursor-label">{toy.label ?? 'you’re here'}</span>
+            </span>
+          )}
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .toys-layer {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .toy {
+    position: absolute;
+    rotate: var(--rot);
+  }
+
+  .toy :global(svg) {
+    display: block;
+  }
+
+  .code {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 19px;
+    background: var(--sky);
+    color: var(--dark);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .e {
+    width: 76px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 21px;
+    background: var(--orange);
+    box-shadow: 0 16px 30px rgba(255, 106, 61, 0.3);
+    color: var(--dark);
+    font-family: var(--font-name);
+    font-weight: 800;
+    font-size: 32px;
+  }
+
+  .circle {
+    display: block;
+    width: var(--size, 120px);
+    height: var(--size, 120px);
+    border-radius: 50%;
+    background: var(--sky);
+  }
+
+  .arch {
+    display: block;
+    width: 80px;
+    height: 40px;
+    border: 13px solid var(--orange);
+    border-bottom: 0;
+    border-radius: 80px 80px 0 0;
+  }
+
+  .dot {
+    display: block;
+    width: var(--size, 16px);
+    height: var(--size, 16px);
+    border-radius: 50%;
+  }
+
+  .dot--orange {
+    background: var(--orange);
+  }
+
+  .dot--dark {
+    background: var(--dark);
+  }
+
+  .cursor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .cursor-label {
+    margin-left: 18px;
+    padding: 5px 11px;
+    border-radius: 999px 999px 999px 4px;
+    background: var(--dark);
+    color: var(--on-dark);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Loops, same rhythm as the home hero */
+  .bob { animation: bob 3.4s ease-in-out infinite; }
+  .bob2 { animation: bob 4.1s ease-in-out 0.7s infinite; }
+  .bob3 { animation: bob 3.7s ease-in-out 1.3s infinite; }
+  .bob4 { animation: bob 5s ease-in-out 0.3s infinite; }
+  .spin { animation: spin 18s linear infinite; }
+  .spin-r { animation: spin 26s linear infinite reverse; }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim {
+      animation: none;
+    }
+  }
+
+  /* Tablet: a touch smaller */
+  @media (max-width: 1023px) {
+    .toy {
+      scale: 0.85;
+    }
+  }
+
+  /* Phones: only toys marked mobile, smaller still */
+  @media (max-width: 640px) {
+    .toy--desktop-only {
+      display: none;
+    }
+
+    .toy {
+      scale: 0.7;
+    }
+  }
+</style>
