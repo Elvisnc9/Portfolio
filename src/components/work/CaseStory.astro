@@ -1,0 +1,154 @@
+---
+// A story beat on a case study ("How I reached out", "Result"): same two-column
+// layout as "The problem" so it reads as part of the same page.
+interface Props {
+  label: string;
+  title: string;
+  text: string;
+  points?: string[];
+  /** Pill colour for the label */
+  tone?: 'sky' | 'lime';
+}
+
+const { label, title, text, points = [], tone = 'sky' } = Astro.props;
+const id = `story-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+---
+
+<section class="story" aria-labelledby={id}>
+  <div class="head" data-reveal>
+    <span class={`pill pill--${tone}`}>{label}</span>
+    <h2 id={id}>{title}</h2>
+  </div>
+  <div class="body">
+    <p class="statement" data-reveal data-reveal-delay="0.06">{text}</p>
+    {
+      points.length > 0 && (
+        <ul class="points">
+          {points.map((point, i) => (
+            <li data-reveal data-reveal-delay={String(0.1 + i * 0.06)}>{point}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .story {
+    padding: 0 var(--gutter) 104px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+
+  .head {
+    grid-column: 1 / span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .pill {
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .pill--sky {
+    background: var(--sky);
+  }
+
+  .pill--lime {
+    background: var(--note-lime);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .body {
+    grid-column: 6 / span 7;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .statement {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  .points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .points li {
+    padding: 12px 18px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 1023px) {
+    .story {
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    h2 {
+      font-size: 52px;
+    }
+
+    .statement {
+      font-size: 22px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .story {
+      padding-bottom: 56px;
+      gap: 18px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+
+    h2 {
+      font-size: 36px;
+    }
+
+    .body {
+      gap: 20px;
+    }
+
+    .statement {
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .points li {
+      padding: 10px 14px;
+      font-size: 14px;
+    }
+  }
+</style>

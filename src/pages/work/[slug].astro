@@ -8,6 +8,7 @@ import CaseProblem from '../../components/work/CaseProblem.astro';
 import CaseRole from '../../components/work/CaseRole.astro';
 import CaseHighlights from '../../components/work/CaseHighlights.astro';
 import CaseGallery from '../../components/work/CaseGallery.astro';
+import CaseStory from '../../components/work/CaseStory.astro';
 import { projects, type Project } from '../../data/projects';
 
 export async function getStaticPaths() {
@@ -31,7 +32,7 @@ interface Props {
 }
 
 const { project, caseStudy, index, next } = Astro.props;
-const { facts, brief, problem, role, highlights, gallery, features, quote, summary } = caseStudy;
+const { facts, brief, problem, outreach, role, highlights, gallery, features, result, quote, summary, live } = caseStudy;
 // "MY ROLE" always leads the fact tiles when a role is set
 const allFacts = role ? [{ label: 'MY ROLE', value: role.title }, ...facts] : facts;
 const total = projects.length;
@@ -77,6 +78,8 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
 
   {problem && <CaseProblem text={problem.text} points={problem.points} />}
 
+  {outreach && <CaseStory label="HOW IT STARTED" title="How I reached out" text={outreach.text} />}
+
   {role && <CaseRole title={role.title} summary={role.summary} points={role.points} stack={role.stack} />}
 
   {highlights.length > 0 && <CaseHighlights items={highlights} />}
@@ -103,7 +106,9 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
     )
   }
 
-  {gallery.length > 1 && <CaseGallery images={gallery} />}
+  {gallery.length > 1 && <CaseGallery images={gallery} source={live?.store === 'web' ? 'site' : 'app'} />}
+
+  {result && <CaseStory label="WHERE IT LANDED" title="Result" text={result.text} points={result.points} tone="lime" />}
 
   {
     quote && (

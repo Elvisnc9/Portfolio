@@ -48,7 +48,7 @@ const style = [
     `tile--${project.media}`,
     `tone--${project.tone}`,
     `pills--${layout.pills}`,
-    { 'pills--stack': layout.stackPills, 'compact-tablet': compactTablet },
+    { 'pills--stack': layout.stackPills, 'compact-tablet': compactTablet, 'is-client': project.client },
   ]}
   href={`/work/${project.slug}`}
   data-speed={layout.speed ?? 1}
@@ -76,6 +76,7 @@ const style = [
       }
     </span>
     <span class="pill pill--tag">{project.tag}</span>
+    {project.client && <span class="pill pill--client">Client Project</span>}
   </div>
 
   {
@@ -97,11 +98,20 @@ const style = [
     )
   }
 </a>
+{
+  /* Sibling of the card, not inside it: a link can't be nested in the card's own link */
+  project.liveUrl && (
+    <a class="live-link" href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`${project.title}: visit the live site (opens in a new tab)`}>
+      Visit live site <Icon name="arrow-up-right" size={14} />
+    </a>
+  )
+}
 </div>
 
 <style>
   /* The slot is the grid cell (filtered and animated by the Work section) */
   .slot {
+    position: relative;
     grid-column: span var(--span-d);
     height: var(--h-d);
   }
@@ -222,6 +232,45 @@ const style = [
     border-radius: var(--radius-pill);
     font-size: 13px;
     white-space: nowrap;
+  }
+
+  /* ---------- Client projects ---------- */
+  .pill--client {
+    background: var(--orange);
+    color: var(--dark);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Leave room for the live-site link in the top-right corner */
+  .is-client .pills {
+    max-width: calc(100% - 190px);
+  }
+
+  .live-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    min-height: var(--tap);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    color: var(--dark);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(17, 17, 16, 0.18);
+    transition: transform 0.2s;
+  }
+
+  .live-link:hover {
+    transform: translateY(-2px);
   }
 
   .pill--title {
@@ -405,6 +454,16 @@ const style = [
 
   /* ========== Mobile ========== */
   @media (max-width: 640px) {
+    .live-link {
+      top: 14px;
+      right: 14px;
+      padding: 0 14px;
+    }
+
+    .is-client .pills {
+      max-width: calc(100% - 180px);
+    }
+
     .slot {
       grid-column: 1 / -1;
       height: var(--h-m);

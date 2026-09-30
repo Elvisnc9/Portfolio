@@ -16,6 +16,10 @@ export interface Project {
   /** How the image sits in the tile */
   media: 'phones' | 'contain' | 'cover' | 'phone-bottom';
   images: { src: string; alt: string; width: number; height: number }[];
+  /** Client work: shows a "Client Project" badge on the card */
+  client?: boolean;
+  /** Live site, shown as "Visit live site" on the card (opens in a new tab) */
+  liveUrl?: string;
 }
 
 const img = (name: string, alt: string, width: number, height: number) => ({
@@ -25,7 +29,52 @@ const img = (name: string, alt: string, width: number, height: number) => ({
   height,
 });
 
+// Client restaurant sites come first. Their screenshots are PNGs, so they use full paths.
+const shot = (name: string, alt: string, width: number, height: number) => ({
+  src: `/images/projects/${name}.png`,
+  alt,
+  width,
+  height,
+});
+
 export const projects: Project[] = [
+  {
+    slug: 'kenz-sushi',
+    title: 'Kenz Sushi',
+    tag: 'Web · Restaurant',
+    categories: ['Web'],
+    bg: '#6E1414',
+    tone: 'dark',
+    media: 'phone-bottom',
+    images: [shot('kenz-sushi-1', 'Kenz Sushi home screen: “L’art du Sushi à Alger”', 215, 479)],
+    client: true,
+    liveUrl: 'https://kenzsushi.com',
+  },
+  {
+    slug: 'yulmaz',
+    title: 'Yulmaz Resto Caterer',
+    shortTitle: 'Yulmaz',
+    tag: 'Web · Restaurant',
+    categories: ['Web'],
+    bg: '#E9A23B',
+    tone: 'light',
+    media: 'phone-bottom',
+    images: [shot('yulmaz-1', 'Yulmaz home screen: “The authentic taste of Algerian cuisine”', 217, 481)],
+    client: true,
+    liveUrl: 'https://restoyulmazalger.com',
+  },
+  {
+    slug: 'the-11th-floor',
+    title: 'The 11th Floor',
+    tag: 'Web · Restaurant',
+    categories: ['Web'],
+    bg: '#0E3B3A',
+    tone: 'dark',
+    media: 'contain',
+    images: [shot('the-11th-floor-1', 'The 11th Floor home page: rooftop dining experience', 643, 407)],
+    client: true,
+    liveUrl: 'https://the11thfloor.co.za',
+  },
   {
     slug: 'genspark-ai',
     title: 'Genspark AI',

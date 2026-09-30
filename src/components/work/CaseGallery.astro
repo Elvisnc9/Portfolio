@@ -1,21 +1,24 @@
 ---
-// "Screens": a row of phone screenshots. Swipes sideways on small screens.
+// "Screens": a row of screenshots. Swipes sideways on small screens.
+// Portrait shots get a phone frame; landscape (desktop) shots keep their shape.
 interface Props {
   images: { src: string; alt: string; width: number; height: number }[];
+  /** Wording in the caption: "from the app" or "from the site" */
+  source?: 'app' | 'site';
 }
 
-const { images } = Astro.props;
+const { images, source = 'app' } = Astro.props;
 ---
 
 <section class="gallery" aria-labelledby="gallery-title">
   <div class="head" data-reveal>
     <h2 id="gallery-title">Screens</h2>
-    <span>{images.length} screens from the app.</span>
+    <span>{images.length} screens from the {source}.</span>
   </div>
   <ul class="row">
     {
       images.map((image, i) => (
-        <li data-reveal data-reveal-delay={String(i * 0.08)}>
+        <li class:list={{ 'is-wide': image.width > image.height }} data-reveal data-reveal-delay={String(i * 0.08)}>
           <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
         </li>
       ))
@@ -95,6 +98,16 @@ const { images } = Astro.props;
     border-radius: 28px;
     background: var(--surface);
     box-shadow: 0 24px 50px rgba(17, 17, 16, 0.2);
+  }
+
+  /* Landscape (desktop) screenshots keep their own shape instead of a phone frame */
+  .row li.is-wide {
+    width: clamp(280px, 42vw, 560px);
+  }
+
+  .row li.is-wide img {
+    aspect-ratio: auto;
+    border-radius: 18px;
   }
 
   @media (max-width: 1023px) {

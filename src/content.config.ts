@@ -55,6 +55,10 @@ const work = defineCollection({
         stack: z.array(z.string()).default([]),
       })
       .optional(),
+    /** "How I reached out": how the project started (client work) */
+    outreach: z.object({ text: z.string() }).optional(),
+    /** "Result": what came of it; points are short outcome lines */
+    result: z.object({ text: z.string(), points: z.array(z.string()).default([]) }).optional(),
     /** "What it does": key capabilities */
     highlights: z.array(z.object({ title: z.string(), text: z.string() })).default([]),
     /** "Screens": phone screenshots; paths in /public */
