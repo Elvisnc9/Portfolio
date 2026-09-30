@@ -30,12 +30,7 @@ export const socials = [
   { label: 'X', href: 'https://x.com/ElvisNgwu', menu: false },
   { label: 'WhatsApp', href: 'https://wa.me/2349056982116', menu: true },
   { label: 'Telegram', href: 'https://t.me/Elviznc', menu: false, contactOnly: true },
-  // TODO: add your Contra profile URL
-  { label: 'Contra', href: '', menu: false, contactOnly: true },
-  // TODO: add your pub.dev publisher URL
-  { label: 'pub.dev', href: '', menu: false },
-  // TODO: add your Instagram profile URL
-  { label: 'Instagram', href: '', menu: false, contactOnly: true },
+  { label: 'Instagram', href: 'https://www.instagram.com/elvisngwu', menu: false, contactOnly: true },
 ];
 
 export const whatsapp = socials.find((s) => s.label === 'WhatsApp')!.href;

@@ -25,10 +25,9 @@ export const certificates: {
   url?: string;
   draft?: boolean;
 }[] = [
-  // TODO: confirm degree year (the journey below says 2025)
-  { k: 'UNN', issuer: 'University of Nigeria', title: 'BSc Computer Science', year: '2026', ring: '#111110', fill: '#FFD9C9', rot: -10 },
-  { k: 'An', issuer: 'Anthropic', title: 'AI Fluency', year: '2026', ring: '#FF6A3D', fill: '#FFFFFF', rot: 8 },
-  { k: 'G', issuer: 'Google', title: 'Google AI Professional', year: '2026', ring: '#111110', fill: '#BFE3FA', rot: -6 },
+  { k: 'UNN', issuer: 'University of Nigeria', title: 'BSc Computer Science', year: '2025', ring: '#111110', fill: '#FFD9C9', rot: -10 },
+  { k: 'Anthropic', issuer: 'Anthropic', title: 'AI Fluency', year: '2026', ring: '#FF6A3D', fill: '#FFFFFF', rot: 8 },
+  { k: 'Google', issuer: 'Google', title: 'Google AI Professional', year: '2026', ring: '#111110', fill: '#BFE3FA', rot: -6 },
   { k: 'IBM', issuer: 'IBM', title: 'Generative AI Engineering', year: '2026', ring: '#111110', fill: '#E6DEFF', rot: 10 },
   // TODO: Learn KTS certificate name + year, then remove draft
   { k: 'LK', issuer: 'Learn KTS', title: '', year: '', ring: '#FF6A3D', fill: '#E4F5B8', rot: -8, draft: true },

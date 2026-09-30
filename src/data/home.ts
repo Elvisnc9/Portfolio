@@ -63,7 +63,6 @@ export const testimonials: { quote: string; short?: string; name: string; compan
   {
     quote: 'Multiple integrations and moving parts, but Elvis handled them with confidence. His troubleshooting really stood out.',
     short: 'Multiple integrations and moving parts, but Elvis handled them with confidence.',
-    // TODO: Genspark PM's name
     name: '',
     company: 'Product Manager, Genspark',
     tone: 'sky',

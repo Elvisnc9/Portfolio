@@ -41,6 +41,5 @@ gallery:
   - { src: /images/projects/genspark2.webp, alt: AI Docs gallery of generated documents, width: 665, height: 1440 }
 quote:
   text: The project involved multiple integrations and moving parts, but Elvis handled them with confidence. His ability to troubleshoot and build practical solutions really stood out.
-  # TODO: add the product manager's name
   role: Product Manager, Genspark
 ---
