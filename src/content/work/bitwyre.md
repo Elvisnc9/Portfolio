@@ -16,10 +16,12 @@ problem:
     - Instruments spread across different exchanges
     - Trading tools that feel slow when markets move fast
     - Security that has to be visible to earn trust
-# TODO: add your role on Bitwyre, e.g.
-# role:
-#   title: Frontend developer
-#   summary: I built ...
+role:
+  title: Backend developer
+  summary: I was one of the backend developers on the team behind the trading platform.
+  # TODO: add what you worked on, e.g. APIs, services, integrations
+  points: []
+  stack: []
 highlights:
   - { title: Spot trading, text: Buy and sell digital assets directly. }
   - { title: Derivatives, text: Trade contracts on the price of crypto assets. }
