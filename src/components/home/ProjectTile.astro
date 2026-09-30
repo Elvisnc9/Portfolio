@@ -42,7 +42,7 @@ const style = [
 ---
 
 <div class="slot" style={style} data-categories={project.categories.join(' ')}>
-<a
+<div
   class:list={[
     'tile',
     `tile--${project.media}`,
@@ -50,10 +50,11 @@ const style = [
     `pills--${layout.pills}`,
     { 'pills--stack': layout.stackPills, 'compact-tablet': compactTablet },
   ]}
-  href={`/work/${project.slug}`}
   data-speed={layout.speed ?? 1}
   data-unmask
 >
+  <!-- The case link fills the tile; the live-site link sits beside it (links can't nest) -->
+  <a class="tile-link" href={`/work/${project.slug}`}>
   <div class="media" data-parallax="0.1">
     {
       project.images.map((image) => (
@@ -76,6 +77,7 @@ const style = [
       }
     </span>
     <span class="pill pill--tag">{project.tag}</span>
+    {project.client && <span class="pill pill--client">Client Project</span>}
   </div>
 
   {
@@ -96,7 +98,18 @@ const style = [
       </span>
     )
   }
-</a>
+  </a>
+
+  {
+    project.live && (
+      <a class="live" href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} live site (opens in a new tab)`}>
+        <span class="dot" aria-hidden="true" />
+        Live site
+        <Icon name="arrow-up-right" size={16} />
+      </a>
+    )
+  }
+</div>
 </div>
 
 <style>
@@ -117,6 +130,11 @@ const style = [
 
   .tone--dark {
     border: 1px solid var(--line);
+  }
+
+  .tile-link {
+    position: absolute;
+    inset: 0;
   }
 
   /* Filter state (set by the Work section script) */
@@ -263,6 +281,42 @@ const style = [
     color: var(--surface);
   }
 
+  .pill--client {
+    background: var(--orange);
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  /* ---------- Live site link ---------- */
+  .live {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    min-height: var(--tap);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(17, 17, 16, 0.14);
+    transition: transform 0.25s;
+  }
+
+  .live:hover {
+    transform: translateY(-2px);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+  }
+
   /* ---------- Arrow + cursor ---------- */
   .arrow {
     position: absolute;
@@ -401,6 +455,13 @@ const style = [
     .cursor {
       display: none;
     }
+
+    .live {
+      right: 18px;
+      bottom: 18px;
+      padding: 0 14px;
+      font-size: 13px;
+    }
   }
 
   /* ========== Mobile ========== */
@@ -455,6 +516,11 @@ const style = [
       top: 16px;
       width: 44px;
       height: 44px;
+    }
+
+    .live {
+      right: 16px;
+      bottom: 16px;
     }
   }
 </style>

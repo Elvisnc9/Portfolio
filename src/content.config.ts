@@ -46,6 +46,12 @@ const work = defineCollection({
     brief: z.object({ lead: z.string(), muted: z.string().optional() }).optional(),
     /** "The problem": what the product solves, plus the pain points */
     problem: z.object({ text: z.string(), points: z.array(z.string()).default([]) }).optional(),
+    /** "How I reached out": how the client and I got started (client work) */
+    outreach: z.object({ text: z.string(), points: z.array(z.string()).default([]) }).optional(),
+    /** "What I built": what I shipped (client work) */
+    built: z.object({ text: z.string(), points: z.array(z.string()).default([]) }).optional(),
+    /** "Result": how it turned out (client work) */
+    result: z.object({ text: z.string(), points: z.array(z.string()).default([]) }).optional(),
     /** "My part": your role on the team. `stack` = names from the stack list in home.ts */
     role: z
       .object({

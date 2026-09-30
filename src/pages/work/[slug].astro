@@ -31,7 +31,7 @@ interface Props {
 }
 
 const { project, caseStudy, index, next } = Astro.props;
-const { facts, brief, problem, role, highlights, gallery, features, quote, summary } = caseStudy;
+const { facts, brief, problem, outreach, built, result, role, highlights, gallery, features, quote, summary } = caseStudy;
 // "MY ROLE" always leads the fact tiles when a role is set
 const allFacts = role ? [{ label: 'MY ROLE', value: role.title }, ...facts] : facts;
 const total = projects.length;
@@ -76,6 +76,12 @@ const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? Str
   }
 
   {problem && <CaseProblem text={problem.text} points={problem.points} />}
+
+  {outreach && <CaseProblem id="outreach" eyebrow="GETTING STARTED" title="How I reached out" text={outreach.text} points={outreach.points} />}
+
+  {built && <CaseProblem id="built" eyebrow="THE WORK" title="What I built" text={built.text} points={built.points} />}
+
+  {result && <CaseProblem id="result" eyebrow="THE OUTCOME" title="Result" text={result.text} points={result.points} />}
 
   {role && <CaseRole title={role.title} summary={role.summary} points={role.points} stack={role.stack} />}
 

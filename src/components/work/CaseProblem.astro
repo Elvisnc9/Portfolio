@@ -1,17 +1,21 @@
 ---
 // "The problem": what the product solves, and the pain points behind it.
+// Also used for other text + numbered points sections (pass eyebrow, title, id).
 interface Props {
   text: string;
   points: string[];
+  eyebrow?: string;
+  title?: string;
+  id?: string;
 }
 
-const { text, points } = Astro.props;
+const { text, points, eyebrow = 'WHAT IT SOLVES', title = 'The problem', id = 'problem' } = Astro.props;
 ---
 
-<section class="problem" aria-labelledby="problem-title">
+<section class="problem" aria-labelledby={`${id}-title`}>
   <div class="head" data-reveal>
-    <span class="pill">WHAT IT SOLVES</span>
-    <h2 id="problem-title">The problem</h2>
+    <span class="pill">{eyebrow}</span>
+    <h2 id={`${id}-title`}>{title}</h2>
   </div>
   <div class="body">
     <p class="statement" data-reveal data-reveal-delay="0.06">{text}</p>

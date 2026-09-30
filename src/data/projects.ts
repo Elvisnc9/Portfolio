@@ -16,6 +16,10 @@ export interface Project {
   /** How the image sits in the tile */
   media: 'phones' | 'contain' | 'cover' | 'phone-bottom';
   images: { src: string; alt: string; width: number; height: number }[];
+  /** Client work: shows the "Client Project" badge */
+  client?: boolean;
+  /** Live site, linked straight from the card */
+  live?: string;
 }
 
 const img = (name: string, alt: string, width: number, height: number) => ({
@@ -26,6 +30,45 @@ const img = (name: string, alt: string, width: number, height: number) => ({
 });
 
 export const projects: Project[] = [
+  {
+    slug: 'kenz-sushi',
+    title: 'Kenz Sushi',
+    shortTitle: 'Kenz',
+    tag: 'Web · Restaurant',
+    categories: ['Web'],
+    bg: '#FFD9C9',
+    tone: 'light',
+    media: 'contain',
+    images: [img('kenz-sushi', 'Kenz Sushi website homepage', 1440, 900)],
+    client: true,
+    live: 'https://kenzsushi.com',
+  },
+  {
+    slug: 'resto-yulmaz',
+    title: 'Resto Yulmaz',
+    shortTitle: 'Yulmaz',
+    tag: 'Web · Restaurant',
+    categories: ['Web'],
+    bg: '#E4F5B8',
+    tone: 'light',
+    media: 'contain',
+    images: [img('resto-yulmaz', 'Resto Yulmaz website homepage', 1440, 900)],
+    client: true,
+    live: 'https://restoyulmazalger.com',
+  },
+  {
+    slug: 'the-11th-floor',
+    title: 'The 11th Floor',
+    shortTitle: '11th Floor',
+    tag: 'Web · Restaurant',
+    categories: ['Web'],
+    bg: '#111110',
+    tone: 'dark',
+    media: 'contain',
+    images: [img('the-11th-floor', 'The 11th Floor website homepage', 1440, 900)],
+    client: true,
+    live: 'https://the11thfloor.co.za',
+  },
   {
     slug: 'genspark-ai',
     title: 'Genspark AI',
@@ -101,6 +144,6 @@ export const projects: Project[] = [
 ];
 
 export const latestShip = {
-  project: projects[0],
+  project: projects.find((p) => p.slug === 'genspark-ai')!,
   subtitle: 'AI workspace · Mobile app',
 };
