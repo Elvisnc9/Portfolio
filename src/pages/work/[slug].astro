@@ -41,7 +41,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 const featureCount = ['One', 'Two', 'Three', 'Four'][features.length - 1] ?? String(features.length);
 ---
 
-<BaseLayout title={project.title} active="Work" description={summary}>
+<BaseLayout title={project.title} active="Work" description={summary} type="article" image={project.images[0]}>
   <section class="crumbs">
     <BackLink href="/#work" label="All work" />
     <span class="mono">

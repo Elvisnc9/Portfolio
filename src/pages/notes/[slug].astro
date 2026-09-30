@@ -31,7 +31,7 @@ const { Content } = await render(note);
 const { n, title, category, excerpt, color, pinned } = note.data;
 ---
 
-<BaseLayout title={title} active="Notes" description={excerpt}>
+<BaseLayout title={title} active="Notes" description={excerpt} type="article">
   <section class="note-page">
     <BackLink href="/#notes" label="All notes" />
 

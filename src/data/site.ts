@@ -6,7 +6,7 @@ export const site = {
   email: 'elvescorps@outlook.com',
   /** Web3Forms access key for the contact form (public by design: it can only send to your inbox) */
   web3formsKey: '063ea004-09b3-4ea3-b77a-83a165355924',
-  description: 'Elvis Ngwu, mobile and web developer. Portfolio, case studies and notes.',
+  description: 'Elvis Ngwu — I build websites and apps that help businesses get found and win customers.',
   timezone: 'Africa/Lagos',
   available: true,
 };
