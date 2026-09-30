@@ -9,7 +9,8 @@ const notes = await getNotes();
 const pinned = notes.find((note) => note.data.pinned);
 const board = notes.filter((note) => note !== pinned);
 const startHere = notes.filter((note) => note.data.startHere);
-const categories = ['Building', 'Design', 'Tech', 'Life'];
+// Only offer filters that have notes behind them
+const categories = ['Building', 'Design', 'Tech', 'Life'].filter((cat) => notes.some((note) => note.data.category === cat));
 
 const currentlyThinking = 'AI integrations & new developer tools.';
 ---
@@ -489,8 +490,15 @@ const currentlyThinking = 'AI integrations & new developer tools.';
     padding: 0;
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 48px 32px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 48px 28px;
+  }
+
+  /* Five board notes: one row on wide screens, 3 + 2 below that */
+  @media (max-width: 1279px) {
+    .board {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   .board > li[hidden] {
@@ -713,6 +721,13 @@ const currentlyThinking = 'AI integrations & new developer tools.';
     .board {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px 16px;
+    }
+
+    /* An odd note out sits centred instead of hanging on the left */
+    .board > li:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc(50% - 8px);
     }
   }
 </style>

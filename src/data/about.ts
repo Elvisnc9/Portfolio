@@ -1,7 +1,7 @@
 // Copy and lists for the About page. Stats and stack are shared with home (see home.ts).
 
 export const aboutIntro =
-  'I build websites, mobile apps and AI-powered products that feel as good as they perform.';
+  'Always shipping. I build mobile apps, websites and AI products that help businesses solve real problems and win customers.';
 
 export const services = [
   { n: '01', title: 'Mobile apps', text: 'Native-feeling apps built with Flutter.', bg: '#FFD9C9' },
@@ -52,9 +52,9 @@ export const journey: Chapter[] = [
     title: 'Where it all started.',
     shape: '#BFE3FA',
     paras: [
-      'Started my journey into technology and Computer Science.',
-      'Learned the fundamentals of programming and began understanding how software is built.',
-      'Experimented with different technologies to discover what I wanted to pursue.',
+      'I started Computer Science at the University of Nigeria with more curiosity than direction.',
+      'I learned the fundamentals, broke a lot of things, and slowly figured out how software really gets built.',
+      'I tried a bit of everything, looking for the part I wanted to go deep on.',
     ],
     listLabel: 'THIS YEAR',
     items: [
@@ -65,13 +65,13 @@ export const journey: Chapter[] = [
   },
   {
     year: '2023',
-    role: 'DEVELOPER · EXPLORING',
-    title: 'Going deeper.',
+    role: 'MOBILE · FLUTTER',
+    title: 'Mobile first, with Flutter.',
     shape: '#E4F5B8',
     paras: [
-      'Went deeper into programming and started building real projects.',
-      'Explored mobile development with Flutter alongside JavaScript, backend technologies and APIs.',
-      'Started collaborating on projects and turning what I learned into working products.',
+      'Flutter is where it clicked: one codebase, apps on Android and iOS, and something on my phone I could show people.',
+      'I paired it with JavaScript, backends and APIs, so my apps could work with real data.',
+      'Tutorials turned into working apps, and working apps gave me the confidence to build bigger.',
     ],
     listLabel: 'PICKED UP',
     items: [
@@ -83,13 +83,13 @@ export const journey: Chapter[] = [
   },
   {
     year: '2024',
-    role: 'FREELANCER · BUILDING',
-    title: 'Building for real people.',
+    role: 'FREELANCER · GOING BIGGER',
+    title: 'Building bigger things.',
     shape: '#FFD9C9',
     paras: [
-      'Moved from simply learning to building for real people and real use cases.',
-      'Worked on mobile and web projects, collaborated with teams, and took on freelance work.',
-      'Built Campipal, Bailey and Elves Meet while expanding my development stack.',
+      'I took on harder problems: real-time video calling with Elves Meet, plus Campipal and Bailey.',
+      'I pushed into AI and AR too, with a hands-free email app (Blail), a voice detection experiment and Genie, an AR app.',
+      'Freelance work and team projects taught me to build for real people, not just for the demo.',
     ],
     listLabel: 'SHIPPED',
     items: [
@@ -102,37 +102,37 @@ export const journey: Chapter[] = [
   {
     year: '2025',
     role: 'CS GRADUATE · PROFESSIONAL',
-    title: 'Graduated. Went pro.',
+    title: 'Code that solves real problems.',
     shape: '#FF6A3D',
     paras: [
-      'Graduated with a degree in Computer Science after four years of learning, building and problem-solving.',
-      'Kept working on real-world applications while growing as a Flutter developer.',
-      'Focused on professional projects, collaboration, cloud technologies and delivering complete products.',
+      'I graduated with a BSc in Computer Science and went pro.',
+      'Real products with real teams changed how I measure my work: Flutter on Genspark AI, backend on Bitwyre, a private, safe matchmaking app with Muslim Matrimony.',
+      'The question stopped being “can I build it?” and became “does it solve someone’s problem?”',
     ],
     listLabel: 'MILESTONES',
     items: [
       { k: 'BSc', name: 'BSc Computer Science', sub: 'University of Nigeria', bg: '#FFD9C9' },
       { k: 'Fl', name: 'Flutter developer', sub: 'Professional projects', bg: '#BFE3FA' },
     ],
-    line: 'Four years of school, one very long build.',
+    line: 'Code matters most when it solves someone’s real problem.',
   },
   {
     year: '2026',
-    role: 'FLUTTER DEV · AI & CLOUD',
-    title: 'AI, cloud and new tools.',
+    role: 'DEVELOPER · BUSINESSES & AI',
+    title: 'Helping businesses get found.',
     shape: '#E6DEFF',
     paras: [
-      'Expanded beyond traditional app development into AI, AI integrations and new developer tools.',
-      'Kept building mobile and web products while experimenting with cloud and modern workflows.',
-      'Added new certifications and kept turning ideas into more capable products.',
+      'Now I build websites that help restaurants get found and win customers: Kenz Sushi and Yulmaz in Algiers, The 11th Floor in South Africa.',
+      'I keep sharpening the AI side with certificates from Google, IBM, Anthropic and Learn KTS.',
+      'I’m busy and shipping, and I still make room for the right project. If your business has a problem worth solving, let’s build the answer together.',
     ],
-    listLabel: 'CERTIFIED',
+    listLabel: 'SHIPPED',
     items: [
-      { k: 'An', name: 'AI Fluency', sub: 'Anthropic', bg: '#FFD9C9' },
-      { k: 'G', name: 'Google AI Professional', sub: 'Google', bg: '#BFE3FA' },
-      { k: 'IBM', name: 'Generative AI Engineering', sub: 'IBM', bg: '#E6DEFF' },
+      { k: 'Ks', name: 'Kenz Sushi', sub: 'Website · Algiers', bg: '#FFD9C9' },
+      { k: 'Yz', name: 'Yulmaz Resto Caterer', sub: 'Website · Algiers', bg: '#FFE9A8' },
+      { k: '11', name: 'The 11th Floor', sub: 'Website · South Africa', bg: '#E4F5B8' },
     ],
-    line: 'Teaching products to think a little.',
+    line: 'Your business could be the next chapter.',
   },
 ];
 
